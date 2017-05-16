@@ -4,7 +4,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.text.Font?>
-<StackPane id="main-content">
+<StackPane id="main-content"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="br.com.antoniogabriel.lirelab.WelcomeViewController">
     <GridPane id="welcome-view"
               vgap="10"
               alignment="CENTER"
@@ -27,6 +29,7 @@
               GridPane.columnIndex="0"></Text>
         <Button id="welcome-create-collection-button"
                 text="Create Collection"
+                onAction="#openCreateCollectionDialog"
                 GridPane.rowIndex="2"
                 GridPane.columnIndex="0"></Button>
     </GridPane>

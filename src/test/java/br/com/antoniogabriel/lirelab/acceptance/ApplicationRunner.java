@@ -9,9 +9,11 @@ import org.testfx.api.FxToolkit;
 
 import java.util.concurrent.TimeoutException;
 
+import static br.com.antoniogabriel.lirelab.WelcomeViewController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import static org.testfx.matcher.base.WindowMatchers.isShowing;
 
 public class ApplicationRunner extends FxRobot{
 
@@ -64,8 +66,10 @@ public class ApplicationRunner extends FxRobot{
     }
 
     public void openCreateCollectionDialog() {
-        throw new UnsupportedOperationException();
+        clickOn("#welcome-create-collection-button");
+        verifyThat(window(CREATE_COLLECTION), isShowing());
     }
+
 
     public void fillCreateCollectionDialog(String name, String path, Feature[] features) {
         throw new UnsupportedOperationException();
