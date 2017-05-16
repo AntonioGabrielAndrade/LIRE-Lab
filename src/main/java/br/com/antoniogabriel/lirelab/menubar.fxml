@@ -1,0 +1,11 @@
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<MenuBar id="menu-bar">
+    <Menu id="file-menu" text="File">
+        <MenuItem id="create-collection" text="Create Collection"></MenuItem>
+    </Menu>
+    <Menu id="help-menu" text="Help">
+        <MenuItem id="about" text="About"></MenuItem>
+    </Menu>
+</MenuBar>

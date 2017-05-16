@@ -1,0 +1,64 @@
+package br.com.antoniogabriel.lirelab.acceptance;
+
+import br.com.antoniogabriel.lirelab.Main;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
+
+import java.util.concurrent.TimeoutException;
+
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.hasChild;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
+
+public class ApplicationRunner extends FxRobot{
+    void setUpApp() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.setupApplication(Main.class);
+    }
+
+    void tearDownApp() throws TimeoutException {
+        FxToolkit.hideStage();
+        release(new KeyCode[] {});
+        release(new MouseButton[] {});
+    }
+
+    void checkMenus() {
+        checkMenuBar();
+        checkFileMenu();
+        checkHelpMenu();
+    }
+
+    private void checkMenuBar() {
+        verifyThat("#menu-bar", isVisible());
+        verifyThat("#menu-bar", hasChild("#file-menu"));
+        verifyThat("#menu-bar", hasChild("#help-menu"));
+    }
+
+    private void checkHelpMenu() {
+        clickOn("#help-menu");
+        verifyThat("#about", isVisible());
+        clickOn("#help-menu");
+    }
+
+    private void checkFileMenu() {
+        clickOn("#file-menu");
+        verifyThat("#create-collection", isVisible());
+        clickOn("#file-menu");
+    }
+
+    void checkToolBar() {
+        verifyThat("#toolbar", isVisible());
+        verifyThat("#toolbar-create-collection", isVisible());
+        verifyThat("#toolbar-about", isVisible());
+    }
+
+    void checkWelcomeView() {
+        verifyThat("#welcome-view", isVisible());
+        verifyThat("#welcome-title", isVisible());
+        verifyThat("#welcome-text", isVisible());
+        verifyThat("#welcome-create-collection-button", isVisible());
+    }
+
+}
