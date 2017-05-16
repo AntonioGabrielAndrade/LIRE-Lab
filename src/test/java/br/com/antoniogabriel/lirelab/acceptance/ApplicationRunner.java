@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.Feature;
 import br.com.antoniogabriel.lirelab.Main;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -13,6 +14,7 @@ import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 public class ApplicationRunner extends FxRobot{
+
     void setUpApp() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(Main.class);
@@ -61,4 +63,23 @@ public class ApplicationRunner extends FxRobot{
         verifyThat("#welcome-create-collection-button", isVisible());
     }
 
+    public void openCreateCollectionDialog() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void fillCreateCollectionDialog(String name, String path, Feature[] features) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void checkCreateCollectionProgressDialog() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void checkListTestCollection() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void checkCollectionIsCreated(String collectionName) {
+        throw new UnsupportedOperationException();
+    }
 }
