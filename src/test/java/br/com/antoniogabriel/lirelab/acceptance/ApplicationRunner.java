@@ -15,7 +15,7 @@ import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.base.WindowMatchers.isShowing;
 
-public class ApplicationRunner extends FxRobot{
+public class ApplicationRunner extends FxRobot {
 
     void setUpApp() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
@@ -24,8 +24,8 @@ public class ApplicationRunner extends FxRobot{
 
     void tearDownApp() throws TimeoutException {
         FxToolkit.hideStage();
-        release(new KeyCode[] {});
-        release(new MouseButton[] {});
+        release(new KeyCode[]{});
+        release(new MouseButton[]{});
     }
 
     void checkMenus() {
