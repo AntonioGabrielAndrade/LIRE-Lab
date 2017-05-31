@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="br.com.antoniogabriel.lirelab.collection.CreateCollectionController"
+          prefHeight="600.0" prefWidth="600.0"
+          vgap="10"
+          gridLinesVisible="false">
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="100"/>
+    </columnConstraints>
+
+    <padding>
+        <Insets top="20" bottom="20" left="20" right="20"/>
+    </padding>
+
+    <VBox spacing="3"
+          GridPane.rowIndex="0"
+          GridPane.columnIndex="0">
+        <Label text="Name"/>
+        <TextField id="collection-name"/>
+    </VBox>
+
+    <VBox spacing="3"
+          GridPane.rowIndex="1"
+          GridPane.columnIndex="0">
+        <Label text="Path to images"/>
+        <TextField id="path-to-images"/>
+    </VBox>
+
+    <VBox spacing="3"
+          GridPane.rowIndex="2"
+          GridPane.columnIndex="0">
+        <Label text="Features"/>
+        <TableView fx:id="featuresTable" editable="true">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="selectedCol"
+                             text=""
+                             minWidth="50"
+                             maxWidth="50"/>
+                <TableColumn fx:id="nameCol"
+                             text="Name"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+    <HBox alignment="BOTTOM_RIGHT"
+          spacing="3"
+          GridPane.rowIndex="3"
+          GridPane.columnIndex="0">
+        <Button text="Cancel"/>
+        <Button text="OK" id="ok"/>
+    </HBox>
+
+</GridPane>
+
