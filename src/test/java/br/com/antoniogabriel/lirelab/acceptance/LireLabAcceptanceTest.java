@@ -9,7 +9,7 @@ public class LireLabAcceptanceTest {
 
     private static final String TEST_COLLECTION_NAME = "Test Collection";
     private static final String TEST_IMAGES_PATH = "br/com/antoniogabriel/lirelab/acceptance/test-images";
-    private static final Feature[] TEST_FEATURES = new Feature[]{Feature.CEDD, Feature.TAMURA};
+    private static final Feature[] TEST_FEATURES = {Feature.CEDD, Feature.TAMURA};
 
     private ApplicationRunner runner = new ApplicationRunner();
 
