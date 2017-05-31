@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.Feature;
 import br.com.antoniogabriel.lirelab.Main;
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import org.testfx.api.FxRobot;
@@ -73,7 +74,18 @@ public class ApplicationRunner extends FxRobot {
 
 
     public void fillCreateCollectionDialog(String name, String path, Feature[] features) {
-        throw new UnsupportedOperationException();
+        clickOn("#collection-name").write(name);
+        clickOn("#path-to-images").write(path);
+
+        for (Feature feature : features) {
+            Node checkBox = lookup("#featuresTable")
+                    .lookup(".table-row-cell").nth(feature.ordinal())
+                    .lookup(".table-cell").nth(0)
+                    .lookup(".check-box").query();
+            clickOn(checkBox).interrupt();
+        }
+
+        clickOn("#ok");
     }
 
     public void checkCreateCollectionProgressDialog() {
