@@ -13,12 +13,11 @@ import static br.com.antoniogabriel.lirelab.WelcomeViewController.CREATE_COLLECT
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
-import static org.testfx.matcher.base.WindowMatchers.isShowing;
 
 public class ApplicationRunner extends FxRobot {
 
     void setUpApp() throws TimeoutException {
-        FxToolkit.registerPrimaryStage();
+        targetWindow(FxToolkit.registerPrimaryStage());
         FxToolkit.setupApplication(Main.class);
     }
 
@@ -66,8 +65,8 @@ public class ApplicationRunner extends FxRobot {
     }
 
     public void openCreateCollectionDialog() {
-        clickOn("#welcome-create-collection-button");
-        verifyThat(window(CREATE_COLLECTION), isShowing());
+        clickOn("#welcome-create-collection-button")
+        .targetWindow(window(CREATE_COLLECTION));
     }
 
 
