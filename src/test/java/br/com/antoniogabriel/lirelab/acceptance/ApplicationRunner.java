@@ -79,7 +79,7 @@ public class ApplicationRunner extends FxRobot{
         throw new UnsupportedOperationException();
     }
 
-    public void checkListTestCollection() {
+    public void checkCollectionIsListed(String collectionName) {
         throw new UnsupportedOperationException();
     }
 

@@ -37,7 +37,7 @@ public class LireLabAcceptanceTest {
                 TEST_IMAGES_PATH,
                 TEST_FEATURES);
         runner.checkCreateCollectionProgressDialog();
-        runner.checkListTestCollection();
+        runner.checkCollectionIsListed(TEST_COLLECTION_NAME);
         runner.checkCollectionIsCreated(TEST_COLLECTION_NAME);
     }
 }
