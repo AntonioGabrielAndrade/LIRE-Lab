@@ -19,6 +19,7 @@ public class ApplicationRunner extends FxRobot {
     void setUpApp() throws TimeoutException {
         targetWindow(FxToolkit.registerPrimaryStage());
         FxToolkit.setupApplication(Main.class);
+        interrupt();
     }
 
     void tearDownApp() throws TimeoutException {
@@ -66,7 +67,8 @@ public class ApplicationRunner extends FxRobot {
 
     public void openCreateCollectionDialog() {
         clickOn("#welcome-create-collection-button")
-        .targetWindow(window(CREATE_COLLECTION));
+                .interrupt()
+                .targetWindow(window(CREATE_COLLECTION));
     }
 
 
