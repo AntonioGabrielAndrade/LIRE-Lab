@@ -77,6 +77,12 @@ public class ApplicationRunner extends FxRobot {
         clickOn("#collection-name").write(name);
         clickOn("#path-to-images").write(path);
 
+        markCheckBoxFor(features);
+
+        clickOn("#ok");
+    }
+
+    private void markCheckBoxFor(Feature[] features) {
         for (Feature feature : features) {
             Node checkBox = lookup("#featuresTable")
                     .lookup(".table-row-cell").nth(feature.ordinal())
@@ -84,8 +90,6 @@ public class ApplicationRunner extends FxRobot {
                     .lookup(".check-box").query();
             clickOn(checkBox).interrupt();
         }
-
-        clickOn("#ok");
     }
 
     public void checkCreateCollectionProgressDialog() {
