@@ -41,10 +41,22 @@ public class CreateCollectionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setupColumns();
+        populateTable();
+        bindCreateButtonToMandatoryData();
+    }
+
+    private void setupColumns() {
         selectedCol.setCellValueFactory(new PropertyValueFactory<>("selected"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
+    }
+
+    private void populateTable() {
         featuresTable.setItems(getFeatureItems());
+    }
+
+    private void bindCreateButtonToMandatoryData() {
         createButton.disableProperty().bind(
                 nameField.textProperty().isEmpty().or(
                         pathToImages.textProperty().isEmpty().or(
