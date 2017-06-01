@@ -80,7 +80,7 @@ public class ApplicationRunner extends FxRobot {
 
         markCheckBoxFor(features);
 
-        clickOn("#ok");
+        clickOn("#create");
     }
 
     private void markCheckBoxFor(Feature[] features) {
