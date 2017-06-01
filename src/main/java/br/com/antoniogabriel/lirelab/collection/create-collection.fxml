@@ -21,7 +21,7 @@
     <VBox spacing="3"
           GridPane.rowIndex="0"
           GridPane.columnIndex="0">
-        <Label text="Name"/>
+        <Label text="Collection name"/>
         <TextField id="collection-name" fx:id="nameField"/>
     </VBox>
 
