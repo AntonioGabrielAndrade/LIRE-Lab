@@ -1,5 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.Feature;
+import br.com.antoniogabriel.lirelab.acceptance.ApplicationRunner;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,6 +12,7 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import static br.com.antoniogabriel.lirelab.WelcomeViewController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.WindowMatchers.isNotShowing;
 
 public class CreateCollectionControllerTest extends ApplicationTest {
@@ -30,5 +33,17 @@ public class CreateCollectionControllerTest extends ApplicationTest {
         Window window = window(CREATE_COLLECTION);
         clickOn("#cancel");
         verifyThat(window, isNotShowing());
+    }
+
+    @Test
+    public void shouldDisableCreateButtonIfNameFieldIsEmpty() throws Exception {
+        clickOn("#collection-name").write("");
+        clickOn("#path-to-images").write("some/test/path");
+
+        ApplicationRunner runner = new ApplicationRunner();
+        Feature[] features = {Feature.CEDD, Feature.TAMURA};
+        runner.markCheckBoxFor(features);
+
+        verifyThat("#create", isDisabled());
     }
 }

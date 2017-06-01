@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,6 +26,8 @@ public class CreateCollectionController implements Initializable {
     public static final String CREATING_COLLECTION = "Creating collection...";
 
     @FXML
+    private TextField nameField;
+    @FXML
     private TextField pathToImages;
     @FXML
     private TableView<FeatureModel> featuresTable;
@@ -32,6 +35,8 @@ public class CreateCollectionController implements Initializable {
     private TableColumn<FeatureModel, Boolean> selectedCol;
     @FXML
     private TableColumn<FeatureModel, String> nameCol;
+    @FXML
+    private Button createButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,6 +44,9 @@ public class CreateCollectionController implements Initializable {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
         featuresTable.setItems(getFeatureItems());
+        createButton.disableProperty().bind(
+                nameField.textProperty().isEmpty()
+        );
     }
 
     private ObservableList<FeatureModel> getFeatureItems() {

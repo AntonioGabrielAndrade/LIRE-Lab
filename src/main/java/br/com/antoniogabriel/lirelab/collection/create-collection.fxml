@@ -22,7 +22,7 @@
           GridPane.rowIndex="0"
           GridPane.columnIndex="0">
         <Label text="Name"/>
-        <TextField id="collection-name"/>
+        <TextField id="collection-name" fx:id="nameField"/>
     </VBox>
 
     <VBox spacing="3"
@@ -59,7 +59,7 @@
           GridPane.rowIndex="3"
           GridPane.columnIndex="0">
         <Button text="Cancel" id="cancel" onAction="#close"/>
-        <Button text="Create" id="create"/>
+        <Button text="Create" id="create" fx:id="createButton"/>
     </HBox>
 
 </GridPane>
