@@ -83,7 +83,7 @@ public class ApplicationRunner extends FxRobot {
         clickOn("#create");
     }
 
-    private void markCheckBoxFor(Feature[] features) {
+    public void markCheckBoxFor(Feature[] features) {
         for (Feature feature : features) {
             Node checkBox = lookup("#featuresTable")
                     .lookup(".table-row-cell").nth(feature.ordinal())
