@@ -28,7 +28,7 @@
     <VBox spacing="3"
           GridPane.rowIndex="1"
           GridPane.columnIndex="0">
-        <Label text="Path to images"/>
+        <Label text="Images directory"/>
         <HBox spacing="5">
             <TextField fx:id="pathToImages" id="path-to-images" HBox.hgrow="ALWAYS"/>
             <Button text="Browse" onAction="#chooseDir"/>
