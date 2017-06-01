@@ -42,7 +42,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldDisableCreateButtonIfNameFieldIsEmpty() throws Exception {
+    public void shouldDisableCreateButtonIfNameIsEmpty() throws Exception {
         unselectAllFeatures();
         clickOn("#collection-name").write("");
         clickOn("#path-to-images").write("some/test/path");
@@ -53,7 +53,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldDisableCreateButtonIfPathFieldIsEmpty() throws Exception {
+    public void shouldDisableCreateButtonIfPathIsEmpty() throws Exception {
         unselectAllFeatures();
         clickOn("#collection-name").write("Some Name");
         clickOn("#path-to-images").write("");
