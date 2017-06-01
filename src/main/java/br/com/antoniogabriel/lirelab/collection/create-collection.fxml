@@ -38,7 +38,7 @@
     <VBox spacing="3"
           GridPane.rowIndex="2"
           GridPane.columnIndex="0">
-        <Label text="Features"/>
+        <Label text="Features for indexing"/>
         <TableView fx:id="featuresTable" editable="true">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
