@@ -5,10 +5,13 @@ import br.com.antoniogabriel.lirelab.acceptance.ApplicationRunner;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
+
+import java.util.Set;
 
 import static br.com.antoniogabriel.lirelab.WelcomeViewController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -39,6 +42,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
 
     @Test
     public void shouldDisableCreateButtonIfNameFieldIsEmpty() throws Exception {
+        unselectAllFeatures();
         clickOn("#collection-name").write("");
         clickOn("#path-to-images").write("some/test/path");
 
@@ -49,11 +53,22 @@ public class CreateCollectionControllerTest extends ApplicationTest {
 
     @Test
     public void shouldDisableCreateButtonIfPathFieldIsEmpty() throws Exception {
+        unselectAllFeatures();
         clickOn("#collection-name").write("Some Name");
         clickOn("#path-to-images").write("");
 
         runner.markCheckBoxFor(featuresForTest);
 
         verifyThat("#create", isDisabled());
+    }
+
+    private void unselectAllFeatures() {
+        Set<CheckBox> checkBoxes = lookup("#featuresTable")
+                .lookup(".check-box")
+                .queryAll();
+
+        for (CheckBox checkBox : checkBoxes) {
+            checkBox.setSelected(false);
+        }
     }
 }
