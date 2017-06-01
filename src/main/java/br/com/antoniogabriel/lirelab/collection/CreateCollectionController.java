@@ -59,7 +59,8 @@ public class CreateCollectionController implements Initializable {
         return items;
     }
 
-    public void chooseDir(ActionEvent event) {
+    @FXML
+    private void chooseDir(ActionEvent event) {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Select the directory that contains the images");
         Window window = featuresTable.getScene().getWindow();
@@ -69,7 +70,8 @@ public class CreateCollectionController implements Initializable {
         }
     }
 
-    public void close(ActionEvent event) {
+    @FXML
+    private void close(ActionEvent event) {
         featuresTable.getScene().getWindow().hide();
     }
 
