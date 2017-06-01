@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.Feature;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -46,9 +47,23 @@ public class CreateCollectionController implements Initializable {
         featuresTable.setItems(getFeatureItems());
         createButton.disableProperty().bind(
                 nameField.textProperty().isEmpty().or(
-                        pathToImages.textProperty().isEmpty()
+                        pathToImages.textProperty().isEmpty().or(
+                                noFeatureSelected()
+                        )
                 )
         );
+    }
+
+    private BooleanBinding noFeatureSelected() {
+        BooleanBinding binding = null;
+        for (FeatureModel feature : featuresTable.getItems()) {
+            if(binding == null) {
+                binding = feature.selectedProperty().not();
+            } else {
+                binding = binding.and(feature.selectedProperty().not());
+            }
+        }
+        return binding;
     }
 
     private ObservableList<FeatureModel> getFeatureItems() {

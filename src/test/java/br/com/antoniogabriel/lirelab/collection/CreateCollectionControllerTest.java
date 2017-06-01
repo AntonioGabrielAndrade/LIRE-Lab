@@ -16,6 +16,7 @@ import java.util.Set;
 import static br.com.antoniogabriel.lirelab.WelcomeViewController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isDisabled;
+import static org.testfx.matcher.base.NodeMatchers.isEnabled;
 import static org.testfx.matcher.base.WindowMatchers.isNotShowing;
 
 public class CreateCollectionControllerTest extends ApplicationTest {
@@ -60,6 +61,26 @@ public class CreateCollectionControllerTest extends ApplicationTest {
         runner.markCheckBoxFor(featuresForTest);
 
         verifyThat("#create", isDisabled());
+    }
+
+    @Test
+    public void shouldDisableCreateButtonIfNoFeatureIsSelected() throws Exception {
+        unselectAllFeatures();
+        clickOn("#collection-name").write("Some Name");
+        clickOn("#path-to-images").write("some/test/path");
+
+        verifyThat("#create", isDisabled());
+    }
+
+    @Test
+    public void shouldEnableCreateButtonIfMandatoryDataIsFilled() throws Exception {
+        unselectAllFeatures();
+        clickOn("#collection-name").write("Some Name");
+        clickOn("#path-to-images").write("some/test/path");
+
+        runner.markCheckBoxFor(featuresForTest);
+
+        verifyThat("#create", isEnabled());
     }
 
     private void unselectAllFeatures() {
