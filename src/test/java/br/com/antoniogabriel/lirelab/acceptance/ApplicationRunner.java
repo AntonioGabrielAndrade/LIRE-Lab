@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.Feature;
 import br.com.antoniogabriel.lirelab.Main;
+import br.com.antoniogabriel.lirelab.collection.CreateCollectionController;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -93,7 +94,7 @@ public class ApplicationRunner extends FxRobot {
     }
 
     public void checkCreateCollectionProgressDialog() {
-        throw new UnsupportedOperationException();
+        targetWindow(window(CreateCollectionController.CREATING_COLLECTION));
     }
 
     public void checkCollectionIsListed(String collectionName) {
