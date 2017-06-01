@@ -1,8 +1,8 @@
 package br.com.antoniogabriel.lirelab;
 
 public enum Feature {
-    TAMURA,
     CEDD,
+    TAMURA,
     GABOR,
     FCTH,
     COLOR_HISTOGRAM
