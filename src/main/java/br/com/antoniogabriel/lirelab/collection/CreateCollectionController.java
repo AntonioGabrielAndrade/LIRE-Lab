@@ -26,8 +26,8 @@ public class CreateCollectionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        selectedCol.setCellValueFactory(new PropertyValueFactory<FeatureModel, Boolean>("selected"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<FeatureModel, String>("name"));
+        selectedCol.setCellValueFactory(new PropertyValueFactory<>("selected"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
         featuresTable.setItems(getFeatureItems());
     }
