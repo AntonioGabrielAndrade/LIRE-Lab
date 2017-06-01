@@ -46,4 +46,16 @@ public class CreateCollectionControllerTest extends ApplicationTest {
 
         verifyThat("#create", isDisabled());
     }
+
+    @Test
+    public void shouldDisableCreateButtonIfPathFieldIsEmpty() throws Exception {
+        clickOn("#collection-name").write("Some Name");
+        clickOn("#path-to-images").write("");
+
+        ApplicationRunner runner = new ApplicationRunner();
+        Feature[] features = {Feature.CEDD, Feature.TAMURA};
+        runner.markCheckBoxFor(features);
+
+        verifyThat("#create", isDisabled());
+    }
 }

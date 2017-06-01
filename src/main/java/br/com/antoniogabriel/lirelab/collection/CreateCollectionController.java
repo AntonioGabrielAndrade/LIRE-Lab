@@ -45,7 +45,9 @@ public class CreateCollectionController implements Initializable {
         selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
         featuresTable.setItems(getFeatureItems());
         createButton.disableProperty().bind(
-                nameField.textProperty().isEmpty()
+                nameField.textProperty().isEmpty().or(
+                        pathToImages.textProperty().isEmpty()
+                )
         );
     }
 
