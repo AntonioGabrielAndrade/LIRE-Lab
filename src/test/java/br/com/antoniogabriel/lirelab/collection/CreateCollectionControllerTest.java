@@ -17,6 +17,8 @@ import static org.testfx.matcher.base.WindowMatchers.isNotShowing;
 
 public class CreateCollectionControllerTest extends ApplicationTest {
 
+    private ApplicationRunner runner = new ApplicationRunner();
+    private Feature[] featuresForTest = {Feature.CEDD, Feature.TAMURA};
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -40,9 +42,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
         clickOn("#collection-name").write("");
         clickOn("#path-to-images").write("some/test/path");
 
-        ApplicationRunner runner = new ApplicationRunner();
-        Feature[] features = {Feature.CEDD, Feature.TAMURA};
-        runner.markCheckBoxFor(features);
+        runner.markCheckBoxFor(featuresForTest);
 
         verifyThat("#create", isDisabled());
     }
@@ -52,9 +52,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
         clickOn("#collection-name").write("Some Name");
         clickOn("#path-to-images").write("");
 
-        ApplicationRunner runner = new ApplicationRunner();
-        Feature[] features = {Feature.CEDD, Feature.TAMURA};
-        runner.markCheckBoxFor(features);
+        runner.markCheckBoxFor(featuresForTest);
 
         verifyThat("#create", isDisabled());
     }
