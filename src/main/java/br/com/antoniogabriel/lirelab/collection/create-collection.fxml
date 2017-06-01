@@ -58,7 +58,7 @@
           spacing="3"
           GridPane.rowIndex="3"
           GridPane.columnIndex="0">
-        <Button text="Cancel"/>
+        <Button text="Cancel" id="cancel" onAction="#close"/>
         <Button text="OK" id="ok"/>
     </HBox>
 

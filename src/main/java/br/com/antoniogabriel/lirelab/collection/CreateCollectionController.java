@@ -59,6 +59,10 @@ public class CreateCollectionController implements Initializable {
         }
     }
 
+    public void close(ActionEvent event) {
+        featuresTable.getScene().getWindow().hide();
+    }
+
     public class FeatureModel {
         private final SimpleBooleanProperty selected;
         private final SimpleStringProperty name;
