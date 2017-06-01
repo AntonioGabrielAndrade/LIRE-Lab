@@ -5,18 +5,18 @@
 <ToolBar id="toolbar">
     <Button id="toolbar-create-collection">
         <tooltip>
-            <Tooltip text="Create Collection"></Tooltip>
+            <Tooltip text="Create Collection"/>
         </tooltip>
         <graphic>
-            <FontIcon iconLiteral="fa-database"></FontIcon>
+            <FontIcon iconLiteral="fa-database"/>
         </graphic>
     </Button>
     <Button id="toolbar-about">
         <tooltip>
-            <Tooltip text="About"></Tooltip>
+            <Tooltip text="About"/>
         </tooltip>
         <graphic>
-            <FontIcon iconLiteral="fa-info"></FontIcon>
+            <FontIcon iconLiteral="fa-info"/>
         </graphic>
     </Button>
 </ToolBar>

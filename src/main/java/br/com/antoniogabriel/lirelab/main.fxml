@@ -9,13 +9,13 @@
 
     <top>
         <VBox>
-            <fx:include source="menubar.fxml"></fx:include>
-            <fx:include source="toolbar.fxml"></fx:include>
+            <fx:include source="menubar.fxml"/>
+            <fx:include source="toolbar.fxml"/>
         </VBox>
     </top>
 
     <center>
-        <fx:include source="welcome-view.fxml"></fx:include>
+        <fx:include source="welcome-view.fxml"/>
     </center>
 
 </BorderPane>

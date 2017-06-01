@@ -12,7 +12,7 @@
               alignment="CENTER"
               gridLinesVisible="false">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER"></ColumnConstraints>
+            <ColumnConstraints halignment="CENTER"/>
         </columnConstraints>
 
         <Text id="welcome-title"
@@ -20,17 +20,17 @@
               GridPane.rowIndex="0"
               GridPane.columnIndex="0">
             <font>
-                <Font size="60"></Font>
+                <Font size="60"/>
             </font>
         </Text>
         <Text id="welcome-text"
               text="With LIRE Lab you can test LIRE Features in an easy way"
               GridPane.rowIndex="1"
-              GridPane.columnIndex="0"></Text>
+              GridPane.columnIndex="0"/>
         <Button id="welcome-create-collection-button"
                 text="Create Collection"
                 onAction="#openCreateCollectionDialog"
                 GridPane.rowIndex="2"
-                GridPane.columnIndex="0"></Button>
+                GridPane.columnIndex="0"/>
     </GridPane>
 </StackPane>
