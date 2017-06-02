@@ -28,6 +28,7 @@
               GridPane.rowIndex="1"
               GridPane.columnIndex="0"/>
         <Button id="welcome-create-collection-button"
+                fx:id="createCollectionButton"
                 text="Create Collection"
                 onAction="#openCreateCollectionDialog"
                 GridPane.rowIndex="2"
