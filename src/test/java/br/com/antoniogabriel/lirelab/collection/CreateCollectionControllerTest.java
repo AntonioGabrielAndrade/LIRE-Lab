@@ -30,6 +30,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(CREATE_COLLECTION);
+        stage.setMaximized(false);
         stage.centerOnScreen();
         stage.show();
     }
