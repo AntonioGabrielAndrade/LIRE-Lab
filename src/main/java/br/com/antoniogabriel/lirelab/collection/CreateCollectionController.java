@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.Feature;
+import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,6 +21,7 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CreateCollectionController implements Initializable {
@@ -90,7 +92,7 @@ public class CreateCollectionController implements Initializable {
     private void chooseDir(ActionEvent event) {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Select the directory that contains the images");
-        Window window = featuresTable.getScene().getWindow();
+        Window window = getWindow();
         File dir = chooser.showDialog(window);
         if (dir != null) {
             pathToImages.setText(dir.getAbsolutePath());
@@ -99,16 +101,51 @@ public class CreateCollectionController implements Initializable {
 
     @FXML
     private void close(ActionEvent event) {
-        featuresTable.getScene().getWindow().hide();
+        getWindow().hide();
     }
+
+    private Window getWindow() {
+        return featuresTable.getScene().getWindow();
+    }
+
+    @FXML
+    private void createCollection(ActionEvent event) {
+        CollectionCreator creator = new CollectionCreatorBuilder()
+                .aCreator()
+                .indexForFeatures(getSelectedFeatures())
+                .readImagesFrom(pathToImages.getText())
+                .openIndexIn(System.getProperty("user.home") +
+                        "/lirelab/collections/" + nameField.getText() + "/index")
+                .build();
+
+        CreateCollectionTask task = new CreateCollectionTask(creator);
+        ProgressDialog dialog = new ProgressDialog(task);
+        dialog.initOwner(getWindow());
+        dialog.show();
+        new Thread(task).start();
+    }
+
+    private ArrayList<Feature> getSelectedFeatures() {
+        ObservableList<FeatureModel> items = featuresTable.getItems();
+        ArrayList<Feature> features = new ArrayList<>();
+        for (FeatureModel item : items) {
+            if (item.isSelected()) {
+                features.add(item.getFeature());
+            }
+        }
+        return features;
+    }
+
 
     public class FeatureModel {
         private final SimpleBooleanProperty selected;
         private final SimpleStringProperty name;
+        private final Feature feature;
 
         public FeatureModel(Feature feature) {
             this.selected = new SimpleBooleanProperty(false);
             this.name = new SimpleStringProperty(feature.name());
+            this.feature = feature;
         }
 
         public boolean isSelected() {
@@ -133,6 +170,10 @@ public class CreateCollectionController implements Initializable {
 
         public void setName(String name) {
             this.name.set(name);
+        }
+
+        public Feature getFeature() {
+            return feature;
         }
     }
 
