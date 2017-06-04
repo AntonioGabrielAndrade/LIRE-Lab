@@ -44,14 +44,14 @@ public class CollectionCreator {
 
         for (int i = 0; i < images.size(); i++) {
             String imageFilePath = images.get(i);
-            callback.beforeAddImageToIndex(i, images.size(), imageFilePath);
+            callback.beforeAddImageToIndex(i+1, images.size(), imageFilePath);
             try {
                 BufferedImage img = ImageIO.read(
                         new FileInputStream(imageFilePath));
                 Document document =
                         builder.createDocument(img, imageFilePath);
                 indexWriter.addDocument(document);
-                callback.afterAddImageToIndex(i, images.size(), imageFilePath);
+                callback.afterAddImageToIndex(i+1, images.size(), imageFilePath);
             } catch (Exception e) {
                 e.printStackTrace();
             }
