@@ -22,9 +22,13 @@ public class ProgressDialog extends Dialog<Void> {
         progressBar.progressProperty().bind(task.progressProperty());
         message.textProperty().bind(task.messageProperty());
         okButton.disableProperty().bind(task.runningProperty());
+        setOnCloseRequest(event -> {
+            getOwner().hide();
+        });
     }
 
     private void setupUI() {
+        setTitle("Creating collection");
         message = new Text();
         message.setId("message");
 
