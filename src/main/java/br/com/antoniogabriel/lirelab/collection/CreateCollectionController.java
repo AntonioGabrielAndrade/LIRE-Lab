@@ -58,6 +58,14 @@ public class CreateCollectionController implements Initializable {
         featuresTable.setItems(getFeatureItems());
     }
 
+    private ObservableList<FeatureModel> getFeatureItems() {
+        ObservableList<FeatureModel> items = FXCollections.observableArrayList();
+        for (Feature feature : Feature.values()) {
+            items.add(new FeatureModel(feature));
+        }
+        return items;
+    }
+
     private void bindCreateButtonToMandatoryData() {
         createButton.disableProperty().bind(
                 nameField.textProperty().isEmpty().or(
@@ -80,13 +88,6 @@ public class CreateCollectionController implements Initializable {
         return binding;
     }
 
-    private ObservableList<FeatureModel> getFeatureItems() {
-        ObservableList<FeatureModel> items = FXCollections.observableArrayList();
-        for (Feature feature : Feature.values()) {
-            items.add(new FeatureModel(feature));
-        }
-        return items;
-    }
 
     @FXML
     private void chooseDir(ActionEvent event) {
@@ -104,10 +105,6 @@ public class CreateCollectionController implements Initializable {
         getWindow().hide();
     }
 
-    private Window getWindow() {
-        return featuresTable.getScene().getWindow();
-    }
-
     @FXML
     private void createCollection(ActionEvent event) {
         CollectionCreator creator = new CollectionCreatorBuilder()
@@ -123,6 +120,10 @@ public class CreateCollectionController implements Initializable {
         dialog.initOwner(getWindow());
         dialog.show();
         new Thread(task).start();
+    }
+
+    private Window getWindow() {
+        return featuresTable.getScene().getWindow();
     }
 
     private ArrayList<Feature> getSelectedFeatures() {
