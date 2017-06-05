@@ -13,7 +13,6 @@ import org.testfx.util.WaitForAsyncUtils;
 import java.util.concurrent.TimeUnit;
 
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 public class ProgressDialogTest extends ApplicationTest {
@@ -90,8 +89,6 @@ public class ProgressDialogTest extends ApplicationTest {
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
                 progressBar.progressProperty().isEqualTo(1.0, 0.05));
-
-
     }
 
     @Test
@@ -148,7 +145,6 @@ public class ProgressDialogTest extends ApplicationTest {
                 TimeUnit.SECONDS,
                 progressBar.progressProperty().isEqualTo(1.0, 0)
                         .and(button.disabledProperty().not()));
-
     }
 
     private class StubTask extends Task<Void> {
