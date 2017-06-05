@@ -53,7 +53,7 @@ public class ProgressDialogTest extends ApplicationTest {
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.1, 0));
+                progressBar.progressProperty().isEqualTo(0.1, 0.05));
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
@@ -65,31 +65,31 @@ public class ProgressDialogTest extends ApplicationTest {
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.4, 0.0));
+                progressBar.progressProperty().isEqualTo(0.4, 0.05));
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.5, 0.0));
+                progressBar.progressProperty().isEqualTo(0.5, 0.05));
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.6, 0.0));
+                progressBar.progressProperty().isEqualTo(0.6, 0.05));
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.7, 0.0));
+                progressBar.progressProperty().isEqualTo(0.7, 0.05));
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.8, 0.0));
+                progressBar.progressProperty().isEqualTo(0.8, 0.05));
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.9, 0.0));
+                progressBar.progressProperty().isEqualTo(0.9, 0.05));
 
         WaitForAsyncUtils.waitFor(10,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(1.0, 0.0));
+                progressBar.progressProperty().isEqualTo(1.0, 0.05));
 
 
     }
