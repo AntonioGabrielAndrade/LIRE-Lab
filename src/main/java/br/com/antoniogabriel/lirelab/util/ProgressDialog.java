@@ -19,9 +19,9 @@ public class ProgressDialog extends Dialog<Void> {
     public ProgressDialog(Task<Void> task) {
         this.task = task;
         setupUI();
-        progressBar.progressProperty().bind(task.progressProperty());
-        message.textProperty().bind(task.messageProperty());
-        okButton.disableProperty().bind(task.runningProperty());
+        okButton.disableProperty().bind(this.task.progressProperty().isEqualTo(1.0, 0.0).not());
+        progressBar.progressProperty().bind(this.task.progressProperty());
+        message.textProperty().bind(this.task.messageProperty());
         setOnCloseRequest(event -> {
             getOwner().hide();
         });
@@ -33,6 +33,7 @@ public class ProgressDialog extends Dialog<Void> {
         message.setId("message");
 
         progressBar = new ProgressBar();
+        progressBar.setProgress(-1);
         progressBar.setId("progress-bar");
         progressBar.setPrefWidth(500);
         progressBar.setMaxHeight(10);
@@ -46,7 +47,7 @@ public class ProgressDialog extends Dialog<Void> {
         ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().add(okButtonType);
         okButton = getDialogPane().lookupButton(okButtonType);
-        okButton.setId("ok-button");
         okButton.setDisable(true);
+        okButton.setId("ok-button");
     }
 }
