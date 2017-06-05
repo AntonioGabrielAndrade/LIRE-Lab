@@ -34,9 +34,9 @@ public class ProgressDialogTest extends ApplicationTest {
             task = new StubTask();
             dialog = new ProgressDialog(task);
             dialog.show();
-            progressBar = lookup("#progress-bar").query();
-            message = lookup("#message").query();
-            button = lookup("#ok-button").query();
+            progressBar = from(dialog.getDialogPane()).lookup("#progress-bar").query();
+            message = from(dialog.getDialogPane()).lookup("#message").query();
+            button = from(dialog.getDialogPane()).lookup("#ok-button").query();
         });
     }
 
@@ -44,7 +44,7 @@ public class ProgressDialogTest extends ApplicationTest {
     public void shouldShowBasicUIStructure() throws Exception {
         verifyThat("#progress-bar", isVisible());
         verifyThat("#message", isVisible());
-        verifyThat("#ok-button", isDisabled());
+        verifyThat("#ok-button", isVisible());
     }
 
     @Test
