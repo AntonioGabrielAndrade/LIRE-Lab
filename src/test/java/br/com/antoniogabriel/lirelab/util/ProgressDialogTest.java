@@ -157,7 +157,7 @@ public class ProgressDialogTest extends ApplicationTest {
         @Override
         protected Void call() throws Exception {
             int max = 10;
-            for (int i = 1; i <= max; i++) {
+            for (int i = 0; i <= max; i++) {
                 updateProgress(i, max);
                 updateMessage(
                         "Progress: " + i + " of " + max);
