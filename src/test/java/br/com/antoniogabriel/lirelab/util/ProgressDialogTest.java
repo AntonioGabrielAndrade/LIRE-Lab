@@ -146,11 +146,9 @@ public class ProgressDialogTest extends ApplicationTest {
 
         WaitForAsyncUtils.waitFor(15,
                 TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(1.0, 0));
+                progressBar.progressProperty().isEqualTo(1.0, 0)
+                        .and(button.disabledProperty().not()));
 
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                button.disabledProperty().not());
     }
 
     private class StubTask extends Task<Void> {
