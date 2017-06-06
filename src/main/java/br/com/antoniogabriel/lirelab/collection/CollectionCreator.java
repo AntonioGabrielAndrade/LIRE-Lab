@@ -1,38 +1,36 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.Feature;
-import net.semanticmetadata.lire.builders.DocumentBuilder;
-import net.semanticmetadata.lire.builders.SimpleDocumentBuilder;
+import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import net.semanticmetadata.lire.utils.FileUtils;
-import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import net.semanticmetadata.lire.utils.LuceneUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.store.FSDirectory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import static net.semanticmetadata.lire.utils.LuceneUtils.AnalyzerType;
 
 public class CollectionCreator {
 
     private CreateCollectionCallback callback;
     private IndexWriter indexWriter;
-    private DocumentBuilder builder;
+    private GlobalDocumentBuilder builder;
     private String imagesDir;
     private ArrayList<Feature> features;
     private String indexDir;
 
     public void createIndex() throws IOException {
-        builder = new SimpleDocumentBuilder();
-        IndexWriterConfig conf =
-                new IndexWriterConfig(
-                        new WhitespaceAnalyzer());
-        indexWriter = new IndexWriter(FSDirectory.open(Paths.get(indexDir)), conf);
+        builder = new GlobalDocumentBuilder(false);
+        for (Feature feature : features) {
+            builder.addExtractor(feature.getLireClass());
+        }
+        indexWriter = LuceneUtils.createIndexWriter(indexDir, true, AnalyzerType.WhitespaceAnalyzer);
     }
 
     public void addImagesToIndex() throws IOException {
@@ -56,6 +54,9 @@ public class CollectionCreator {
                 e.printStackTrace();
             }
         }
+
+        LuceneUtils.closeWriter(indexWriter);
+        callback.afterIndexAllImages(images.size());
     }
 
     void setCallback(CreateCollectionCallback callback) {
