@@ -29,4 +29,9 @@ public class CreateCollectionTask extends Task<Void> implements CreateCollection
     public void afterAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {
         updateProgress(currentImage, totalImages);
     }
+
+    @Override
+    public void afterIndexAllImages(int totalImages) {
+        updateMessage("Indexing complete!");
+    }
 }
