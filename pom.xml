@@ -64,7 +64,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.4</version>
+            <version>2.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -74,17 +74,17 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>5.2.1</version>
+            <version>6.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-queryparser</artifactId>
-            <version>5.2.1</version>
+            <version>6.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-analyzers-common</artifactId>
-            <version>5.2.1</version>
+            <version>6.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.sangupta</groupId>
@@ -94,8 +94,8 @@
 
         <dependency>
             <groupId>net.semanticmetadata</groupId>
-            <artifactId>lire</artifactId>
-            <version>1.0b4</version>
+            <artifactId>LIRE</artifactId>
+            <version>1.0_b04</version>
         </dependency>
 
     </dependencies>
@@ -124,10 +124,11 @@
                 <version>2.5.1</version>
                 <configuration>
                     <groupId>net.semanticmetadata</groupId>
-                    <artifactId>lire</artifactId>
-                    <version>1.0b4</version>
+                    <artifactId>LIRE</artifactId>
+                    <version>1.0_b04</version>
                     <packaging>jar</packaging>
-                    <file>${basedir}/src/main/resources/local-maven-repo/lire.jar</file>
+                    <file>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04.jar</file>
+                    <sources>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04-sources.jar</sources>
                 </configuration>
                 <executions>
                     <execution>
