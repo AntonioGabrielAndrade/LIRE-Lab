@@ -19,7 +19,7 @@ import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
 import static org.testfx.matcher.base.WindowMatchers.isNotShowing;
 
-public class CreateCollectionControllerTest extends ApplicationTest {
+public class CreateCollectionViewTest extends ApplicationTest {
 
     private ApplicationRunner runner = new ApplicationRunner();
     private Feature[] featuresForTest = {Feature.CEDD, Feature.TAMURA};
