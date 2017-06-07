@@ -11,7 +11,7 @@ public class CollectionCreatorBuilder {
     private String indexDir;
 
     public CollectionCreatorBuilder aCreator() {
-        creator = new CollectionCreator();
+        creator = new CollectionCreator(new IndexBuilder());
         return this;
     }
 

@@ -20,7 +20,7 @@ public class CreateCollectionTaskTest {
     }
 
     @Test
-    public void shouldCreateCollectionStepByStep() throws Exception {
+    public void shouldCreateCollection() throws Exception {
         CreateCollectionTask task = new CreateCollectionTask(creator);
 
         task.call();
