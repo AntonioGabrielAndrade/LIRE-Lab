@@ -138,7 +138,7 @@ public class ProgressDialogTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldEnableOkButtonOnFinish() throws Exception {
+    public void shouldEnableOkButtonWhenFinish() throws Exception {
         new Thread(task).start();
 
         WaitForAsyncUtils.waitFor(15,

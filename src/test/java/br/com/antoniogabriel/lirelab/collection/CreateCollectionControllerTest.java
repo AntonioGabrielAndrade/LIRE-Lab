@@ -36,14 +36,14 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldCloseOnCancel() throws Exception {
+    public void shouldCloseWhenCancel() throws Exception {
         Window window = window(CREATE_COLLECTION);
         clickOn("#cancel");
         verifyThat(window, isNotShowing());
     }
 
     @Test
-    public void shouldDisableCreateButtonIfNameIsEmpty() throws Exception {
+    public void shouldDisableCreateButtonWhenNameIsEmpty() throws Exception {
         unselectAllFeatures();
         clickOn("#collection-name").write("");
         clickOn("#path-to-images").write("some/test/path");
@@ -54,7 +54,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldDisableCreateButtonIfPathIsEmpty() throws Exception {
+    public void shouldDisableCreateButtonWhenPathIsEmpty() throws Exception {
         unselectAllFeatures();
         clickOn("#collection-name").write("Some Name");
         clickOn("#path-to-images").write("");
@@ -65,7 +65,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldDisableCreateButtonIfNoFeatureIsSelected() throws Exception {
+    public void shouldDisableCreateButtonWhenNoFeatureIsSelected() throws Exception {
         unselectAllFeatures();
         clickOn("#collection-name").write("Some Name");
         clickOn("#path-to-images").write("some/test/path");
@@ -74,7 +74,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldEnableCreateButtonIfMandatoryDataIsFilled() throws Exception {
+    public void shouldEnableCreateButtonWhenMandatoryDataIsFilled() throws Exception {
         unselectAllFeatures();
         clickOn("#collection-name").write("Some Name");
         clickOn("#path-to-images").write("some/test/path");
