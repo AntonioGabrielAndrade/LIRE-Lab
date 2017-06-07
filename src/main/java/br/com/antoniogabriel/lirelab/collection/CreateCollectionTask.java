@@ -14,8 +14,7 @@ public class CreateCollectionTask extends Task<Void> implements CreateCollection
 
     @Override
     protected Void call() throws Exception {
-        creator.createIndex();
-        creator.addImagesToIndex();
+        creator.create();
         return null;
     }
 

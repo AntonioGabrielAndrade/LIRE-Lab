@@ -25,6 +25,11 @@ public class CollectionCreator {
     private ArrayList<Feature> features;
     private String indexDir;
 
+    public void create() throws IOException {
+        createIndex();
+        addImagesToIndex();
+    }
+
     public void createIndex() throws IOException {
         builder = new GlobalDocumentBuilder(false);
         for (Feature feature : features) {
@@ -74,4 +79,5 @@ public class CollectionCreator {
     public void setIndexDir(String indexDir) {
         this.indexDir = indexDir;
     }
+
 }

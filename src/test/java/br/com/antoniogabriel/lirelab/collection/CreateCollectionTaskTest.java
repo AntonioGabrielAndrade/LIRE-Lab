@@ -2,11 +2,10 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateCollectionTaskTest {
@@ -26,8 +25,6 @@ public class CreateCollectionTaskTest {
 
         task.call();
 
-        InOrder inOrder = inOrder(creator);
-        inOrder.verify(creator).createIndex();
-        inOrder.verify(creator).addImagesToIndex();
+        verify(creator).create();
     }
 }
