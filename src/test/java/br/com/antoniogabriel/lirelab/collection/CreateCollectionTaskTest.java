@@ -7,9 +7,11 @@ import static org.mockito.Mockito.*;
 
 public class CreateCollectionTaskTest {
 
+    private CollectionCreator creator;
+
     @Test
     public void shouldSetItselfAsCallback() throws Exception {
-        CollectionCreator creator = mock(CollectionCreator.class);
+        creator = mock(CollectionCreator.class);
         CreateCollectionTask task = new CreateCollectionTask(creator);
 
         verify(creator).setCallback(task);
@@ -17,7 +19,7 @@ public class CreateCollectionTaskTest {
 
     @Test
     public void shouldCreateCollectionStepByStep() throws Exception {
-        CollectionCreator creator = mock(CollectionCreator.class);
+        creator = mock(CollectionCreator.class);
         CreateCollectionTask task = new CreateCollectionTask(creator);
 
         task.call();
