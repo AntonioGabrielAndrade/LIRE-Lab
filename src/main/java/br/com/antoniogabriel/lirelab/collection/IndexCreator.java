@@ -9,7 +9,7 @@ import java.util.List;
 
 public class IndexCreator {
 
-    private CreateCollectionCallback callback;
+    private IndexBuilderCallback callback;
     private String imagesDir;
     private List<Feature> features;
     private String indexDir;
@@ -38,7 +38,7 @@ public class IndexCreator {
         callback.afterIndexAllImages(paths.size());
     }
 
-    void setCallback(CreateCollectionCallback callback) {
+    void setCallback(IndexBuilderCallback callback) {
         this.callback = callback;
     }
 

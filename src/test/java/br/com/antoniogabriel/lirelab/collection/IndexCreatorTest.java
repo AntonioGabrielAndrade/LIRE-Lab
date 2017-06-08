@@ -36,7 +36,7 @@ public class IndexCreatorTest {
     @Mock private GlobalDocumentBuilder docBuilder;
     @Mock private BufferedImage bufImg1;
     @Mock private BufferedImage bufImg2;
-    @Mock private CreateCollectionCallback callback;
+    @Mock private IndexBuilderCallback callback;
 
     @Test
     public void shouldCreateCollectionStepByStep() throws Exception {
