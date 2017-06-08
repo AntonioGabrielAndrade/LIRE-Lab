@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.app.App;
-import br.com.antoniogabriel.lirelab.app.Feature;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionController;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;

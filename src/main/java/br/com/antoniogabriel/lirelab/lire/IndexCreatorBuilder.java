@@ -1,7 +1,5 @@
 package br.com.antoniogabriel.lirelab.lire;
 
-import br.com.antoniogabriel.lirelab.app.Feature;
-
 import java.util.ArrayList;
 
 public class IndexCreatorBuilder {

@@ -1,9 +1,5 @@
 package br.com.antoniogabriel.lirelab.lire;
 
-import br.com.antoniogabriel.lirelab.app.Feature;
-import br.com.antoniogabriel.lirelab.lire.IndexBuilder;
-import br.com.antoniogabriel.lirelab.lire.IndexBuilderCallback;
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;

@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 
-import br.com.antoniogabriel.lirelab.app.Feature;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Window;

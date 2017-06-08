@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.app;
+package br.com.antoniogabriel.lirelab.lire;
 
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
 import net.semanticmetadata.lire.imageanalysis.features.global.CEDD;

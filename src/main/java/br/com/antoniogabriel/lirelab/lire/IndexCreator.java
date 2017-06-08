@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.lire;
 
-import br.com.antoniogabriel.lirelab.app.Feature;
 import org.apache.lucene.document.Document;
 
 import java.awt.image.BufferedImage;

@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.app.Feature;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
