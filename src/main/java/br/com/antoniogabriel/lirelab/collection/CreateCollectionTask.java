@@ -16,13 +16,12 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     private String imagesDir;
     private ArrayList<Feature> features;
 
-    public CreateCollectionTask(IndexCreator indexCreator) {
-        this.indexCreator = indexCreator;
-        this.indexCreator.setCallback(this);
+    public CreateCollectionTask() {
+        this(new IndexCreator(new IndexBuilder()));
     }
 
-    public CreateCollectionTask() {
-        this.indexCreator = new IndexCreator(new IndexBuilder());
+    public CreateCollectionTask(IndexCreator indexCreator) {
+        this.indexCreator = indexCreator;
         this.indexCreator.setCallback(this);
     }
 
