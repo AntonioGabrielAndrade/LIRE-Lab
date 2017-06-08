@@ -1,28 +1,20 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.Feature;
-import br.com.antoniogabriel.lirelab.acceptance.ApplicationRunner;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import java.util.Set;
-
 import static br.com.antoniogabriel.lirelab.WelcomeViewController.CREATE_COLLECTION;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isDisabled;
-import static org.testfx.matcher.base.NodeMatchers.isEnabled;
-import static org.testfx.matcher.base.WindowMatchers.isNotShowing;
 
 public class CreateCollectionViewTest extends ApplicationTest {
 
-    private ApplicationRunner runner = new ApplicationRunner();
-    private Feature[] featuresForTest = {Feature.CEDD, Feature.TAMURA};
+    private static final Feature[] FEATURES_FOR_TEST = {Feature.CEDD, Feature.TAMURA};
+    private CreateCollectionView view;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -35,62 +27,50 @@ public class CreateCollectionViewTest extends ApplicationTest {
         stage.show();
     }
 
+    @Before
+    public void setUp() throws Exception {
+        view = new CreateCollectionView();
+    }
+
     @Test
     public void shouldCloseWhenCancel() throws Exception {
-        Window window = window(CREATE_COLLECTION);
-        clickOn("#cancel");
-        verifyThat(window, isNotShowing());
+        view.cancel();
+        view.checkWindowIsClosed();
     }
 
     @Test
     public void shouldDisableCreateButtonWhenNameIsEmpty() throws Exception {
-        unselectAllFeatures();
-        clickOn("#collection-name").write("");
-        clickOn("#path-to-images").write("some/test/path");
-
-        runner.markCheckBoxFor(featuresForTest);
-
-        verifyThat("#create", isDisabled());
+        view.unselectAllFeatures();
+        view.writeName("");
+        view.writeImagesDirectory("some/test/path");
+        view.selectFeatures(FEATURES_FOR_TEST);
+        view.checkCreateIsDisabled();
     }
 
     @Test
     public void shouldDisableCreateButtonWhenPathIsEmpty() throws Exception {
-        unselectAllFeatures();
-        clickOn("#collection-name").write("Some Name");
-        clickOn("#path-to-images").write("");
-
-        runner.markCheckBoxFor(featuresForTest);
-
-        verifyThat("#create", isDisabled());
+        view.unselectAllFeatures();
+        view.writeName("Some Name");
+        view.writeImagesDirectory("");
+        view.selectFeatures(FEATURES_FOR_TEST);
+        view.checkCreateIsDisabled();
     }
 
     @Test
     public void shouldDisableCreateButtonWhenNoFeatureIsSelected() throws Exception {
-        unselectAllFeatures();
-        clickOn("#collection-name").write("Some Name");
-        clickOn("#path-to-images").write("some/test/path");
-
-        verifyThat("#create", isDisabled());
+        view.unselectAllFeatures();
+        view.writeName("Some Name");
+        view.writeImagesDirectory("some/test/path");
+        view.checkCreateIsDisabled();
     }
 
     @Test
     public void shouldEnableCreateButtonWhenMandatoryDataIsFilled() throws Exception {
-        unselectAllFeatures();
-        clickOn("#collection-name").write("Some Name");
-        clickOn("#path-to-images").write("some/test/path");
-
-        runner.markCheckBoxFor(featuresForTest);
-
-        verifyThat("#create", isEnabled());
+        view.unselectAllFeatures();
+        view.writeName("Some Name");
+        view.writeImagesDirectory("some/test/path");
+        view.selectFeatures(FEATURES_FOR_TEST);
+        view.checkCreateIsEnabled();
     }
 
-    private void unselectAllFeatures() {
-        Set<CheckBox> checkBoxes = lookup("#featuresTable")
-                .lookup(".check-box")
-                .queryAll();
-
-        for (CheckBox checkBox : checkBoxes) {
-            checkBox.setSelected(false);
-        }
-    }
 }
