@@ -20,7 +20,7 @@ public class ProgressDialogView extends FxRobot {
         verifyThat("#ok-button", isVisible());
     }
 
-    public void checkProgressMark(Double... marks) throws TimeoutException {
+    public ProgressDialogView checkProgressMark(Double... marks) throws TimeoutException {
         ProgressBar bar = lookup("#progress-bar").query();
 
         for (Double mark : marks) {
@@ -28,9 +28,11 @@ public class ProgressDialogView extends FxRobot {
                     TimeUnit.SECONDS,
                     bar.progressProperty().isEqualTo(mark, 0.05));
         }
+
+        return this;
     }
 
-    public void checkMessageShow(String... values) throws TimeoutException {
+    public ProgressDialogView checkMessageShow(String... values) throws TimeoutException {
         Text message = lookup("#message").query();
 
         for (String value : values) {
@@ -38,9 +40,11 @@ public class ProgressDialogView extends FxRobot {
                     TimeUnit.SECONDS,
                     message.textProperty().isEqualTo(value));
         }
+
+        return this;
     }
 
-    public void checkOkIsEnabledWhenFinish(long timeout, TimeUnit timeUnit) throws TimeoutException {
+    public ProgressDialogView checkOkIsEnabledWhenFinish(long timeout, TimeUnit timeUnit) throws TimeoutException {
         ProgressBar bar = lookup("#progress-bar").query();
         Node button = lookup("#ok-button").query();
 
@@ -49,5 +53,10 @@ public class ProgressDialogView extends FxRobot {
                 bar.progressProperty().isEqualTo(1.0, 0)
                         .and(button.disabledProperty().not()));
 
+        return this;
+    }
+
+    public void ok() {
+        clickOn("#ok-button").interrupt();
     }
 }
