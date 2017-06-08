@@ -1,27 +1,19 @@
 package br.com.antoniogabriel.lirelab.util;
 
 import javafx.concurrent.Task;
-import javafx.scene.Node;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.concurrent.TimeUnit;
-
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 public class ProgressDialogTest extends ApplicationTest {
 
     private Task<Void> task;
-    private ProgressBar progressBar;
     private ProgressDialog dialog;
-    private Text message;
-    private Node button;
+    private ProgressDialogView view = new ProgressDialogView();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -32,108 +24,44 @@ public class ProgressDialogTest extends ApplicationTest {
         interact(() -> {
             task = new StubTask();
             dialog = new ProgressDialog(task);
+            dialog.setTitle("Testing ProgressDialog");
             dialog.show();
-            progressBar = from(dialog.getDialogPane()).lookup("#progress-bar").query();
-            message = from(dialog.getDialogPane()).lookup("#message").query();
-            button = from(dialog.getDialogPane()).lookup("#ok-button").query();
+        });
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        interact(() -> {
+           dialog.close();
         });
     }
 
     @Test
     public void shouldShowBasicUIStructure() throws Exception {
-        verifyThat("#progress-bar", isVisible());
-        verifyThat("#message", isVisible());
-        verifyThat("#ok-button", isVisible());
+        view.checkUIStructure();
     }
 
     @Test
     public void shouldUpdateProgress() throws Exception {
         new Thread(task).start();
 
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.1, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.2, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.3, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.4, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.5, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.6, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.7, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.8, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(0.9, 0.05));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(1.0, 0.05));
+        view.checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
     }
 
     @Test
     public void shouldUpdateMessage() throws Exception {
         new Thread(task).start();
 
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 1 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 2 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 3 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 4 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 5 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 6 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 7 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 8 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 9 of 10"));
-
-        WaitForAsyncUtils.waitFor(10,
-                TimeUnit.SECONDS,
-                message.textProperty().isEqualTo("Progress: 10 of 10"));
+        view.checkMessageShow("Progress: 1 of 10",
+                "Progress: 2 of 10",
+                "Progress: 3 of 10",
+                "Progress: 4 of 10",
+                "Progress: 5 of 10",
+                "Progress: 6 of 10",
+                "Progress: 7 of 10",
+                "Progress: 8 of 10",
+                "Progress: 9 of 10",
+                "Progress: 10 of 10");
 
     }
 
@@ -141,10 +69,7 @@ public class ProgressDialogTest extends ApplicationTest {
     public void shouldEnableOkButtonWhenFinish() throws Exception {
         new Thread(task).start();
 
-        WaitForAsyncUtils.waitFor(15,
-                TimeUnit.SECONDS,
-                progressBar.progressProperty().isEqualTo(1.0, 0)
-                        .and(button.disabledProperty().not()));
+        view.checkOkIsEnabledWhenFinish(100, TimeUnit.SECONDS);
     }
 
     private class StubTask extends Task<Void> {
