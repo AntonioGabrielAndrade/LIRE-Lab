@@ -23,7 +23,9 @@ public class ProgressDialog extends Dialog<Void> {
         progressBar.progressProperty().bind(this.task.progressProperty());
         message.textProperty().bind(this.task.messageProperty());
         setOnCloseRequest(event -> {
-            getOwner().hide();
+            if (getOwner() != null) {
+                getOwner().hide();
+            }
         });
     }
 
