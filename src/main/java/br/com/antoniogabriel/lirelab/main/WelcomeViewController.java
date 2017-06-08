@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab;
+package br.com.antoniogabriel.lirelab.main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

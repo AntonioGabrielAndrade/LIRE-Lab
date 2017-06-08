@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static final String MAIN_FXML_PATH = "br/com/antoniogabriel/lirelab/main.fxml";
+    public static final String MAIN_FXML_PATH = "br/com/antoniogabriel/lirelab/main/main.fxml";
 
     public static void main(String[] args) {
         launch(Main.class);

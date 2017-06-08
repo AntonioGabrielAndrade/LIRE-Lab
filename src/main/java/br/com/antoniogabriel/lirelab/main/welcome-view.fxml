@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <StackPane id="main-content"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="br.com.antoniogabriel.lirelab.WelcomeViewController">
+           fx:controller="br.com.antoniogabriel.lirelab.main.WelcomeViewController">
     <GridPane id="welcome-view"
               vgap="10"
               alignment="CENTER"

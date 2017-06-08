@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.Feature;
+import br.com.antoniogabriel.lirelab.main.Feature;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import net.semanticmetadata.lire.utils.FileUtils;
 import net.semanticmetadata.lire.utils.LuceneUtils;

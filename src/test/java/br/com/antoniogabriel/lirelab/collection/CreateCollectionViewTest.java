@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.Feature;
+import br.com.antoniogabriel.lirelab.main.Feature;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import static br.com.antoniogabriel.lirelab.WelcomeViewController.CREATE_COLLECTION;
+import static br.com.antoniogabriel.lirelab.main.WelcomeViewController.CREATE_COLLECTION;
 
 public class CreateCollectionViewTest extends ApplicationTest {
 
