@@ -19,7 +19,9 @@ public class ProgressDialog extends Dialog<Void> {
     public ProgressDialog(Task<Void> task) {
         this.task = task;
         setupUI();
-        okButton.disableProperty().bind(this.task.progressProperty().isEqualTo(1.0, 0.0).not());
+        okButton.disableProperty().bind(
+                this.task.progressProperty().isEqualTo(1.0, 0.0).not()
+                        .or(this.task.runningProperty()));
         progressBar.progressProperty().bind(this.task.progressProperty());
         message.textProperty().bind(this.task.messageProperty());
         setOnCloseRequest(event -> {
