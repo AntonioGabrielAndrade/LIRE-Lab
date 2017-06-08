@@ -39,7 +39,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldDisableCreateButtonWhenNameIsEmpty() throws Exception {
+    public void shouldDisableCreateWhenNameIsEmpty() throws Exception {
         view.unselectAllFeatures();
         view.writeName("");
         view.writeImagesDirectory("some/test/path");
@@ -48,7 +48,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldDisableCreateButtonWhenPathIsEmpty() throws Exception {
+    public void shouldDisableCreateWhenImagesDirectoryIsEmpty() throws Exception {
         view.unselectAllFeatures();
         view.writeName("Some Name");
         view.writeImagesDirectory("");
@@ -57,7 +57,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldDisableCreateButtonWhenNoFeatureIsSelected() throws Exception {
+    public void shouldDisableCreateWhenNoFeatureIsSelected() throws Exception {
         view.unselectAllFeatures();
         view.writeName("Some Name");
         view.writeImagesDirectory("some/test/path");
@@ -65,7 +65,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldEnableCreateButtonWhenMandatoryDataIsFilled() throws Exception {
+    public void shouldEnableCreateWhenAllDataIsInformed() throws Exception {
         view.unselectAllFeatures();
         view.writeName("Some Name");
         view.writeImagesDirectory("some/test/path");
