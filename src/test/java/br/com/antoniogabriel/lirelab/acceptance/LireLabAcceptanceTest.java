@@ -13,10 +13,17 @@ import org.junit.Test;
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 
+import java.nio.file.Paths;
+
 public class LireLabAcceptanceTest extends FxRobot {
 
     private static final String TEST_COLLECTION_NAME = "Test Collection";
-    private static final String TEST_IMAGES_PATH = "br/com/antoniogabriel/lirelab/acceptance/test-images";
+    private static final String TEST_IMAGES_PATH = testImagesPath();
+
+    private static String testImagesPath() {
+        return Paths.get("src/test/resources/images/").toAbsolutePath().toString();
+    }
+
     private static final Feature[] TEST_FEATURES = {Feature.CEDD, Feature.TAMURA};
 
     @Before
