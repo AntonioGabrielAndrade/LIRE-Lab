@@ -15,7 +15,7 @@ public class AppView extends FxRobot {
     }
 
     public void checkToolBar() {
-        toolBarView.checkToolBarStructure();
+        toolBarView.checkStructure();
     }
 
     public void checkWelcomeView() {
