@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.main.Feature;
+import br.com.antoniogabriel.lirelab.app.Feature;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

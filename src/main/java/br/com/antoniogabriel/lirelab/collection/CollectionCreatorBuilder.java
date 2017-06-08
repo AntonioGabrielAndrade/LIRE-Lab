@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.main.Feature;
+import br.com.antoniogabriel.lirelab.app.Feature;
 
 import java.util.ArrayList;
 

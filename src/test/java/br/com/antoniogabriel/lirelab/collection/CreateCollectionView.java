@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 
-import br.com.antoniogabriel.lirelab.main.Feature;
+import br.com.antoniogabriel.lirelab.app.Feature;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Window;
@@ -9,7 +9,7 @@ import org.testfx.api.FxRobot;
 
 import java.util.Set;
 
-import static br.com.antoniogabriel.lirelab.main.WelcomeController.CREATE_COLLECTION;
+import static br.com.antoniogabriel.lirelab.app.WelcomeController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;

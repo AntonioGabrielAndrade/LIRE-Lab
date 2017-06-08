@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.main.Feature;
-import br.com.antoniogabriel.lirelab.Main;
+import br.com.antoniogabriel.lirelab.app.App;
+import br.com.antoniogabriel.lirelab.app.Feature;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionController;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
@@ -11,7 +11,7 @@ import org.testfx.api.FxToolkit;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.main.WelcomeController.CREATE_COLLECTION;
+import static br.com.antoniogabriel.lirelab.app.WelcomeController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
@@ -20,7 +20,7 @@ public class ApplicationRunner extends FxRobot {
 
     void setUpApp() throws TimeoutException {
         targetWindow(FxToolkit.registerPrimaryStage());
-        FxToolkit.setupApplication(Main.class);
+        FxToolkit.setupApplication(App.class);
         interrupt();
     }
 
