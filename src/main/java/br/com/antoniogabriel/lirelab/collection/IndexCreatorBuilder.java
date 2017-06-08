@@ -4,28 +4,28 @@ import br.com.antoniogabriel.lirelab.app.Feature;
 
 import java.util.ArrayList;
 
-public class CollectionCreatorBuilder {
+public class IndexCreatorBuilder {
     private IndexCreator creator;
     private ArrayList<Feature> features;
     private String imagesDir;
     private String indexDir;
 
-    public CollectionCreatorBuilder aCreator() {
+    public IndexCreatorBuilder aCreator() {
         creator = new IndexCreator(new IndexBuilder());
         return this;
     }
 
-    public CollectionCreatorBuilder indexForFeatures(ArrayList<Feature> features) {
+    public IndexCreatorBuilder indexForFeatures(ArrayList<Feature> features) {
         this.features = features;
         return this;
     }
 
-    public CollectionCreatorBuilder readImagesFrom(String imagesDir) {
+    public IndexCreatorBuilder readImagesFrom(String imagesDir) {
         this.imagesDir = imagesDir;
         return this;
     }
 
-    public CollectionCreatorBuilder openIndexIn(String indexDir) {
+    public IndexCreatorBuilder openIndexIn(String indexDir) {
         this.indexDir = indexDir;
         return this;
     }
