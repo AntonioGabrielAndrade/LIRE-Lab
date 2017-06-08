@@ -17,19 +17,24 @@ public class CreateCollectionTaskTest {
     @Mock
     private IndexCreator indexCreator;
 
+    @Mock
+    private ThumbnailsCreator thumbnailsCreator;
+
     @Before
     public void setUp() throws Exception {
-        task = new CreateCollectionTask(indexCreator);
+        task = new CreateCollectionTask(indexCreator, thumbnailsCreator);
     }
 
     @Test
     public void shouldSetItselfAsCallback() throws Exception {
         verify(indexCreator).setCallback(task);
+        verify(thumbnailsCreator).setCallback(task);
     }
 
     @Test
     public void shouldCreateCollection() throws Exception {
         task.call();
         verify(indexCreator).create();
+        verify(thumbnailsCreator).create();
     }
 }
