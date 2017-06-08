@@ -47,7 +47,7 @@ public class CreateCollectionView extends FxRobot {
     }
 
     public void writeImagesDirectory(String path) {
-        clickOn("#path-to-images").write(path);
+        clickOn("#images-directory").write(path);
     }
 
     public void selectFeatures(Feature[] features) {

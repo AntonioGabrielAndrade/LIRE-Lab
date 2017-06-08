@@ -76,7 +76,7 @@ public class ApplicationRunner extends FxRobot {
 
     public void fillCreateCollectionDialog(String name, String path, Feature[] features) {
         clickOn("#collection-name").write(name);
-        clickOn("#path-to-images").write(path);
+        clickOn("#images-directory").write(path);
 
         markCheckBoxFor(features);
 

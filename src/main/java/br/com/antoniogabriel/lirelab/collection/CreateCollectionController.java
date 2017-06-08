@@ -31,7 +31,7 @@ public class CreateCollectionController implements Initializable {
     @FXML
     private TextField nameField;
     @FXML
-    private TextField pathToImages;
+    private TextField imagesDirectoryField;
     @FXML
     private TableView<FeatureModel> featuresTable;
     @FXML
@@ -69,7 +69,7 @@ public class CreateCollectionController implements Initializable {
     private void bindCreateButtonToMandatoryData() {
         createButton.disableProperty().bind(
                 nameField.textProperty().isEmpty().or(
-                        pathToImages.textProperty().isEmpty().or(
+                        imagesDirectoryField.textProperty().isEmpty().or(
                                 noFeatureSelected()
                         )
                 )
@@ -96,7 +96,7 @@ public class CreateCollectionController implements Initializable {
         Window window = getWindow();
         File dir = chooser.showDialog(window);
         if (dir != null) {
-            pathToImages.setText(dir.getAbsolutePath());
+            imagesDirectoryField.setText(dir.getAbsolutePath());
         }
     }
 
@@ -110,7 +110,7 @@ public class CreateCollectionController implements Initializable {
         CollectionCreator creator = new CollectionCreatorBuilder()
                 .aCreator()
                 .indexForFeatures(getSelectedFeatures())
-                .readImagesFrom(pathToImages.getText())
+                .readImagesFrom(imagesDirectoryField.getText())
                 .openIndexIn(System.getProperty("user.home") +
                         "/lirelab/collections/" + nameField.getText() + "/index")
                 .build();

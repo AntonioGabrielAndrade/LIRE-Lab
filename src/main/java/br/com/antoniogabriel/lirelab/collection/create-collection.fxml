@@ -30,7 +30,7 @@
           GridPane.columnIndex="0">
         <Label text="Images directory"/>
         <HBox spacing="5">
-            <TextField fx:id="pathToImages" id="path-to-images" HBox.hgrow="ALWAYS"/>
+            <TextField id="images-directory" fx:id="imagesDirectoryField" HBox.hgrow="ALWAYS"/>
             <Button text="Browse" onAction="#chooseDir"/>
         </HBox>
     </VBox>
