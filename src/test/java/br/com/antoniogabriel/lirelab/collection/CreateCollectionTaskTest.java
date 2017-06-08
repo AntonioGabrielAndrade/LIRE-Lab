@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

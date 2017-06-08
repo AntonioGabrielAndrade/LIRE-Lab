@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.app.Feature;
+import br.com.antoniogabriel.lirelab.lire.IndexCreator;
+import br.com.antoniogabriel.lirelab.lire.IndexCreatorBuilder;
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleBooleanProperty;

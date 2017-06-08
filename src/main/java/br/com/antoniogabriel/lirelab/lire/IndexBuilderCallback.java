@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.lire;
 
 public interface IndexBuilderCallback {
     void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath);

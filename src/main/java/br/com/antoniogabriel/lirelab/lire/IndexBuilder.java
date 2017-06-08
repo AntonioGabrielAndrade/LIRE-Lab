@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.lire;
 
 import br.com.antoniogabriel.lirelab.app.Feature;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;

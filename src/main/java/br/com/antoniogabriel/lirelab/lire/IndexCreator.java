@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.lire;
 
 import br.com.antoniogabriel.lirelab.app.Feature;
 import org.apache.lucene.document.Document;
@@ -38,7 +38,7 @@ public class IndexCreator {
         callback.afterIndexAllImages(paths.size());
     }
 
-    void setCallback(IndexBuilderCallback callback) {
+    public void setCallback(IndexBuilderCallback callback) {
         this.callback = callback;
     }
 
