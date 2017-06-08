@@ -14,6 +14,7 @@ import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 public class LireLabAcceptanceTest extends FxRobot {
 
@@ -50,6 +51,10 @@ public class LireLabAcceptanceTest extends FxRobot {
                 .selectFeatures(TEST_FEATURES);
 
         ProgressDialogView progressView = createView.create();
+
+        progressView.checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
+                    .checkOkIsEnabledWhenFinish(2, TimeUnit.SECONDS)
+                    .ok();
 
 
 //        runner.openCreateCollectionDialog();
