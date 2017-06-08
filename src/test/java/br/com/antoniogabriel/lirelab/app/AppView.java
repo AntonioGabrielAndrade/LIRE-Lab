@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.app;
 
+import br.com.antoniogabriel.lirelab.collection.CreateCollectionView;
 import org.testfx.api.FxRobot;
 
 public class AppView extends FxRobot {
@@ -20,5 +21,12 @@ public class AppView extends FxRobot {
 
     public void checkWelcomeView() {
         welcomeView.checkStructure();
+    }
+
+    public CreateCollectionView openCreateCollectionView() {
+        clickOn("#welcome-create-collection-button")
+                .interrupt();
+
+        return new CreateCollectionView();
     }
 }

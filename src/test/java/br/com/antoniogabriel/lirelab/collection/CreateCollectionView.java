@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.collection;
 
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Window;
@@ -42,15 +43,17 @@ public class CreateCollectionView extends FxRobot {
         }
     }
 
-    public void writeName(String name) {
+    public CreateCollectionView writeName(String name) {
         clickOn("#collection-name").write(name);
+        return this;
     }
 
-    public void writeImagesDirectory(String path) {
+    public CreateCollectionView writeImagesDirectory(String path) {
         clickOn("#images-directory").write(path);
+        return this;
     }
 
-    public void selectFeatures(Feature[] features) {
+    public CreateCollectionView selectFeatures(Feature[] features) {
         for (Feature feature : features) {
             Node checkBox = lookup("#featuresTable")
                     .lookup(".table-row-cell").nth(feature.ordinal())
@@ -58,6 +61,7 @@ public class CreateCollectionView extends FxRobot {
                     .lookup(".check-box").query();
             clickOn(checkBox).interrupt();
         }
+        return this;
     }
 
     public void checkCreateIsDisabled() {
@@ -66,5 +70,10 @@ public class CreateCollectionView extends FxRobot {
 
     public void checkCreateIsEnabled() {
         verifyThat("#create", isEnabled());
+    }
+
+    public ProgressDialogView create() {
+        clickOn("#create");
+        return new ProgressDialogView();
     }
 }
