@@ -62,7 +62,6 @@ public class ProgressDialogTest extends ApplicationTest {
                 "Progress: 8 of 10",
                 "Progress: 9 of 10",
                 "Progress: 10 of 10");
-
     }
 
     @Test
