@@ -23,7 +23,7 @@ public class WelcomeController {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(createCollectionButton.getScene().getWindow());
         Parent root = CreateCollectionFXML.load();
-        stage.setScene(new Scene(root, 600, 400));
+        stage.setScene(new Scene(root));
         stage.centerOnScreen();
         stage.show();
     }
