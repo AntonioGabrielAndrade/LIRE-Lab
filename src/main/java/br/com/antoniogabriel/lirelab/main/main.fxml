@@ -15,7 +15,7 @@
     </top>
 
     <center>
-        <fx:include source="welcome-view.fxml"/>
+        <fx:include source="welcome.fxml"/>
     </center>
 
 </BorderPane>
