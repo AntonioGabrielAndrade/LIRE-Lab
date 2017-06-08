@@ -33,7 +33,4 @@ public class AppViewTest extends ApplicationTest {
         view.checkWelcomeView();
     }
 
-
-
-
 }
