@@ -7,7 +7,7 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 public class ToolBarView extends FxRobot {
 
-    public void checkTooBar() {
+    public void checkToolBarStructure() {
         verifyThat("#toolbar", isVisible());
         verifyThat("#toolbar-create-collection", isVisible());
         verifyThat("#toolbar-about", isVisible());

@@ -8,6 +8,7 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 public class AppView extends FxRobot {
 
     MenuView menuView = new MenuView();
+    ToolBarView toolBarView = new ToolBarView();
 
     public void checkMenus() {
         menuView.checkMenuBar();
@@ -15,13 +16,11 @@ public class AppView extends FxRobot {
         menuView.checkHelpMenu();
     }
 
-    void checkToolBar() {
-        verifyThat("#toolbar", isVisible());
-        verifyThat("#toolbar-create-collection", isVisible());
-        verifyThat("#toolbar-about", isVisible());
+    public void checkToolBar() {
+        toolBarView.checkToolBarStructure();
     }
 
-    void checkWelcomeView() {
+    public void checkWelcomeView() {
         verifyThat("#welcome-view", isVisible());
         verifyThat("#welcome-title", isVisible());
         verifyThat("#welcome-text", isVisible());
