@@ -17,11 +17,11 @@ public class CreateCollectionViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
+        stage.setMaximized(false);
         Parent root = CreateCollectionFXML.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(CREATE_COLLECTION);
-        stage.setMaximized(false);
         stage.centerOnScreen();
         stage.show();
     }
