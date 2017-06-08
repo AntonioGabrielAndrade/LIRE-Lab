@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
-public class CollectionCreator {
+public class IndexCreator {
 
     private CreateCollectionCallback callback;
     private String imagesDir;
@@ -15,7 +15,7 @@ public class CollectionCreator {
     private String indexDir;
     private IndexBuilder indexBuilder;
 
-    public CollectionCreator(IndexBuilder indexBuilder) {
+    public IndexCreator(IndexBuilder indexBuilder) {
         this.indexBuilder = indexBuilder;
     }
 

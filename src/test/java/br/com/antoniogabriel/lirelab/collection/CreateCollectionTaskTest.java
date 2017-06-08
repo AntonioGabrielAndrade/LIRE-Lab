@@ -10,7 +10,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class CreateCollectionTaskTest {
 
-    @Mock private CollectionCreator creator;
+    @Mock private IndexCreator creator;
 
     @Test
     public void shouldSetItselfAsCallback() throws Exception {

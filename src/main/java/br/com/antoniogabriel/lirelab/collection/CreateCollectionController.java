@@ -107,7 +107,7 @@ public class CreateCollectionController implements Initializable {
 
     @FXML
     private void createCollection(ActionEvent event) {
-        CollectionCreator creator = new CollectionCreatorBuilder()
+        IndexCreator creator = new CollectionCreatorBuilder()
                 .aCreator()
                 .indexForFeatures(getSelectedFeatures())
                 .readImagesFrom(imagesDirectoryField.getText())

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CollectionCreatorTest {
+public class IndexCreatorTest {
 
     private static final String IMG1 = "path1";
     private static final String IMG2 = "path2";
@@ -40,7 +40,7 @@ public class CollectionCreatorTest {
 
     @Test
     public void shouldCreateCollectionStepByStep() throws Exception {
-        CollectionCreator creator = new CollectionCreator(indexBuilder);
+        IndexCreator creator = new IndexCreator(indexBuilder);
 
         creator.setFeatures(FEATURES);
         creator.setIndexDir(INDEX_DIR);

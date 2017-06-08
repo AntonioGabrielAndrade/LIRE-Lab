@@ -5,13 +5,13 @@ import br.com.antoniogabriel.lirelab.app.Feature;
 import java.util.ArrayList;
 
 public class CollectionCreatorBuilder {
-    private CollectionCreator creator;
+    private IndexCreator creator;
     private ArrayList<Feature> features;
     private String imagesDir;
     private String indexDir;
 
     public CollectionCreatorBuilder aCreator() {
-        creator = new CollectionCreator(new IndexBuilder());
+        creator = new IndexCreator(new IndexBuilder());
         return this;
     }
 
@@ -30,7 +30,7 @@ public class CollectionCreatorBuilder {
         return this;
     }
 
-    public CollectionCreator build() {
+    public IndexCreator build() {
         creator.setFeatures(features);
         creator.setImagesDir(imagesDir);
         creator.setIndexDir(indexDir);

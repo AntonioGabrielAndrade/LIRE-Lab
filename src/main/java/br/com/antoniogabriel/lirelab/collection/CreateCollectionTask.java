@@ -5,9 +5,9 @@ import javafx.concurrent.Task;
 import java.nio.file.Paths;
 
 public class CreateCollectionTask extends Task<Void> implements CreateCollectionCallback {
-    private CollectionCreator creator;
+    private IndexCreator creator;
 
-    public CreateCollectionTask(CollectionCreator creator) {
+    public CreateCollectionTask(IndexCreator creator) {
         this.creator = creator;
         this.creator.setCallback(this);
     }
