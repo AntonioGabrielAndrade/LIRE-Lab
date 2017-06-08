@@ -1,8 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
-import br.com.antoniogabriel.lirelab.lire.IndexCreatorBuilder;
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -109,15 +107,14 @@ public class CreateCollectionController implements Initializable {
 
     @FXML
     private void createCollection(ActionEvent event) {
-        IndexCreator creator = new IndexCreatorBuilder()
-                .aCreator()
-                .indexForFeatures(getSelectedFeatures())
-                .readImagesFrom(imagesDirectoryField.getText())
-                .openIndexIn(System.getProperty("user.home") +
-                        "/lirelab/collections/" + nameField.getText() + "/index")
-                .build();
+        CreateCollectionTask task =
+                CreateCollectionTask
+                        .aTask()
+                        .createCollectionNamed(nameField.getText())
+                        .indexedBy(getSelectedFeatures())
+                        .inDirectory(System.getProperty("user.home") + "/lirelab/collections")
+                        .readImagesFrom(imagesDirectoryField.getText());
 
-        CreateCollectionTask task = new CreateCollectionTask(creator);
         ProgressDialog dialog = new ProgressDialog(task);
         dialog.initOwner(getWindow());
         dialog.show();

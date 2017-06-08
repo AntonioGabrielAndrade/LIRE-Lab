@@ -1,22 +1,34 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.lire.Feature;
+import br.com.antoniogabriel.lirelab.lire.IndexBuilder;
 import br.com.antoniogabriel.lirelab.lire.IndexCreatorCallback;
 import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 import javafx.concurrent.Task;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback {
-    private IndexCreator creator;
+    private IndexCreator indexCreator;
+    private String collectionName;
+    private String collectionDirectory;
+    private String imagesDir;
+    private ArrayList<Feature> features;
 
-    public CreateCollectionTask(IndexCreator creator) {
-        this.creator = creator;
-        this.creator.setCallback(this);
+    public CreateCollectionTask(IndexCreator indexCreator) {
+        this.indexCreator = indexCreator;
+        this.indexCreator.setCallback(this);
+    }
+
+    public CreateCollectionTask() {
+        this.indexCreator = new IndexCreator(new IndexBuilder());
+        this.indexCreator.setCallback(this);
     }
 
     @Override
     protected Void call() throws Exception {
-        creator.create();
+        indexCreator.create();
         return null;
     }
 
@@ -34,5 +46,32 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     @Override
     public void afterIndexAllImages(int totalImages) {
         updateMessage("Indexing complete!");
+    }
+
+    public static CreateCollectionTask aTask() {
+        return new CreateCollectionTask();
+    }
+
+    public CreateCollectionTask createCollectionNamed(String name) {
+        this.collectionName = name;
+        return this;
+    }
+
+    public CreateCollectionTask inDirectory(String dir) {
+        this.collectionDirectory = dir;
+        indexCreator.setIndexDir(dir + "/" + collectionName + "/index");
+        return this;
+    }
+
+    public CreateCollectionTask readImagesFrom(String imagesDir) {
+        this.imagesDir = imagesDir;
+        indexCreator.setImagesDir(imagesDir);
+        return this;
+    }
+
+    public CreateCollectionTask indexedBy(ArrayList<Feature> features) {
+        this.features = features;
+        indexCreator.setFeatures(features);
+        return this;
     }
 }
