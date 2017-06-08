@@ -46,15 +46,17 @@ public class LireLabAcceptanceTest extends FxRobot {
         AppView appView = new AppView();
         CreateCollectionView createView = appView.openCreateCollectionView();
 
-        createView.writeName(TEST_COLLECTION_NAME)
+        createView
+                .writeName(TEST_COLLECTION_NAME)
                 .writeImagesDirectory(TEST_IMAGES_PATH)
                 .selectFeatures(TEST_FEATURES);
 
         ProgressDialogView progressView = createView.create();
 
-        progressView.checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
-                    .checkOkIsEnabledWhenFinish(2, TimeUnit.SECONDS)
-                    .ok();
+        progressView
+                .checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
+                .checkOkIsEnabledWhenFinish(2, TimeUnit.SECONDS)
+                .ok();
 
 
 //        runner.openCreateCollectionDialog();
