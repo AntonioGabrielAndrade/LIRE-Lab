@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.IndexCreator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -11,21 +12,24 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class CreateCollectionTaskTest {
 
-    @Mock private IndexCreator creator;
+    private CreateCollectionTask task;
+
+    @Mock
+    private IndexCreator indexCreator;
+
+    @Before
+    public void setUp() throws Exception {
+        task = new CreateCollectionTask(indexCreator);
+    }
 
     @Test
     public void shouldSetItselfAsCallback() throws Exception {
-        CreateCollectionTask task = new CreateCollectionTask(creator);
-
-        verify(creator).setCallback(task);
+        verify(indexCreator).setCallback(task);
     }
 
     @Test
     public void shouldCreateCollection() throws Exception {
-        CreateCollectionTask task = new CreateCollectionTask(creator);
-
         task.call();
-
-        verify(creator).create();
+        verify(indexCreator).create();
     }
 }
