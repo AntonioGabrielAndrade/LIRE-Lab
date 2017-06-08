@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.app.Feature;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,7 +17,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("create-collection.fxml"));
+        Parent root = CreateCollectionFXML.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(CREATE_COLLECTION);

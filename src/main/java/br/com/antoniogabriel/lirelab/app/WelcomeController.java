@@ -1,8 +1,8 @@
 package br.com.antoniogabriel.lirelab.app;
 
+import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,9 +22,7 @@ public class WelcomeController {
         stage.setTitle(CREATE_COLLECTION);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(createCollectionButton.getScene().getWindow());
-        Parent root = FXMLLoader.load(
-                getClass().getClassLoader().getResource(
-                        "br/com/antoniogabriel/lirelab/collection/create-collection.fxml"));
+        Parent root = CreateCollectionFXML.load();
         stage.setScene(new Scene(root, 600, 400));
         stage.centerOnScreen();
         stage.show();
