@@ -11,7 +11,7 @@ import org.testfx.api.FxToolkit;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.main.WelcomeViewController.CREATE_COLLECTION;
+import static br.com.antoniogabriel.lirelab.main.WelcomeController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;

@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import static br.com.antoniogabriel.lirelab.main.WelcomeViewController.CREATE_COLLECTION;
+import static br.com.antoniogabriel.lirelab.main.WelcomeController.CREATE_COLLECTION;
 
 public class CreateCollectionViewTest extends ApplicationTest {
 

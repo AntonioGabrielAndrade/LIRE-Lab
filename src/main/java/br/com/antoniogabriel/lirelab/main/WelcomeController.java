@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class WelcomeViewController {
+public class WelcomeController {
     public static final String CREATE_COLLECTION = "Create Collection";
 
     @FXML
