@@ -24,13 +24,6 @@ public class LireLabAcceptanceTest {
     }
 
     @Test
-    public void shouldShowBasicUIStructure() throws Exception {
-        runner.checkMenus();
-        runner.checkToolBar();
-        runner.checkWelcomeView();
-    }
-
-    @Test
     public void shouldCreateCollection() throws Exception {
         runner.openCreateCollectionDialog();
         runner.fillCreateCollectionDialog(TEST_COLLECTION_NAME,
