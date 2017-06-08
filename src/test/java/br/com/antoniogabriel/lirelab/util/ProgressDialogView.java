@@ -44,6 +44,10 @@ public class ProgressDialogView extends FxRobot {
         return this;
     }
 
+    public ProgressDialogView checkOkIsEnabledWhenFinish() throws TimeoutException {
+        return checkOkIsEnabledWhenFinish(100, TimeUnit.SECONDS);
+    }
+
     public ProgressDialogView checkOkIsEnabledWhenFinish(long timeout, TimeUnit timeUnit) throws TimeoutException {
         ProgressBar bar = lookup("#progress-bar").query();
         Node button = lookup("#ok-button").query();

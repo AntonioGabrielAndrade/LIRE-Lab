@@ -55,7 +55,7 @@ public class LireLabAcceptanceTest extends FxRobot {
 
         progressView
                 .checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
-                .checkOkIsEnabledWhenFinish(2, TimeUnit.SECONDS)
+                .checkOkIsEnabledWhenFinish()
                 .ok();
 
 
