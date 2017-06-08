@@ -1,12 +1,12 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.lire.IndexBuilderCallback;
+import br.com.antoniogabriel.lirelab.lire.IndexCreatorCallback;
 import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 import javafx.concurrent.Task;
 
 import java.nio.file.Paths;
 
-public class CreateCollectionTask extends Task<Void> implements IndexBuilderCallback {
+public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback {
     private IndexCreator creator;
 
     public CreateCollectionTask(IndexCreator creator) {
