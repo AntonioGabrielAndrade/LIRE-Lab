@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Tooltip?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <ToolBar id="toolbar">
+
     <Button id="toolbar-create-collection">
         <tooltip>
             <Tooltip text="Create Collection"/>
@@ -11,6 +12,7 @@
             <FontIcon iconLiteral="fa-database"/>
         </graphic>
     </Button>
+
     <Button id="toolbar-about">
         <tooltip>
             <Tooltip text="About"/>
@@ -19,4 +21,5 @@
             <FontIcon iconLiteral="fa-info"/>
         </graphic>
     </Button>
+
 </ToolBar>

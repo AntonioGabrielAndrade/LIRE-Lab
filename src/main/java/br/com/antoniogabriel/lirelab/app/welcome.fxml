@@ -7,10 +7,12 @@
 <StackPane id="main-content"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="br.com.antoniogabriel.lirelab.app.WelcomeController">
+
     <GridPane id="welcome-view"
               vgap="10"
               alignment="CENTER"
               gridLinesVisible="false">
+
         <columnConstraints>
             <ColumnConstraints halignment="CENTER"/>
         </columnConstraints>
@@ -23,15 +25,18 @@
                 <Font size="60"/>
             </font>
         </Text>
+
         <Text id="welcome-text"
               text="With LIRE Lab you can test LIRE Features in an easy way"
               GridPane.rowIndex="1"
               GridPane.columnIndex="0"/>
+
         <Button id="welcome-create-collection-button"
                 fx:id="createCollectionButton"
                 text="Create Collection"
                 onAction="#openCreateCollectionDialog"
                 GridPane.rowIndex="2"
                 GridPane.columnIndex="0"/>
+
     </GridPane>
 </StackPane>
