@@ -14,10 +14,6 @@ public class ThumbnailsCreator {
         this.builder = builder;
     }
 
-    public void setCallback(ThumbnailsCreatorCallback callback) {
-        this.callback = callback;
-    }
-
     public void create() throws IOException {
         builder.createDirectory(thumbnailsDir);
         List<String> images = builder.getAllImagePaths(imagesDir);
@@ -30,6 +26,10 @@ public class ThumbnailsCreator {
         }
 
         callback.afterCreateAllThumbnails(images.size());
+    }
+
+    public void setCallback(ThumbnailsCreatorCallback callback) {
+        this.callback = callback;
     }
 
     public void setThumbnailsDir(String thumbnailsDir) {
