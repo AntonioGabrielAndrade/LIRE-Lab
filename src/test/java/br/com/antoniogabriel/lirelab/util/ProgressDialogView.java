@@ -24,7 +24,7 @@ public class ProgressDialogView extends FxRobot {
         ProgressBar bar = lookup("#progress-bar").query();
 
         for (Double mark : marks) {
-            WaitForAsyncUtils.waitFor(100,
+            WaitForAsyncUtils.waitFor(5,
                     TimeUnit.SECONDS,
                     bar.progressProperty().isEqualTo(mark, 0.05));
         }
@@ -36,7 +36,7 @@ public class ProgressDialogView extends FxRobot {
         Text message = lookup("#message").query();
 
         for (String value : values) {
-            WaitForAsyncUtils.waitFor(100,
+            WaitForAsyncUtils.waitFor(5,
                     TimeUnit.SECONDS,
                     message.textProperty().isEqualTo(value));
         }
@@ -45,7 +45,7 @@ public class ProgressDialogView extends FxRobot {
     }
 
     public ProgressDialogView checkOkIsEnabledWhenFinish() throws TimeoutException {
-        return checkOkIsEnabledWhenFinish(100, TimeUnit.SECONDS);
+        return checkOkIsEnabledWhenFinish(15, TimeUnit.SECONDS);
     }
 
     public ProgressDialogView checkOkIsEnabledWhenFinish(long timeout, TimeUnit timeUnit) throws TimeoutException {
