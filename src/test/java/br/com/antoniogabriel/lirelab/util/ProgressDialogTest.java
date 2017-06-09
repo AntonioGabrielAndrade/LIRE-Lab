@@ -45,23 +45,18 @@ public class ProgressDialogTest extends ApplicationTest {
     public void shouldUpdateProgress() throws Exception {
         new Thread(task).start();
 
-        view.checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0);
+        view.checkProgressMark(0.2, 0.4, 0.6, 0.8, 1.0);
     }
 
     @Test
     public void shouldUpdateMessage() throws Exception {
         new Thread(task).start();
 
-        view.checkMessageShow("Progress: 1 of 10",
-                "Progress: 2 of 10",
-                "Progress: 3 of 10",
-                "Progress: 4 of 10",
-                "Progress: 5 of 10",
-                "Progress: 6 of 10",
-                "Progress: 7 of 10",
-                "Progress: 8 of 10",
-                "Progress: 9 of 10",
-                "Progress: 10 of 10");
+        view.checkMessageShow("Progress: 1 of 5",
+                "Progress: 2 of 5",
+                "Progress: 3 of 5",
+                "Progress: 4 of 5",
+                "Progress: 5 of 5");
     }
 
     @Test
@@ -74,7 +69,7 @@ public class ProgressDialogTest extends ApplicationTest {
     private class StubTask extends Task<Void> {
         @Override
         protected Void call() throws Exception {
-            int max = 10;
+            int max = 5;
             for (int i = 0; i <= max; i++) {
                 updateProgress(i, max);
                 updateMessage(
