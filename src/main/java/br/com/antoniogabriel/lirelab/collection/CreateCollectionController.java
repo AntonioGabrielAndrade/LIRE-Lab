@@ -26,8 +26,6 @@ import java.util.ResourceBundle;
 
 public class CreateCollectionController implements Initializable {
 
-    public static final String CREATING_COLLECTION = "Creating collection...";
-
     @FXML
     private TextField nameField;
     @FXML
