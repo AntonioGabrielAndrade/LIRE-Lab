@@ -9,13 +9,14 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 import static br.com.antoniogabriel.lirelab.app.WelcomeController.CREATE_COLLECTION;
+import static br.com.antoniogabriel.lirelab.lire.Feature.*;
 
 public class CreateCollectionViewTest extends ApplicationTest {
 
     private static final String EMPTY = "";
     private static final String ANY_NAME = "Any Name";
     private static final String ANY_PATH = "/any/dir/path";
-    private static final Feature[] ANY_FEATURES = {Feature.CEDD, Feature.TAMURA};
+    private static final Feature[] ANY_FEATURES = {CEDD, TAMURA};
 
     private CreateCollectionView view;
 

@@ -3,7 +3,6 @@ package br.com.antoniogabriel.lirelab.acceptance;
 import br.com.antoniogabriel.lirelab.app.App;
 import br.com.antoniogabriel.lirelab.app.AppView;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionView;
-import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -14,6 +13,9 @@ import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 
 import java.nio.file.Paths;
+
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
 
 public class LireLabAcceptanceTest extends FxRobot {
 
@@ -46,7 +48,7 @@ public class LireLabAcceptanceTest extends FxRobot {
         createView
                 .writeName(ACCEPTANCE_TEST_COLLECTION)
                 .writeImagesDirectory(TEST_IMAGES_PATH)
-                .selectFeatures(Feature.CEDD, Feature.TAMURA);
+                .selectFeatures(CEDD, TAMURA);
 
         ProgressDialogView progressView = createView.create();
 
