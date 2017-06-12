@@ -12,10 +12,11 @@ import static br.com.antoniogabriel.lirelab.app.WelcomeController.CREATE_COLLECT
 
 public class CreateCollectionViewTest extends ApplicationTest {
 
-    private static final Feature[] FEATURES_FOR_TEST = {Feature.CEDD, Feature.TAMURA};
     private static final String EMPTY = "";
+    private static final String ANY_NAME = "Any Name";
     private static final String ANY_PATH = "/any/dir/path";
-    public static final String ANY_NAME = "Any Name";
+    private static final Feature[] ANY_FEATURES = {Feature.CEDD, Feature.TAMURA};
+
     private CreateCollectionView view;
 
     @Override
@@ -45,7 +46,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
         view.unselectAllFeatures();
         view.writeName(EMPTY);
         view.writeImagesDirectory(ANY_PATH);
-        view.selectFeatures(FEATURES_FOR_TEST);
+        view.selectFeatures(ANY_FEATURES);
         view.checkCreateIsDisabled();
     }
 
@@ -54,7 +55,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
         view.unselectAllFeatures();
         view.writeName(ANY_NAME);
         view.writeImagesDirectory(EMPTY);
-        view.selectFeatures(FEATURES_FOR_TEST);
+        view.selectFeatures(ANY_FEATURES);
         view.checkCreateIsDisabled();
     }
 
@@ -71,7 +72,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
         view.unselectAllFeatures();
         view.writeName(ANY_NAME);
         view.writeImagesDirectory(ANY_PATH);
-        view.selectFeatures(FEATURES_FOR_TEST);
+        view.selectFeatures(ANY_FEATURES);
         view.checkCreateIsEnabled();
     }
 
