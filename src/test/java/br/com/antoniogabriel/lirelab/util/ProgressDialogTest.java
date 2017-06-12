@@ -47,18 +47,24 @@ public class ProgressDialogTest extends ApplicationTest {
     public void shouldUpdateProgress() throws Exception {
         new Thread(task).start();
 
-        view.checkProgressMark(0.2, 0.4, 0.6, 0.8, 1.0);
+        view.checkProgressMark(
+                percent(20),
+                percent(40),
+                percent(60),
+                percent(80),
+                percent(100));
     }
+
 
     @Test
     public void shouldUpdateMessage() throws Exception {
         new Thread(task).start();
 
-        view.checkMessageShow("Progress: 1 of 5",
-                "Progress: 2 of 5",
-                "Progress: 3 of 5",
-                "Progress: 4 of 5",
-                "Progress: 5 of 5");
+        view.checkMessageShow("Progress: 20%",
+                "Progress: 40%",
+                "Progress: 60%",
+                "Progress: 80%",
+                "Progress: 100%");
     }
 
     @Test
@@ -76,18 +82,19 @@ public class ProgressDialogTest extends ApplicationTest {
         view.checkErrorMessageShown(EXCEPTION.getMessage());
     }
 
-
+    private int percent(int i) {
+        return i;
+    }
 
     private class StubTask extends Task<Void> {
         protected boolean throwException = false;
 
         @Override
         protected Void call() throws Exception {
-            int max = 5;
-            for (int i = 0; i <= max; i++) {
-                updateProgress(i, max);
-                updateMessage("Progress: " + i + " of " + max);
-                if(throwException && i==3) {
+            for (int i = 0; i <= 100; i += 20) {
+                updateProgress(i, 100);
+                updateMessage("Progress: " + percent(i) + "%");
+                if(throwException && i==60) {
                     throw EXCEPTION;
                 }
                 sleep(1000);

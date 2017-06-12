@@ -23,17 +23,18 @@ public class ProgressDialogView extends FxRobot {
         verifyThat("#ok-button", isVisible());
     }
 
-    public ProgressDialogView checkProgressMark(Double... marks) throws TimeoutException {
+    public ProgressDialogView checkProgressMark(Integer... percentages) throws TimeoutException {
         ProgressBar bar = lookup("#progress-bar").query();
 
-        for (Double mark : marks) {
+        for (Integer percentage : percentages) {
             WaitForAsyncUtils.waitFor(5,
                     TimeUnit.SECONDS,
-                    bar.progressProperty().isEqualTo(mark, 0.05));
+                    bar.progressProperty().isEqualTo(toDecimal(percentage), 0.05));
         }
 
         return this;
     }
+
 
     public ProgressDialogView checkMessageShow(String... values) throws TimeoutException {
         Text message = lookup("#message").query();
@@ -78,5 +79,9 @@ public class ProgressDialogView extends FxRobot {
 
         verifyThat(error, isVisible());
         assertThat("Error was printed", error.getText().contains(message));
+    }
+
+    private double toDecimal(Integer percentage) {
+        return percentage/100.00;
     }
 }
