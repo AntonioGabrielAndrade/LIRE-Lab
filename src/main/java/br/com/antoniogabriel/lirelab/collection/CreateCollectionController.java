@@ -109,7 +109,7 @@ public class CreateCollectionController implements Initializable {
                 CreateCollectionTask
                         .aTask()
                         .createCollectionNamed(nameField.getText())
-                        .indexedBy(getSelectedFeatures())
+                        .indexedBy(selectedFeatures())
                         .inDirectory(System.getProperty("user.home") + "/lirelab/collections")
                         .readImagesFrom(imagesDirectoryField.getText());
 
@@ -122,7 +122,7 @@ public class CreateCollectionController implements Initializable {
         return featuresTable.getScene().getWindow();
     }
 
-    private ArrayList<Feature> getSelectedFeatures() {
+    private ArrayList<Feature> selectedFeatures() {
         ObservableList<FeatureModel> items = featuresTable.getItems();
         ArrayList<Feature> features = new ArrayList<>();
         for (FeatureModel item : items) {
