@@ -1,7 +1,9 @@
 package br.com.antoniogabriel.lirelab.util;
 
 import javafx.scene.Node;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
@@ -9,6 +11,7 @@ import org.testfx.util.WaitForAsyncUtils;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
@@ -62,5 +65,18 @@ public class ProgressDialogView extends FxRobot {
 
     public void ok() {
         clickOn("#ok-button").interrupt();
+    }
+
+    public void checkErrorMessageShown(String message) throws TimeoutException {
+        DialogPane pane = lookup("#progress-dialog-pane").query();
+
+        WaitForAsyncUtils.waitFor(5,
+                TimeUnit.SECONDS,
+                pane.expandedProperty());
+
+        TextArea error = lookup("#error-message").query();
+
+        verifyThat(error, isVisible());
+        assertThat("Error was printed", error.getText().contains(message));
     }
 }

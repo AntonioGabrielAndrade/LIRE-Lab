@@ -11,7 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 public class ProgressDialogTest extends ApplicationTest {
 
-    private Task<Void> task;
+    private static final Exception EXCEPTION = new RuntimeException("Some Error!");
+
+    private StubTask task;
     private ProgressDialog dialog;
     private ProgressDialogView view = new ProgressDialogView();
 
@@ -66,14 +68,28 @@ public class ProgressDialogTest extends ApplicationTest {
         view.checkOkIsEnabledWhenFinish(100, TimeUnit.SECONDS);
     }
 
+    @Test
+    public void shouldShowErrorMessageWhenExceptionOccur() throws Exception {
+        task.throwException = true;
+        new Thread(task).start();
+
+        view.checkErrorMessageShown(EXCEPTION.getMessage());
+    }
+
+
+
     private class StubTask extends Task<Void> {
+        protected boolean throwException = false;
+
         @Override
         protected Void call() throws Exception {
             int max = 5;
             for (int i = 0; i <= max; i++) {
                 updateProgress(i, max);
-                updateMessage(
-                        "Progress: " + i + " of " + max);
+                updateMessage("Progress: " + i + " of " + max);
+                if(throwException && i==3) {
+                    throw EXCEPTION;
+                }
                 sleep(1000);
             }
             return null;
