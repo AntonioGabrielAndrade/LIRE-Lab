@@ -1,15 +1,13 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import static br.com.antoniogabriel.lirelab.app.WelcomeController.CREATE_COLLECTION;
-import static br.com.antoniogabriel.lirelab.lire.Feature.*;
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
 
 public class CreateCollectionViewTest extends ApplicationTest {
 
@@ -22,13 +20,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setMaximized(false);
-        Parent root = CreateCollectionFXML.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle(CREATE_COLLECTION);
-        stage.centerOnScreen();
-        stage.show();
+        CreateCollectionFXML.showIn(stage);
     }
 
     @Before

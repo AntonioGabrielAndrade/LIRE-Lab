@@ -10,7 +10,6 @@ import org.testfx.api.FxRobot;
 
 import java.util.Set;
 
-import static br.com.antoniogabriel.lirelab.app.WelcomeController.CREATE_COLLECTION;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
@@ -21,7 +20,7 @@ public class CreateCollectionView extends FxRobot {
     private final Window window;
 
     public CreateCollectionView() {
-        window = window(CREATE_COLLECTION);
+        window = window(CreateCollectionFXML.TITLE);
         targetWindow(window);
     }
 
