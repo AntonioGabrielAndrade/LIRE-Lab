@@ -40,7 +40,7 @@ public class ProgressDialogTest extends ApplicationTest {
 
     @Test
     public void shouldShowBasicUIStructure() throws Exception {
-        view.checkUIStructure();
+        view.checkStructure();
     }
 
     @Test

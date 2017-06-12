@@ -17,7 +17,7 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 public class ProgressDialogView extends FxRobot {
 
-    public void checkUIStructure() {
+    public void checkStructure() {
         verifyThat("#progress-bar", isVisible());
         verifyThat("#message", isVisible());
         verifyThat("#ok-button", isVisible());
