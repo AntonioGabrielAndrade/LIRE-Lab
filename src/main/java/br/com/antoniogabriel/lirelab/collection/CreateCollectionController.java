@@ -115,8 +115,7 @@ public class CreateCollectionController implements Initializable {
 
         ProgressDialog dialog = new ProgressDialog(task);
         dialog.initOwner(getWindow());
-        dialog.show();
-        new Thread(task).start();
+        dialog.showAndStart();
     }
 
     private Window getWindow() {

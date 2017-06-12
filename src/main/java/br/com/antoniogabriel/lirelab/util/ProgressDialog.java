@@ -30,6 +30,11 @@ public class ProgressDialog extends Dialog<Void> {
         setupDialogContent();
     }
 
+    public void showAndStart() {
+        show();
+        new Thread(task).start();
+    }
+
     private void setupProgressBar() {
         progressBar = new ProgressBar();
         progressBar.setId("progress-bar");

@@ -27,7 +27,7 @@ public class ProgressDialogTest extends ApplicationTest {
             task = new StubTask();
             dialog = new ProgressDialog(task);
             dialog.setTitle("Testing ProgressDialog");
-            dialog.show();
+            dialog.showAndStart();
         });
     }
 
@@ -45,40 +45,31 @@ public class ProgressDialogTest extends ApplicationTest {
 
     @Test
     public void shouldUpdateProgress() throws Exception {
-        new Thread(task).start();
-
-        view.checkProgressMark(
-                percent(20),
-                percent(40),
-                percent(60),
-                percent(80),
-                percent(100));
+        view.checkProgressMark(percent(20),
+                            percent(40),
+                            percent(60),
+                            percent(80),
+                            percent(100));
     }
 
 
     @Test
     public void shouldUpdateMessage() throws Exception {
-        new Thread(task).start();
-
         view.checkMessageShow("Progress: 20%",
-                "Progress: 40%",
-                "Progress: 60%",
-                "Progress: 80%",
-                "Progress: 100%");
+                            "Progress: 40%",
+                            "Progress: 60%",
+                            "Progress: 80%",
+                            "Progress: 100%");
     }
 
     @Test
     public void shouldEnableOkButtonWhenFinish() throws Exception {
-        new Thread(task).start();
-
         view.checkOkIsEnabledWhenFinish(100, TimeUnit.SECONDS);
     }
 
     @Test
     public void shouldShowErrorMessageWhenExceptionOccur() throws Exception {
         task.throwException = true;
-        new Thread(task).start();
-
         view.checkErrorMessageShown(EXCEPTION.getMessage());
     }
 
