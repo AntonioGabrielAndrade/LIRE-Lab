@@ -24,8 +24,6 @@ public class LireLabAcceptanceTest extends FxRobot {
         return Paths.get("src/test/resources/images/").toAbsolutePath().toString();
     }
 
-    private static final Feature[] TEST_FEATURES = {Feature.CEDD, Feature.TAMURA};
-
     @Before
     public void setUp() throws Exception {
         FxToolkit.registerPrimaryStage();
@@ -48,7 +46,7 @@ public class LireLabAcceptanceTest extends FxRobot {
         createView
                 .writeName(TEST_COLLECTION_NAME)
                 .writeImagesDirectory(TEST_IMAGES_PATH)
-                .selectFeatures(TEST_FEATURES);
+                .selectFeatures(Feature.CEDD, Feature.TAMURA);
 
         ProgressDialogView progressView = createView.create();
 

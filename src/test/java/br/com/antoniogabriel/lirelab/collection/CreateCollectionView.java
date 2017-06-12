@@ -53,7 +53,7 @@ public class CreateCollectionView extends FxRobot {
         return this;
     }
 
-    public CreateCollectionView selectFeatures(Feature[] features) {
+    public CreateCollectionView selectFeatures(Feature... features) {
         for (Feature feature : features) {
             Node checkBox = lookup("#featuresTable")
                     .lookup(".table-row-cell").nth(feature.ordinal())
