@@ -15,6 +15,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     private static final Feature[] FEATURES_FOR_TEST = {Feature.CEDD, Feature.TAMURA};
     private static final String EMPTY = "";
     private static final String ANY_PATH = "/any/dir/path";
+    public static final String ANY_NAME = "Any Name";
     private CreateCollectionView view;
 
     @Override
@@ -51,7 +52,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     @Test
     public void shouldDisableCreateWhenImagesDirectoryIsEmpty() throws Exception {
         view.unselectAllFeatures();
-        view.writeName("Some Name");
+        view.writeName(ANY_NAME);
         view.writeImagesDirectory(EMPTY);
         view.selectFeatures(FEATURES_FOR_TEST);
         view.checkCreateIsDisabled();
@@ -60,7 +61,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     @Test
     public void shouldDisableCreateWhenNoFeatureIsSelected() throws Exception {
         view.unselectAllFeatures();
-        view.writeName("Some Name");
+        view.writeName(ANY_NAME);
         view.writeImagesDirectory(ANY_PATH);
         view.checkCreateIsDisabled();
     }
@@ -68,7 +69,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     @Test
     public void shouldEnableCreateWhenAllDataIsInformed() throws Exception {
         view.unselectAllFeatures();
-        view.writeName("Some Name");
+        view.writeName(ANY_NAME);
         view.writeImagesDirectory(ANY_PATH);
         view.selectFeatures(FEATURES_FOR_TEST);
         view.checkCreateIsEnabled();
