@@ -97,7 +97,7 @@ public class ProgressDialogTest extends ApplicationTest {
                 if(throwException && i==60) {
                     throw EXCEPTION;
                 }
-                sleep(1000);
+                sleep(250);
             }
             return null;
         }
