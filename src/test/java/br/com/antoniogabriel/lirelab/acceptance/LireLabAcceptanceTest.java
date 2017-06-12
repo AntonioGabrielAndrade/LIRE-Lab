@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 
 public class LireLabAcceptanceTest extends FxRobot {
 
-    private static final String TEST_COLLECTION_NAME = "Test Collection";
+    private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
     private static final String TEST_IMAGES_PATH = testImagesPath();
 
     private static String testImagesPath() {
@@ -44,7 +44,7 @@ public class LireLabAcceptanceTest extends FxRobot {
         CreateCollectionView createView = appView.createCollection();
 
         createView
-                .writeName(TEST_COLLECTION_NAME)
+                .writeName(ACCEPTANCE_TEST_COLLECTION)
                 .writeImagesDirectory(TEST_IMAGES_PATH)
                 .selectFeatures(Feature.CEDD, Feature.TAMURA);
 
@@ -60,14 +60,14 @@ public class LireLabAcceptanceTest extends FxRobot {
 
 
 //        runner.openCreateCollectionDialog();
-//        runner.fillCreateCollectionDialog(TEST_COLLECTION_NAME,
+//        runner.fillCreateCollectionDialog(ACCEPTANCE_TEST_COLLECTION,
 //                TEST_IMAGES_PATH,
 //                TEST_FEATURES);
 
         //TODO uncomment and implement
 //        runner.checkCreateCollectionProgressDialog();
-//        runner.checkCollectionIsListed(TEST_COLLECTION_NAME);
-//        runner.checkCollectionIsCreated(TEST_COLLECTION_NAME);
+//        runner.checkCollectionIsListed(ACCEPTANCE_TEST_COLLECTION);
+//        runner.checkCollectionIsCreated(ACCEPTANCE_TEST_COLLECTION);
     }
 
 }
