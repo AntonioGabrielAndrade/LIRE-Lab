@@ -77,7 +77,6 @@ public class ProgressDialogView extends FxRobot {
 
         TextArea error = lookup("#error-message").query();
 
-        verifyThat(error, isVisible());
         assertThat("Error was printed", error.getText().contains(message));
     }
 
