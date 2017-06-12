@@ -13,6 +13,7 @@ import static br.com.antoniogabriel.lirelab.app.WelcomeController.CREATE_COLLECT
 public class CreateCollectionViewTest extends ApplicationTest {
 
     private static final Feature[] FEATURES_FOR_TEST = {Feature.CEDD, Feature.TAMURA};
+    private static final String EMPTY = "";
     private CreateCollectionView view;
 
     @Override
@@ -40,7 +41,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     @Test
     public void shouldDisableCreateWhenNameIsEmpty() throws Exception {
         view.unselectAllFeatures();
-        view.writeName("");
+        view.writeName(EMPTY);
         view.writeImagesDirectory("some/test/path");
         view.selectFeatures(FEATURES_FOR_TEST);
         view.checkCreateIsDisabled();
@@ -50,7 +51,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     public void shouldDisableCreateWhenImagesDirectoryIsEmpty() throws Exception {
         view.unselectAllFeatures();
         view.writeName("Some Name");
-        view.writeImagesDirectory("");
+        view.writeImagesDirectory(EMPTY);
         view.selectFeatures(FEATURES_FOR_TEST);
         view.checkCreateIsDisabled();
     }
