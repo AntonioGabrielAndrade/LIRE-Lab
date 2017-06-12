@@ -55,10 +55,8 @@ public class LireLabAcceptanceTest extends FxRobot {
         progressView
                 //indexing images
                 .checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
-
                 //creating thumbnails
                 .checkProgressMark(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
-
                 .checkOkIsEnabledWhenFinish()
                 .ok();
 
