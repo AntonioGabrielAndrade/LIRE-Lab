@@ -23,7 +23,7 @@ public class AppView extends FxRobot {
         welcomeView.checkStructure();
     }
 
-    public CreateCollectionView openCreateCollectionView() {
+    public CreateCollectionView createCollection() {
         clickOn("#welcome-create-collection-button")
                 .interrupt();
 

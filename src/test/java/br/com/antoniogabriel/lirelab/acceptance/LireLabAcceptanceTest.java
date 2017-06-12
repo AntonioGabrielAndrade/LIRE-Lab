@@ -14,7 +14,6 @@ import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 
 import java.nio.file.Paths;
-import java.util.concurrent.TimeUnit;
 
 public class LireLabAcceptanceTest extends FxRobot {
 
@@ -44,7 +43,7 @@ public class LireLabAcceptanceTest extends FxRobot {
     @Test
     public void shouldCreateCollection() throws Exception {
         AppView appView = new AppView();
-        CreateCollectionView createView = appView.openCreateCollectionView();
+        CreateCollectionView createView = appView.createCollection();
 
         createView
                 .writeName(TEST_COLLECTION_NAME)
