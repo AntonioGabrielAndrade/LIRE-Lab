@@ -9,7 +9,6 @@ import javafx.scene.text.Text;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -83,13 +82,4 @@ public class ProgressDialogView extends FxRobot {
         return percentage/100.00;
     }
 
-    private class TimeOut {
-        private final long value;
-        private final TimeUnit unit;
-
-        public TimeOut(long value, TimeUnit unit) {
-            this.value = value;
-            this.unit = unit;
-        }
-    }
 }
