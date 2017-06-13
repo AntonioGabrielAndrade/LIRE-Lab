@@ -3,9 +3,12 @@ package br.com.antoniogabriel.lirelab.collection;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,9 +31,16 @@ public class ThumbnailsCreatorTest {
     @Mock private ThumbnailsCreatorCallback callback;
 
     private ThumbnailsCreator creator;
+    private InOrder inOrder;
 
     @Before
     public void setUp() throws Exception {
+        setupThumbnailsCreator();
+        setupInOrder();
+        setupBuilderExpectations();
+    }
+
+    private void setupThumbnailsCreator() {
         creator = new ThumbnailsCreator(builder);
 
         creator.setThumbnailsDir(THUMBNAILS_DIR);
@@ -38,24 +48,29 @@ public class ThumbnailsCreatorTest {
         creator.setCallback(callback);
     }
 
+    private void setupInOrder() {
+        inOrder = Mockito.inOrder(builder, callback);
+    }
+
+    private void setupBuilderExpectations() throws IOException {
+        when(builder.getAllImagePaths(IMAGES_DIR)).thenReturn(IMAGES);
+    }
+
     @Test
     public void shouldCreateThumbnails() throws Exception {
-
-        when(builder.getAllImagePaths(IMAGES_DIR)).thenReturn(IMAGES);
-
         creator.create();
 
-        verify(builder).createDirectory(THUMBNAILS_DIR);
-        verify(builder).getAllImagePaths(IMAGES_DIR);
+        inOrder.verify(builder).createDirectory(THUMBNAILS_DIR);
+        inOrder.verify(builder).getAllImagePaths(IMAGES_DIR);
 
-        verify(callback).beforeCreateThumbnail(1, IMAGES.size(), IMG1);
-        verify(builder).createThumbnail(IMG1, THUMBNAILS_DIR);
-        verify(callback).afterCreateThumbnail(1, IMAGES.size(), IMG1);
+        inOrder.verify(callback).beforeCreateThumbnail(1, IMAGES.size(), IMG1);
+        inOrder.verify(builder).createThumbnail(IMG1, THUMBNAILS_DIR);
+        inOrder.verify(callback).afterCreateThumbnail(1, IMAGES.size(), IMG1);
 
-        verify(callback).beforeCreateThumbnail(2, IMAGES.size(), IMG2);
-        verify(builder).createThumbnail(IMG1, THUMBNAILS_DIR);
-        verify(callback).afterCreateThumbnail(2, IMAGES.size(), IMG2);
+        inOrder.verify(callback).beforeCreateThumbnail(2, IMAGES.size(), IMG2);
+        inOrder.verify(builder).createThumbnail(IMG2, THUMBNAILS_DIR);
+        inOrder.verify(callback).afterCreateThumbnail(2, IMAGES.size(), IMG2);
 
-        verify(callback).afterCreateAllThumbnails(IMAGES.size());
+        inOrder.verify(callback).afterCreateAllThumbnails(IMAGES.size());
     }
 }
