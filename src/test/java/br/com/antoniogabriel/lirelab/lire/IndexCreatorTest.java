@@ -41,9 +41,16 @@ public class IndexCreatorTest {
     @Mock private IndexCreatorCallback callback;
 
     private IndexCreator creator;
+    private InOrder inOrder;
 
     @Before
     public void setUp() throws Exception {
+        setupIndexCreator();
+        setupInOrder();
+        setupExpectationsForIndexBuilder();
+    }
+
+    private void setupIndexCreator() {
         creator = new IndexCreator(indexBuilder);
 
         creator.setFeatures(FEATURES);
@@ -52,13 +59,26 @@ public class IndexCreatorTest {
         creator.setCallback(callback);
     }
 
+    private void setupInOrder() {
+        inOrder = Mockito.inOrder(indexBuilder, callback);
+    }
+
+    private void setupExpectationsForIndexBuilder() throws IOException {
+        given(indexBuilder.createDocumentBuilder()).willReturn(docBuilder);
+
+        given(indexBuilder.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
+        given(indexBuilder.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
+
+        given(indexBuilder.getBufferedImage(IMG1)).willReturn(bufImg1);
+        given(indexBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
+
+        given(indexBuilder.getBufferedImage(IMG2)).willReturn(bufImg2);
+        given(indexBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
+    }
+
     @Test
     public void shouldCreateCollectionStepByStep() throws Exception {
-        setupExpectationsForIndexBuilder();
-
         creator.create();
-
-        InOrder inOrder = Mockito.inOrder(indexBuilder, callback);
 
         inOrder.verify(indexBuilder).createDocumentBuilder();
         inOrder.verify(indexBuilder).addFeaturesToDocumentBuilder(FEATURES);
@@ -80,18 +100,5 @@ public class IndexCreatorTest {
 
         inOrder.verify(indexBuilder).closeIndexWriter();
         inOrder.verify(callback).afterIndexAllImages(PATHS.size());
-    }
-
-    private void setupExpectationsForIndexBuilder() throws IOException {
-        given(indexBuilder.createDocumentBuilder()).willReturn(docBuilder);
-
-        given(indexBuilder.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
-        given(indexBuilder.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
-
-        given(indexBuilder.getBufferedImage(IMG1)).willReturn(bufImg1);
-        given(indexBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
-
-        given(indexBuilder.getBufferedImage(IMG2)).willReturn(bufImg2);
-        given(indexBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
     }
 }
