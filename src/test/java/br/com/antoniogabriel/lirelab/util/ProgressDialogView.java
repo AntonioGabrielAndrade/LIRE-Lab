@@ -29,7 +29,8 @@ public class ProgressDialogView extends FxRobot {
         for (Integer percentage : percentages) {
             WaitForAsyncUtils.waitFor(5,
                     TimeUnit.SECONDS,
-                    bar.progressProperty().isEqualTo(toDecimal(percentage), 0.05));
+                    bar.progressProperty().isEqualTo(
+                            percentToDecimal(percentage), 0.05));
         }
 
         return this;
@@ -80,7 +81,7 @@ public class ProgressDialogView extends FxRobot {
         assertThat("Error was printed", error.getText().contains(message));
     }
 
-    private double toDecimal(Integer percentage) {
+    private double percentToDecimal(Integer percentage) {
         return percentage/100.00;
     }
 }
