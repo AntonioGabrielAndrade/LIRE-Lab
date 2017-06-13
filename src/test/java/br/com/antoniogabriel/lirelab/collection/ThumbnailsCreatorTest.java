@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,13 +27,19 @@ public class ThumbnailsCreatorTest {
     @Mock private ThumbnailBuilder builder;
     @Mock private ThumbnailsCreatorCallback callback;
 
-    @Test
-    public void shouldCreateThumbnails() throws Exception {
-        ThumbnailsCreator creator = new ThumbnailsCreator(builder);
+    private ThumbnailsCreator creator;
+
+    @Before
+    public void setUp() throws Exception {
+        creator = new ThumbnailsCreator(builder);
 
         creator.setThumbnailsDir(THUMBNAILS_DIR);
         creator.setImagesDir(IMAGES_DIR);
         creator.setCallback(callback);
+    }
+
+    @Test
+    public void shouldCreateThumbnails() throws Exception {
 
         when(builder.getAllImagePaths(IMAGES_DIR)).thenReturn(IMAGES);
 
