@@ -5,14 +5,15 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -59,25 +60,27 @@ public class IndexCreatorTest {
 
         creator.create();
 
-        verify(indexBuilder).createDocumentBuilder();
-        verify(indexBuilder).addFeaturesToDocumentBuilder(FEATURES);
+        InOrder inOrder = Mockito.inOrder(indexBuilder, callback);
 
-        verify(indexBuilder).createIndexWriter(INDEX_DIR);
-        verify(indexBuilder).getAllImagesPaths(IMAGES_DIR);
+        inOrder.verify(indexBuilder).createDocumentBuilder();
+        inOrder.verify(indexBuilder).addFeaturesToDocumentBuilder(FEATURES);
 
-        verify(callback).beforeAddImageToIndex(1, PATHS.size(), IMG1);
-        verify(indexBuilder).getBufferedImage(IMG1);
-        verify(indexBuilder).createDocument(bufImg1, IMG1);
-        verify(indexBuilder).addDocument(DOC1);
-        verify(callback).afterAddImageToIndex(1, PATHS.size(), IMG1);
+        inOrder.verify(indexBuilder).createIndexWriter(INDEX_DIR);
+        inOrder.verify(indexBuilder).getAllImagesPaths(IMAGES_DIR);
 
-        verify(callback).beforeAddImageToIndex(2, PATHS.size(), IMG2);
-        verify(indexBuilder).getBufferedImage(IMG2);
-        verify(indexBuilder).createDocument(bufImg2, IMG2);
-        verify(indexBuilder).addDocument(DOC2);
-        verify(callback).afterAddImageToIndex(2, PATHS.size(), IMG2);
+        inOrder.verify(callback).beforeAddImageToIndex(1, PATHS.size(), IMG1);
+        inOrder.verify(indexBuilder).getBufferedImage(IMG1);
+        inOrder.verify(indexBuilder).createDocument(bufImg1, IMG1);
+        inOrder.verify(indexBuilder).addDocument(DOC1);
+        inOrder.verify(callback).afterAddImageToIndex(1, PATHS.size(), IMG1);
 
-        verify(indexBuilder).closeIndexWriter();
-        verify(callback).afterIndexAllImages(PATHS.size());
+        inOrder.verify(callback).beforeAddImageToIndex(2, PATHS.size(), IMG2);
+        inOrder.verify(indexBuilder).getBufferedImage(IMG2);
+        inOrder.verify(indexBuilder).createDocument(bufImg2, IMG2);
+        inOrder.verify(indexBuilder).addDocument(DOC2);
+        inOrder.verify(callback).afterAddImageToIndex(2, PATHS.size(), IMG2);
+
+        inOrder.verify(indexBuilder).closeIndexWriter();
+        inOrder.verify(callback).afterIndexAllImages(PATHS.size());
     }
 }
