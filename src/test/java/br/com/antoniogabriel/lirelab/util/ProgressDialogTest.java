@@ -64,7 +64,7 @@ public class ProgressDialogTest extends ApplicationTest {
 
     @Test
     public void shouldEnableOkButtonWhenFinish() throws Exception {
-        view.checkOkIsEnabledWhenFinish(100, TimeUnit.SECONDS);
+        view.checkOkIsEnabledWhenFinish();
     }
 
     @Test
