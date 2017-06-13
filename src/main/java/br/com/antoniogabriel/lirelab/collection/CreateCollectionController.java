@@ -38,11 +38,11 @@ public class CreateCollectionController implements Initializable {
     @FXML
     private TextField imagesDirectoryField;
     @FXML
-    private TableView<FeatureModel> featuresTable;
+    private TableView<ViewableFeature> featuresTable;
     @FXML
-    private TableColumn<FeatureModel, Boolean> selectedCol;
+    private TableColumn<ViewableFeature, Boolean> selectedCol;
     @FXML
-    private TableColumn<FeatureModel, String> nameCol;
+    private TableColumn<ViewableFeature, String> nameCol;
     @FXML
     private Button createButton;
 
@@ -63,10 +63,10 @@ public class CreateCollectionController implements Initializable {
         featuresTable.setItems(getFeatureItems());
     }
 
-    private ObservableList<FeatureModel> getFeatureItems() {
-        ObservableList<FeatureModel> items = FXCollections.observableArrayList();
+    private ObservableList<ViewableFeature> getFeatureItems() {
+        ObservableList<ViewableFeature> items = FXCollections.observableArrayList();
         for (Feature feature : Feature.values()) {
-            items.add(new FeatureModel(feature));
+            items.add(new ViewableFeature(feature));
         }
         return items;
     }
@@ -89,7 +89,7 @@ public class CreateCollectionController implements Initializable {
 
     private BooleanBinding noFeatureSelected() {
         BooleanBinding binding = null;
-        for (FeatureModel feature : featuresTable.getItems()) {
+        for (ViewableFeature feature : featuresTable.getItems()) {
             if(binding == null) {
                 binding = feature.selectedProperty().not();
             } else {
@@ -136,9 +136,9 @@ public class CreateCollectionController implements Initializable {
     }
 
     private ArrayList<Feature> selectedFeatures() {
-        ObservableList<FeatureModel> items = featuresTable.getItems();
+        ObservableList<ViewableFeature> items = featuresTable.getItems();
         ArrayList<Feature> features = new ArrayList<>();
-        for (FeatureModel item : items) {
+        for (ViewableFeature item : items) {
             if (item.isSelected()) {
                 features.add(item.getFeature());
             }
@@ -147,12 +147,12 @@ public class CreateCollectionController implements Initializable {
     }
 
 
-    public class FeatureModel {
+    public class ViewableFeature {
         private final SimpleBooleanProperty selected;
         private final SimpleStringProperty name;
         private final Feature feature;
 
-        public FeatureModel(Feature feature) {
+        public ViewableFeature(Feature feature) {
             this.selected = new SimpleBooleanProperty(false);
             this.name = new SimpleStringProperty(feature.name());
             this.feature = feature;
