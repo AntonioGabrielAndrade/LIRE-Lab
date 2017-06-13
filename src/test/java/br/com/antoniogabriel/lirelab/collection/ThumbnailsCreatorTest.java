@@ -12,8 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -53,7 +52,7 @@ public class ThumbnailsCreatorTest {
     }
 
     private void setupBuilderExpectations() throws IOException {
-        when(builder.getAllImagePaths(IMAGES_DIR)).thenReturn(IMAGES);
+        given(builder.getAllImagePaths(IMAGES_DIR)).willReturn(IMAGES);
     }
 
     @Test
