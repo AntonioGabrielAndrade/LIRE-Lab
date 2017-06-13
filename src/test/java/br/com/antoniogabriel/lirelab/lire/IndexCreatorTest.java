@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.lire;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,25 +40,21 @@ public class IndexCreatorTest {
     @Mock private BufferedImage bufImg2;
     @Mock private IndexCreatorCallback callback;
 
-    @Test
-    public void shouldCreateCollectionStepByStep() throws Exception {
-        IndexCreator creator = new IndexCreator(indexBuilder);
+    private IndexCreator creator;
+
+    @Before
+    public void setUp() throws Exception {
+        creator = new IndexCreator(indexBuilder);
 
         creator.setFeatures(FEATURES);
         creator.setIndexDir(INDEX_DIR);
         creator.setImagesDir(IMAGES_DIR);
         creator.setCallback(callback);
+    }
 
-        when(indexBuilder.createDocumentBuilder()).thenReturn(docBuilder);
-
-        when(indexBuilder.createIndexWriter(INDEX_DIR)).thenReturn(indexWriter);
-        when(indexBuilder.getAllImagesPaths(IMAGES_DIR)).thenReturn(PATHS);
-
-        when(indexBuilder.getBufferedImage(IMG1)).thenReturn(bufImg1);
-        when(indexBuilder.createDocument(bufImg1, IMG1)).thenReturn(DOC1);
-
-        when(indexBuilder.getBufferedImage(IMG2)).thenReturn(bufImg2);
-        when(indexBuilder.createDocument(bufImg2, IMG2)).thenReturn(DOC2);
+    @Test
+    public void shouldCreateCollectionStepByStep() throws Exception {
+        setupExpectationsForIndexBuilder();
 
         creator.create();
 
@@ -82,5 +80,18 @@ public class IndexCreatorTest {
 
         inOrder.verify(indexBuilder).closeIndexWriter();
         inOrder.verify(callback).afterIndexAllImages(PATHS.size());
+    }
+
+    private void setupExpectationsForIndexBuilder() throws IOException {
+        when(indexBuilder.createDocumentBuilder()).thenReturn(docBuilder);
+
+        when(indexBuilder.createIndexWriter(INDEX_DIR)).thenReturn(indexWriter);
+        when(indexBuilder.getAllImagesPaths(IMAGES_DIR)).thenReturn(PATHS);
+
+        when(indexBuilder.getBufferedImage(IMG1)).thenReturn(bufImg1);
+        when(indexBuilder.createDocument(bufImg1, IMG1)).thenReturn(DOC1);
+
+        when(indexBuilder.getBufferedImage(IMG2)).thenReturn(bufImg2);
+        when(indexBuilder.createDocument(bufImg2, IMG2)).thenReturn(DOC2);
     }
 }
