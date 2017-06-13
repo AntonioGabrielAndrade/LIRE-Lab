@@ -27,6 +27,12 @@ import java.util.ResourceBundle;
 
 public class CreateCollectionController implements Initializable {
 
+    public static final String HOME_DIRECTORY_PATH = System.getProperty("user.home");
+    public static final String LIRELAB_WORK_DIRECTORY = "/lirelab";
+    public static final String COLLECTIONS_DIRECTORY = "/collections";
+    public static final String COLLECTIONS_PATH = HOME_DIRECTORY_PATH
+                                                + LIRELAB_WORK_DIRECTORY
+                                                + COLLECTIONS_DIRECTORY;
     @FXML
     private TextField nameField;
     @FXML
@@ -117,7 +123,7 @@ public class CreateCollectionController implements Initializable {
                         .aTask()
                         .createCollectionNamed(nameField.getText())
                         .indexedBy(selectedFeatures())
-                        .inDirectory(System.getProperty("user.home") + "/lirelab/collections")
+                        .inDirectory(COLLECTIONS_PATH)
                         .readImagesFrom(imagesDirectoryField.getText());
 
         ProgressDialog dialog = new ProgressDialog(task);
