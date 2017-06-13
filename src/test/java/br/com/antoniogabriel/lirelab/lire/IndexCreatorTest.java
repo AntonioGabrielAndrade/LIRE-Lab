@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IndexCreatorTest {
@@ -83,15 +83,15 @@ public class IndexCreatorTest {
     }
 
     private void setupExpectationsForIndexBuilder() throws IOException {
-        when(indexBuilder.createDocumentBuilder()).thenReturn(docBuilder);
+        given(indexBuilder.createDocumentBuilder()).willReturn(docBuilder);
 
-        when(indexBuilder.createIndexWriter(INDEX_DIR)).thenReturn(indexWriter);
-        when(indexBuilder.getAllImagesPaths(IMAGES_DIR)).thenReturn(PATHS);
+        given(indexBuilder.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
+        given(indexBuilder.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
 
-        when(indexBuilder.getBufferedImage(IMG1)).thenReturn(bufImg1);
-        when(indexBuilder.createDocument(bufImg1, IMG1)).thenReturn(DOC1);
+        given(indexBuilder.getBufferedImage(IMG1)).willReturn(bufImg1);
+        given(indexBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
 
-        when(indexBuilder.getBufferedImage(IMG2)).thenReturn(bufImg2);
-        when(indexBuilder.createDocument(bufImg2, IMG2)).thenReturn(DOC2);
+        given(indexBuilder.getBufferedImage(IMG2)).willReturn(bufImg2);
+        given(indexBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
     }
 }
