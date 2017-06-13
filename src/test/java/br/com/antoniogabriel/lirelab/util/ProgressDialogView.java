@@ -51,7 +51,7 @@ public class ProgressDialogView extends FxRobot {
 
         waitUntil(bar.progressProperty().isEqualTo(1.0, 0)
                         .and(button.disabledProperty().not()),
-                new TimeOut(15, SECONDS));
+                TimeOut.of(15, SECONDS));
 
         return this;
     }
@@ -71,7 +71,7 @@ public class ProgressDialogView extends FxRobot {
     }
 
     private void waitUntil(ObservableBooleanValue condition) throws TimeoutException {
-        waitUntil(condition, new TimeOut(5, SECONDS));
+        waitUntil(condition, TimeOut.of(5, SECONDS));
     }
 
     private void waitUntil(ObservableBooleanValue condition, TimeOut timeout) throws TimeoutException {
