@@ -62,11 +62,9 @@ public class ProgressDialogView extends FxRobot {
 
     public void checkErrorMessageShown(String message) throws TimeoutException {
         DialogPane pane = lookup("#progress-dialog-pane").query();
-
         waitUntil(pane.expandedProperty());
 
         TextArea error = lookup("#error-message").query();
-
         assertThat("Error was printed", error.getText().contains(message));
     }
 
