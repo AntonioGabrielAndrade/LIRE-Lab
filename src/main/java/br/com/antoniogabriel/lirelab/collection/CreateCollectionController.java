@@ -5,6 +5,7 @@ import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,12 +42,12 @@ public class CreateCollectionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setupColumns();
+        setupTableColumns();
         populateTable();
-        bindCreateButtonToMandatoryData();
+        setupCreateButton();
     }
 
-    private void setupColumns() {
+    private void setupTableColumns() {
         selectedCol.setCellValueFactory(new PropertyValueFactory<>("selected"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
@@ -64,14 +65,20 @@ public class CreateCollectionController implements Initializable {
         return items;
     }
 
-    private void bindCreateButtonToMandatoryData() {
-        createButton.disableProperty().bind(
-                nameField.textProperty().isEmpty().or(
-                        imagesDirectoryField.textProperty().isEmpty().or(
-                                noFeatureSelected()
-                        )
-                )
-        );
+    private void setupCreateButton() {
+        createIsDisabledWhen(nameIsEmpty().or(imagesDirectoryIsEmpty().or(noFeatureSelected())));
+    }
+
+    private void createIsDisabledWhen(ObservableBooleanValue condition) {
+        createButton.disableProperty().bind(condition);
+    }
+
+    private BooleanBinding nameIsEmpty() {
+        return nameField.textProperty().isEmpty();
+    }
+
+    private BooleanBinding imagesDirectoryIsEmpty() {
+        return imagesDirectoryField.textProperty().isEmpty();
     }
 
     private BooleanBinding noFeatureSelected() {
