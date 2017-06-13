@@ -3,7 +3,6 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
-import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Window;
 import org.testfx.api.FxRobot;
@@ -33,13 +32,15 @@ public class CreateCollectionView extends FxRobot {
     }
 
     public void unselectAllFeatures() {
-        Set<CheckBox> checkBoxes = lookup("#featuresTable")
-                .lookup(".check-box")
-                .queryAll();
-
-        for (CheckBox checkBox : checkBoxes) {
+        for (CheckBox checkBox : tableCheckBoxes()) {
             checkBox.setSelected(false);
         }
+    }
+
+    private Set<CheckBox> tableCheckBoxes() {
+        return lookup("#featuresTable")
+                .lookup(".check-box")
+                .queryAll();
     }
 
     public CreateCollectionView writeName(String name) {
@@ -54,13 +55,20 @@ public class CreateCollectionView extends FxRobot {
 
     public CreateCollectionView selectFeatures(Feature... features) {
         for (Feature feature : features) {
-            Node checkBox = lookup("#featuresTable")
-                    .lookup(".table-row-cell").nth(feature.ordinal())
-                    .lookup(".table-cell").nth(0)
-                    .lookup(".check-box").query();
-            clickOn(checkBox).interrupt();
+            select(feature);
         }
         return this;
+    }
+
+    private void select(Feature feature) {
+        clickOn(checkboxFor(feature)).interrupt();
+    }
+
+    private CheckBox checkboxFor(Feature feature) {
+        return lookup("#featuresTable")
+                .lookup(".table-row-cell").nth(feature.ordinal())
+                .lookup(".table-cell").nth(0)
+                .lookup(".check-box").query();
     }
 
     public void checkCreateIsDisabled() {
