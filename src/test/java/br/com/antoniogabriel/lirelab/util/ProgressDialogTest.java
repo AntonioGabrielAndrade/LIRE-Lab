@@ -7,8 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import java.util.concurrent.TimeUnit;
-
 public class ProgressDialogTest extends ApplicationTest {
 
     private static final Exception EXCEPTION = new RuntimeException("Some Error!");
@@ -70,7 +68,7 @@ public class ProgressDialogTest extends ApplicationTest {
     @Test
     public void shouldShowErrorMessageWhenExceptionOccur() throws Exception {
         task.throwException = true;
-        view.checkErrorMessageShown(EXCEPTION.getMessage());
+        view.checkErrorAreaShow(EXCEPTION.getMessage());
     }
 
     private int percent(int i) {

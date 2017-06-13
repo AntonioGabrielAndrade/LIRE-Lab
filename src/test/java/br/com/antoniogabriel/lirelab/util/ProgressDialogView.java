@@ -1,5 +1,7 @@
 package br.com.antoniogabriel.lirelab.util;
 
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.DialogPane;
@@ -25,47 +27,35 @@ public class ProgressDialogView extends FxRobot {
     }
 
     public ProgressDialogView checkProgressMark(Integer... percentages) throws TimeoutException {
-        ProgressBar bar = lookup("#progress-bar").query();
-
         for (Integer percentage : percentages) {
-            waitUntil(bar.progressProperty().isEqualTo(
-                            percentToDecimal(percentage), 0.05));
+            waitUntil(progressEqualsTo(percentage));
         }
 
         return this;
     }
 
     public ProgressDialogView checkMessageShow(String... values) throws TimeoutException {
-        Text message = lookup("#message").query();
-
         for (String value : values) {
-            waitUntil(message.textProperty().isEqualTo(value));
+            waitUntil(messageEqualsTo(value));
         }
 
         return this;
     }
 
     public ProgressDialogView checkOkIsEnabledWhenFinish() throws TimeoutException {
-        ProgressBar bar = lookup("#progress-bar").query();
-        Node button = lookup("#ok-button").query();
-
-        waitUntil(bar.progressProperty().isEqualTo(1.0, 0)
-                        .and(button.disabledProperty().not()),
-                TimeOut.of(15, SECONDS));
+        waitUntil(progressComplete().and(buttonEnabled()),
+                    TimeOut.of(15, SECONDS));
 
         return this;
     }
 
-    public void ok() {
-        clickOn("#ok-button").interrupt();
+    public void checkErrorAreaShow(String error) throws TimeoutException {
+        waitUntil(dialogPaneIsExpanded());
+        assertThat("Error was not printed", errorAreaContains(error));
     }
 
-    public void checkErrorMessageShown(String message) throws TimeoutException {
-        DialogPane pane = lookup("#progress-dialog-pane").query();
-        waitUntil(pane.expandedProperty());
-
-        TextArea error = lookup("#error-message").query();
-        assertThat("Error was printed", error.getText().contains(message));
+    public void ok() {
+        clickOn("#ok-button").interrupt();
     }
 
     private void waitUntil(ObservableBooleanValue condition) throws TimeoutException {
@@ -77,7 +67,51 @@ public class ProgressDialogView extends FxRobot {
     }
 
     private double percentToDecimal(Integer percentage) {
-        return percentage/100.00;
+        return percentage / 100.00;
     }
 
+    private BooleanBinding progressEqualsTo(Integer percentage) {
+        return progressBar().progressProperty().isEqualTo(
+                percentToDecimal(percentage), 0.05);
+    }
+
+    private ProgressBar progressBar() {
+        return lookup("#progress-bar").query();
+    }
+
+    private BooleanBinding messageEqualsTo(String value) {
+        return message().textProperty().isEqualTo(value);
+    }
+
+    private Text message() {
+        return lookup("#message").query();
+    }
+
+    private BooleanBinding progressComplete() {
+        return progressBar().progressProperty().isEqualTo(1.0, 0);
+    }
+
+    private BooleanBinding buttonEnabled() {
+        return okButton().disabledProperty().not();
+    }
+
+    private Node okButton() {
+        return lookup("#ok-button").query();
+    }
+
+    private boolean errorAreaContains(String message) {
+        return errorArea().getText().contains(message);
+    }
+
+    private TextArea errorArea() {
+        return lookup("#error-message").query();
+    }
+
+    private BooleanProperty dialogPaneIsExpanded() {
+        return dialogPane().expandedProperty();
+    }
+
+    private DialogPane dialogPane() {
+        return lookup("#progress-dialog-pane").query();
+    }
 }
