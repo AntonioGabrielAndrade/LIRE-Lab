@@ -60,10 +60,10 @@ public class CreateCollectionController implements Initializable {
     }
 
     private void populateTable() {
-        featuresTable.setItems(getFeatureItems());
+        featuresTable.setItems(getViewableFeature());
     }
 
-    private ObservableList<ViewableFeature> getFeatureItems() {
+    private ObservableList<ViewableFeature> getViewableFeature() {
         ObservableList<ViewableFeature> items = FXCollections.observableArrayList();
         for (Feature feature : Feature.values()) {
             items.add(new ViewableFeature(feature));
