@@ -14,8 +14,15 @@ public class IndexCreator {
     private String indexDir;
     private IndexBuilder indexBuilder;
 
-    public IndexCreator(IndexBuilder indexBuilder) {
+    public IndexCreator(IndexBuilder indexBuilder,
+                        String imagesDir,
+                        String indexDir,
+                        List<Feature> features) {
+
         this.indexBuilder = indexBuilder;
+        this.imagesDir = imagesDir;
+        this.indexDir = indexDir;
+        this.features = features;
     }
 
     public void create() throws IOException {
@@ -39,18 +46,6 @@ public class IndexCreator {
 
     public void setCallback(IndexCreatorCallback callback) {
         this.callback = callback;
-    }
-
-    public void setFeatures(List<Feature> features) {
-        this.features = features;
-    }
-
-    public void setImagesDir(String imagesDir) {
-        this.imagesDir = imagesDir;
-    }
-
-    public void setIndexDir(String indexDir) {
-        this.indexDir = indexDir;
     }
 
 }

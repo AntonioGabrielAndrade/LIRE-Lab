@@ -34,6 +34,7 @@ public class CreateCollectionTaskTest {
     @Test
     public void shouldCreateCollection() throws Exception {
         task.call();
+
         verify(indexCreator).create();
         verify(thumbnailsCreator).create();
     }

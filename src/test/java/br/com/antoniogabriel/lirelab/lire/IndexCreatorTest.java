@@ -51,11 +51,7 @@ public class IndexCreatorTest {
     }
 
     private void setupIndexCreator() {
-        creator = new IndexCreator(indexBuilder);
-
-        creator.setFeatures(FEATURES);
-        creator.setIndexDir(INDEX_DIR);
-        creator.setImagesDir(IMAGES_DIR);
+        creator = new IndexCreator(indexBuilder, IMAGES_DIR, INDEX_DIR, FEATURES);
         creator.setCallback(callback);
     }
 

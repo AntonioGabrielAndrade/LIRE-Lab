@@ -20,6 +20,7 @@ import javafx.stage.Window;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreateCollectionController implements Initializable {
@@ -103,16 +104,31 @@ public class CreateCollectionController implements Initializable {
     @FXML
     private void createCollection(ActionEvent event) {
         CreateCollectionTask task =
-                CreateCollectionTask
-                        .aTask()
-                        .createCollectionNamed(nameField.getText())
-                        .indexedBy(selectedFeatures())
-                        .inDirectory(COLLECTIONS_PATH)
-                        .readImagesFrom(imagesDirectoryField.getText());
+                new CreateCollectionTaskFactory()
+                        .createTask(collectionName(),
+                                    collectionFeatures(),
+                                    collectionDirectory(),
+                                    imagesDirectory());
 
         ProgressDialog dialog = new ProgressDialog(task);
         dialog.initOwner(getWindow());
         dialog.showAndStart();
+    }
+
+    private String imagesDirectory() {
+        return imagesDirectoryField.getText();
+    }
+
+    private String collectionDirectory() {
+        return COLLECTIONS_PATH + "/" + collectionName();
+    }
+
+    private List<Feature> collectionFeatures() {
+        return selectedFeatures();
+    }
+
+    private String collectionName() {
+        return nameField.getText();
     }
 
     private Window getWindow() {

@@ -10,8 +10,10 @@ public class ThumbnailsCreator {
     private String thumbnailsDir;
     private String imagesDir;
 
-    public ThumbnailsCreator(ThumbnailBuilder builder) {
+    public ThumbnailsCreator(ThumbnailBuilder builder, String thumbnailsDir, String imagesDir) {
         this.builder = builder;
+        this.thumbnailsDir = thumbnailsDir;
+        this.imagesDir = imagesDir;
     }
 
     public void create() throws IOException {
@@ -30,13 +32,5 @@ public class ThumbnailsCreator {
 
     public void setCallback(ThumbnailsCreatorCallback callback) {
         this.callback = callback;
-    }
-
-    public void setThumbnailsDir(String thumbnailsDir) {
-        this.thumbnailsDir = thumbnailsDir;
-    }
-
-    public void setImagesDir(String imagesDir) {
-        this.imagesDir = imagesDir;
     }
 }

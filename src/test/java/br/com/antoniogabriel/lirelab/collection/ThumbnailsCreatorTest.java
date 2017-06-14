@@ -40,10 +40,7 @@ public class ThumbnailsCreatorTest {
     }
 
     private void setupThumbnailsCreator() {
-        creator = new ThumbnailsCreator(builder);
-
-        creator.setThumbnailsDir(THUMBNAILS_DIR);
-        creator.setImagesDir(IMAGES_DIR);
+        creator = new ThumbnailsCreator(builder, THUMBNAILS_DIR, IMAGES_DIR);
         creator.setCallback(callback);
     }
 
