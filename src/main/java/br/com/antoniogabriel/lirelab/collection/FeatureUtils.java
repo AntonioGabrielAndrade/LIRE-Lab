@@ -6,16 +6,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class FeatureUtils {
 
     public static ObservableList<ViewableFeature> toViewableFeatures(Feature... features) {
-        ObservableList<ViewableFeature> result = FXCollections.observableArrayList();
-        for (Feature feature : features) {
-            result.add(new ViewableFeature(feature));
-        }
-        return result;
+        return Arrays.stream(features)
+                .map(f -> new ViewableFeature(f))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     public static ArrayList<Feature> getSelectedFeaturesFrom(ObservableList<ViewableFeature> viewableFeatures) {
