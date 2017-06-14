@@ -42,29 +42,14 @@ public class ProgressDialog extends Dialog<Void> {
         progressBar.setId("progress-bar");
         progressBar.setPrefWidth(500);
         progressBar.setMaxHeight(10);
-        visibleProgress().bind(taskProgress());
+        bindBarProgressTo(taskProgress());
     }
 
-    private DoubleProperty visibleProgress() {
-        return progressBar.progressProperty();
-    }
-
-    private ReadOnlyDoubleProperty taskProgress() {
-        return this.task.progressProperty();
-    }
 
     private void setupMessageText() {
         message = new Text();
         message.setId("message");
         progressbarMessage().bind(taskMessage());
-    }
-
-    private StringProperty progressbarMessage() {
-        return message.textProperty();
-    }
-
-    private ReadOnlyStringProperty taskMessage() {
-        return this.task.messageProperty();
     }
 
     private void setupOkButton() {
@@ -78,18 +63,6 @@ public class ProgressDialog extends Dialog<Void> {
                         .and(noTaskException())
                             .or(taskIsRunning())
         );
-    }
-
-    private BooleanBinding taskNotCompleted() {
-        return taskProgress().isEqualTo(1.0, 0.0).not();
-    }
-
-    private BooleanBinding noTaskException() {
-        return taskException().isNull();
-    }
-
-    private ReadOnlyBooleanProperty taskIsRunning() {
-        return this.task.runningProperty();
     }
 
     private void setupWindowBehavior() {
@@ -127,10 +100,6 @@ public class ProgressDialog extends Dialog<Void> {
         });
     }
 
-    private void setExpandableContentAs(Node errorPane) {
-        getDialogPane().setExpandableContent(errorPane);
-    }
-
     private String getStacktraceFrom(Throwable newValue) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
@@ -138,13 +107,6 @@ public class ProgressDialog extends Dialog<Void> {
         return sw.toString();
     }
 
-    private void expandDialog() {
-        getDialogPane().setExpanded(true);
-    }
-
-    private ReadOnlyObjectProperty<Throwable> taskException() {
-        return this.task.exceptionProperty();
-    }
 
     private Node getErrorPaneWith(String error) {
         Label label = new Label("Some error occurred:");
@@ -179,5 +141,49 @@ public class ProgressDialog extends Dialog<Void> {
         vbox.setSpacing(2);
         vbox.getChildren().addAll(message, progressBar);
         getDialogPane().setContent(vbox);
+    }
+
+    private void bindBarProgressTo(ReadOnlyDoubleProperty property) {
+        barProgress().bind(property);
+    }
+
+    private DoubleProperty barProgress() {
+        return progressBar.progressProperty();
+    }
+
+    private ReadOnlyDoubleProperty taskProgress() {
+        return this.task.progressProperty();
+    }
+
+    private StringProperty progressbarMessage() {
+        return message.textProperty();
+    }
+
+    private ReadOnlyStringProperty taskMessage() {
+        return this.task.messageProperty();
+    }
+
+    private BooleanBinding taskNotCompleted() {
+        return taskProgress().isEqualTo(1.0, 0.0).not();
+    }
+
+    private BooleanBinding noTaskException() {
+        return taskException().isNull();
+    }
+
+    private ReadOnlyBooleanProperty taskIsRunning() {
+        return this.task.runningProperty();
+    }
+
+    private void setExpandableContentAs(Node errorPane) {
+        getDialogPane().setExpandableContent(errorPane);
+    }
+
+    private void expandDialog() {
+        getDialogPane().setExpanded(true);
+    }
+
+    private ReadOnlyObjectProperty<Throwable> taskException() {
+        return this.task.exceptionProperty();
     }
 }
