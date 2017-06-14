@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.util;
 
 import javafx.application.Platform;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.*;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -40,13 +42,29 @@ public class ProgressDialog extends Dialog<Void> {
         progressBar.setId("progress-bar");
         progressBar.setPrefWidth(500);
         progressBar.setMaxHeight(10);
-        progressBar.progressProperty().bind(this.task.progressProperty());
+        visibleProgress().bind(taskProgress());
+    }
+
+    private DoubleProperty visibleProgress() {
+        return progressBar.progressProperty();
+    }
+
+    private ReadOnlyDoubleProperty taskProgress() {
+        return this.task.progressProperty();
     }
 
     private void setupMessageText() {
         message = new Text();
         message.setId("message");
-        message.textProperty().bind(this.task.messageProperty());
+        progressbarMessage().bind(taskMessage());
+    }
+
+    private StringProperty progressbarMessage() {
+        return message.textProperty();
+    }
+
+    private ReadOnlyStringProperty taskMessage() {
+        return this.task.messageProperty();
     }
 
     private void setupOkButton() {
@@ -56,21 +74,32 @@ public class ProgressDialog extends Dialog<Void> {
         okButton.setDisable(true);
         okButton.setId("ok-button");
         okButton.disableProperty().bind(
-                this.task
-                        .progressProperty().isEqualTo(1.0, 0.0).not()
-                        .and(task.exceptionProperty().isNull())
-                            .or(this.task.runningProperty())
+                    taskNotCompleted()
+                        .and(noTaskException())
+                            .or(taskIsRunning())
         );
     }
 
+    private BooleanBinding taskNotCompleted() {
+        return taskProgress().isEqualTo(1.0, 0.0).not();
+    }
+
+    private BooleanBinding noTaskException() {
+        return taskException().isNull();
+    }
+
+    private ReadOnlyBooleanProperty taskIsRunning() {
+        return this.task.runningProperty();
+    }
+
     private void setupWindowBehavior() {
-        setOnCloseRequest(event -> {
-            if (getOwner() != null) {
-                getOwner().hide();
-            }
-        });
+        hideOwnerOnClose();
 
         // dirty hack to fix JavaFX resizing bug
+        resizeStageWhenDialogExpandOrCollapse();
+    }
+
+    private void resizeStageWhenDialogExpandOrCollapse() {
         getDialogPane().expandedProperty().addListener((l) -> {
             Platform.runLater(() -> {
                 Stage stage = (Stage) getDialogPane().getScene().getWindow();
@@ -79,20 +108,45 @@ public class ProgressDialog extends Dialog<Void> {
         });
     }
 
-    private void setupExceptionHandling() {
-        this.task.exceptionProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                newValue.printStackTrace(pw);
-                String stackTrace = sw.toString();
-                getDialogPane().setExpandableContent(getErrorPane(stackTrace));
-                getDialogPane().setExpanded(true);
+    private void hideOwnerOnClose() {
+        setOnCloseRequest(event -> {
+            if (getOwner() != null) {
+                getOwner().hide();
             }
         });
     }
 
-    private Node getErrorPane(String error) {
+    private void setupExceptionHandling() {
+        taskException().addListener((observable, oldException, newException) -> {
+            if(newException != null) {
+                String stackTrace = getStacktraceFrom(newException);
+                Node errorPane = getErrorPaneWith(stackTrace);
+                setExpandableContentAs(errorPane);
+                expandDialog();
+            }
+        });
+    }
+
+    private void setExpandableContentAs(Node errorPane) {
+        getDialogPane().setExpandableContent(errorPane);
+    }
+
+    private String getStacktraceFrom(Throwable newValue) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        newValue.printStackTrace(pw);
+        return sw.toString();
+    }
+
+    private void expandDialog() {
+        getDialogPane().setExpanded(true);
+    }
+
+    private ReadOnlyObjectProperty<Throwable> taskException() {
+        return this.task.exceptionProperty();
+    }
+
+    private Node getErrorPaneWith(String error) {
         Label label = new Label("Some error occurred:");
 
         TextArea textArea = new TextArea();
