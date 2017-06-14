@@ -45,7 +45,7 @@ public class FeatureUtilsTest {
     }
 
     @Test
-    public void shouldBindNoSelectedFeatureValueOfViewableFeatures() throws Exception {
+    public void shouldCreateBindingInformingIfNoFeatureIsSelected() throws Exception {
         ObservableList<ViewableFeature> features = someFeatures(
                                                         notSelected(CEDD),
                                                         notSelected(TAMURA)
@@ -54,6 +54,7 @@ public class FeatureUtilsTest {
         BooleanBinding binding = noFeatureIsSelectedIn(features);
 
         assertThat(valueOf(binding), is(true));
+
         selectFirstItemOf(features);
         assertThat(valueOf(binding), is(false));
     }
