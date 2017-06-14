@@ -77,7 +77,7 @@ public class IndexCreatorTest {
     }
 
     @Test
-    public void shouldCreateCollectionStepByStep() throws Exception {
+    public void shouldCreateIndexStepByStep() throws Exception {
         creator.create();
 
         inOrder.verify(indexBuilder).createDocumentBuilder();
