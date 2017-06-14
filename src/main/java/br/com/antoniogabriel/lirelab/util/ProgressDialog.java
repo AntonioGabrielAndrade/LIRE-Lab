@@ -42,7 +42,7 @@ public class ProgressDialog extends Dialog<Void> {
         progressBar.setId("progress-bar");
         progressBar.setPrefWidth(500);
         progressBar.setMaxHeight(10);
-        bindBarProgressTo(taskProgress());
+        bindProgressBarTo(taskProgress());
     }
 
 
@@ -143,7 +143,7 @@ public class ProgressDialog extends Dialog<Void> {
         getDialogPane().setContent(vbox);
     }
 
-    private void bindBarProgressTo(ReadOnlyDoubleProperty property) {
+    private void bindProgressBarTo(ReadOnlyDoubleProperty property) {
         barProgress().bind(property);
     }
 
