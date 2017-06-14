@@ -99,10 +99,10 @@ public class ProgressDialog extends Dialog<Void> {
         });
     }
 
-    private String getStacktraceFrom(Throwable newValue) {
+    private String getStacktraceFrom(Throwable throwable) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
-        newValue.printStackTrace(pw);
+        throwable.printStackTrace(pw);
         return sw.toString();
     }
 
