@@ -45,11 +45,10 @@ public class ProgressDialog extends Dialog<Void> {
         bindProgressBarTo(taskProgress());
     }
 
-
     private void setupMessageText() {
         message = new Text();
         message.setId("message");
-        progressbarMessage().bind(taskMessage());
+        bindProgressMessageTo(taskMessage());
     }
 
     private void setupOkButton() {
@@ -145,6 +144,10 @@ public class ProgressDialog extends Dialog<Void> {
 
     private void bindProgressBarTo(ReadOnlyDoubleProperty property) {
         barProgress().bind(property);
+    }
+
+    private void bindProgressMessageTo(ReadOnlyStringProperty property) {
+        progressbarMessage().bind(property);
     }
 
     private DoubleProperty barProgress() {
