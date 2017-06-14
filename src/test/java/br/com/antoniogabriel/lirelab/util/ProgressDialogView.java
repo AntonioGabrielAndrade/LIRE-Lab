@@ -8,6 +8,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.Contract;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
 
@@ -66,6 +67,7 @@ public class ProgressDialogView extends FxRobot {
         WaitForAsyncUtils.waitFor(timeout.value, timeout.unit, condition);
     }
 
+    @Contract(pure = true)
     private double percentToDecimal(Integer percentage) {
         return percentage / 100.00;
     }
