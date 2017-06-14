@@ -109,7 +109,23 @@ public class ProgressDialog extends Dialog<Void> {
 
     private Node getErrorPaneWith(String error) {
         Label label = new Label("Some error occurred:");
+        TextArea textArea = getErrorArea(error);
+        return errorGrid(label, textArea);
+    }
 
+    private GridPane errorGrid(Label label, TextArea textArea) {
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane grid = new GridPane();
+        grid.setMaxWidth(Double.MAX_VALUE);
+        grid.setVgap(3);
+        grid.add(label, 0, 0);
+        grid.add(textArea, 0, 1);
+        return grid;
+    }
+
+    private TextArea getErrorArea(String error) {
         TextArea textArea = new TextArea();
         textArea.setId("error-message");
         textArea.setEditable(false);
@@ -119,17 +135,7 @@ public class ProgressDialog extends Dialog<Void> {
         textArea.setPrefWidth(500);
         textArea.setPrefHeight(200);
         textArea.setText(error);
-
-        GridPane.setVgrow(textArea, Priority.ALWAYS);
-        GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-        GridPane grid = new GridPane();
-        grid.setMaxWidth(Double.MAX_VALUE);
-        grid.setVgap(3);
-        grid.add(label, 0, 0);
-        grid.add(textArea, 0, 1);
-
-        return grid;
+        return textArea;
     }
 
     private void setupDialogContent() {
