@@ -4,7 +4,6 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,11 +61,7 @@ public class CreateCollectionController implements Initializable {
     }
 
     private ObservableList<ViewableFeature> getViewableFeatures() {
-        ObservableList<ViewableFeature> items = FXCollections.observableArrayList();
-        for (Feature feature : Feature.values()) {
-            items.add(new ViewableFeature(feature));
-        }
-        return items;
+        return FeatureUtils.toViewableFeatures(Feature.values());
     }
 
     private void setupCreateButton() {
@@ -86,17 +81,8 @@ public class CreateCollectionController implements Initializable {
     }
 
     private BooleanBinding noFeatureSelected() {
-        BooleanBinding binding = null;
-        for (ViewableFeature feature : featuresTable.getItems()) {
-            if(binding == null) {
-                binding = feature.selectedProperty().not();
-            } else {
-                binding = binding.and(feature.selectedProperty().not());
-            }
-        }
-        return binding;
+        return FeatureUtils.noFeatureIsSelectedIn(featuresTable.getItems());
     }
-
 
     @FXML
     private void chooseDir(ActionEvent event) {
@@ -134,13 +120,6 @@ public class CreateCollectionController implements Initializable {
     }
 
     private ArrayList<Feature> selectedFeatures() {
-        ObservableList<ViewableFeature> items = featuresTable.getItems();
-        ArrayList<Feature> features = new ArrayList<>();
-        for (ViewableFeature item : items) {
-            if (item.isSelected()) {
-                features.add(item.getFeature());
-            }
-        }
-        return features;
+        return FeatureUtils.getSelectedFeaturesFrom(featuresTable.getItems());
     }
 }
