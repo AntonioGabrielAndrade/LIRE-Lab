@@ -86,7 +86,7 @@ public class CreateCollectionController implements Initializable {
     }
 
     @FXML
-    private void chooseDir(ActionEvent event) {
+    private void chooseImagesDirectory(ActionEvent event) {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Select the directory that contains the images");
         Window window = getWindow();

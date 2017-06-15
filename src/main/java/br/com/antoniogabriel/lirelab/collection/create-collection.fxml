@@ -32,7 +32,7 @@
         <Label text="Images directory"/>
         <HBox spacing="5">
             <TextField id="images-directory" fx:id="imagesDirectoryField" HBox.hgrow="ALWAYS"/>
-            <Button text="Browse" onAction="#chooseDir"/>
+            <Button text="Browse" onAction="#chooseImagesDirectory"/>
         </HBox>
     </VBox>
 
