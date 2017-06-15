@@ -6,13 +6,18 @@ import javafx.concurrent.Task;
 
 import java.nio.file.Paths;
 
-public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback {
+public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback, XMLCreatorCallback {
     private final IndexCreator indexCreator;
     private final ThumbnailsCreator thumbnailsCreator;
+    private XMLCreator xmlCreator;
 
-    public CreateCollectionTask(IndexCreator indexCreator, ThumbnailsCreator thumbnailsCreator) {
+    public CreateCollectionTask(IndexCreator indexCreator,
+                                ThumbnailsCreator thumbnailsCreator,
+                                XMLCreator xmlCreator) {
+
         this.indexCreator = indexCreator;
         this.thumbnailsCreator = thumbnailsCreator;
+        this.xmlCreator = xmlCreator;
 
         setItselfAsCallback();
     }
@@ -20,12 +25,14 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     private void setItselfAsCallback() {
         this.indexCreator.setCallback(this);
         this.thumbnailsCreator.setCallback(this);
+        this.xmlCreator.setCallback(this);
     }
 
     @Override
     protected Void call() throws Exception {
         indexCreator.create();
         thumbnailsCreator.create();
+        xmlCreator.create();
         return null;
     }
 
@@ -59,5 +66,17 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     @Override
     public void afterCreateAllThumbnails(int totalImages) {
         updateMessage("Done!");
+    }
+
+    @Override
+    public void beforeCreateXML() {
+        updateProgress(-1,1);
+        updateMessage("Creating collection.xml...");
+    }
+
+    @Override
+    public void afterCreateXML() {
+        updateMessage("Collection Created");
+        updateProgress(1,1);
     }
 }

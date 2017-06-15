@@ -4,6 +4,7 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.lire.IndexBuilder;
 import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 
+import java.io.File;
 import java.util.List;
 
 public class CreateCollectionTaskFactory {
@@ -27,7 +28,13 @@ public class CreateCollectionTaskFactory {
                                                                     thumbnailsDirectory,
                                                                     imagesDirectory);
 
-        return new CreateCollectionTask(indexCreator, thumbnailsCreator);
+        CollectionXMLDAO xmlDAO = new CollectionXMLDAO(new File(collectionDirectory));
+        XMLCreator xmlCreator = new XMLCreator(collectionName,
+                                                imagesDirectory,
+                                                collectionFeatures,
+                                                xmlDAO);
+
+        return new CreateCollectionTask(indexCreator, thumbnailsCreator, xmlCreator);
 
     }
 }

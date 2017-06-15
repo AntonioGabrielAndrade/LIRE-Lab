@@ -14,21 +14,20 @@ public class CreateCollectionTaskTest {
 
     private CreateCollectionTask task;
 
-    @Mock
-    private IndexCreator indexCreator;
-
-    @Mock
-    private ThumbnailsCreator thumbnailsCreator;
+    @Mock IndexCreator indexCreator;
+    @Mock ThumbnailsCreator thumbnailsCreator;
+    @Mock XMLCreator xmlCreator;
 
     @Before
     public void setUp() throws Exception {
-        task = new CreateCollectionTask(indexCreator, thumbnailsCreator);
+        task = new CreateCollectionTask(indexCreator, thumbnailsCreator, xmlCreator);
     }
 
     @Test
     public void shouldSetItselfAsCallback() throws Exception {
         verify(indexCreator).setCallback(task);
         verify(thumbnailsCreator).setCallback(task);
+        verify(xmlCreator).setCallback(task);
     }
 
     @Test
@@ -37,5 +36,6 @@ public class CreateCollectionTaskTest {
 
         verify(indexCreator).create();
         verify(thumbnailsCreator).create();
+        verify(xmlCreator).create();
     }
 }
