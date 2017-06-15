@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <left>
+        <fx:include source="collection-list.fxml"/>
+    </left>
+    <center>
+        <fx:include source="welcome.fxml"/>
+    </center>
+
+</BorderPane>

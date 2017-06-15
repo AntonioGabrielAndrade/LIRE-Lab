@@ -5,7 +5,6 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.com.antoniogabriel.lirelab.Main"
             prefHeight="600.0" prefWidth="800.0">
 
     <top>
@@ -16,7 +15,7 @@
     </top>
 
     <center>
-        <fx:include source="welcome.fxml"/>
+        <fx:include source="main-area.fxml"/>
     </center>
 
 </BorderPane>

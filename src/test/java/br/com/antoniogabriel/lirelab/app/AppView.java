@@ -3,6 +3,9 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionView;
 import org.testfx.api.FxRobot;
 
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.util.NodeQueryUtils.isVisible;
+
 public class AppView extends FxRobot {
 
     MenuView menuView = new MenuView();
@@ -28,5 +31,9 @@ public class AppView extends FxRobot {
                 .interrupt();
 
         return new CreateCollectionView();
+    }
+
+    public void checkCollectionIsListed(String collectionName) {
+        verifyThat("#collections-tree", isVisible());
     }
 }

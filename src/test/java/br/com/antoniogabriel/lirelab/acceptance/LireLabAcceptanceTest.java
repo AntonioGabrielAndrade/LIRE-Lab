@@ -74,16 +74,8 @@ public class LireLabAcceptanceTest extends FxRobot {
 
         collectionHelper.checkCollectionExists(ACCEPTANCE_TEST_COLLECTION);
 
+        appView.checkCollectionIsListed(ACCEPTANCE_TEST_COLLECTION);
 
-//        runner.openCreateCollectionDialog();
-//        runner.fillCreateCollectionDialog(ACCEPTANCE_TEST_COLLECTION,
-//                TEST_IMAGES_PATH,
-//                TEST_FEATURES);
-
-        //TODO uncomment and implement
-//        runner.checkCreateCollectionProgressDialog();
-//        runner.checkCollectionIsListed(ACCEPTANCE_TEST_COLLECTION);
-//        runner.checkCollectionIsCreated(ACCEPTANCE_TEST_COLLECTION);
     }
 
 }
