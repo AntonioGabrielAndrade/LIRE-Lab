@@ -22,22 +22,34 @@ public class LireLabAcceptanceTest extends FxRobot {
     private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
     private static final String TEST_IMAGES_PATH = testImagesPath();
 
+    private CollectionHelper collectionHelper;
+
     private static String testImagesPath() {
         return Paths.get("src/test/resources/images/").toAbsolutePath().toString();
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUpJavaFX() throws Exception {
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(App.class);
         interrupt();
     }
 
+    @Before
+    public void initObjects() throws Exception {
+        collectionHelper = new CollectionHelper();
+    }
+
     @After
-    public void tearDown() throws Exception {
+    public void tearDownJavaFX() throws Exception {
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
+    }
+
+    @After
+    public void cleanEnvironment() throws Exception {
+        collectionHelper.deleteCollection(ACCEPTANCE_TEST_COLLECTION);
     }
 
     @Test
@@ -59,6 +71,8 @@ public class LireLabAcceptanceTest extends FxRobot {
                 .checkProgressMark(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
                 .checkOkIsEnabledWhenFinish()
                 .ok();
+
+        collectionHelper.checkCollectionExists(ACCEPTANCE_TEST_COLLECTION);
 
 
 //        runner.openCreateCollectionDialog();
