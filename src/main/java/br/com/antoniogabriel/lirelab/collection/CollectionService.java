@@ -16,14 +16,14 @@ public class CollectionService {
 
 
     public CreateCollectionTask getCreateTask(String collectionName,
-                                              String imagesDirectory,
+                                              String imagesPath,
                                               List<Feature> collectionFeatures) {
 
         return new CreateCollectionTaskFactory()
                             .createTask(
                                     collectionName,
                                     collectionFeatures,
-                                    imagesDirectory,
+                                    imagesPath,
                                     resolver.getCollectionPath(collectionName),
                                     resolver.getIndexDirectoryPath(collectionName),
                                     resolver.getThumbnailsDirectoryPath(collectionName)

@@ -11,25 +11,25 @@ public class CreateCollectionTaskFactory {
 
     public CreateCollectionTask createTask(String collectionName,
                                            List<Feature> collectionFeatures,
-                                           String imagesDirectory,
+                                           String imagesPath,
                                            String collectionPath,
                                            String indexPath,
                                            String thumbnailsPath) {
 
         IndexBuilder indexBuilder = new IndexBuilder();
         IndexCreator indexCreator = new IndexCreator(indexBuilder,
-                                                    imagesDirectory,
+                                                    imagesPath,
                                                     indexPath,
                                                     collectionFeatures);
 
         ThumbnailBuilder thumbnailBuilder = new ThumbnailBuilder();
         ThumbnailsCreator thumbnailsCreator = new ThumbnailsCreator(thumbnailBuilder,
                                                                     thumbnailsPath,
-                                                                    imagesDirectory);
+                                                                    imagesPath);
 
         CollectionXMLDAO xmlDAO = new CollectionXMLDAO(new File(collectionPath));
         XMLCreator xmlCreator = new XMLCreator(collectionName,
-                                                imagesDirectory,
+                                                imagesPath,
                                                 collectionFeatures,
                                                 xmlDAO);
 
