@@ -14,9 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,6 +43,13 @@ public class CreateCollectionController implements Initializable {
     private TableColumn<ViewableFeature, String> nameCol;
     @FXML
     private Button createButton;
+
+    private DialogProvider dialogProvider;
+
+    @Inject
+    public CreateCollectionController(DialogProvider dialogProvider) {
+        this.dialogProvider = dialogProvider;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,19 +93,18 @@ public class CreateCollectionController implements Initializable {
     }
 
     @FXML
-    private void chooseImagesDirectory(ActionEvent event) {
-        DirectoryChooser chooser = new DirectoryChooser();
-        chooser.setTitle("Select the directory that contains the images");
-        Window window = getWindow();
-        File dir = chooser.showDialog(window);
+    void chooseImagesDirectory(ActionEvent event) {
+        Window parent = getWindowFrom(event);
+        File dir = dialogProvider.chooseImagesDirectory(parent);
         if (dir != null) {
             imagesDirectoryField.setText(dir.getAbsolutePath());
         }
     }
 
+
     @FXML
-    private void close(ActionEvent event) {
-        getWindow().hide();
+    void close(ActionEvent event) {
+        getWindowFrom(event).hide();
     }
 
     @FXML
@@ -111,11 +117,15 @@ public class CreateCollectionController implements Initializable {
                                     imagesDirectory());
 
         ProgressDialog dialog = new ProgressDialog(task);
-        dialog.initOwner(getWindow());
+        dialog.initOwner(getWindowFrom(event));
         dialog.showAndStart();
     }
 
-    private String imagesDirectory() {
+    private Window getWindowFrom(ActionEvent event) {
+        return dialogProvider.getWindowFrom(event);
+    }
+
+    String imagesDirectory() {
         return imagesDirectoryField.getText();
     }
 
@@ -129,10 +139,6 @@ public class CreateCollectionController implements Initializable {
 
     private String collectionName() {
         return nameField.getText();
-    }
-
-    private Window getWindow() {
-        return featuresTable.getScene().getWindow();
     }
 
     private ArrayList<Feature> selectedFeatures() {
