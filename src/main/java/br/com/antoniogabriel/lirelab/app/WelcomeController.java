@@ -20,7 +20,7 @@ public class WelcomeController {
     }
 
     public void openCreateCollectionDialog(ActionEvent event) throws IOException {
-        createCollectionFXML.showOwnedBy(getWindow());
+        createCollectionFXML.loadOwnedBy(getWindow());
     }
 
     private Window getWindow() {

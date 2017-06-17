@@ -17,13 +17,13 @@ public class CreateCollectionFXML {
 
     @Inject private FXMLLoader loader;
 
-    public void showOwnedBy(Window owner) throws IOException {
+    public void loadOwnedBy(Window owner) throws IOException {
         Stage stage = new Stage();
         stage.initOwner(owner);
-        showIn(stage);
+        loadIn(stage);
     }
 
-    public void showIn(Stage stage) throws IOException {
+    public void loadIn(Stage stage) throws IOException {
         Parent root = loader.load(getClass().getResource(FXML));
 
         if(stage.getOwner() != null) {

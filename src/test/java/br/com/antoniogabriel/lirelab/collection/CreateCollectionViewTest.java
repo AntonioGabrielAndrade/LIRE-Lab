@@ -26,7 +26,7 @@ public class CreateCollectionViewTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
         DependencyInjection.init(this);
-        fxml.showIn(stage);
+        fxml.loadIn(stage);
     }
 
     @Before
