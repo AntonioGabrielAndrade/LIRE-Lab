@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.collection.FeatureUtils;
-import br.com.antoniogabriel.lirelab.collection.ViewableFeature;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;

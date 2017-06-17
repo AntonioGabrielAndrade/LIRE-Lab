@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.property.SimpleBooleanProperty;
