@@ -1,10 +1,13 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
+
+import javax.inject.Inject;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
@@ -16,11 +19,14 @@ public class CreateCollectionViewTest extends ApplicationTest {
     private static final String ANY_PATH = "/any/dir/path";
     private static final Feature[] ANY_FEATURES = {CEDD, TAMURA};
 
+    @Inject private CreateCollectionFXML fxml;
+
     private CreateCollectionView view;
 
     @Override
     public void start(Stage stage) throws Exception {
-        CreateCollectionFXML.showIn(stage);
+        DependencyInjection.init(this);
+        fxml.showIn(stage);
     }
 
     @Before

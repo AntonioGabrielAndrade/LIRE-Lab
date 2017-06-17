@@ -7,21 +7,24 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
 public class CreateCollectionFXML {
 
+    public static final String FXML = "create-collection.fxml";
     public static final String TITLE = "Create Collection";
 
-    public static void showOwnedBy(Window owner) throws IOException {
+    @Inject private FXMLLoader loader;
+
+    public void showOwnedBy(Window owner) throws IOException {
         Stage stage = new Stage();
         stage.initOwner(owner);
         showIn(stage);
     }
 
-    public static void showIn(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(
-                CreateCollectionFXML.class.getResource("create-collection.fxml"));
+    public void showIn(Stage stage) throws IOException {
+        Parent root = loader.load(getClass().getResource(FXML));
 
         if(stage.getOwner() != null) {
             stage.initModality(Modality.WINDOW_MODAL);

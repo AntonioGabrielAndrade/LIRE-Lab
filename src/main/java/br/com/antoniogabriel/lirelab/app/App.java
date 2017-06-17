@@ -1,18 +1,18 @@
 package br.com.antoniogabriel.lirelab.app;
 
+import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import javafx.application.Application;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.inject.Inject;
+
 public class App extends Application {
+
+    @Inject private AppFXML appFXML;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = AppFXML.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("LIRE Lab");
-        stage.setMaximized(true);
-        stage.show();
+        DependencyInjection.init(this);
+        appFXML.loadIn(stage);
     }
 }
