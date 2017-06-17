@@ -112,6 +112,12 @@
             <version>RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>ignite-guice</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
