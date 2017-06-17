@@ -5,12 +5,15 @@ import com.google.inject.Module;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 
 public class DependencyInjection {
 
+    public static final List<Module> NO_MODULES = Collections.emptyList();
+
     public static void init(Object root) {
-        init(root, Collections.emptyList());
+        init(root, NO_MODULES);
     }
 
     public static void init(Object root, Collection<Module> modules) {
