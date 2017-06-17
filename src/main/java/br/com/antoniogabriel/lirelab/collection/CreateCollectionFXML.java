@@ -15,7 +15,13 @@ public class CreateCollectionFXML {
     public static final String FXML = "create-collection.fxml";
     public static final String TITLE = "Create Collection";
 
-    @Inject private FXMLLoader loader;
+    private FXMLLoader loader;
+
+    @Inject
+    public CreateCollectionFXML(FXMLLoader loader) {
+        this.loader = loader;
+        this.loader.setLocation(getClass().getResource(FXML));
+    }
 
     public void loadOwnedBy(Window owner) throws IOException {
         Stage stage = new Stage();
@@ -24,7 +30,7 @@ public class CreateCollectionFXML {
     }
 
     public void loadIn(Stage stage) throws IOException {
-        Parent root = loader.load(getClass().getResource(FXML));
+        Parent root = loader.load();
 
         if(stage.getOwner() != null) {
             stage.initModality(Modality.WINDOW_MODAL);
@@ -36,4 +42,8 @@ public class CreateCollectionFXML {
         stage.show();
     }
 
+    public CreateCollectionController getController() throws IOException {
+        loader.load();
+        return loader.getController();
+    }
 }
