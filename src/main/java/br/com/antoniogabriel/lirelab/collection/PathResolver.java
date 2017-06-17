@@ -11,4 +11,12 @@ public class PathResolver {
     public String getCollectionPath(String collectionName) {
         return COLLECTIONS_PATH + "/" + collectionName;
     }
+
+    public String getIndexDirectoryPath(String collectionName) {
+        return getCollectionPath(collectionName) + "/index";
+    }
+
+    public String getThumbnailsDirectoryPath(String collectionName) {
+        return getCollectionPath(collectionName) + "/thumbnails";
+    }
 }

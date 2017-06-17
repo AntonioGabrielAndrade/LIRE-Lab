@@ -12,10 +12,9 @@ public class CreateCollectionTaskFactory {
     public CreateCollectionTask createTask(String collectionName,
                                            List<Feature> collectionFeatures,
                                            String collectionDirectory,
-                                           String imagesDirectory) {
-
-        String indexDirectory = collectionDirectory + "/index";
-        String thumbnailsDirectory = collectionDirectory + "/thumbnails";
+                                           String imagesDirectory,
+                                           String indexDirectory,
+                                           String thumbnailsDirectory) {
 
         IndexBuilder indexBuilder = new IndexBuilder();
         IndexCreator indexCreator = new IndexCreator(indexBuilder,

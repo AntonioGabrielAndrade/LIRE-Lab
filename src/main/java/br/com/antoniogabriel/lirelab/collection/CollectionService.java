@@ -20,12 +20,14 @@ public class CollectionService {
                                               List<Feature> collectionFeatures) {
 
         return new CreateCollectionTaskFactory()
-                                        .createTask(
-                                                collectionName,
-                                                collectionFeatures,
-                                                resolver.getCollectionPath(collectionName),
-                                                imagesDirectory
-                                        );
+                            .createTask(
+                                    collectionName,
+                                    collectionFeatures,
+                                    resolver.getCollectionPath(collectionName),
+                                    imagesDirectory,
+                                    resolver.getIndexDirectoryPath(collectionName),
+                                    resolver.getThumbnailsDirectoryPath(collectionName)
+                            );
 
     }
 }
