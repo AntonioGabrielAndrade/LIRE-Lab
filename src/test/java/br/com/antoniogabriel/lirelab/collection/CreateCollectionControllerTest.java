@@ -58,7 +58,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldSetImagesDirectoryToFieldWhenUserChoosesIt() throws Exception {
+    public void shouldSetImagesDirectoryWhenUserChoosesIt() throws Exception {
         given(dialogProvider.chooseImagesDirectory(window)).willReturn(file);
 
         controller.chooseImagesDirectory(event);
@@ -67,7 +67,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldNotSetImagesDirectoryToFieldWhenUserDontChoosesIt() throws Exception {
+    public void shouldNotSetImagesDirectoryWhenUserDontChoosesIt() throws Exception {
         given(dialogProvider.chooseImagesDirectory(window)).willReturn(null);
 
         controller.chooseImagesDirectory(event);
