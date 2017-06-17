@@ -23,8 +23,8 @@ public class CollectionService {
                             .createTask(
                                     collectionName,
                                     collectionFeatures,
-                                    resolver.getCollectionPath(collectionName),
                                     imagesDirectory,
+                                    resolver.getCollectionPath(collectionName),
                                     resolver.getIndexDirectoryPath(collectionName),
                                     resolver.getThumbnailsDirectoryPath(collectionName)
                             );
