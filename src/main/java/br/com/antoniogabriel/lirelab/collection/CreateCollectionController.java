@@ -18,17 +18,12 @@ import javafx.stage.Window;
 import javax.inject.Inject;
 import java.io.File;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreateCollectionController implements Initializable {
 
-    public static final String HOME_DIRECTORY_PATH = System.getProperty("user.home");
-    public static final String LIRELAB_WORK_DIRECTORY = "/lirelab";
-    public static final String COLLECTIONS_DIRECTORY = "/collections";
-    public static final String COLLECTIONS_PATH = HOME_DIRECTORY_PATH
-                                                + LIRELAB_WORK_DIRECTORY
-                                                + COLLECTIONS_DIRECTORY;
     @FXML
     private TextField nameField;
     @FXML
@@ -40,9 +35,12 @@ public class CreateCollectionController implements Initializable {
 
     private DialogProvider dialogProvider;
 
+    private CollectionService service;
+
     @Inject
-    public CreateCollectionController(DialogProvider dialogProvider) {
+    public CreateCollectionController(DialogProvider dialogProvider, CollectionService service) {
         this.dialogProvider = dialogProvider;
+        this.service = service;
     }
 
     @Override
@@ -66,16 +64,15 @@ public class CreateCollectionController implements Initializable {
     }
 
     @FXML
-    private void createCollection(ActionEvent event) {
-        CreateCollectionTask task =
-                new CreateCollectionTaskFactory()
-                        .createTask(collectionName(),
-                                    collectionFeatures(),
-                                    collectionDirectory(),
-                                    imagesDirectory());
+    void createCollection(ActionEvent event) {
+        CreateCollectionTask task = service.getCreateTask(
+                collectionName(),
+                imagesDirectory(),
+                collectionFeatures()
+        );
 
-        ProgressDialog dialog = new ProgressDialog(task);
-        dialog.initOwner(getWindowFrom(event));
+        ProgressDialog dialog = dialogProvider.getProgressDialog(
+                                                    task, getWindowFrom(event));
         dialog.showAndStart();
     }
 
@@ -115,15 +112,30 @@ public class CreateCollectionController implements Initializable {
         return imagesDirectoryField.getText();
     }
 
-    private String collectionDirectory() {
-        return COLLECTIONS_PATH + "/" + collectionName();
+    List<Feature> collectionFeatures() {
+        return Collections.unmodifiableList(featuresTable.getSelectedFeatures());
     }
 
-    private List<Feature> collectionFeatures() {
-        return featuresTable.getSelectedFeatures();
-    }
-
-    private String collectionName() {
+    String collectionName() {
         return nameField.getText();
     }
+
+    /* SHOULD BE USED ONLY BY TESTS */
+
+    void imagesDirectory(String dir) {
+        imagesDirectoryField.setText(dir);
+    }
+
+    void collectionFeatures(List<Feature> features) {
+        for (ViewableFeature viewableFeature : featuresTable.getItems()) {
+            if(features.contains(viewableFeature.getFeature())) {
+                viewableFeature.setSelected(true);
+            }
+        };
+    }
+
+    void collectionName(String name) {
+        nameField.setText(name);
+    }
+
 }

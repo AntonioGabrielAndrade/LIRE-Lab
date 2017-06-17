@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.DependencyInjection;
+import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 import javafx.event.ActionEvent;
@@ -17,7 +19,10 @@ import javax.inject.Inject;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -28,6 +33,9 @@ public class CreateCollectionControllerTest extends ApplicationTest {
 
     private static final String SOME_PATH = "/some/path";
     private static final String EMPTY = "";
+    public static final String MY_COLLECTION = "My Collection";
+    public static final String SOME_DIR = "/some/dir";
+    public static final List<Feature> SOME_FEATURES = Arrays.asList(CEDD, TAMURA);
 
     @Inject private CreateCollectionFXML fxml;
 
@@ -35,6 +43,9 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     @Mock private ActionEvent event;
     @Mock private Window window;
     @Mock private File file;
+    @Mock private CollectionService service;
+    @Mock private CreateCollectionTask task;
+    @Mock private ProgressDialog progressDialog;
 
     private CreateCollectionController controller;
 
@@ -42,6 +53,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
         @Override
         protected void configure() {
             bind(DialogProvider.class).toInstance(dialogProvider);
+            bind(CollectionService.class).toInstance(service);
         }
     });
 
@@ -80,5 +92,21 @@ public class CreateCollectionControllerTest extends ApplicationTest {
         controller.close(event);
 
         verify(window).hide();
+    }
+
+    @Test
+    public void shouldStartCreateCollectionTaskAndShowProgress() throws Exception {
+        given(service.getCreateTask(MY_COLLECTION, SOME_DIR, SOME_FEATURES))
+                .willReturn(task);
+        given(dialogProvider.getProgressDialog(task, window))
+                .willReturn(progressDialog);
+
+        controller.collectionName(MY_COLLECTION);
+        controller.imagesDirectory(SOME_DIR);
+        controller.collectionFeatures(SOME_FEATURES);
+
+        controller.createCollection(event);
+
+        verify(progressDialog).showAndStart();
     }
 }

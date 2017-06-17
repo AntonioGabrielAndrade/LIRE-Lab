@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static br.com.antoniogabriel.lirelab.collection.CreateCollectionController.COLLECTIONS_PATH;
+import static br.com.antoniogabriel.lirelab.collection.CollectionService.COLLECTIONS_PATH;
 import static org.junit.Assert.assertTrue;
 
 public class CollectionHelper {
