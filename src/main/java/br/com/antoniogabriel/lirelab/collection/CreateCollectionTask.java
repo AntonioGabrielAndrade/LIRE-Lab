@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback, XMLCreatorCallback {
     private final IndexCreator indexCreator;
     private final ThumbnailsCreator thumbnailsCreator;
-    private XMLCreator xmlCreator;
+    private final XMLCreator xmlCreator;
 
     public CreateCollectionTask(IndexCreator indexCreator,
                                 ThumbnailsCreator thumbnailsCreator,
@@ -38,8 +38,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
 
     @Override
     public void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {
-        updateMessage("Indexing " +
-                Paths.get(imageFilePath).getFileName().toString());
+        updateMessage("Indexing " + Paths.get(imageFilePath).getFileName().toString());
     }
 
     @Override
@@ -54,8 +53,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
 
     @Override
     public void beforeCreateThumbnail(int currentImage, int totalImages, String imagePath) {
-        updateMessage("Creating thumbnail for  " +
-                Paths.get(imagePath).getFileName().toString());
+        updateMessage("Creating thumbnail for  " + Paths.get(imagePath).getFileName().toString());
     }
 
     @Override
