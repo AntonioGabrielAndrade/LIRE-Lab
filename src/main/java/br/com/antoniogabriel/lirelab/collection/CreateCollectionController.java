@@ -49,6 +49,34 @@ public class CreateCollectionController implements Initializable {
         setupCreateButton();
     }
 
+    @FXML
+    void chooseImagesDirectory(ActionEvent event) {
+        Window parent = getWindowFrom(event);
+        File dir = dialogProvider.chooseImagesDirectory(parent);
+        if (dir != null) {
+            imagesDirectoryField.setText(dir.getAbsolutePath());
+        }
+    }
+
+    @FXML
+    void close(ActionEvent event) {
+        getWindowFrom(event).hide();
+    }
+
+    @FXML
+    private void createCollection(ActionEvent event) {
+        CreateCollectionTask task =
+                new CreateCollectionTaskFactory()
+                        .createTask(collectionName(),
+                                    collectionFeatures(),
+                                    collectionDirectory(),
+                                    imagesDirectory());
+
+        ProgressDialog dialog = new ProgressDialog(task);
+        dialog.initOwner(getWindowFrom(event));
+        dialog.showAndStart();
+    }
+
     private void populateTable() {
         featuresTable.setItems(getViewableFeatures());
     }
@@ -75,35 +103,6 @@ public class CreateCollectionController implements Initializable {
 
     private BooleanBinding noFeatureSelected() {
         return featuresTable.noFeatureSelected();
-    }
-
-    @FXML
-    void chooseImagesDirectory(ActionEvent event) {
-        Window parent = getWindowFrom(event);
-        File dir = dialogProvider.chooseImagesDirectory(parent);
-        if (dir != null) {
-            imagesDirectoryField.setText(dir.getAbsolutePath());
-        }
-    }
-
-
-    @FXML
-    void close(ActionEvent event) {
-        getWindowFrom(event).hide();
-    }
-
-    @FXML
-    private void createCollection(ActionEvent event) {
-        CreateCollectionTask task =
-                new CreateCollectionTaskFactory()
-                        .createTask(collectionName(),
-                                    collectionFeatures(),
-                                    collectionDirectory(),
-                                    imagesDirectory());
-
-        ProgressDialog dialog = new ProgressDialog(task);
-        dialog.initOwner(getWindowFrom(event));
-        dialog.showAndStart();
     }
 
     private Window getWindowFrom(ActionEvent event) {
