@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static br.com.antoniogabriel.lirelab.collection.FeatureUtils.getSelectedFeaturesFrom;
-import static br.com.antoniogabriel.lirelab.collection.FeatureUtils.noFeatureIsSelectedIn;
-import static br.com.antoniogabriel.lirelab.collection.FeatureUtils.toViewableFeatures;
+import static br.com.antoniogabriel.lirelab.util.FeatureUtils.getSelectedFeaturesFrom;
+import static br.com.antoniogabriel.lirelab.util.FeatureUtils.noFeatureIsSelectedIn;
+import static br.com.antoniogabriel.lirelab.util.FeatureUtils.toViewableFeatures;
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.FCTH;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
