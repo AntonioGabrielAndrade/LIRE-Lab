@@ -2,16 +2,18 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
 
+import javax.inject.Inject;
 import java.util.List;
 
 public class CollectionService {
 
-    public static final String HOME_DIRECTORY_PATH = System.getProperty("user.home");
-    public static final String LIRELAB_WORK_DIRECTORY = "/lirelab";
-    public static final String COLLECTIONS_DIRECTORY = "/collections";
-    public static final String COLLECTIONS_PATH = HOME_DIRECTORY_PATH
-                                                + LIRELAB_WORK_DIRECTORY
-                                                + COLLECTIONS_DIRECTORY;
+    private PathResolver resolver;
+
+    @Inject
+    public CollectionService(PathResolver resolver) {
+        this.resolver = resolver;
+    }
+
 
     public CreateCollectionTask getCreateTask(String collectionName,
                               String imagesDirectory,
@@ -20,7 +22,7 @@ public class CollectionService {
         return new CreateCollectionTaskFactory()
                         .createTask(collectionName,
                                 collectionFeatures,
-                                COLLECTIONS_PATH + "/" + collectionName,
+                                resolver.getCollectionPath(collectionName),
                                 imagesDirectory);
 
     }
