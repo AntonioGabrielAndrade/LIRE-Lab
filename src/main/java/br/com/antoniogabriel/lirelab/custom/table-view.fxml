@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="TableView">
+
+    <columnResizePolicy>
+        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+    </columnResizePolicy>
+    <columns>
+        <TableColumn fx:id="selectedCol"
+                     text=""
+                     minWidth="50"
+                     maxWidth="50"/>
+        <TableColumn fx:id="nameCol"
+                     text="Name"/>
+    </columns>
+
+</fx:root>

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import br.com.antoniogabriel.lirelab.custom.FeatureTable?>
 
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
@@ -40,19 +41,7 @@
           GridPane.rowIndex="2"
           GridPane.columnIndex="0">
         <Label text="Features for indexing"/>
-        <TableView fx:id="featuresTable" editable="true">
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-            </columnResizePolicy>
-            <columns>
-                <TableColumn fx:id="selectedCol"
-                             text=""
-                             minWidth="50"
-                             maxWidth="50"/>
-                <TableColumn fx:id="nameCol"
-                             text="Name"/>
-            </columns>
-        </TableView>
+        <FeatureTable fx:id="featuresTable" editable="true"/>
     </VBox>
 
     <HBox alignment="BOTTOM_RIGHT"

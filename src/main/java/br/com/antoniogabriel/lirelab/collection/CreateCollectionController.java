@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.custom.FeatureTable;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
@@ -9,17 +10,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Window;
 
 import javax.inject.Inject;
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,11 +32,7 @@ public class CreateCollectionController implements Initializable {
     @FXML
     private TextField imagesDirectoryField;
     @FXML
-    private TableView<ViewableFeature> featuresTable;
-    @FXML
-    private TableColumn<ViewableFeature, Boolean> selectedCol;
-    @FXML
-    private TableColumn<ViewableFeature, String> nameCol;
+    private FeatureTable featuresTable;
     @FXML
     private Button createButton;
 
@@ -53,15 +45,8 @@ public class CreateCollectionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setupTableColumns();
         populateTable();
         setupCreateButton();
-    }
-
-    private void setupTableColumns() {
-        selectedCol.setCellValueFactory(new PropertyValueFactory<>("selected"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
     }
 
     private void populateTable() {
@@ -89,7 +74,7 @@ public class CreateCollectionController implements Initializable {
     }
 
     private BooleanBinding noFeatureSelected() {
-        return FeatureUtils.noFeatureIsSelectedIn(featuresTable.getItems());
+        return featuresTable.noFeatureSelected();
     }
 
     @FXML
@@ -134,14 +119,10 @@ public class CreateCollectionController implements Initializable {
     }
 
     private List<Feature> collectionFeatures() {
-        return selectedFeatures();
+        return featuresTable.getSelectedFeatures();
     }
 
     private String collectionName() {
         return nameField.getText();
-    }
-
-    private ArrayList<Feature> selectedFeatures() {
-        return FeatureUtils.getSelectedFeaturesFrom(featuresTable.getItems());
     }
 }
