@@ -6,7 +6,7 @@
             xmlns:fx="http://javafx.com/fxml">
 
     <left>
-        <fx:include source="collection-list.fxml"/>
+        <fx:include source="../collection/collection-list.fxml"/>
     </left>
     <center>
         <fx:include source="welcome.fxml"/>
