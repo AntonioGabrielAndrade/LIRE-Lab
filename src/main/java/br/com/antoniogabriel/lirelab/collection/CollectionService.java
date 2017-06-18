@@ -9,9 +9,12 @@ public class CollectionService {
 
     private PathResolver resolver;
 
+    private CollectionRepository collectionRepository;
+
     @Inject
-    public CollectionService(PathResolver resolver) {
+    public CollectionService(PathResolver resolver, CollectionRepository collectionRepository) {
         this.resolver = resolver;
+        this.collectionRepository = collectionRepository;
     }
 
 
@@ -29,5 +32,9 @@ public class CollectionService {
                                     resolver.getThumbnailsDirectoryPath(collectionName)
                             );
 
+    }
+
+    public List<Collection> getCollections() {
+        return collectionRepository.getCollections();
     }
 }
