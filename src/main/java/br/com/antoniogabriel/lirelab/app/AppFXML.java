@@ -1,29 +1,19 @@
 package br.com.antoniogabriel.lirelab.app;
 
+import br.com.antoniogabriel.lirelab.util.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import javax.inject.Inject;
-import java.io.IOException;
 
-public class AppFXML {
-    private static final String FXML = "app.fxml";
-    private static final String TITLE = "LIRE Lab";
+public class AppFXML extends FXML {
 
-    @Inject private FXMLLoader loader;
-
-    public void loadIn(Stage stage) throws IOException {
-        Parent root = loadFXML();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle(TITLE);
-        stage.setMaximized(true);
-        stage.show();
+    @Inject
+    public AppFXML(FXMLLoader loader) {
+        super(loader);
     }
 
-    private Parent loadFXML() throws IOException {
-        return loader.load(getClass().getResource(FXML));
+    @Override
+    public String getFXMLResourceName() {
+        return "app.fxml";
     }
 }
