@@ -1,23 +1,23 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.app.App;
+import br.com.antoniogabriel.lirelab.app.AppFXML;
 import br.com.antoniogabriel.lirelab.app.AppView;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionView;
+import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.testfx.api.FxRobot;
-import org.testfx.api.FxToolkit;
+import org.testfx.framework.junit.ApplicationTest;
 
+import javax.inject.Inject;
 import java.nio.file.Paths;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
 
-public class LireLabAcceptanceTest extends FxRobot {
+public class LireLabAcceptanceTest extends ApplicationTest {
 
     private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
     private static final String TEST_IMAGES_PATH = testImagesPath();
@@ -28,23 +28,18 @@ public class LireLabAcceptanceTest extends FxRobot {
         return Paths.get("src/test/resources/images/").toAbsolutePath().toString();
     }
 
-    @Before
-    public void setUpJavaFX() throws Exception {
-        FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(App.class);
-        interrupt();
+    @Inject
+    private AppFXML fxml;
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        DependencyInjection.init(this);
+        fxml.loadIn(stage, true);
     }
 
     @Before
     public void initObjects() throws Exception {
         collectionHelper = new CollectionHelper();
-    }
-
-    @After
-    public void tearDownJavaFX() throws Exception {
-        FxToolkit.hideStage();
-        release(new KeyCode[]{});
-        release(new MouseButton[]{});
     }
 
     @After
@@ -77,5 +72,4 @@ public class LireLabAcceptanceTest extends FxRobot {
         appView.checkCollectionIsListed(ACCEPTANCE_TEST_COLLECTION);
 
     }
-
 }
