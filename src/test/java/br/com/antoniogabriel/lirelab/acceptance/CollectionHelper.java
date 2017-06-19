@@ -19,8 +19,8 @@ public class CollectionHelper {
         assertTrue(fileExistsFor(xmlFileOf(collection)));
     }
 
-    public void deleteCollection(String collection) throws IOException {
-        FileUtils.deleteDirectory(pathTo(collection).toFile());
+    public void deleteCollection(String collectionName) throws IOException {
+        FileUtils.deleteDirectory(pathTo(collectionName).toFile());
     }
 
     private boolean fileExistsFor(String pathName) {
