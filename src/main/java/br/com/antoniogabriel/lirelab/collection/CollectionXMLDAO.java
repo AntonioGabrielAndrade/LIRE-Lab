@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.collection;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 
@@ -12,6 +13,10 @@ public class CollectionXMLDAO {
 
     public CollectionXMLDAO(File targetDir) {
         this.targetDir = targetDir;
+    }
+
+    public CollectionXMLDAO(String targetDir) {
+        this(new File(targetDir));
     }
 
     public void create(Collection collection) throws JAXBException {
@@ -25,5 +30,13 @@ public class CollectionXMLDAO {
         jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
         jaxbMarshaller.marshal(collection, file);
         jaxbMarshaller.marshal(collection, System.out);
+    }
+
+    public Collection readCollection() throws JAXBException {
+        File file = new File(targetDir, "collection.xml");
+        JAXBContext jaxbContext = JAXBContext.newInstance(Collection.class);
+
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        return (Collection) jaxbUnmarshaller.unmarshal(file);
     }
 }
