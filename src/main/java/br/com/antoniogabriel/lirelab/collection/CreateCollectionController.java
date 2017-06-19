@@ -65,7 +65,7 @@ public class CreateCollectionController implements Initializable {
 
     @FXML
     void createCollection(ActionEvent event) {
-        CreateCollectionTask task = service.getCreateTask(
+        CreateCollectionTask task = service.getTaskToCreateCollection(
                 collectionName(),
                 imagesDirectory(),
                 collectionFeatures()

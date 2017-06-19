@@ -96,7 +96,7 @@ public class CreateCollectionControllerTest extends ApplicationTest {
 
     @Test
     public void shouldStartCreateCollectionTaskAndShowProgress() throws Exception {
-        given(service.getCreateTask(MY_COLLECTION, SOME_DIR, SOME_FEATURES))
+        given(service.getTaskToCreateCollection(MY_COLLECTION, SOME_DIR, SOME_FEATURES))
                 .willReturn(task);
         given(dialogProvider.getProgressDialog(task, window))
                 .willReturn(progressDialog);

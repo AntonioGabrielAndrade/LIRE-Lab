@@ -18,9 +18,9 @@ public class CollectionService {
     }
 
 
-    public CreateCollectionTask getCreateTask(String collectionName,
-                                              String imagesPath,
-                                              List<Feature> collectionFeatures) {
+    public CreateCollectionTask getTaskToCreateCollection(String collectionName,
+                                                          String imagesPath,
+                                                          List<Feature> collectionFeatures) {
 
         return new CreateCollectionTaskFactory()
                             .createTask(
