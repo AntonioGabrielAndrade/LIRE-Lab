@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.StackPane?>
 
-<?import javafx.scene.control.TreeView?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
+           fx:controller="br.com.antoniogabriel.lirelab.collection.ListCollectionController"
            prefWidth="350.0">
 
-    <TreeView id="collections-tree"></TreeView>
+    <TreeView id="collections-tree" fx:id="collectionsTree"/>
 
 </StackPane>
