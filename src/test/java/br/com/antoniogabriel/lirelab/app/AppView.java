@@ -35,5 +35,6 @@ public class AppView extends FxRobot {
 
     public void checkCollectionIsListed(String collectionName) {
         verifyThat("#collections-tree", isVisible());
+//        verifyThat(collectionName, isVisible());
     }
 }

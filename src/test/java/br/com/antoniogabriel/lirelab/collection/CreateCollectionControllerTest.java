@@ -1,24 +1,18 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.ControllerTest;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import com.google.inject.AbstractModule;
-import com.google.inject.Module;
 import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import javafx.stage.Window;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.testfx.framework.junit.ApplicationTest;
 
-import javax.inject.Inject;
 import java.io.File;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
@@ -29,15 +23,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CreateCollectionControllerTest extends ApplicationTest {
+public class CreateCollectionControllerTest extends ControllerTest<CreateCollectionFXML, CreateCollectionController> {
 
     private static final String SOME_PATH = "/some/path";
     private static final String EMPTY = "";
     public static final String MY_COLLECTION = "My Collection";
     public static final String SOME_DIR = "/some/dir";
     public static final List<Feature> SOME_FEATURES = Arrays.asList(CEDD, TAMURA);
-
-    @Inject private CreateCollectionFXML fxml;
 
     @Mock private DialogProvider dialogProvider;
     @Mock private ActionEvent event;
@@ -47,24 +39,19 @@ public class CreateCollectionControllerTest extends ApplicationTest {
     @Mock private CreateCollectionTask task;
     @Mock private ProgressDialog progressDialog;
 
-    private CreateCollectionController controller;
-
-    private Collection<Module> modules = Arrays.asList(new AbstractModule() {
-        @Override
-        protected void configure() {
-            bind(DialogProvider.class).toInstance(dialogProvider);
-            bind(CollectionService.class).toInstance(service);
-        }
-    });
-
     @Override
-    public void start(Stage stage) throws Exception {
-        DependencyInjection.init(this, modules);
-        controller = fxml.getController();
+    protected AbstractModule getBindings() {
+        return new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(DialogProvider.class).toInstance(dialogProvider);
+                bind(CollectionService.class).toInstance(service);
+            }
+        };
     }
 
-    @Before
-    public void setUp() throws Exception {
+    @Override
+    public void init() throws Exception {
         given(dialogProvider.getWindowFrom(event)).willReturn(window);
         given(file.getAbsolutePath()).willReturn(SOME_PATH);
     }

@@ -45,7 +45,7 @@ public abstract class FXML {
         stage.show();
     }
 
-    public CreateCollectionController getController() throws IOException {
+    public <C> C getController() throws IOException {
         loader.load();
         return loader.getController();
     }
