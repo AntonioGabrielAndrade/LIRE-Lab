@@ -1,18 +1,13 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.util.DependencyInjection;
+import br.com.antoniogabriel.lirelab.FXMLTest;
 import com.google.inject.AbstractModule;
-import com.google.inject.Module;
-import javafx.stage.Stage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.testfx.framework.junit.ApplicationTest;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
@@ -20,28 +15,25 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ListCollectionViewTest extends ApplicationTest {
+public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
     private static final List<Collection> COLLECTIONS = getCollections();
 
-    @Inject
-    private ListCollectionFXML fxml;
-
-    @Mock
-    private CollectionService collectionService;
-
-    private List<Module> modules = Arrays.asList(new AbstractModule() {
-        @Override
-        protected void configure() {
-            bind(CollectionService.class).toInstance(collectionService);
-            given(collectionService.getCollections()).willReturn(COLLECTIONS);
-        }
-    });
+    @Mock private CollectionService collectionService;
 
     @Override
-    public void start(Stage stage) throws Exception {
-        DependencyInjection.init(this, modules);
-        fxml.loadIn(stage);
+    public void init() throws Exception {
+        given(collectionService.getCollections()).willReturn(COLLECTIONS);
+    }
+
+    @Override
+    protected AbstractModule getBindings() {
+        return new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(CollectionService.class).toInstance(collectionService);
+            }
+        };
     }
 
     private static List<Collection> getCollections() {
