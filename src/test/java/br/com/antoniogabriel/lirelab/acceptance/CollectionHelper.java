@@ -1,51 +1,35 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static br.com.antoniogabriel.lirelab.collection.PathResolver.COLLECTIONS_PATH;
 import static org.junit.Assert.assertTrue;
 
 public class CollectionHelper {
 
+    private PathResolver resolver = new PathResolver();
+
     public void checkCollectionExists(String collection) {
-        assertTrue(directoryExistsFor(collection));
-        assertTrue(directoryExistsFor(indexFolderOf(collection)));
-        assertTrue(directoryExistsFor(thumbnailsFolderOf(collection)));
-        assertTrue(fileExistsFor(xmlFileOf(collection)));
+        assertTrue(directoryExists(resolver.getCollectionPath(collection)));
+        assertTrue(directoryExists(resolver.getIndexDirectoryPath(collection)));
+        assertTrue(directoryExists(resolver.getThumbnailsDirectoryPath(collection)));
+        assertTrue(fileExists(resolver.getCollectionXMLPath(collection)));
+    }
+
+    private boolean directoryExists(String path) {
+        return Files.exists(Paths.get(path)) && Files.isDirectory(Paths.get(path));
+    }
+
+    private boolean fileExists(String path) {
+        return Files.exists(Paths.get(path)) && Files.isRegularFile(Paths.get(path));
     }
 
     public void deleteCollection(String collectionName) throws IOException {
-        FileUtils.deleteDirectory(pathTo(collectionName).toFile());
-    }
-
-    private boolean fileExistsFor(String pathName) {
-        Path path = pathTo(pathName);
-        return Files.exists(path) && Files.isRegularFile(path);
-    }
-
-    private boolean directoryExistsFor(String pathName) {
-        Path path = pathTo(pathName);
-        return Files.exists(path) && Files.isDirectory(path);
-    }
-
-    private Path pathTo(String collection) {
-        return Paths.get(COLLECTIONS_PATH + "/" + collection);
-    }
-
-    private String thumbnailsFolderOf(String collection) {
-        return collection + "/thumbnails";
-    }
-
-    private String indexFolderOf(String collection) {
-        return collection + "/index";
-    }
-
-    private String xmlFileOf(String collection) {
-        return collection + "/collection.xml";
+        FileUtils.deleteDirectory(new File(resolver.getCollectionPath(collectionName)));
     }
 }

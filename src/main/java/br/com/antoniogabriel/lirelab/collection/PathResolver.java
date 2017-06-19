@@ -5,6 +5,7 @@ public class PathResolver {
     public static final String COLLECTIONS_DIRECTORY = "/collections";
     public static final String INDEX_DIRECTORY = "/index";
     public static final String THUMBNAILS_DIRECTORY = "/thumbnails";
+    public static final String COLLECTION_XML = "collection.xml";
 
     public static final String HOME_DIRECTORY_PATH = System.getProperty("user.home");
     public static final String COLLECTIONS_PATH = HOME_DIRECTORY_PATH
@@ -13,6 +14,10 @@ public class PathResolver {
 
     public String getCollectionPath(String collectionName) {
         return COLLECTIONS_PATH + "/" + collectionName;
+    }
+
+    public String getCollectionXMLPath(String collectionName) {
+        return COLLECTIONS_PATH + "/" + collectionName + "/" + COLLECTION_XML;
     }
 
     public String getIndexDirectoryPath(String collectionName) {
