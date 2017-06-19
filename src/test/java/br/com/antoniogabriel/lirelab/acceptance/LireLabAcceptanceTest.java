@@ -7,7 +7,6 @@ import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
 import javafx.stage.Stage;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -22,11 +21,13 @@ public class LireLabAcceptanceTest extends ApplicationTest {
     private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
     private static final String TEST_IMAGES_PATH = testImagesPath();
 
-    private CollectionHelper collectionHelper;
 
     private static String testImagesPath() {
         return Paths.get("src/test/resources/images/").toAbsolutePath().toString();
     }
+
+    @Inject
+    private CollectionHelper collectionHelper;
 
     @Inject
     private AppFXML fxml;
@@ -35,11 +36,6 @@ public class LireLabAcceptanceTest extends ApplicationTest {
     public void start(Stage stage) throws Exception {
         DependencyInjection.init(this);
         fxml.loadIn(stage, true);
-    }
-
-    @Before
-    public void initObjects() throws Exception {
-        collectionHelper = new CollectionHelper();
     }
 
     @After
