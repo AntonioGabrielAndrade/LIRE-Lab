@@ -1,7 +1,13 @@
 package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionView;
+import org.jetbrains.annotations.NotNull;
 import org.testfx.api.FxRobot;
+import org.testfx.util.WaitForAsyncUtils;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
@@ -33,8 +39,19 @@ public class AppView extends FxRobot {
         return new CreateCollectionView();
     }
 
-    public void checkCollectionIsListed(String collectionName) {
+    public void checkCollectionIsListed(String collectionName) throws TimeoutException {
         verifyThat("#collections-tree", isVisible());
-//        verifyThat(collectionName, isVisible());
+        waitFor(isPresent(collectionName));
+
+    }
+
+    private void waitFor(Callable<Boolean> present) throws TimeoutException {
+        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS,
+                present);
+    }
+
+    @NotNull
+    private Callable<Boolean> isPresent(String text) {
+        return () -> lookup(text).tryQuery().isPresent();
     }
 }
