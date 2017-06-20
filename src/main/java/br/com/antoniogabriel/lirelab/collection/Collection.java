@@ -21,6 +21,12 @@ public class Collection {
     @XmlElement
     private String imagesDirectory;
 
+    public Collection() {}
+
+    public Collection(String name) {
+        this.name = name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
