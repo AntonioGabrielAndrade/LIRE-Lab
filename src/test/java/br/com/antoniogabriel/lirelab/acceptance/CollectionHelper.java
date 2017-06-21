@@ -38,6 +38,10 @@ public class CollectionHelper {
         return Files.exists(Paths.get(path)) && Files.isRegularFile(Paths.get(path));
     }
 
+    public void deleteCollection(Collection collection) throws IOException {
+        deleteCollection(collection.getName());
+    }
+
     public void deleteCollection(String collectionName) throws IOException {
         FileUtils.deleteDirectory(new File(resolver.getCollectionPath(collectionName)));
     }
