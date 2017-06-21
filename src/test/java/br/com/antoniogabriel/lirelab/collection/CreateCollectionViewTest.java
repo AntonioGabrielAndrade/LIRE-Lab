@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.FXMLTest;
+import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import org.junit.Before;
 import org.junit.Test;

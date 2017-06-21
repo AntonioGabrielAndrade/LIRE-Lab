@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab;
+package br.com.antoniogabriel.lirelab.test;
 
 import br.com.antoniogabriel.lirelab.util.FXML;
 import javafx.stage.Stage;
