@@ -10,7 +10,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 
@@ -20,27 +19,45 @@ public class CollectionServiceTest {
     private CollectionService service;
 
     @Mock private CollectionRepository collectionRepository;
+    @Mock private CollectionsMonitor collectionsMonitor;
+
+    private Runnable SOME_CALLBACK = () -> {};
 
     @Before
     public void setUp() throws Exception {
-        service = new CollectionService(new PathResolver(), collectionRepository);
+        service = new CollectionService(new PathResolver(),
+                                        collectionRepository,
+                                        collectionsMonitor);
     }
 
     @Test
-    public void shouldGetTaskToCreateCollection() throws Exception {
+    public void shouldStartMonitoringCollections() throws Exception {
+        verify(collectionsMonitor).startMonitoringCollectionsDeleteAndUpdate();
+    }
+
+    @Test
+    public void shouldBuildTaskToCreateCollection() throws Exception {
         String name = "";
         String path = "";
         List<Feature> features = null;
 
         CreateCollectionTask task = service.getTaskToCreateCollection(name, path, features);
 
-        assertNotNull(task);
+        verify(collectionsMonitor).bindListenersTo(task);
         assertThat(task, instanceOf(CreateCollectionTask.class));
     }
 
     @Test
     public void shouldGetCollections() throws Exception {
         service.getCollections();
+
         verify(collectionRepository).getCollections();
+    }
+
+    @Test
+    public void shouldRegisterListenersForCollectionsChanges() throws Exception {
+        service.addCollectionsChangeListener(SOME_CALLBACK);
+
+        verify(collectionsMonitor).addListener(SOME_CALLBACK);
     }
 }
