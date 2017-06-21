@@ -8,6 +8,7 @@ import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javax.inject.Inject;
@@ -41,6 +42,7 @@ public class LireLabAcceptanceTest extends ApplicationTest {
     @After
     public void cleanEnvironment() throws Exception {
         collectionHelper.deleteCollection(ACCEPTANCE_TEST_COLLECTION);
+        FxToolkit.hideStage();
     }
 
     @Test
