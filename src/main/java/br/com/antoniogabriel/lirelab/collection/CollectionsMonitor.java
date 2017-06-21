@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import com.google.inject.Inject;
 
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
+@Singleton
 public class CollectionsMonitor {
 
     private PathResolver resolver;
