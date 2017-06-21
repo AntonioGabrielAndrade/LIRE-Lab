@@ -58,10 +58,10 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
         interact(() -> {
             try {
 
-                collectionHelper.deleteCollection(COLLECTION_1.getName());
-                collectionHelper.deleteCollection(COLLECTION_2.getName());
-                collectionHelper.deleteCollection(COLLECTION_3.getName());
-                collectionHelper.deleteCollection(COLLECTION_4.getName());
+                collectionHelper.deleteCollection(COLLECTION_1);
+                collectionHelper.deleteCollection(COLLECTION_2);
+                collectionHelper.deleteCollection(COLLECTION_3);
+                collectionHelper.deleteCollection(COLLECTION_4);
 
                 FileUtils.deleteDirectory(new File(resolver.getWorkDirectoryPath()));
 
