@@ -1,29 +1,74 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.FXMLTest;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
+import javax.xml.bind.JAXBException;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.BDDMockito.given;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import static br.com.antoniogabriel.lirelab.collection.CollectionRepositoryTest.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.lire.Feature.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
-    private static final List<Collection> COLLECTIONS = getCollections();
+    private static final Collection COLLECTION_1 = new Collection("Collection1");
+    private static final Collection COLLECTION_2 = new Collection("Collection2");
+    private static final Collection COLLECTION_3 = new Collection("Collection3");
+    private static final Collection COLLECTION_4 = new Collection("Collection4");
 
-    @Mock private CollectionService collectionService;
+    private static final String IMAGES_PATH = TEST_ROOT + "/images";
+    private static final List<Feature> FEATURES = Arrays.asList(CEDD);
+
+    private ListCollectionView view = new ListCollectionView();
+    private PathResolver resolver = new PathResolver(TEST_ROOT);
+    private CollectionHelper collectionHelper = new CollectionHelper(resolver);
+
+    @Inject
+    private CollectionService service;
 
     @Override
     public void init() throws Exception {
-        given(collectionService.getCollections()).willReturn(COLLECTIONS);
+        interact(() -> {
+            try {
+
+                collectionHelper.createStubCollection(COLLECTION_1);
+                collectionHelper.createStubCollection(COLLECTION_2);
+                collectionHelper.createStubCollection(COLLECTION_3);
+
+            } catch (IOException | JAXBException e) {
+                throw new RuntimeException("Test Error", e);
+            }
+        });
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        interact(() -> {
+            try {
+
+                collectionHelper.deleteCollection(COLLECTION_1.getName());
+                collectionHelper.deleteCollection(COLLECTION_2.getName());
+                collectionHelper.deleteCollection(COLLECTION_3.getName());
+                collectionHelper.deleteCollection(COLLECTION_4.getName());
+
+                FileUtils.deleteDirectory(new File(resolver.getWorkDirectoryPath()));
+
+            } catch (IOException e) {
+                throw new RuntimeException("Test Error", e);
+            }
+        });
     }
 
     @Override
@@ -31,38 +76,35 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
         return new AbstractModule() {
             @Override
             protected void configure() {
-                bind(CollectionService.class).toInstance(collectionService);
+                bind(PathResolver.class).toInstance(resolver);
             }
         };
     }
 
-    private static List<Collection> getCollections() {
-        Collection collection1 = new Collection();
-        collection1.setName("Collection1");
-
-        Collection collection2 = new Collection();
-        collection2.setName("Collection2");
-
-        Collection collection3 = new Collection();
-        collection3.setName("Collection3");
-
-        Collection collection4 = new Collection();
-        collection4.setName("Collection4");
-
-        final ArrayList<Collection> cols = new ArrayList<>();
-        cols.add(collection1);
-        cols.add(collection2);
-        cols.add(collection3);
-        cols.add(collection4);
-
-        return cols;
+    @Test
+    public void shouldListCollections() throws Exception {
+        view.checkCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
     }
 
     @Test
-    public void shouldListCollections() throws Exception {
-        verifyThat("Collection1", isVisible());
-        verifyThat("Collection2", isVisible());
-        verifyThat("Collection3", isVisible());
-        verifyThat("Collection4", isVisible());
+    public void shouldUpdateCollectionTreeWhenNewCollectionIsCreated() throws Exception {
+        CreateCollectionTask creationTask = service.getTaskToCreateCollection(
+                                                        COLLECTION_4.getName(),
+                                                        IMAGES_PATH,
+                                                        FEATURES);
+
+        new Thread(creationTask).start();
+
+        view.waitUntilCollectionIsListed(COLLECTION_4);
+    }
+
+    @Test
+    public void shouldUpdateCollectionTreeWhenCollectionIsDeleted() throws Exception {
+        view.checkCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
+
+        collectionHelper.deleteCollection(COLLECTION_1);
+
+        view.waitUntilCollectionIsNotListed(COLLECTION_1);
+        view.waitUntilCollectionsAreListed(COLLECTION_2, COLLECTION_3);
     }
 }

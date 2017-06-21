@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,11 @@ public class ListCollectionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        buildCollectionTree();
+        listenToCollectionsChange();
+    }
+
+    private void buildCollectionTree() {
         TreeItem root = new TreeItem();
         root.setExpanded(true);
 
@@ -36,7 +42,10 @@ public class ListCollectionController implements Initializable {
 
         collectionsTree.setRoot(root);
         collectionsTree.setShowRoot(false);
+    }
 
+    private void listenToCollectionsChange() {
+        service.addCollectionsChangeListener(() -> Platform.runLater(() -> buildCollectionTree()));
     }
 
     private ViewableCollection getViewableCollection(Collection collection) {
