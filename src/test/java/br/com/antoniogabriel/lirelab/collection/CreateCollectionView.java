@@ -61,7 +61,15 @@ public class CreateCollectionView extends FxRobot {
     }
 
     private void select(Feature feature) {
-        clickOn(checkboxFor(feature)).interrupt();
+        CheckBox checkBox = checkboxFor(feature);
+        boolean oldValue = checkBox.isSelected();
+
+        clickOn(checkBox).interrupt();
+
+        //workaround when sometimes it wont click the checkbox
+        if(checkBox.isSelected() == oldValue) {
+            checkBox.setSelected(!oldValue);
+        }
     }
 
     private CheckBox checkboxFor(Feature feature) {
