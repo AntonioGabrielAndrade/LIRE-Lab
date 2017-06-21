@@ -2,6 +2,8 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+
 public class PathResolver {
     public static final String LIRELAB_WORK_DIRECTORY = "/lirelab";
     public static final String COLLECTIONS_DIRECTORY = "/collections";
@@ -17,7 +19,7 @@ public class PathResolver {
     }
 
     public PathResolver(String applicationBasePath) {
-        this.applicationBasePath = applicationBasePath;
+        this.applicationBasePath = new File(applicationBasePath).getAbsolutePath();
     }
 
     public String getCollectionPath(String collectionName) {
