@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CollectionRepository {
@@ -21,6 +22,9 @@ public class CollectionRepository {
 
     public List<Collection> getCollections() {
         Path dir = Paths.get(resolver.getCollectionsPath());
+
+        if(!Files.exists(dir)) return Collections.EMPTY_LIST;
+
         DirectoryStream.Filter<Path> filter = entry -> Files.isDirectory(entry);
 
         List<Collection> collections = new ArrayList<>();

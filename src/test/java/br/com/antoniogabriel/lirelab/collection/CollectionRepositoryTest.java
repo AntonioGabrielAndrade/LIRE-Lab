@@ -9,18 +9,18 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionRepositoryTest {
 
-    private static final Collection COLLECTION1 = getCollectionNamed("Collection1");
-    private static final Collection COLLECTION2 = getCollectionNamed("Collection2");
-    private static final Collection COLLECTION3 = getCollectionNamed("Collection3");
+    private static final Collection COLLECTION1 = new Collection("Collection1");
+    private static final Collection COLLECTION2 = new Collection("Collection2");
+    private static final Collection COLLECTION3 = new Collection("Collection3");
 
     public static final String TEST_ROOT = "src/test/resources";
 
@@ -38,28 +38,31 @@ public class CollectionRepositoryTest {
 
     @After
     public void tearDown() throws Exception {
-        collectionHelper.deleteCollection(COLLECTION1.getName());
-        collectionHelper.deleteCollection(COLLECTION2.getName());
-        collectionHelper.deleteCollection(COLLECTION3.getName());
+        collectionHelper.deleteCollection(COLLECTION1);
+        collectionHelper.deleteCollection(COLLECTION2);
+        collectionHelper.deleteCollection(COLLECTION3);
 
-        File directory =  Paths.get(resolver.getWorkDirectoryPath()).toFile();
-        FileUtils.deleteDirectory(directory);
+        deleteWorkDirectory();
+    }
+
+    @Test
+    public void shouldGetEmptyCollectionListWhenCollectionsDirectoryDonExist() throws Exception {
+        deleteWorkDirectory();
+
+        assertTrue(repository.getCollections().isEmpty());
     }
 
     @Test
     public void shouldGetCollectionsFromDisk() throws Exception {
         List<Collection> collections = repository.getCollections();
 
-        assertThat(collections.size(), is(3));
-        assertThat(collections.contains(COLLECTION1), is(true));
-        assertThat(collections.contains(COLLECTION2), is(true));
-        assertThat(collections.contains(COLLECTION3), is(true));
+        assertTrue(collections.contains(COLLECTION1));
+        assertTrue(collections.contains(COLLECTION2));
+        assertTrue(collections.contains(COLLECTION3));
     }
 
-    private static Collection getCollectionNamed(String name) {
-        Collection collection = new Collection();
-        collection.setName(name);
-
-        return collection;
+    private void deleteWorkDirectory() throws IOException {
+        File directory =  Paths.get(resolver.getWorkDirectoryPath()).toFile();
+        FileUtils.deleteDirectory(directory);
     }
 }
