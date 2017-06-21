@@ -32,26 +32,26 @@ public class ListCollectionController implements Initializable {
     }
 
     private void buildCollectionTree() {
-        collectionsTree.setRoot(getRootFrom(service.getCollections()));
+        collectionsTree.setRoot(getRootItemFor(service.getCollections()));
         collectionsTree.setShowRoot(false);
     }
 
     @NotNull
-    private TreeItem getRootFrom(List<Collection> collections) {
+    private TreeItem getRootItemFor(List<Collection> collections) {
         TreeItem root = new TreeItem();
         root.setExpanded(true);
 
         for (Collection collection : collections) {
-            addCollectionToRoot(collection, root);
+            root.getChildren().add(getItemFor(collection));
         }
         return root;
     }
 
-    private void addCollectionToRoot(Collection collection, TreeItem root) {
+    private TreeItem<ViewableCollection> getItemFor(Collection collection) {
         ViewableCollection vCollection = getViewableCollection(collection);
         TreeItem<ViewableCollection> item = new TreeItem<>(vCollection);
         item.setGraphic(new FontIcon("fa-folder"));
-        root.getChildren().add(item);
+        return item;
     }
 
     private void listenToCollectionsChange() {
