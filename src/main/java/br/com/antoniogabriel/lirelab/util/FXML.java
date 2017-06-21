@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.util;
 
-import br.com.antoniogabriel.lirelab.collection.CreateCollectionController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
