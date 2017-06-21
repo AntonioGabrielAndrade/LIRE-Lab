@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.app.DirectoryStructure;
 import com.google.inject.Inject;
 
 import javax.inject.Singleton;
@@ -15,11 +16,14 @@ public class CollectionsMonitor {
 
     private PathResolver resolver;
 
+    private DirectoryStructure directoryStructure;
+
     private List<Runnable> listeners = new ArrayList<>();
 
     @Inject
-    public CollectionsMonitor(PathResolver resolver) {
+    public CollectionsMonitor(PathResolver resolver, DirectoryStructure directoryStructure) {
         this.resolver = resolver;
+        this.directoryStructure = directoryStructure;
     }
 
     public void addListener(Runnable listener) {
@@ -43,13 +47,16 @@ public class CollectionsMonitor {
     public void startMonitoringCollectionsDeleteAndUpdate() throws IOException {
         Path path = Paths.get(resolver.getCollectionsPath());
 
+        if(!Files.exists(path)) {
+            directoryStructure.createCollectionsDirectory();
+        }
+
         // We obtain the file system of the Path
         FileSystem fs = path.getFileSystem();
 
         WatchService watcher = fs.newWatchService();
 
         // We register the path to the watcher
-        // We watch for creation events
         path.register(watcher, ENTRY_DELETE, ENTRY_MODIFY);
 
         Runnable loop = () -> {

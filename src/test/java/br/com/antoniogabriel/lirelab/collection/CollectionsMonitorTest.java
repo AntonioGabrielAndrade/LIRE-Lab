@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.app.DirectoryStructure;
 import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
@@ -57,7 +58,7 @@ public class CollectionsMonitorTest {
     }
 
     private void createMonitor() {
-        monitor = new CollectionsMonitor(resolver);
+        monitor = new CollectionsMonitor(resolver, new DirectoryStructure(resolver));
     }
 
     @After
