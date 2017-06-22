@@ -49,6 +49,10 @@ public class CollectionHelper {
     }
 
     public void createRealCollection(Collection collection) {
+        System.out.println();
+        System.out.println("Creating collection: " + collection.getName());
+        System.out.println();
+
         CreateCollectionTask task =
                 new CreateCollectionTaskFactory()
                         .createTask(
