@@ -1,8 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.CollectionXMLDAO;
-import br.com.antoniogabriel.lirelab.collection.PathResolver;
+import br.com.antoniogabriel.lirelab.collection.*;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,7 +11,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static org.junit.Assert.assertTrue;
 
 public class CollectionHelper {
@@ -45,6 +46,21 @@ public class CollectionHelper {
         createIndexFolder(collection);
         createThumbnailsFolder(collection);
         createXMLFile(collection);
+    }
+
+    public void createRealCollection(Collection collection) {
+        CreateCollectionTask task =
+                new CreateCollectionTaskFactory()
+                        .createTask(
+                                collection.getName(),
+                                Arrays.asList(CEDD),
+                                TEST_IMAGES,
+                                resolver.getCollectionPath(collection.getName()),
+                                resolver.getIndexDirectoryPath(collection.getName()),
+                                resolver.getThumbnailsDirectoryPath(collection.getName())
+                        );
+
+        task.run();
     }
 
     private boolean xmlFileExist(String collection) {
