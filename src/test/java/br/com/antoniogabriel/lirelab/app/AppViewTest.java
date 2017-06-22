@@ -1,8 +1,10 @@
 package br.com.antoniogabriel.lirelab.app;
 
 import javafx.stage.Stage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 public class AppViewTest extends ApplicationTest {
@@ -17,6 +19,11 @@ public class AppViewTest extends ApplicationTest {
     @Before
     public void setUp() throws Exception {
         view = new AppView();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        FxToolkit.hideStage();
     }
 
     @Test
