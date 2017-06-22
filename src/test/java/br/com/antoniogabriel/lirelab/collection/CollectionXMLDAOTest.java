@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
+import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
 import static br.com.antoniogabriel.lirelab.test.TestUtils.collection;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -19,9 +20,8 @@ import static org.junit.Assert.assertTrue;
 
 public class CollectionXMLDAOTest {
 
-    private static final String TARGET_DIR = "src/test/resources/";
     private static final String XML_FILENAME = "collection.xml";
-    private static final Path XML_PATH = Paths.get(TARGET_DIR, XML_FILENAME);
+    private static final Path XML_PATH = Paths.get(TEST_ROOT, XML_FILENAME);
 
     private static final String A_NAME = "Test Collection";
     private static final String A_DIRECTORY = "/some/example/path";
@@ -42,7 +42,7 @@ public class CollectionXMLDAOTest {
 
     @Before
     public void setUp() throws Exception {
-        xmlDAO = new CollectionXMLDAO(TARGET_DIR);
+        xmlDAO = new CollectionXMLDAO(TEST_ROOT);
         collection = collection(A_NAME, A_DIRECTORY, CEDD, TAMURA);
     }
 
