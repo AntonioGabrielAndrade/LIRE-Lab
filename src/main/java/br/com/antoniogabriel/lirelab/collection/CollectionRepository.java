@@ -1,5 +1,11 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import net.semanticmetadata.lire.builders.DocumentBuilder;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.store.FSDirectory;
+
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -32,7 +38,10 @@ public class CollectionRepository {
         try(DirectoryStream<Path> stream = Files.newDirectoryStream(dir, filter)) {
             for (Path path : stream) {
                 CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
-                collections.add(dao.readCollection());
+                Collection collection = dao.readCollection();
+                List<String> paths = getCollectionImages(collection);
+                collection.setImagePaths(paths);
+                collections.add(collection);
             }
 
         } catch (IOException | JAXBException e) {
@@ -40,5 +49,27 @@ public class CollectionRepository {
         }
 
         return collections;
+    }
+
+    private List<String> getCollectionImages(Collection collection) {
+
+        List<String> results = new ArrayList<>();
+
+        try {
+            IndexReader ir = DirectoryReader.open(FSDirectory.open(Paths.get(resolver.getIndexDirectoryPath(collection.getName()))));
+
+            int num = ir.numDocs();
+            for ( int i = 0; i < num; i++)
+            {
+                Document d = ir.document(i);
+                results.add(d.getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue());
+            }
+            ir.close();
+
+        } catch (IOException e) {
+            throw new LireLabException("Could not read index", e);
+        }
+
+        return results;
     }
 }
