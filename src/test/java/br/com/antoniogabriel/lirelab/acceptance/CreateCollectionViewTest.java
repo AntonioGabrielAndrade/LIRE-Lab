@@ -25,11 +25,6 @@ public class CreateCollectionViewTest extends FXMLTest<CreateCollectionFXML> {
         view = new CreateCollectionViewObject();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        FxToolkit.hideStage();
-    }
-
     @Test
     public void shouldCloseWhenCancel() throws Exception {
         view.cancel();
