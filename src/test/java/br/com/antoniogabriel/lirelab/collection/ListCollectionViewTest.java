@@ -31,11 +31,13 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
     private static final Collection COLLECTION_3 = new Collection("Collection3");
     private static final Collection COLLECTION_4 = new Collection("Collection4");
 
+    private static final PathResolver resolver = new PathResolver(TEST_ROOT);
+    private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
+
     private static final List<Feature> FEATURES = Arrays.asList(CEDD);
 
     private ListCollectionView view = new ListCollectionView();
-    private PathResolver resolver = new PathResolver(TEST_ROOT);
-    private CollectionHelper collectionHelper = new CollectionHelper(resolver);
+
 
     @Inject
     private CollectionService service;
@@ -45,8 +47,6 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
         startJavaFX();
         runOnFXThread(() -> {
             try {
-
-                CollectionHelper collectionHelper = new CollectionHelper(new PathResolver(TEST_ROOT));
 
                 collectionHelper.createRealCollection(COLLECTION_1);
                 collectionHelper.createRealCollection(COLLECTION_2);
@@ -63,9 +63,6 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
     public static void deleteCollections() throws Exception {
         runOnFXThread(() -> {
             try {
-
-                PathResolver resolver = new PathResolver(TEST_ROOT);
-                CollectionHelper collectionHelper = new CollectionHelper(resolver);
 
                 collectionHelper.deleteCollection(COLLECTION_1);
                 collectionHelper.deleteCollection(COLLECTION_2);
