@@ -9,8 +9,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertThat;
+import static java.util.Collections.EMPTY_LIST;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,7 +24,7 @@ public class CollectionServiceTest {
     private Runnable SOME_CALLBACK = () -> {};
 
     @Before
-    public void setUp() throws Exception {
+    public void  setUp() throws Exception {
         service = new CollectionService(new PathResolver(),
                                         collectionRepository,
                                         collectionsMonitor);
@@ -39,12 +39,12 @@ public class CollectionServiceTest {
     public void shouldBuildTaskToCreateCollection() throws Exception {
         String name = "";
         String path = "";
-        List<Feature> features = null;
+        List<Feature> features = EMPTY_LIST;
 
         CreateCollectionTask task = service.getTaskToCreateCollection(name, path, features);
 
         verify(collectionsMonitor).bindListenersTo(task);
-        assertThat(task, instanceOf(CreateCollectionTask.class));
+        assertNotNull(task);
     }
 
     @Test

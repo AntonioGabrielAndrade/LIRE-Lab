@@ -57,7 +57,7 @@ public class ListCollectionController implements Initializable {
     }
 
     private void insertImageItens(TreeItem<String> item, Collection collection) {
-        List<String> images = service.getCollectionImages(collection);
+        List<String> images = collection.getImagePaths();
         for (String image : images) {
             TreeItem<String> imageItem = new TreeItem<>(Paths.get(image).getFileName().toString());
             item.getChildren().add(imageItem);
