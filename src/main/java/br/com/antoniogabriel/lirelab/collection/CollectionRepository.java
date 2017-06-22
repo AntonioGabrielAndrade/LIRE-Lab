@@ -39,7 +39,7 @@ public class CollectionRepository {
             for (Path path : stream) {
                 CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
                 Collection collection = dao.readCollection();
-                List<String> paths = getCollectionImages(collection);
+                List<String> paths = getCollectionImagesPaths(collection);
                 collection.setImagePaths(paths);
                 collections.add(collection);
             }
@@ -51,7 +51,7 @@ public class CollectionRepository {
         return collections;
     }
 
-    private List<String> getCollectionImages(Collection collection) {
+    private List<String> getCollectionImagesPaths(Collection collection) {
 
         List<String> results = new ArrayList<>();
 
