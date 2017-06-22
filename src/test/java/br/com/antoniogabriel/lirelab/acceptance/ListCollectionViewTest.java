@@ -91,7 +91,7 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
     }
 
     @Test
-    public void shouldListImagesInCollectionItem() throws Exception {
+    public void shouldListImagesInCollection() throws Exception {
         view.expandCollection(COLLECTION_1);
 
         view.checkImageIsListed("14474347006_99aa0fd981_k.jpg");
@@ -107,7 +107,7 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
     }
 
     @Test
-    public void shouldUpdateCollectionTreeWhenNewCollectionIsCreated() throws Exception {
+    public void shouldUpdateCollectionsListWhenNewCollectionIsCreated() throws Exception {
         CreateCollectionTask creationTask = service.getTaskToCreateCollection(
                                                         COLLECTION_4.getName(),
                                                         TEST_IMAGES,
@@ -119,7 +119,7 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
     }
 
     @Test
-    public void shouldUpdateCollectionTreeWhenCollectionIsDeleted() throws Exception {
+    public void shouldUpdateCollectionsListWhenCollectionIsDeleted() throws Exception {
         view.checkCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
 
         collectionHelper.deleteCollection(COLLECTION_1);
