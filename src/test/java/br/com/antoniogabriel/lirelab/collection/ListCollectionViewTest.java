@@ -96,7 +96,17 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
     @Test
     public void shouldListImagesInCollectionItem() throws Exception {
         view.expandCollection(COLLECTION_1);
+
         view.checkImageIsVisible("14474347006_99aa0fd981_k.jpg");
+        view.checkImageIsVisible("16903390174_1d670a5849_h.jpg");
+        view.checkImageIsVisible("17099294578_0ba4068bad_k.jpg");
+        view.checkImageIsVisible("17338370170_1e620bfb18_h.jpg");
+        view.checkImageIsVisible("17525978165_86dc26e8cb_h.jpg");
+        view.checkImageIsVisible("19774866363_757555901c_k.jpg");
+        view.checkImageIsVisible("25601366680_b57441bb52_k.jpg");
+        view.checkImageIsVisible("25601374660_78e6a9bba8_k.jpg");
+        view.checkImageIsVisible("26487616294_b22b87133e_k.jpg");
+        view.checkImageIsVisible("26489383923_98d419eb0d_k.jpg");
     }
 
     @Test
