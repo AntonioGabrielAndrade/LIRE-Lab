@@ -1,6 +1,6 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.collection.*;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import com.google.inject.AbstractModule;

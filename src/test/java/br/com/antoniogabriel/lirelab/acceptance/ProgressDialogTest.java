@@ -1,5 +1,6 @@
-package br.com.antoniogabriel.lirelab.util;
+package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import org.junit.After;

@@ -1,5 +1,6 @@
-package br.com.antoniogabriel.lirelab.app;
+package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.app.App;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;

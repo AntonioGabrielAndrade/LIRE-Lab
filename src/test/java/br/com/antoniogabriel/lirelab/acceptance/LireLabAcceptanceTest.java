@@ -1,10 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.app.AppFXML;
-import br.com.antoniogabriel.lirelab.app.AppViewObject;
-import br.com.antoniogabriel.lirelab.collection.CreateCollectionViewObject;
 import br.com.antoniogabriel.lirelab.util.DependencyInjection;
-import br.com.antoniogabriel.lirelab.util.ProgressDialogViewObject;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Test;

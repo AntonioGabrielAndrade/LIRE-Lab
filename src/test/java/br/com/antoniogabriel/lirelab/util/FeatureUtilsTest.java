@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.util;
 
 import br.com.antoniogabriel.lirelab.custom.ViewableFeature;
 import br.com.antoniogabriel.lirelab.lire.Feature;

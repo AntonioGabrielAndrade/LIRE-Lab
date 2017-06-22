@@ -1,5 +1,6 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.collection.Collection;
 import javafx.scene.Node;
 import org.jetbrains.annotations.NotNull;
 import org.testfx.api.FxRobot;

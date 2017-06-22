@@ -1,6 +1,5 @@
-package br.com.antoniogabriel.lirelab.app;
+package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.collection.CreateCollectionViewObject;
 import org.jetbrains.annotations.NotNull;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;

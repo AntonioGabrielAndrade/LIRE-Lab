@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.app;
+package br.com.antoniogabriel.lirelab.acceptance;
 
 import org.testfx.api.FxRobot;
 

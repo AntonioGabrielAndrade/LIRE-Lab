@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.util;
+package br.com.antoniogabriel.lirelab.acceptance;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;

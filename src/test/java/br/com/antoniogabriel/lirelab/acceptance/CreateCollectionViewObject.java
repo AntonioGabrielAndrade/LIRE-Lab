@@ -1,8 +1,8 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.acceptance;
 
 
+import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.util.ProgressDialogViewObject;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Window;
 import org.testfx.api.FxRobot;

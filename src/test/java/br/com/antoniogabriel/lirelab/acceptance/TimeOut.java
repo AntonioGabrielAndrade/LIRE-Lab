@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.util;
+package br.com.antoniogabriel.lirelab.acceptance;
 
 import java.util.concurrent.TimeUnit;
 
