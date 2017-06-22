@@ -53,7 +53,9 @@ public class CollectionHelper {
                 new CreateCollectionTaskFactory()
                         .createTask(
                                 collection.getName(),
-                                Arrays.asList(CEDD),
+                                collection.getFeatures().isEmpty() ?
+                                        Arrays.asList(CEDD) :
+                                        collection.getFeatures(),
                                 collection.getImagesDirectory(),
                                 resolver.getCollectionPath(collection.getName()),
                                 resolver.getIndexDirectoryPath(collection.getName()),
