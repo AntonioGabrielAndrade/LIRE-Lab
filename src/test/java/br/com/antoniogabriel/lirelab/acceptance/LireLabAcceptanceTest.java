@@ -12,20 +12,14 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javax.inject.Inject;
-import java.nio.file.Paths;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
+import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 
 public class LireLabAcceptanceTest extends ApplicationTest {
 
     private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
-    private static final String TEST_IMAGES_PATH = testImagesPath();
-
-
-    private static String testImagesPath() {
-        return Paths.get("src/test/resources/images/").toAbsolutePath().toString();
-    }
 
     @Inject
     private CollectionHelper collectionHelper;
@@ -52,7 +46,7 @@ public class LireLabAcceptanceTest extends ApplicationTest {
 
         createView
                 .writeName(ACCEPTANCE_TEST_COLLECTION)
-                .writeImagesDirectory(TEST_IMAGES_PATH)
+                .writeImagesDirectory(TEST_IMAGES)
                 .selectFeatures(CEDD, TAMURA);
 
         ProgressDialogView progressView = createView.create();

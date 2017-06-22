@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,8 +22,6 @@ public class CollectionRepositoryTest {
     private static final Collection COLLECTION1 = new Collection("Collection1");
     private static final Collection COLLECTION2 = new Collection("Collection2");
     private static final Collection COLLECTION3 = new Collection("Collection3");
-
-    public static final String TEST_ROOT = "src/test/resources";
 
     private PathResolver resolver = new PathResolver(TEST_ROOT);
 
