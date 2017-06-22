@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
-public class ListCollectionView extends FxRobot {
+public class ListCollectionViewObject extends FxRobot {
 
     public void checkCollectionsAreListed(Collection... collections) {
         for (Collection collection : collections) {
@@ -56,7 +56,7 @@ public class ListCollectionView extends FxRobot {
     @NotNull
     private Callable<Boolean> isPresent(String text) {
         return () -> {
-            Node node = ListCollectionView.this.lookup(text).query();
+            Node node = ListCollectionViewObject.this.lookup(text).query();
             if(node == null)
                 return false;
             else
@@ -67,7 +67,7 @@ public class ListCollectionView extends FxRobot {
     @NotNull
     private Callable<Boolean> notPresent(String text) {
         return () -> {
-            Node node = ListCollectionView.this.lookup(text).query();
+            Node node = ListCollectionViewObject.this.lookup(text).query();
             if(node == null)
                 return true;
             else

@@ -19,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
-public class ProgressDialogView extends FxRobot {
+public class ProgressDialogViewObject extends FxRobot {
 
     public void checkStructure() {
         verifyThat("#progress-bar", isVisible());
@@ -27,7 +27,7 @@ public class ProgressDialogView extends FxRobot {
         verifyThat("#ok-button", isVisible());
     }
 
-    public ProgressDialogView checkProgressMark(Integer... percentages) throws TimeoutException {
+    public ProgressDialogViewObject checkProgressMark(Integer... percentages) throws TimeoutException {
         for (Integer percentage : percentages) {
             waitUntil(progressEqualsTo(percentage));
         }
@@ -35,7 +35,7 @@ public class ProgressDialogView extends FxRobot {
         return this;
     }
 
-    public ProgressDialogView checkMessageShow(String... values) throws TimeoutException {
+    public ProgressDialogViewObject checkMessageShow(String... values) throws TimeoutException {
         for (String value : values) {
             waitUntil(messageEqualsTo(value));
         }
@@ -43,7 +43,7 @@ public class ProgressDialogView extends FxRobot {
         return this;
     }
 
-    public ProgressDialogView checkOkIsEnabledWhenFinish() throws TimeoutException {
+    public ProgressDialogViewObject checkOkIsEnabledWhenFinish() throws TimeoutException {
         waitUntil(progressComplete().and(buttonEnabled()),
                     TimeOut.of(15, SECONDS));
 

@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.app;
 
-import br.com.antoniogabriel.lirelab.collection.CreateCollectionView;
+import br.com.antoniogabriel.lirelab.collection.CreateCollectionViewObject;
 import org.jetbrains.annotations.NotNull;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
@@ -12,11 +12,11 @@ import java.util.concurrent.TimeoutException;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
-public class AppView extends FxRobot {
+public class AppViewObject extends FxRobot {
 
-    MenuView menuView = new MenuView();
-    ToolBarView toolBarView = new ToolBarView();
-    WelcomeView welcomeView = new WelcomeView();
+    MenuViewObject menuView = new MenuViewObject();
+    ToolBarViewObject toolBarView = new ToolBarViewObject();
+    WelcomeViewObject welcomeView = new WelcomeViewObject();
 
     public void checkMenus() {
         menuView.checkMenuBar();
@@ -32,11 +32,11 @@ public class AppView extends FxRobot {
         welcomeView.checkStructure();
     }
 
-    public CreateCollectionView createCollection() {
+    public CreateCollectionViewObject createCollection() {
         clickOn("#welcome-create-collection-button")
                 .interrupt();
 
-        return new CreateCollectionView();
+        return new CreateCollectionViewObject();
     }
 
     public void checkCollectionIsListed(String collectionName) throws TimeoutException {

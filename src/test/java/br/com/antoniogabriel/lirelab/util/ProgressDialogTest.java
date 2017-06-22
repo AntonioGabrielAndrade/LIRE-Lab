@@ -13,7 +13,7 @@ public class ProgressDialogTest extends ApplicationTest {
 
     private StubTask task;
     private ProgressDialog dialog;
-    private ProgressDialogView view = new ProgressDialogView();
+    private ProgressDialogViewObject view = new ProgressDialogViewObject();
 
     @Override
     public void start(Stage stage) throws Exception {

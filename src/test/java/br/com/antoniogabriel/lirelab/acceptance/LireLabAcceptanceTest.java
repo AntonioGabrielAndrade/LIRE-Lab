@@ -1,10 +1,10 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.app.AppFXML;
-import br.com.antoniogabriel.lirelab.app.AppView;
-import br.com.antoniogabriel.lirelab.collection.CreateCollectionView;
+import br.com.antoniogabriel.lirelab.app.AppViewObject;
+import br.com.antoniogabriel.lirelab.collection.CreateCollectionViewObject;
 import br.com.antoniogabriel.lirelab.util.DependencyInjection;
-import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
+import br.com.antoniogabriel.lirelab.util.ProgressDialogViewObject;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Test;
@@ -41,15 +41,15 @@ public class LireLabAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldCreateCollection() throws Exception {
-        AppView appView = new AppView();
-        CreateCollectionView createView = appView.createCollection();
+        AppViewObject appView = new AppViewObject();
+        CreateCollectionViewObject createView = appView.createCollection();
 
         createView
                 .writeName(ACCEPTANCE_TEST_COLLECTION)
                 .writeImagesDirectory(TEST_IMAGES)
                 .selectFeatures(CEDD, TAMURA);
 
-        ProgressDialogView progressView = createView.create();
+        ProgressDialogViewObject progressView = createView.create();
 
         progressView
                 //indexing images

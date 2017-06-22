@@ -2,7 +2,7 @@ package br.com.antoniogabriel.lirelab.collection;
 
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.util.ProgressDialogView;
+import br.com.antoniogabriel.lirelab.util.ProgressDialogViewObject;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Window;
 import org.testfx.api.FxRobot;
@@ -14,11 +14,11 @@ import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
 import static org.testfx.matcher.base.WindowMatchers.isNotShowing;
 
-public class CreateCollectionView extends FxRobot {
+public class CreateCollectionViewObject extends FxRobot {
 
     private final Window window;
 
-    public CreateCollectionView() {
+    public CreateCollectionViewObject() {
         window = window(CreateCollectionFXML.TITLE);
         targetWindow(window);
     }
@@ -43,17 +43,17 @@ public class CreateCollectionView extends FxRobot {
                 .queryAll();
     }
 
-    public CreateCollectionView writeName(String name) {
+    public CreateCollectionViewObject writeName(String name) {
         clickOn("#collection-name").write(name);
         return this;
     }
 
-    public CreateCollectionView writeImagesDirectory(String path) {
+    public CreateCollectionViewObject writeImagesDirectory(String path) {
         clickOn("#images-directory").write(path);
         return this;
     }
 
-    public CreateCollectionView selectFeatures(Feature... features) {
+    public CreateCollectionViewObject selectFeatures(Feature... features) {
         for (Feature feature : features) {
             select(feature);
         }
@@ -87,8 +87,8 @@ public class CreateCollectionView extends FxRobot {
         verifyThat("#create", isEnabled());
     }
 
-    public ProgressDialogView create() {
+    public ProgressDialogViewObject create() {
         clickOn("#create");
-        return new ProgressDialogView();
+        return new ProgressDialogViewObject();
     }
 }

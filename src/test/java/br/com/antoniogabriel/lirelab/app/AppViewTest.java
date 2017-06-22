@@ -9,7 +9,7 @@ import org.testfx.framework.junit.ApplicationTest;
 
 public class AppViewTest extends ApplicationTest {
 
-    private AppView view;
+    private AppViewObject view;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -18,7 +18,7 @@ public class AppViewTest extends ApplicationTest {
 
     @Before
     public void setUp() throws Exception {
-        view = new AppView();
+        view = new AppViewObject();
     }
 
     @After

@@ -6,7 +6,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
-public class MenuView extends FxRobot {
+public class MenuViewObject extends FxRobot {
 
     public void checkMenuBar() {
         verifyThat("#menu-bar", isVisible());

@@ -17,11 +17,11 @@ public class CreateCollectionViewTest extends FXMLTest<CreateCollectionFXML> {
     private static final String ANY_PATH = "/any/dir/path";
     private static final Feature[] ANY_FEATURES = {CEDD, TAMURA};
 
-    private CreateCollectionView view;
+    private CreateCollectionViewObject view;
 
     @Before
     public void setUp() throws Exception {
-        view = new CreateCollectionView();
+        view = new CreateCollectionViewObject();
     }
 
     @After

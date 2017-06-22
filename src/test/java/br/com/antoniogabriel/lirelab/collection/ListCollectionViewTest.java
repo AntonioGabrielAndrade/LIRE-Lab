@@ -33,7 +33,7 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
     private static final List<Feature> FEATURES = Arrays.asList(CEDD);
 
-    private ListCollectionView view = new ListCollectionView();
+    private ListCollectionViewObject view = new ListCollectionViewObject();
 
 
     @Inject

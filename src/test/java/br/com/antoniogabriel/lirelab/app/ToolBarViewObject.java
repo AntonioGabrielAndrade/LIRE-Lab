@@ -5,7 +5,7 @@ import org.testfx.api.FxRobot;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
-public class ToolBarView extends FxRobot {
+public class ToolBarViewObject extends FxRobot {
 
     public void checkStructure() {
         verifyThat("#toolbar", isVisible());
