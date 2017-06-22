@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
@@ -11,12 +10,13 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import javax.inject.Inject;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ListCollectionController implements Initializable {
     @FXML
-    private TreeView<ViewableCollection> collectionsTree;
+    private TreeView<String> collectionsTree;
 
     private CollectionService service;
 
@@ -37,7 +37,7 @@ public class ListCollectionController implements Initializable {
     }
 
     @NotNull
-    private TreeItem getRootItemFor(List<Collection> collections) {
+    private TreeItem<String> getRootItemFor(List<Collection> collections) {
         TreeItem root = new TreeItem();
         root.setExpanded(true);
 
@@ -47,45 +47,24 @@ public class ListCollectionController implements Initializable {
         return root;
     }
 
-    private TreeItem<ViewableCollection> getItemFor(Collection collection) {
-        ViewableCollection vCollection = getViewableCollection(collection);
-        TreeItem<ViewableCollection> item = new TreeItem<>(vCollection);
+    private TreeItem<String> getItemFor(Collection collection) {
+        TreeItem<String> item = new TreeItem<>(collection.getName());
         item.setGraphic(new FontIcon("fa-folder"));
+
+        insertImageItens(item, collection);
+
         return item;
+    }
+
+    private void insertImageItens(TreeItem<String> item, Collection collection) {
+        List<String> images = service.getCollectionImages(collection);
+        for (String image : images) {
+            TreeItem<String> imageItem = new TreeItem<>(Paths.get(image).getFileName().toString());
+            item.getChildren().add(imageItem);
+        }
     }
 
     private void listenToCollectionsChange() {
         service.addCollectionsChangeListener(() -> Platform.runLater(() -> buildCollectionTree()));
-    }
-
-    private ViewableCollection getViewableCollection(Collection collection) {
-        return new ViewableCollection(collection);
-    }
-
-    private class ViewableCollection {
-        private final SimpleStringProperty name;
-        private final Collection collection;
-
-        public ViewableCollection(Collection collection) {
-            this.name = new SimpleStringProperty(collection.getName());
-            this.collection = collection;
-        }
-
-        public String getName() {
-            return name.get();
-        }
-
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name.set(name);
-        }
-
-        @Override
-        public String toString() {
-            return name.get();
-        }
     }
 }
