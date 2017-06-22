@@ -42,8 +42,8 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        new JFXPanel();
-        new FxRobot().interact(() -> {
+        startJavaFX();
+        runOnFXThread(() -> {
             try {
 
                 CollectionHelper collectionHelper = new CollectionHelper(new PathResolver(TEST_ROOT));
@@ -58,9 +58,10 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
         });
     }
 
+
     @AfterClass
     public static void deleteCollections() throws Exception {
-        new FxRobot().interact(() -> {
+        runOnFXThread(() -> {
             try {
 
                 PathResolver resolver = new PathResolver(TEST_ROOT);
@@ -120,5 +121,13 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
         view.waitUntilCollectionIsNotListed(COLLECTION_1);
         view.waitUntilCollectionsAreListed(COLLECTION_2, COLLECTION_3);
+    }
+
+    private static void startJavaFX() {
+        new JFXPanel();
+    }
+
+    private static void runOnFXThread(Runnable runnable) {
+        new FxRobot().interact(runnable);
     }
 }
