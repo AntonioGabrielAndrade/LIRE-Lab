@@ -49,7 +49,7 @@ public class ListCollectionView extends FxRobot {
         clickOn(arrow).interrupt();
     }
 
-    public void checkImageIsVisible(String image) throws TimeoutException {
+    public void checkImageIsListed(String image) throws TimeoutException {
         waitFor(isPresent(image));
     }
 
