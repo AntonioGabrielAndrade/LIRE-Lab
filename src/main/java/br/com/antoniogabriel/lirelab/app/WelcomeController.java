@@ -12,8 +12,11 @@ import java.io.IOException;
 
 public class WelcomeController {
 
-    @FXML private Button createCollectionButton;
-    @Inject private CreateCollectionFXML createCollectionFXML;
+    @FXML
+    private Button createCollectionButton;
+
+    @Inject
+    private CreateCollectionFXML createCollectionFXML;
 
     public WelcomeController() {
         DependencyInjection.init(this);
