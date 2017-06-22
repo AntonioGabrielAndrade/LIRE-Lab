@@ -2,22 +2,23 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import javafx.embed.swing.JFXPanel;
 import org.apache.commons.io.FileUtils;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.testfx.api.FxRobot;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFXThread;
+import static br.com.antoniogabriel.lirelab.test.TestUtils.startJavaFX;
 import static java.util.Arrays.asList;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.is;
@@ -122,13 +123,5 @@ public class CollectionRepositoryTest {
         collection.setImagesDirectory(imagesPath);
         collection.setFeatures(asList(features));
         return collection;
-    }
-
-    private static void startJavaFX() {
-        new JFXPanel();
-    }
-
-    private static void runOnFXThread(Runnable runnable) {
-        new FxRobot().interact(runnable);
     }
 }
