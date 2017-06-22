@@ -35,7 +35,22 @@ public class ListCollectionView extends FxRobot {
     }
 
     private void waitFor(Callable<Boolean> condition) throws TimeoutException {
-        WaitForAsyncUtils.waitFor(15, TimeUnit.SECONDS, condition);
+        WaitForAsyncUtils.waitFor(10, TimeUnit.SECONDS, condition);
+    }
+
+    public void expandCollection(Collection collection) throws TimeoutException {
+        Node arrow = null;
+
+        //hack for when the robot cant find the arrow at first
+        while(arrow == null) {
+            arrow = lookup(collection.getName()).lookup(".arrow").query();
+        }
+
+        clickOn(arrow).interrupt();
+    }
+
+    public void checkImageIsVisible(String image) throws TimeoutException {
+        waitFor(isPresent(image));
     }
 
     @NotNull
