@@ -1,47 +1,72 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.lire.Feature;
+import javafx.embed.swing.JFXPanel;
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.testfx.api.FxRobot;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
+import static java.util.Arrays.asList;
+import static junit.framework.TestCase.assertFalse;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionRepositoryTest {
 
-    private static final Collection COLLECTION1 = new Collection("Collection1");
-    private static final Collection COLLECTION2 = new Collection("Collection2");
-    private static final Collection COLLECTION3 = new Collection("Collection3");
+    private static final Collection COLLECTION1 = collection("Collection1", TEST_IMAGES, CEDD);
+    private static final Collection COLLECTION2 = collection("Collection2", TEST_IMAGES, CEDD);
+    private static final Collection COLLECTION3 = collection("Collection3", TEST_IMAGES, CEDD);
 
-    private PathResolver resolver = new PathResolver(TEST_ROOT);
+    private static final PathResolver resolver = new PathResolver(TEST_ROOT);
 
-    private CollectionHelper collectionHelper = new CollectionHelper(resolver);
-    private CollectionRepository repository = new CollectionRepository(resolver);
+    private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
+    private static final CollectionRepository repository = new CollectionRepository(resolver);
 
-    @Before
-    public void setUp() throws Exception {
-        collectionHelper.createStubCollection(COLLECTION1);
-        collectionHelper.createStubCollection(COLLECTION2);
-        collectionHelper.createStubCollection(COLLECTION3);
+    @BeforeClass
+    public static void createCollections() throws Exception {
+        startJavaFX();
+        runOnFXThread(() -> {
+            try {
+
+                collectionHelper.createRealCollection(COLLECTION1);
+                collectionHelper.createRealCollection(COLLECTION2);
+                collectionHelper.createRealCollection(COLLECTION3);
+
+            } catch (Exception e) {
+                throw new RuntimeException("Test Error", e);
+            }
+        });
     }
 
-    @After
-    public void tearDown() throws Exception {
-        collectionHelper.deleteCollection(COLLECTION1);
-        collectionHelper.deleteCollection(COLLECTION2);
-        collectionHelper.deleteCollection(COLLECTION3);
+    @AfterClass
+    public static void deleteCollections() throws Exception {
+        runOnFXThread(() -> {
+            try {
 
-        deleteWorkDirectory();
+                collectionHelper.deleteCollection(COLLECTION1);
+                collectionHelper.deleteCollection(COLLECTION2);
+                collectionHelper.deleteCollection(COLLECTION3);
+
+                deleteWorkDirectory();
+
+            } catch (IOException e) {
+                throw new RuntimeException("Test Error", e);
+            }
+        });
     }
 
     @Test
@@ -49,19 +74,39 @@ public class CollectionRepositoryTest {
         deleteWorkDirectory();
 
         assertTrue(repository.getCollections().isEmpty());
+
+        createCollections();
+
+        assertFalse(repository.getCollections().isEmpty());
     }
 
     @Test
     public void shouldGetCollectionsFromDisk() throws Exception {
         List<Collection> collections = repository.getCollections();
 
+        assertThat(collections.size(), is(3));
         assertTrue(collections.contains(COLLECTION1));
         assertTrue(collections.contains(COLLECTION2));
         assertTrue(collections.contains(COLLECTION3));
     }
 
-    private void deleteWorkDirectory() throws IOException {
+    private static void deleteWorkDirectory() throws IOException {
         File directory =  Paths.get(resolver.getWorkDirectoryPath()).toFile();
         FileUtils.deleteDirectory(directory);
+    }
+
+    private static Collection collection(String name, String imagesPath, Feature... features) {
+        Collection collection = new Collection(name);
+        collection.setImagesDirectory(imagesPath);
+        collection.setFeatures(asList(features));
+        return collection;
+    }
+
+    private static void startJavaFX() {
+        new JFXPanel();
+    }
+
+    private static void runOnFXThread(Runnable runnable) {
+        new FxRobot().interact(runnable);
     }
 }
