@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.lire.Feature;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,14 +8,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
+import static br.com.antoniogabriel.lirelab.test.TestUtils.collection;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class CollectionXMLDAOTest {
 
@@ -24,18 +23,17 @@ public class CollectionXMLDAOTest {
     private static final String XML_FILENAME = "collection.xml";
     private static final Path XML_PATH = Paths.get(TARGET_DIR, XML_FILENAME);
 
-    private static final String COLLECTION_NAME = "Test Collection";
-    private static final String IMAGES_DIRECTORY = "/some/example/path";
-    private static final List<Feature> FEATURES = Arrays.asList(CEDD, TAMURA);
+    private static final String A_NAME = "Test Collection";
+    private static final String A_DIRECTORY = "/some/example/path";
 
     private static final String XML_CONTENT =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<collection>\n" +
-            "    <name>" + COLLECTION_NAME + "</name>\n" +
-            "    <imagesDirectory>" + IMAGES_DIRECTORY + "</imagesDirectory>\n" +
+            "    <name>" + A_NAME + "</name>\n" +
+            "    <imagesDirectory>" + A_DIRECTORY + "</imagesDirectory>\n" +
             "    <features>\n" +
-            "        <feature>" + FEATURES.get(0).name() + "</feature>\n" +
-            "        <feature>" + FEATURES.get(1).name() + "</feature>\n" +
+            "        <feature>" + CEDD.name() + "</feature>\n" +
+            "        <feature>" + TAMURA.name() + "</feature>\n" +
             "    </features>\n" +
             "</collection>\n";
 
@@ -45,7 +43,7 @@ public class CollectionXMLDAOTest {
     @Before
     public void setUp() throws Exception {
         xmlDAO = new CollectionXMLDAO(TARGET_DIR);
-        collection = createTestCollection(COLLECTION_NAME, IMAGES_DIRECTORY, FEATURES);
+        collection = collection(A_NAME, A_DIRECTORY, CEDD, TAMURA);
     }
 
     @After
@@ -57,7 +55,7 @@ public class CollectionXMLDAOTest {
     public void shouldCreateCollectionXMLFile() throws Exception {
         xmlDAO.create(collection);
 
-        assertThat(Files.exists(XML_PATH), is(true));
+        assertTrue(Files.exists(XML_PATH));
         assertThat(fileContent(XML_PATH), is(XML_CONTENT));
     }
 
@@ -72,18 +70,5 @@ public class CollectionXMLDAOTest {
 
     private String fileContent(Path path) throws IOException {
         return new String(Files.readAllBytes(path));
-    }
-
-    private Collection createTestCollection(String name,
-                                            String imagesDir,
-                                            List<Feature> features) {
-
-        Collection collection = new Collection();
-
-        collection.setName(name);
-        collection.setImagesDirectory(imagesDir);
-        collection.setFeatures(features);
-
-        return collection;
     }
 }
