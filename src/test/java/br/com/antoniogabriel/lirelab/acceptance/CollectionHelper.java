@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.collection.*;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,9 +13,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static org.junit.Assert.assertTrue;
 
 public class CollectionHelper {
@@ -53,13 +54,13 @@ public class CollectionHelper {
         System.out.println("Creating collection: " + collection.getName());
         System.out.println();
 
+        List<Feature> collectionFeatures = getFeatures(collection);
+
         CreateCollectionTask task =
                 new CreateCollectionTaskFactory()
                         .createTask(
                                 collection.getName(),
-                                collection.getFeatures() == null || collection.getFeatures().isEmpty() ?
-                                        Arrays.asList(CEDD) :
-                                        collection.getFeatures(),
+                                collectionFeatures,
                                 collection.getImagesDirectory(),
                                 resolver.getCollectionPath(collection.getName()),
                                 resolver.getIndexDirectoryPath(collection.getName()),
@@ -67,6 +68,12 @@ public class CollectionHelper {
                         );
 
         task.run();
+    }
+
+    private List<Feature> getFeatures(Collection collection) {
+        return (collection.getFeatures() == null || collection.getFeatures().isEmpty()) ?
+                                                                    Arrays.asList(CEDD) :
+                                                                    collection.getFeatures();
     }
 
     private boolean xmlFileExist(String collection) {
