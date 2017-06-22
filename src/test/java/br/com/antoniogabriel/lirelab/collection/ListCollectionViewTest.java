@@ -69,13 +69,14 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
                 collectionHelper.deleteCollection(COLLECTION_3);
                 collectionHelper.deleteCollection(COLLECTION_4);
 
-                FileUtils.deleteDirectory(new File(resolver.getWorkDirectoryPath()));
+                deleteTestWorkDirectory();
 
             } catch (IOException e) {
                 throw new RuntimeException("Test Error", e);
             }
         });
     }
+
 
     @Override
     protected AbstractModule getBindings() {
@@ -126,5 +127,9 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
     private static void runOnFXThread(Runnable runnable) {
         new FxRobot().interact(runnable);
+    }
+
+    private static void deleteTestWorkDirectory() throws IOException {
+        FileUtils.deleteDirectory(new File(resolver.getWorkDirectoryPath()));
     }
 }
