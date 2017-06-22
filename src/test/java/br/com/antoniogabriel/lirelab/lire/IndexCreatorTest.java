@@ -78,21 +78,11 @@ public class IndexCreatorTest {
 
         inOrder.verify(indexBuilder).createDocumentBuilder();
         inOrder.verify(indexBuilder).addFeaturesToDocumentBuilder(FEATURES);
-
         inOrder.verify(indexBuilder).createIndexWriter(INDEX_DIR);
-        inOrder.verify(indexBuilder).getAllImagesPaths(IMAGES_DIR);
 
         inOrder.verify(callback).beforeAddImageToIndex(1, PATHS.size(), IMG1);
-        inOrder.verify(indexBuilder).getBufferedImage(IMG1);
-        inOrder.verify(indexBuilder).createDocument(bufImg1, IMG1);
         inOrder.verify(indexBuilder).addDocument(DOC1);
         inOrder.verify(callback).afterAddImageToIndex(1, PATHS.size(), IMG1);
-
-        inOrder.verify(callback).beforeAddImageToIndex(2, PATHS.size(), IMG2);
-        inOrder.verify(indexBuilder).getBufferedImage(IMG2);
-        inOrder.verify(indexBuilder).createDocument(bufImg2, IMG2);
-        inOrder.verify(indexBuilder).addDocument(DOC2);
-        inOrder.verify(callback).afterAddImageToIndex(2, PATHS.size(), IMG2);
 
         inOrder.verify(indexBuilder).closeIndexWriter();
         inOrder.verify(callback).afterIndexAllImages(PATHS.size());

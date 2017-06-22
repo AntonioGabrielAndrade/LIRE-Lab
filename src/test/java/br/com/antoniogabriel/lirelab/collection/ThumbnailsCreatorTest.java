@@ -57,15 +57,10 @@ public class ThumbnailsCreatorTest {
         creator.create();
 
         inOrder.verify(builder).createDirectory(THUMBNAILS_DIR);
-        inOrder.verify(builder).getAllImagePaths(IMAGES_DIR);
 
         inOrder.verify(callback).beforeCreateThumbnail(1, IMAGES.size(), IMG1);
         inOrder.verify(builder).createThumbnail(IMG1, THUMBNAILS_DIR);
         inOrder.verify(callback).afterCreateThumbnail(1, IMAGES.size(), IMG1);
-
-        inOrder.verify(callback).beforeCreateThumbnail(2, IMAGES.size(), IMG2);
-        inOrder.verify(builder).createThumbnail(IMG2, THUMBNAILS_DIR);
-        inOrder.verify(callback).afterCreateThumbnail(2, IMAGES.size(), IMG2);
 
         inOrder.verify(callback).afterCreateAllThumbnails(IMAGES.size());
     }
