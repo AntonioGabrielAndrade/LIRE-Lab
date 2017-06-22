@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.collection;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement
@@ -12,14 +13,17 @@ public class Collection {
 
 
     @XmlElement
-    private String name;
+    private String name = "";
 
     @XmlElementWrapper(name="features")
     @XmlElement(name="feature")
-    private List<Feature> features;
+    private List<Feature> features = new ArrayList<>();
 
     @XmlElement
-    private String imagesDirectory;
+    private String imagesDirectory = "";
+
+    @XmlTransient
+    private List<String> imagePaths = new ArrayList<>();
 
     public Collection() {}
 
@@ -51,6 +55,14 @@ public class Collection {
         return imagesDirectory;
     }
 
+    public List<String> getImagePaths() {
+        return imagePaths;
+    }
+
+    public void setImagePaths(List<String> imagePaths) {
+        this.imagePaths = imagePaths;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,4 +82,5 @@ public class Collection {
         result = 31 * result + (imagesDirectory != null ? imagesDirectory.hashCode() : 0);
         return result;
     }
+
 }
