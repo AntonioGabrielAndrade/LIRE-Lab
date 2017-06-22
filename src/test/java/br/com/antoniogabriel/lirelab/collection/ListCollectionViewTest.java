@@ -26,10 +26,10 @@ import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
 @RunWith(MockitoJUnitRunner.class)
 public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
-    private static final Collection COLLECTION_1 = new Collection("Collection1");
-    private static final Collection COLLECTION_2 = new Collection("Collection2");
-    private static final Collection COLLECTION_3 = new Collection("Collection3");
-    private static final Collection COLLECTION_4 = new Collection("Collection4");
+    private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES);
+    private static final Collection COLLECTION_2 = collection("Collection2", TEST_IMAGES);
+    private static final Collection COLLECTION_3 = collection("Collection3", TEST_IMAGES);
+    private static final Collection COLLECTION_4 = collection("Collection4", TEST_IMAGES);
 
     private static final PathResolver resolver = new PathResolver(TEST_ROOT);
     private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
@@ -141,5 +141,11 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
     private static void deleteTestWorkDirectory() throws IOException {
         FileUtils.deleteDirectory(new File(resolver.getWorkDirectoryPath()));
+    }
+
+    private static Collection collection(String name, String imagesDirectory) {
+        Collection collection = new Collection(name);
+        collection.setImagesDirectory(imagesDirectory);
+        return collection;
     }
 }

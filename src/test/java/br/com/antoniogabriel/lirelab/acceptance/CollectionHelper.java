@@ -54,7 +54,7 @@ public class CollectionHelper {
                         .createTask(
                                 collection.getName(),
                                 Arrays.asList(CEDD),
-                                TEST_IMAGES,
+                                collection.getImagesDirectory(),
                                 resolver.getCollectionPath(collection.getName()),
                                 resolver.getIndexDirectoryPath(collection.getName()),
                                 resolver.getThumbnailsDirectoryPath(collection.getName())
