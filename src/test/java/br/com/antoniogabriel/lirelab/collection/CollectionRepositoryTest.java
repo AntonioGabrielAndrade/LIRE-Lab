@@ -1,25 +1,19 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
-import br.com.antoniogabriel.lirelab.lire.Feature;
-import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFXThread;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.startJavaFX;
-import static java.util.Arrays.asList;
+import static br.com.antoniogabriel.lirelab.test.TestUtils.*;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -62,7 +56,7 @@ public class CollectionRepositoryTest {
                 collectionHelper.deleteCollection(COLLECTION2);
                 collectionHelper.deleteCollection(COLLECTION3);
 
-                deleteWorkDirectory();
+                deleteWorkDirectory(resolver);
 
             } catch (IOException e) {
                 throw new RuntimeException("Test Error", e);
@@ -72,7 +66,7 @@ public class CollectionRepositoryTest {
 
     @Test
     public void shouldGetEmptyCollectionListWhenCollectionsDirectoryDonExist() throws Exception {
-        deleteWorkDirectory();
+        deleteWorkDirectory(resolver);
 
         assertTrue(repository.getCollections().isEmpty());
 
@@ -113,15 +107,4 @@ public class CollectionRepositoryTest {
         assertTrue(paths.contains(imagesDir + "26489383923_98d419eb0d_k.jpg"));
     }
 
-    private static void deleteWorkDirectory() throws IOException {
-        File directory =  Paths.get(resolver.getWorkDirectoryPath()).toFile();
-        FileUtils.deleteDirectory(directory);
-    }
-
-    private static Collection collection(String name, String imagesPath, Feature... features) {
-        Collection collection = new Collection(name);
-        collection.setImagesDirectory(imagesPath);
-        collection.setFeatures(asList(features));
-        return collection;
-    }
 }

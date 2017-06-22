@@ -5,14 +5,12 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
-import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -20,16 +18,15 @@ import java.util.List;
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFXThread;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.startJavaFX;
+import static br.com.antoniogabriel.lirelab.test.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
-    private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES);
-    private static final Collection COLLECTION_2 = collection("Collection2", TEST_IMAGES);
-    private static final Collection COLLECTION_3 = collection("Collection3", TEST_IMAGES);
-    private static final Collection COLLECTION_4 = collection("Collection4", TEST_IMAGES);
+    private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES, CEDD);
+    private static final Collection COLLECTION_2 = collection("Collection2", TEST_IMAGES, CEDD);
+    private static final Collection COLLECTION_3 = collection("Collection3", TEST_IMAGES, CEDD);
+    private static final Collection COLLECTION_4 = collection("Collection4", TEST_IMAGES, CEDD);
 
     private static final PathResolver resolver = new PathResolver(TEST_ROOT);
     private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
@@ -69,7 +66,7 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
                 collectionHelper.deleteCollection(COLLECTION_3);
                 collectionHelper.deleteCollection(COLLECTION_4);
 
-                deleteTestWorkDirectory();
+                deleteWorkDirectory(resolver);
 
             } catch (IOException e) {
                 throw new RuntimeException("Test Error", e);
@@ -129,15 +126,5 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
         view.waitUntilCollectionIsNotListed(COLLECTION_1);
         view.waitUntilCollectionsAreListed(COLLECTION_2, COLLECTION_3);
-    }
-
-    private static void deleteTestWorkDirectory() throws IOException {
-        FileUtils.deleteDirectory(new File(resolver.getWorkDirectoryPath()));
-    }
-
-    private static Collection collection(String name, String imagesDirectory) {
-        Collection collection = new Collection(name);
-        collection.setImagesDirectory(imagesDirectory);
-        return collection;
     }
 }
