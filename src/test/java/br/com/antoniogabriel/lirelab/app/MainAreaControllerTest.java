@@ -48,7 +48,7 @@ public class MainAreaControllerTest {
     }
 
     @Test
-    public void shouldAddCollectionImagesToUI() throws Exception {
+    public void shouldAddCollectionImagesToCenter() throws Exception {
         filesExists = true;
         controller.showCollectionImages(collection);
 
