@@ -38,5 +38,6 @@ public class LireLabAcceptanceTest extends ApplicationTest {
     @Test
     public void userJourneyTest() throws Exception {
         app.createCollection(ACCEPTANCE_TEST_COLLECTION, TEST_IMAGES, CEDD, TAMURA);
+        app.viewCollection(ACCEPTANCE_TEST_COLLECTION);
     }
 }
