@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.LireLabException;
+import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -29,11 +31,13 @@ public class MainAreaControllerTest {
 
     private static final String DONT_EXIST = "DONT EXIST";
     private static final String THROW_EXCEPTION = "THROW EXCEPTION";
+    private static final PathResolver UNUSED_RESOLVER = null;
 
     @Mock BorderPane centerPane;
     @Mock FlowPane flowPane;
     @Mock ImageView imageView;
     @Mock ObservableList<Node> flowPaneChildren;
+    @Mock ImageViewFactory imageViewFactory;
 
     private MainAreaController controller;
     private Collection collection;
@@ -47,6 +51,7 @@ public class MainAreaControllerTest {
         collection.setImagePaths(paths);
 
         given(flowPane.getChildren()).willReturn(flowPaneChildren);
+        given(imageViewFactory.create(any())).willReturn(imageView);
     }
 
     @Test
@@ -73,9 +78,8 @@ public class MainAreaControllerTest {
     }
 
     private class TestableMainAreaController extends MainAreaController {
-        @Override
-        protected @NotNull ImageView createImageView(String thumb) {
-            return imageView;
+        private TestableMainAreaController() {
+            super(UNUSED_RESOLVER, imageViewFactory);
         }
 
         @Override
@@ -91,7 +95,7 @@ public class MainAreaControllerTest {
         }
 
         @Override
-        protected @NotNull FlowPane createFlowPane() {
+        protected FlowPane createFlowPane() {
             return flowPane;
         }
 

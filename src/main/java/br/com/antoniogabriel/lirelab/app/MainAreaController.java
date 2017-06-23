@@ -4,7 +4,6 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.LireLabException;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -13,7 +12,6 @@ import net.semanticmetadata.lire.utils.FileUtils;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,8 +23,15 @@ public class MainAreaController {
     @FXML
     private BorderPane centerPane;
 
-    @Inject
     private PathResolver resolver;
+
+    private ImageViewFactory imageViewFactory;
+
+    @Inject
+    public MainAreaController(PathResolver resolver, ImageViewFactory imageViewFactory) {
+        this.resolver = resolver;
+        this.imageViewFactory = imageViewFactory;
+    }
 
     public void showCollectionImages(Collection collection) {
         try {
@@ -36,7 +41,7 @@ public class MainAreaController {
             for (String thumb : thumbs) {
                 if (fileExists(thumb)) {
 
-                    ImageView imageView = createImageView(thumb);
+                    ImageView imageView = imageViewFactory.create(thumb);
 
                     flowPane.getChildren().add(imageView);
                 }
@@ -51,20 +56,6 @@ public class MainAreaController {
 
     protected BorderPane getCenterPane() {
         return centerPane;
-    }
-
-    protected ImageView createImageView(String thumb) throws IOException {
-        Image image = new Image(new FileInputStream(thumb));
-        ImageView imageView = new ImageView(image);
-
-        String id = Paths.get(thumb).getFileName().toString();
-
-        id = id
-                .replace(".thumbnail", "")
-                .replace(".jpg", "");
-
-        imageView.setId(id);
-        return imageView;
     }
 
     protected boolean fileExists(String thumb) {
