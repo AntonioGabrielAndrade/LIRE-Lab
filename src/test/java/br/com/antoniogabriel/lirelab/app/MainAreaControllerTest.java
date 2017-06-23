@@ -16,16 +16,18 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MainAreaControllerTest {
+
+    private static final String DONT_EXIST = "DONT EXIST";
 
     @Mock BorderPane centerPane;
     @Mock FlowPane flowPane;
@@ -35,12 +37,11 @@ public class MainAreaControllerTest {
     private MainAreaController controller;
     private Collection collection;
     private List<String> paths;
-    private boolean filesExists;
 
     @Before
     public void setUp() throws Exception {
         controller = new TestableMainAreaController();
-        paths = asList("path1", "path2", "path3");
+        paths = new ArrayList<>(asList("path1", "path2", "path3"));
         collection = new Collection();
         collection.setImagePaths(paths);
 
@@ -49,7 +50,6 @@ public class MainAreaControllerTest {
 
     @Test
     public void shouldAddCollectionImagesToCenter() throws Exception {
-        filesExists = true;
         controller.showCollectionImages(collection);
 
         verify(flowPaneChildren, times(paths.size())).add(imageView);
@@ -58,10 +58,11 @@ public class MainAreaControllerTest {
 
     @Test
     public void shouldNotAddImageIfFileNotExist() throws Exception {
-        filesExists = false;
+        paths.add(DONT_EXIST);
         controller.showCollectionImages(collection);
 
-        verify(flowPaneChildren, never()).add(imageView);
+        verify(flowPaneChildren, times(paths.size()-1))
+                .add(imageView);
     }
 
     private class TestableMainAreaController extends MainAreaController {
@@ -72,7 +73,7 @@ public class MainAreaControllerTest {
 
         @Override
         protected boolean fileExists(String thumb) {
-            return filesExists;
+            return !thumb.equals(DONT_EXIST);
         }
 
         @Override
