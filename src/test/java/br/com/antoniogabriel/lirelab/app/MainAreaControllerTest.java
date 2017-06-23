@@ -66,7 +66,7 @@ public class MainAreaControllerTest {
 
     private class TestableMainAreaController extends MainAreaController {
         @Override
-        protected @NotNull ImageView getImageView(String thumb) throws FileNotFoundException {
+        protected @NotNull ImageView createImageView(String thumb) throws FileNotFoundException {
             return imageView;
         }
 
@@ -76,12 +76,12 @@ public class MainAreaControllerTest {
         }
 
         @Override
-        protected List<String> getAllImages(Collection collection) throws IOException {
+        protected List<String> getThumbnailsPaths(Collection collection) throws IOException {
             return paths;
         }
 
         @Override
-        protected @NotNull FlowPane getFlowPane() {
+        protected @NotNull FlowPane createFlowPane() {
             return flowPane;
         }
 

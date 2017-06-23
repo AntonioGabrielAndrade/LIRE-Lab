@@ -32,19 +32,15 @@ public class MainAreaController {
 
     public void showCollectionImages(Collection collection) {
         try {
-            FlowPane flowPane = getFlowPane();
-            List<String> thumbs = getAllImages(collection);
-
-            System.out.println(thumbs);
+            FlowPane flowPane = createFlowPane();
+            List<String> thumbs = getThumbnailsPaths(collection);
 
             for (String thumb : thumbs) {
                 if (fileExists(thumb)) {
 
-                    ImageView imageView = getImageView(thumb);
+                    ImageView imageView = createImageView(thumb);
 
                     flowPane.getChildren().add(imageView);
-
-                    System.out.println(imageView.getId());
                 }
             }
 
@@ -61,7 +57,7 @@ public class MainAreaController {
     }
 
     @NotNull
-    protected ImageView getImageView(String thumb) throws FileNotFoundException {
+    protected ImageView createImageView(String thumb) throws FileNotFoundException {
         Image image = new Image(new FileInputStream(thumb));
         ImageView imageView = new ImageView(image);
 
@@ -79,12 +75,12 @@ public class MainAreaController {
         return Files.exists(Paths.get(thumb));
     }
 
-    protected List<String> getAllImages(Collection collection) throws IOException {
+    protected List<String> getThumbnailsPaths(Collection collection) throws IOException {
         return FileUtils.getAllImages(new File(resolver.getThumbnailsDirectoryPath(collection.getName())), true);
     }
 
     @NotNull
-    protected FlowPane getFlowPane() {
+    protected FlowPane createFlowPane() {
         return new FlowPane();
     }
 }
