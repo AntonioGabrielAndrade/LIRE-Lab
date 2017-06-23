@@ -35,22 +35,30 @@ public class MainAreaController {
 
     public void showCollectionImages(Collection collection) {
         try {
+
             FlowPane flowPane = createFlowPane();
-            List<String> thumbs = getThumbnailsPaths(collection);
-
-            for (String thumb : thumbs) {
-                if (fileExists(thumb)) {
-
-                    ImageView imageView = imageViewFactory.create(thumb);
-
-                    flowPane.getChildren().add(imageView);
-                }
-            }
-
-            getCenterPane().setCenter(flowPane);
+            addImagesToFlowPane(collection, flowPane);
+            addFlowPaneToCenter(flowPane);
 
         } catch (IOException e) {
             throw new LireLabException("Could not show collections", e);
+        }
+    }
+
+    private void addFlowPaneToCenter(FlowPane flowPane) {
+        getCenterPane().setCenter(flowPane);
+    }
+
+    private void addImagesToFlowPane(Collection collection, FlowPane flowPane) throws IOException {
+        List<String> thumbs = getThumbnailsPaths(collection);
+
+        for (String thumb : thumbs) {
+            if (fileExists(thumb)) {
+
+                ImageView imageView = imageViewFactory.create(thumb);
+
+                flowPane.getChildren().add(imageView);
+            }
         }
     }
 
