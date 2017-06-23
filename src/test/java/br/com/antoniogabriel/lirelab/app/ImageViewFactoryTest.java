@@ -12,13 +12,10 @@ import static org.junit.Assert.assertThat;
 
 public class ImageViewFactoryTest {
 
-    private static final String INEXISTENT_FILE = "a_file";
+    private static final String INEXISTENT_FILE_PATH = "some/path/that/dont/exists";
 
-    private static final String EXISTENT_FILE = "14474347006_99aa0fd981_k.thumbnail.jpg";
-    private static final String EXISTENT_FILE_NO_EXTENSIONS = "14474347006_99aa0fd981_k";
-
-    private static final String EXISTENT_FILE_IN_SUB_DIR = "thumb/16903390174_1d670a5849_h.thumbnail.jpg";
-    private static final String EXISTENT_FILE_IN_SUB_DIR_NO_EXTENSIONS = "16903390174_1d670a5849_h";
+    private static final String EXISTENT_FILE_PATH = "thumb/16903390174_1d670a5849_h.thumbnail.jpg";
+    private static final String EXISTENT_FILE_NAME_WITH_NO_EXTENSIONS = "16903390174_1d670a5849_h";
 
     private ImageViewFactory factory;
 
@@ -29,27 +26,22 @@ public class ImageViewFactoryTest {
 
     @Test(expected = FileNotFoundException.class)
     public void shouldThrowExceptionWhenFileDontExists() throws Exception {
-        factory.create(INEXISTENT_FILE);
+        factory.create(INEXISTENT_FILE_PATH);
     }
 
     @Test
     public void shouldCreateImageViewWhenFileExists() throws Exception {
-        String file = getClass().getResource(EXISTENT_FILE).getFile();
-        ImageView imageView = factory.create(file);
+        ImageView imageView = factory.create(existentFilePath());
         assertNotNull(imageView);
     }
 
     @Test
-    public void shouldSetIdEqualsFilenameWithoutThumbnailAndJPGExtension() throws Exception {
-        String file = getClass().getResource(EXISTENT_FILE).getFile();
-        ImageView imageView = factory.create(file);
-        assertThat(imageView.getId(), equalTo(EXISTENT_FILE_NO_EXTENSIONS));
+    public void shouldSetIdAsFilenameWithoutThumbnailAndJPGExtension() throws Exception {
+        ImageView imageView = factory.create(existentFilePath());
+        assertThat(imageView.getId(), equalTo(EXISTENT_FILE_NAME_WITH_NO_EXTENSIONS));
     }
 
-    @Test
-    public void shouldConsiderOnlyFilenameForId() throws Exception {
-        String file = getClass().getResource(EXISTENT_FILE_IN_SUB_DIR).getFile();
-        ImageView imageView = factory.create(file);
-        assertThat(imageView.getId(), equalTo(EXISTENT_FILE_IN_SUB_DIR_NO_EXTENSIONS));
+    private String existentFilePath() {
+        return getClass().getResource(EXISTENT_FILE_PATH).getFile();
     }
 }
