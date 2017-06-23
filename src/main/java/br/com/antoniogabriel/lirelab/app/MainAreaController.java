@@ -9,13 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import net.semanticmetadata.lire.utils.FileUtils;
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -55,7 +53,6 @@ public class MainAreaController {
         return centerPane;
     }
 
-    @NotNull
     protected ImageView createImageView(String thumb) throws IOException {
         Image image = new Image(new FileInputStream(thumb));
         ImageView imageView = new ImageView(image);
@@ -78,7 +75,6 @@ public class MainAreaController {
         return FileUtils.getAllImages(new File(resolver.getThumbnailsDirectoryPath(collection.getName())), true);
     }
 
-    @NotNull
     protected FlowPane createFlowPane() {
         return new FlowPane();
     }
