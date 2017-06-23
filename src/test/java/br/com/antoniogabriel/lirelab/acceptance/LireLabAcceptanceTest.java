@@ -18,11 +18,10 @@ public class LireLabAcceptanceTest extends ApplicationTest {
 
     private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
 
-    @Inject
-    private CollectionHelper collectionHelper;
+    @Inject private ApplicationRunner app;
+    @Inject private CollectionHelper collectionHelper;
+    @Inject private AppFXML fxml;
 
-    @Inject
-    private AppFXML fxml;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -37,28 +36,7 @@ public class LireLabAcceptanceTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldCreateCollection() throws Exception {
-        AppViewObject appView = new AppViewObject();
-        CreateCollectionViewObject createView = appView.createCollection();
-
-        createView
-                .writeName(ACCEPTANCE_TEST_COLLECTION)
-                .writeImagesDirectory(TEST_IMAGES)
-                .selectFeatures(CEDD, TAMURA);
-
-        ProgressDialogViewObject progressView = createView.create();
-
-        progressView
-                //indexing images
-                .checkProgressMark(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
-                //creating thumbnails
-                .checkProgressMark(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
-                .checkOkIsEnabledWhenFinish()
-                .ok();
-
-        collectionHelper.checkCollectionExists(ACCEPTANCE_TEST_COLLECTION);
-
-        appView.checkCollectionIsListed(ACCEPTANCE_TEST_COLLECTION);
-
+    public void userJourneyTest() throws Exception {
+        app.createCollection(ACCEPTANCE_TEST_COLLECTION, TEST_IMAGES, CEDD, TAMURA);
     }
 }
