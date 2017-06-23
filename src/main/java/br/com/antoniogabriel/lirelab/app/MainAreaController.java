@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import net.semanticmetadata.lire.utils.FileUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -31,24 +32,15 @@ public class MainAreaController {
 
     public void showCollectionImages(Collection collection) {
         try {
-            FlowPane flowPane = new FlowPane();
-            List<String> thumbs = FileUtils.getAllImages(new File(resolver.getThumbnailsDirectoryPath(collection.getName())), true);
+            FlowPane flowPane = getFlowPane();
+            List<String> thumbs = getAllImages(collection);
 
             System.out.println(thumbs);
 
             for (String thumb : thumbs) {
-                if (Files.exists(Paths.get(thumb))) {
+                if (fileExists(thumb)) {
 
-                    Image image = new Image(new FileInputStream(thumb));
-                    ImageView imageView = new ImageView(image);
-
-                    String id = Paths.get(thumb).getFileName().toString();
-
-                    id = id
-                            .replace(".thumbnail", "")
-                            .replace(".jpg", "");
-
-                    imageView.setId(id);
+                    ImageView imageView = getImageView(thumb);
 
                     flowPane.getChildren().add(imageView);
 
@@ -56,11 +48,43 @@ public class MainAreaController {
                 }
             }
 
-            centerPane.setCenter(flowPane);
+            getCenterPane().setCenter(flowPane);
         } catch (FileNotFoundException e) {
             throw new LireLabException("Could not show images", e);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected BorderPane getCenterPane() {
+        return centerPane;
+    }
+
+    @NotNull
+    protected ImageView getImageView(String thumb) throws FileNotFoundException {
+        Image image = new Image(new FileInputStream(thumb));
+        ImageView imageView = new ImageView(image);
+
+        String id = Paths.get(thumb).getFileName().toString();
+
+        id = id
+                .replace(".thumbnail", "")
+                .replace(".jpg", "");
+
+        imageView.setId(id);
+        return imageView;
+    }
+
+    protected boolean fileExists(String thumb) {
+        return Files.exists(Paths.get(thumb));
+    }
+
+    protected List<String> getAllImages(Collection collection) throws IOException {
+        return FileUtils.getAllImages(new File(resolver.getThumbnailsDirectoryPath(collection.getName())), true);
+    }
+
+    @NotNull
+    protected FlowPane getFlowPane() {
+        return new FlowPane();
     }
 }
