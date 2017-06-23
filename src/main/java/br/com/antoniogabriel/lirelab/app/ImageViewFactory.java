@@ -10,16 +10,33 @@ import java.nio.file.Paths;
 public class ImageViewFactory {
 
     public ImageView create(String path) throws FileNotFoundException {
-        Image image = new Image(new FileInputStream(path));
-        ImageView imageView = new ImageView(image);
-
-        String id = Paths.get(path).getFileName().toString();
-
-        id = id
-                .replace(".thumbnail", "")
-                .replace(".jpg", "");
-
+        ImageView imageView = createImageView(path);
+        String id = createId(path);
         imageView.setId(id);
+
         return imageView;
+    }
+
+    private String createId(String path) {
+        String filename = getFilename(path);
+        String id = removeExtensions(filename, ".thumbnail", ".jpg");
+
+        return id;
+    }
+
+    private String removeExtensions(String filename, String... extensions) {
+        for (String extension : extensions) {
+            filename = filename.replace(extension, "");
+        }
+        return filename;
+    }
+
+    private String getFilename(String path) {
+        return Paths.get(path).getFileName().toString();
+    }
+
+    private ImageView createImageView(String path) throws FileNotFoundException {
+        Image image = new Image(new FileInputStream(path));
+        return new ImageView(image);
     }
 }
