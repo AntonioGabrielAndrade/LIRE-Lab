@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.app.MainAreaController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +12,9 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import javax.inject.Inject;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ListCollectionController implements Initializable {
@@ -20,20 +23,36 @@ public class ListCollectionController implements Initializable {
 
     private CollectionService service;
 
+    private Map<String, Collection> nameToCollectionMap = new HashMap<>();
+
+    private MainAreaController mainAreaController;
+
     @Inject
-    public ListCollectionController(CollectionService service) {
+    public ListCollectionController(CollectionService service, MainAreaController appController) {
         this.service = service;
+        this.mainAreaController = appController;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buildCollectionTree();
+        buildCollectionsTree();
         listenToCollectionsChange();
     }
 
-    private void buildCollectionTree() {
+    private void buildCollectionsTree() {
         collectionsTree.setRoot(getRootItemFor(service.getCollections()));
         collectionsTree.setShowRoot(false);
+        collectionsTree.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        String value = newValue.getValue();
+                        if (nameToCollectionMap.containsKey(value)) {
+                            Collection collection = nameToCollectionMap.get(value);
+                            mainAreaController.showCollectionImages(collection);
+                        }
+                    }
+                });
     }
 
     @NotNull
@@ -43,6 +62,7 @@ public class ListCollectionController implements Initializable {
 
         for (Collection collection : collections) {
             root.getChildren().add(getItemFor(collection));
+            nameToCollectionMap.put(collection.getName(), collection);
         }
         return root;
     }
@@ -65,6 +85,6 @@ public class ListCollectionController implements Initializable {
     }
 
     private void listenToCollectionsChange() {
-        service.addCollectionsChangeListener(() -> Platform.runLater(() -> buildCollectionTree()));
+        service.addCollectionsChangeListener(() -> Platform.runLater(() -> buildCollectionsTree()));
     }
 }

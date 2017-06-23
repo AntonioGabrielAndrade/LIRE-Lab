@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.app.MainAreaController;
 import br.com.antoniogabriel.lirelab.collection.*;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.test.FXMLTest;
@@ -9,6 +10,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
@@ -19,6 +21,7 @@ import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
 import static br.com.antoniogabriel.lirelab.test.TestUtils.*;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
@@ -38,6 +41,8 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
     @Inject
     private CollectionService service;
+    @Mock
+    private MainAreaController mainAreaController;
 
     @BeforeClass
     public static void createCollections() throws Exception {
@@ -81,6 +86,7 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
             @Override
             protected void configure() {
                 bind(PathResolver.class).toInstance(resolver);
+                bind(MainAreaController.class).toInstance(mainAreaController);
             }
         };
     }
@@ -126,5 +132,14 @@ public class ListCollectionViewTest extends FXMLTest<ListCollectionFXML> {
 
         view.waitUntilCollectionIsNotListed(COLLECTION_1);
         view.waitUntilCollectionsAreListed(COLLECTION_2, COLLECTION_3);
+
+        runOnFXThread(() -> collectionHelper.createRealCollection(COLLECTION_1));
+    }
+
+    @Test
+    public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
+        view.selectCollection(COLLECTION_1);
+
+        verify(mainAreaController).showCollectionImages(COLLECTION_1);
     }
 }

@@ -3,13 +3,18 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
+            fx:controller="br.com.antoniogabriel.lirelab.app.MainAreaController"
             xmlns:fx="http://javafx.com/fxml">
 
     <left>
         <fx:include source="../collection/collection-list.fxml"/>
     </left>
     <center>
-        <fx:include source="welcome.fxml"/>
+        <BorderPane fx:id="centerPane">
+            <center>
+                <fx:include source="welcome.fxml"/>
+            </center>
+        </BorderPane>
     </center>
 
 </BorderPane>
