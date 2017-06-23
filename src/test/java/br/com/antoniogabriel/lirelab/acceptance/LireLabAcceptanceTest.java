@@ -1,14 +1,18 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.app.AppFXML;
+import br.com.antoniogabriel.lirelab.collection.LireLabException;
 import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Test;
+import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javax.inject.Inject;
+
+import java.io.IOException;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
@@ -26,7 +30,13 @@ public class LireLabAcceptanceTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
         DependencyInjection.init(this);
-        fxml.loadIn(stage, true);
+        new FxRobot().interact(() -> {
+            try {
+                fxml.loadIn(stage, true);
+            } catch (IOException e) {
+                throw new LireLabException("Could not load fxml", e);
+            }
+        });
     }
 
     @After
