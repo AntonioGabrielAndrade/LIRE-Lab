@@ -47,7 +47,7 @@ public class MainAreaController {
             getCenterPane().setCenter(flowPane);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LireLabException("Could not show collections", e);
         }
     }
 
@@ -56,7 +56,7 @@ public class MainAreaController {
     }
 
     @NotNull
-    protected ImageView createImageView(String thumb) throws FileNotFoundException {
+    protected ImageView createImageView(String thumb) throws IOException {
         Image image = new Image(new FileInputStream(thumb));
         ImageView imageView = new ImageView(image);
 

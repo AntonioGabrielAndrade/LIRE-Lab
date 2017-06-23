@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.app;
 
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.LireLabException;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -14,7 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,7 @@ import static org.mockito.Mockito.verify;
 public class MainAreaControllerTest {
 
     private static final String DONT_EXIST = "DONT EXIST";
+    private static final String THROW_EXCEPTION = "THROW EXCEPTION";
 
     @Mock BorderPane centerPane;
     @Mock FlowPane flowPane;
@@ -65,9 +66,15 @@ public class MainAreaControllerTest {
                 .add(imageView);
     }
 
+    @Test(expected = LireLabException.class)
+    public void shouldThrowCustomExceptionIfIOExceptionOccurs() throws Exception {
+        collection.setName(THROW_EXCEPTION);
+        controller.showCollectionImages(collection);
+    }
+
     private class TestableMainAreaController extends MainAreaController {
         @Override
-        protected @NotNull ImageView createImageView(String thumb) throws FileNotFoundException {
+        protected @NotNull ImageView createImageView(String thumb) {
             return imageView;
         }
 
@@ -78,6 +85,8 @@ public class MainAreaControllerTest {
 
         @Override
         protected List<String> getThumbnailsPaths(Collection collection) throws IOException {
+            if(collection.getName().equals(THROW_EXCEPTION))
+                throw new IOException();
             return paths;
         }
 
