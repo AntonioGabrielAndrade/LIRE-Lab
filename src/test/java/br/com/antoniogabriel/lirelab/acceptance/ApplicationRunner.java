@@ -38,27 +38,28 @@ public class ApplicationRunner {
         appView.checkCollectionIsListed(collectionName);
     }
 
-    public void viewCollection(String collection) {
+    public void viewCollection(String collection) throws TimeoutException, InterruptedException {
         ListCollectionViewObject listView = new ListCollectionViewObject();
         CollectionGridViewObject gridView = new CollectionGridViewObject();
 
         listView.selectCollection(collection);
 
-        gridView.checkImagesAreVisible("14474347006_99aa0fd981_k.jpg",
-                                        "16903390174_1d670a5849_h.jpg",
-                                        "17099294578_0ba4068bad_k.jpg",
-                                        "17338370170_1e620bfb18_h.jpg",
-                                        "17525978165_86dc26e8cb_h.jpg",
-                                        "19774866363_757555901c_k.jpg",
-                                        "25601366680_b57441bb52_k.jpg",
-                                        "25601374660_78e6a9bba8_k.jpg",
-                                        "26487616294_b22b87133e_k.jpg",
-                                        "26489383923_98d419eb0d_k.jpg");
+        gridView.checkImagesAreVisible( "14474347006_99aa0fd981_k",
+                                        "16903390174_1d670a5849_h",
+                                        "17099294578_0ba4068bad_k",
+                                        "17338370170_1e620bfb18_h",
+                                        "17525978165_86dc26e8cb_h",
+                                        "19774866363_757555901c_k",
+                                        "25601366680_b57441bb52_k",
+                                        "25601374660_78e6a9bba8_k",
+                                        "26487616294_b22b87133e_k",
+                                        "26489383923_98d419eb0d_k");
 
-        ImageDialogViewObject imageView = gridView.selectImage("14474347006_99aa0fd981_k.jpg");
 
-        imageView.checkImageIsDisplayed("14474347006_99aa0fd981_k.jpg");
+        ImageDialogViewObject imageView = gridView.selectImage("14474347006_99aa0fd981_k");
 
-        imageView.close();
+//        imageView.checkImageIsDisplayed("14474347006_99aa0fd981_k-display");
+//
+//        imageView.close();
     }
 }
