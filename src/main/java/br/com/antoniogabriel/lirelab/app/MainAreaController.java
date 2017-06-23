@@ -45,8 +45,7 @@ public class MainAreaController {
             }
 
             getCenterPane().setCenter(flowPane);
-        } catch (FileNotFoundException e) {
-            throw new LireLabException("Could not show images", e);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
