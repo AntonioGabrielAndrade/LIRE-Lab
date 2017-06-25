@@ -14,10 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import static java.util.Arrays.asList;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
@@ -32,13 +29,10 @@ public class MainAreaControllerTest {
     @InjectMocks MainAreaController controller = new MainAreaController(collectionGridBuilder);
 
     private Collection collection;
-    private List<String> paths;
 
     @Before
     public void setUp() throws Exception {
-        paths = new ArrayList<>(asList("path1", "path2", "path3"));
         collection = new Collection();
-        collection.setImagePaths(paths);
     }
 
     @Test(expected = LireLabException.class)
