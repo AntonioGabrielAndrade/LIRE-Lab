@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.app.MainAreaController;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
@@ -46,19 +47,23 @@ public class ListCollectionController implements Initializable {
     private void listenToCollectionSelection() {
         collectionsTree.getSelectionModel()
                 .selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        String value = newValue.getValue();
-                        if (nameToCollectionMap.containsKey(value)) {
-                            Collection collection = nameToCollectionMap.get(value);
-                            mainAreaController.showCollectionImages(collection);
-                        }
-                    }
-                });
+                .addListener(getTreeItemChangeListener());
+    }
+
+    protected ChangeListener<TreeItem<String>> getTreeItemChangeListener() {
+        return (observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                String value = newValue.getValue();
+                if (nameToCollectionMap.containsKey(value)) {
+                    Collection collection = nameToCollectionMap.get(value);
+                    mainAreaController.showCollectionImages(collection);
+                }
+            }
+        };
     }
 
     private TreeItem<String> getRootItemFor(List<Collection> collections) {
-        TreeItem root = new TreeItem();
+        TreeItem root = createRootItem();
         root.setExpanded(true);
 
         for (Collection collection : collections) {
@@ -68,13 +73,21 @@ public class ListCollectionController implements Initializable {
         return root;
     }
 
+    protected TreeItem createRootItem() {
+        return new TreeItem();
+    }
+
     private TreeItem<String> getItemFor(Collection collection) {
-        TreeItem<String> item = new TreeItem<>(collection.getName());
+        TreeItem<String> item = createCollectionItem(collection);
         item.setGraphic(new FontIcon("fa-folder"));
 
         insertImageItens(item, collection);
 
         return item;
+    }
+
+    protected TreeItem<String> createCollectionItem(Collection collection) {
+        return new TreeItem<>(collection.getName());
     }
 
     private void insertImageItens(TreeItem<String> item, Collection collection) {
@@ -87,6 +100,16 @@ public class ListCollectionController implements Initializable {
     }
 
     private void listenToCollectionsChange() {
-        service.addCollectionsChangeListener(() -> Platform.runLater(() -> buildCollectionsTree()));
+//        service.addCollectionsChangeListener(() -> Platform.runLater(() -> buildCollectionsTree()));
+        service.addCollectionsChangeListener(getCollectionsChangeListener());
+    }
+
+    protected Runnable getCollectionsChangeListener() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> ListCollectionController.this.buildCollectionsTree());
+            }
+        };
     }
 }
