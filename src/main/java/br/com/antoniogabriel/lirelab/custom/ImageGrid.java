@@ -13,14 +13,12 @@ import javafx.scene.layout.StackPane;
 import javax.inject.Inject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 public class ImageGrid extends StackPane {
 
     private ImageViewFactory imageViewFactory;
     private FileUtils fileUtils;
-    private List<String> paths;
 
     private int imagesHeight;
 
@@ -45,10 +43,6 @@ public class ImageGrid extends StackPane {
 
 
     public void setImages(List<String> paths) throws FileNotFoundException {
-        this.paths = paths;
-
-        paths.size();
-
         for (String path : paths) {
             if(fileUtils.fileExists(path)) {
                 ImageView imageView = imageViewFactory.create(path);
@@ -63,10 +57,6 @@ public class ImageGrid extends StackPane {
     protected ObservableList<Node> images() {
         ObservableList<Node> nodes = flowPane.getChildren();
         return nodes;
-    }
-
-    public List<String> getPaths() {
-        return Collections.unmodifiableList(paths);
     }
 
     public void setImagesHeight(int imagesHeight) {
