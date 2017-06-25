@@ -3,10 +3,15 @@
 <?import javafx.scene.layout.StackPane?>
 
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.geometry.Insets?>
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          type="StackPane">
 
-    <FlowPane fx:id="flowPane"/>
+    <FlowPane fx:id="flowPane" alignment="TOP_CENTER" hgap="5" vgap="5">
+        <padding>
+            <Insets top="5" bottom="5" left="5" right="5"/>
+        </padding>
+    </FlowPane>
 
 </fx:root>
