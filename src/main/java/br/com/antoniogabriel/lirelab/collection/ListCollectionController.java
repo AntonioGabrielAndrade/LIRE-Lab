@@ -19,8 +19,7 @@ import java.util.ResourceBundle;
 
 public class ListCollectionController implements Initializable {
 
-    @FXML
-    private TreeView<String> collectionsTree;
+    @FXML private TreeView<String> collectionsTree;
 
     private CollectionService service;
     private MainAreaController mainAreaController;
@@ -100,16 +99,10 @@ public class ListCollectionController implements Initializable {
     }
 
     private void listenToCollectionsChange() {
-//        service.addCollectionsChangeListener(() -> Platform.runLater(() -> buildCollectionsTree()));
         service.addCollectionsChangeListener(getCollectionsChangeListener());
     }
 
     protected Runnable getCollectionsChangeListener() {
-        return new Runnable() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> ListCollectionController.this.buildCollectionsTree());
-            }
-        };
+        return () -> Platform.runLater(() -> ListCollectionController.this.buildCollectionsTree());
     }
 }
