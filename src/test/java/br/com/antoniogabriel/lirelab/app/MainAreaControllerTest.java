@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class MainAreaControllerTest {
     @Test(expected = LireLabException.class)
     public void shouldThrowCustomExceptionIfIOExceptionOccurs() throws Exception {
         given(collectionGridBuilder.build()).willReturn(collectionGrid);
-        doThrow(LireLabException.class).when(collectionGrid).setCollection(collection);
+        doThrow(IOException.class).when(collectionGrid).setCollection(collection);
 
         controller.showCollectionImages(collection);
     }
