@@ -36,7 +36,7 @@ public class MainAreaControllerTest {
     }
 
     @Test(expected = LireLabException.class)
-    public void shouldThrowCustomExceptionIfIOExceptionOccurs() throws Exception {
+    public void shouldThrowCustomExceptionWhenIOExceptionOccurs() throws Exception {
         given(collectionGridBuilder.build()).willReturn(collectionGrid);
         doThrow(IOException.class).when(collectionGrid).setCollection(collection);
 
