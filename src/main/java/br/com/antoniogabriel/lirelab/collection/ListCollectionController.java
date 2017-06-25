@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import org.jetbrains.annotations.NotNull;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javax.inject.Inject;
@@ -19,7 +18,8 @@ import java.util.ResourceBundle;
 
 public class ListCollectionController implements Initializable {
 
-    @FXML private TreeView<String> collectionsTree;
+    @FXML
+    private TreeView<String> collectionsTree;
 
     private CollectionService service;
     private MainAreaController mainAreaController;
@@ -34,12 +34,16 @@ public class ListCollectionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buildCollectionsTree();
+        listenToCollectionSelection();
         listenToCollectionsChange();
     }
 
     private void buildCollectionsTree() {
         collectionsTree.setRoot(getRootItemFor(service.getCollections()));
         collectionsTree.setShowRoot(false);
+    }
+
+    private void listenToCollectionSelection() {
         collectionsTree.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
