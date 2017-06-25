@@ -18,14 +18,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ListCollectionController implements Initializable {
-    @FXML
-    private TreeView<String> collectionsTree;
+
+    @FXML private TreeView<String> collectionsTree;
 
     private CollectionService service;
-
-    private Map<String, Collection> nameToCollectionMap = new HashMap<>();
-
     private MainAreaController mainAreaController;
+    private Map<String, Collection> nameToCollectionMap = new HashMap<>();
 
     @Inject
     public ListCollectionController(CollectionService service, MainAreaController appController) {
@@ -55,7 +53,6 @@ public class ListCollectionController implements Initializable {
                 });
     }
 
-    @NotNull
     private TreeItem<String> getRootItemFor(List<Collection> collections) {
         TreeItem root = new TreeItem();
         root.setExpanded(true);
