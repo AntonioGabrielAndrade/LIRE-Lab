@@ -20,9 +20,9 @@ import static org.mockito.Mockito.*;
 public class ImageGridTest {
 
     private static final String INEXISTENT_PATH = "INEXISTENT_PATH";
-    public static final String PATH1 = "PATH1";
-    public static final String PATH2 = "PATH2";
-    public static final String PATH3 = "PATH3";
+    private static final String PATH1 = "PATH1";
+    private static final String PATH2 = "PATH2";
+    private static final String PATH3 = "PATH3";
 
     @Mock private ImageView imageView;
     @Mock private ImageViewFactory imageViewFactory;
