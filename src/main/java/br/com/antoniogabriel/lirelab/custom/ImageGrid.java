@@ -17,20 +17,25 @@ import java.util.List;
 
 public class ImageGrid extends StackPane {
 
+    public static final String IMAGE_GRID_FXML = "image-grid.fxml";
+
     private ImageViewFactory imageViewFactory;
     private FileUtils fileUtils;
 
-    private int imagesHeight;
-
     @FXML private FlowPane flowPane;
+
+    private int imagesHeight;
 
     @Inject
     public ImageGrid(ImageViewFactory imageViewFactory, FileUtils fileUtils) {
         this.imageViewFactory = imageViewFactory;
         this.fileUtils = fileUtils;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-                "image-grid.fxml"));
+        loadFXML();
+    }
+
+    protected void loadFXML() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(IMAGE_GRID_FXML));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -45,25 +50,23 @@ public class ImageGrid extends StackPane {
     public void setImages(List<String> paths) throws FileNotFoundException {
         for (String path : paths) {
             if(fileUtils.fileExists(path)) {
-                ImageView imageView = imageViewFactory.create(path);
-                imageView.setFitHeight(imagesHeight);
-                imageView.setPreserveRatio(true);
-                images().add(imageView);
+                addImageToGrid(path);
             }
         }
-
     }
 
-    protected ObservableList<Node> images() {
-        ObservableList<Node> nodes = flowPane.getChildren();
-        return nodes;
+    private void addImageToGrid(String path) throws FileNotFoundException {
+        ImageView imageView = imageViewFactory.create(path);
+        imageView.setFitHeight(imagesHeight);
+        imageView.setPreserveRatio(true);
+        images().add(imageView);
+    }
+
+    private ObservableList<Node> images() {
+        return flowPane.getChildren();
     }
 
     public void setImagesHeight(int imagesHeight) {
         this.imagesHeight = imagesHeight;
-    }
-
-    public int getImagesHeight() {
-        return imagesHeight;
     }
 }
