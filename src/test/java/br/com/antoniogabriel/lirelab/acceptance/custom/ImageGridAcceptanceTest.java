@@ -5,7 +5,9 @@ import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.semanticmetadata.lire.utils.FileUtils;
+import org.junit.After;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import javax.inject.Inject;
@@ -38,10 +40,13 @@ public class ImageGridAcceptanceTest extends ApplicationTest {
         stage.show();
     }
 
+    @After
+    public void tearDown() throws Exception {
+        FxToolkit.hideStage();
+    }
+
     @Test
     public void shouldShowImages() throws Exception {
-        Thread.sleep(3000);
-
         verifyThat("#14474347006_99aa0fd981_k", isVisible());
         verifyThat("#16903390174_1d670a5849_h", isVisible());
         verifyThat("#17099294578_0ba4068bad_k", isVisible());

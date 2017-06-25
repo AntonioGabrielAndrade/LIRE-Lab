@@ -9,9 +9,11 @@ import br.com.antoniogabriel.lirelab.custom.ImageGridBuilder;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.io.IOException;
@@ -59,6 +61,11 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
         });
     }
 
+    @After
+    public void tearDown() throws Exception {
+        FxToolkit.hideStage();
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         collectionGrid = new CollectionGrid(resolver, imageGridBuilder);
@@ -71,8 +78,6 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldShowImages() throws Exception {
-        Thread.sleep(3000);
-
         verifyThat("#14474347006_99aa0fd981_k", isVisible());
         verifyThat("#16903390174_1d670a5849_h", isVisible());
         verifyThat("#17099294578_0ba4068bad_k", isVisible());
