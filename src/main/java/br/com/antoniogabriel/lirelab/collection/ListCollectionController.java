@@ -80,6 +80,7 @@ public class ListCollectionController implements Initializable {
         List<String> images = collection.getImagePaths();
         for (String image : images) {
             TreeItem<String> imageItem = new TreeItem<>(Paths.get(image).getFileName().toString());
+            imageItem.setGraphic(new FontIcon("fa-file-image-o"));
             item.getChildren().add(imageItem);
         }
     }
