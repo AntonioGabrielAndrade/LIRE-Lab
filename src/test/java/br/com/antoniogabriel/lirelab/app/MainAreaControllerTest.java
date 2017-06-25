@@ -3,41 +3,29 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.LireLabException;
-import br.com.antoniogabriel.lirelab.collection.PathResolver;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.image.ImageView;
+import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.CollectionGridBuilder;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MainAreaControllerTest {
 
-    private static final String DONT_EXIST = "DONT EXIST";
-    private static final String THROW_EXCEPTION = "THROW EXCEPTION";
-    private static final PathResolver UNUSED_RESOLVER = null;
-
     @Mock BorderPane centerPane;
-    @Mock FlowPane flowPane;
-    @Mock ImageView imageView;
-    @Mock ObservableList<Node> flowPaneChildren;
-    @Mock ImageViewFactory imageViewFactory;
+    @Mock CollectionGridBuilder collectionGridBuilder;
+    @Mock CollectionGrid collectionGrid;
 
     private MainAreaController controller;
     private Collection collection;
@@ -49,54 +37,29 @@ public class MainAreaControllerTest {
         paths = new ArrayList<>(asList("path1", "path2", "path3"));
         collection = new Collection();
         collection.setImagePaths(paths);
-
-        given(flowPane.getChildren()).willReturn(flowPaneChildren);
-        given(imageViewFactory.create(any())).willReturn(imageView);
-    }
-
-    @Test
-    public void shouldAddCollectionImagesToCenter() throws Exception {
-        controller.showCollectionImages(collection);
-
-        verify(flowPaneChildren, times(paths.size())).add(imageView);
-        verify(centerPane).setCenter(flowPane);
-    }
-
-    @Test
-    public void shouldNotAddImageIfFileNotExist() throws Exception {
-        paths.add(DONT_EXIST);
-        controller.showCollectionImages(collection);
-
-        verify(flowPaneChildren, times(paths.size()-1))
-                .add(imageView);
     }
 
     @Test(expected = LireLabException.class)
     public void shouldThrowCustomExceptionIfIOExceptionOccurs() throws Exception {
-        collection.setName(THROW_EXCEPTION);
+        given(collectionGridBuilder.build()).willReturn(collectionGrid);
+        doThrow(LireLabException.class).when(collectionGrid).setCollection(collection);
+
         controller.showCollectionImages(collection);
+    }
+
+    @Test
+    public void shouldAddCollectionGridToCenter() throws Exception {
+        given(collectionGridBuilder.build()).willReturn(collectionGrid);
+
+        controller.showCollectionImages(collection);
+
+        verify(collectionGrid).setCollection(collection);
+        verify(centerPane).setCenter(collectionGrid);
     }
 
     private class TestableMainAreaController extends MainAreaController {
         private TestableMainAreaController() {
-            super(UNUSED_RESOLVER, imageViewFactory);
-        }
-
-        @Override
-        protected boolean fileExists(String thumb) {
-            return !thumb.equals(DONT_EXIST);
-        }
-
-        @Override
-        protected List<String> getThumbnailsPaths(Collection collection) throws IOException {
-            if(collection.getName().equals(THROW_EXCEPTION))
-                throw new IOException();
-            return paths;
-        }
-
-        @Override
-        protected FlowPane createFlowPane() {
-            return flowPane;
+            super(collectionGridBuilder);
         }
 
         @Override
