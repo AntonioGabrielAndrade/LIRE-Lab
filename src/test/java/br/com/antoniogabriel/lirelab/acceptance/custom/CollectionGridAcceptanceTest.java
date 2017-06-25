@@ -6,6 +6,7 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.ImageGridBuilder;
+import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -34,6 +35,7 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
     private static final ImageViewFactory imageViewFactory = new ImageViewFactory();
     private static final FileUtils fileUtils = new FileUtils();
     private static final ImageGridBuilder imageGridBuilder = new ImageGridBuilder(imageViewFactory, fileUtils);
+    private static final CollectionUtils collectionUtils = new CollectionUtils(resolver);
 
     private CollectionGrid collectionGrid;
 
@@ -68,7 +70,7 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        collectionGrid = new CollectionGrid(resolver, imageGridBuilder);
+        collectionGrid = new CollectionGrid(imageGridBuilder, collectionUtils);
         collectionGrid.setCollection(COLLECTION);
 
         Scene scene = new Scene(collectionGrid, 600, 400);
