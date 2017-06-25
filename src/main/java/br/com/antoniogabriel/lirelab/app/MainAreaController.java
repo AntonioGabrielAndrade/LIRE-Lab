@@ -29,14 +29,11 @@ public class MainAreaController {
 
             CollectionGrid grid = collectionGridBuilder.build();
             grid.setCollection(collection);
-            getCenterPane().setCenter(grid);
+            centerPane.setCenter(grid);
 
         } catch (IOException e) {
             throw new LireLabException("Could not show collections", e);
         }
     }
 
-    protected BorderPane getCenterPane() {
-        return centerPane;
-    }
 }

@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -27,13 +28,13 @@ public class MainAreaControllerTest {
     @Mock CollectionGridBuilder collectionGridBuilder;
     @Mock CollectionGrid collectionGrid;
 
-    private MainAreaController controller;
+    @InjectMocks MainAreaController controller = new MainAreaController(collectionGridBuilder);
+
     private Collection collection;
     private List<String> paths;
 
     @Before
     public void setUp() throws Exception {
-        controller = new TestableMainAreaController();
         paths = new ArrayList<>(asList("path1", "path2", "path3"));
         collection = new Collection();
         collection.setImagePaths(paths);
@@ -55,16 +56,5 @@ public class MainAreaControllerTest {
 
         verify(collectionGrid).setCollection(collection);
         verify(centerPane).setCenter(collectionGrid);
-    }
-
-    private class TestableMainAreaController extends MainAreaController {
-        private TestableMainAreaController() {
-            super(collectionGridBuilder);
-        }
-
-        @Override
-        protected BorderPane getCenterPane() {
-            return centerPane;
-        }
     }
 }
