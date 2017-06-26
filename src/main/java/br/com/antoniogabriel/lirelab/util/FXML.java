@@ -34,12 +34,15 @@ public abstract class FXML {
         this.loader.setRoot(null);
         Parent root = loader.load();
 
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("css/style.css");
+
         if(stage.getOwner() != null) {
             stage.initModality(Modality.WINDOW_MODAL);
         }
         stage.setTitle(getTitle());
         stage.setMaximized(maximized);
-        stage.setScene(new Scene(root));
+        stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
     }
