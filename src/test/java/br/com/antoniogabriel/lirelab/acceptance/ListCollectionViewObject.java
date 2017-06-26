@@ -62,6 +62,10 @@ public class ListCollectionViewObject extends FxRobot {
         clickOn(collection).interrupt();
     }
 
+    public void selectImage(String image) {
+        clickOn(image).interrupt();
+    }
+
     @NotNull
     private Callable<Boolean> isPresent(String text) {
         return () -> {
