@@ -76,7 +76,7 @@ public class CollectionRepositoryTest {
     }
 
     @Test
-    public void shouldGetCollectionsFromDisk() throws Exception {
+    public void shouldReturnCollectionsFromDisk() throws Exception {
         List<Collection> collections = repository.getCollections();
 
         assertThat(collections.size(), is(3));
@@ -86,7 +86,7 @@ public class CollectionRepositoryTest {
     }
 
     @Test
-    public void shouldGetCollectionsWithImagesPaths() throws Exception {
+    public void shouldReturnCollectionsWithImagesPaths() throws Exception {
         List<Collection> collections = repository.getCollections();
 
         List<String> paths = collections.get(0).getImagePaths();
