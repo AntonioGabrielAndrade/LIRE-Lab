@@ -1,13 +1,16 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import net.semanticmetadata.lire.builders.DocumentBuilder;
+import net.semanticmetadata.lire.utils.FileUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.store.FSDirectory;
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -37,11 +40,7 @@ public class CollectionRepository {
 
         try(DirectoryStream<Path> stream = Files.newDirectoryStream(dir, filter)) {
             for (Path path : stream) {
-                CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
-                Collection collection = dao.readCollection();
-                List<String> paths = getCollectionImagesPaths(collection);
-                collection.setImagePaths(paths);
-                collections.add(collection);
+                collections.add(getCollection(path));
             }
 
         } catch (IOException | JAXBException e) {
@@ -51,7 +50,26 @@ public class CollectionRepository {
         return collections;
     }
 
-    private List<String> getCollectionImagesPaths(Collection collection) {
+    @NotNull
+    protected Collection getCollection(Path path) throws JAXBException, IOException {
+        CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
+        Collection collection = dao.readCollection();
+
+        List<String> imagesPaths = getImagesPaths(collection);
+        collection.setImagePaths(imagesPaths);
+
+        List<String> thumbnailsPaths = getThumbnailPaths(collection);
+        collection.setThumbnailPaths(thumbnailsPaths);
+
+        return collection;
+    }
+
+    private List<String> getThumbnailPaths(Collection collection) throws IOException {
+        return FileUtils.getAllImages(
+                new File(resolver.getThumbnailsDirectoryPath(collection.getName())), false);
+    }
+
+    private List<String> getImagesPaths(Collection collection) {
 
         List<String> results = new ArrayList<>();
 

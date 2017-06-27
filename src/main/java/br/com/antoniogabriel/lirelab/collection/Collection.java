@@ -25,6 +25,9 @@ public class Collection {
     @XmlTransient
     private List<String> imagePaths = new ArrayList<>();
 
+    @XmlTransient
+    private List<String> thumbnailPaths = new ArrayList<>();
+
     public Collection() {}
 
     public Collection(String name) {
@@ -61,6 +64,14 @@ public class Collection {
 
     public void setImagePaths(List<String> imagePaths) {
         this.imagePaths = imagePaths;
+    }
+
+    public List<String> getThumbnailPaths() {
+        return thumbnailPaths;
+    }
+
+    public void setThumbnailPaths(List<String> thumbnailPaths) {
+        this.thumbnailPaths = thumbnailPaths;
     }
 
     @Override
