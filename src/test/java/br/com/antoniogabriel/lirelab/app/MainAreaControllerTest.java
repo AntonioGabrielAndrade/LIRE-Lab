@@ -22,9 +22,9 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class MainAreaControllerTest {
 
-    @Mock BorderPane centerPane;
-    @Mock CollectionGridBuilder collectionGridBuilder;
-    @Mock CollectionGrid collectionGrid;
+    @Mock private BorderPane centerPane;
+    @Mock private CollectionGridBuilder collectionGridBuilder;
+    @Mock private CollectionGrid collectionGrid;
 
     @InjectMocks MainAreaController controller = new MainAreaController(collectionGridBuilder);
 
