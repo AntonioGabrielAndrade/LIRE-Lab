@@ -27,9 +27,9 @@ public class CollectionRepositoryTest {
     private static final Collection COLLECTION3 = collection("Collection3", TEST_IMAGES, CEDD);
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
-
     private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
-    private static final CollectionRepository REPOSITORY = new CollectionRepository(RESOLVER);
+
+    private CollectionRepository repository = new CollectionRepository(RESOLVER);
 
     @BeforeClass
     public static void createCollections() throws Exception {
@@ -68,16 +68,16 @@ public class CollectionRepositoryTest {
     public void shouldReturnEmptyCollectionListWhenCollectionsDirectoryDonExist() throws Exception {
         deleteWorkDirectory(RESOLVER);
 
-        assertTrue(REPOSITORY.getCollections().isEmpty());
+        assertTrue(repository.getCollections().isEmpty());
 
         createCollections();
 
-        assertFalse(REPOSITORY.getCollections().isEmpty());
+        assertFalse(repository.getCollections().isEmpty());
     }
 
     @Test
     public void shouldGetCollectionsFromDisk() throws Exception {
-        List<Collection> collections = REPOSITORY.getCollections();
+        List<Collection> collections = repository.getCollections();
 
         assertThat(collections.size(), is(3));
         assertTrue(collections.contains(COLLECTION1));
@@ -87,7 +87,7 @@ public class CollectionRepositoryTest {
 
     @Test
     public void shouldGetCollectionsWithImagesPaths() throws Exception {
-        List<Collection> collections = REPOSITORY.getCollections();
+        List<Collection> collections = repository.getCollections();
 
         List<String> paths = collections.get(0).getImagePaths();
 
