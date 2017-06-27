@@ -26,10 +26,10 @@ public class CollectionRepositoryTest {
     private static final Collection COLLECTION2 = collection("Collection2", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION3 = collection("Collection3", TEST_IMAGES, CEDD);
 
-    private static final PathResolver resolver = new PathResolver(TEST_ROOT);
+    private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
 
-    private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
-    private static final CollectionRepository repository = new CollectionRepository(resolver);
+    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
+    private static final CollectionRepository REPOSITORY = new CollectionRepository(RESOLVER);
 
     @BeforeClass
     public static void createCollections() throws Exception {
@@ -37,9 +37,9 @@ public class CollectionRepositoryTest {
         runOnFXThread(() -> {
             try {
 
-                collectionHelper.createRealCollection(COLLECTION1);
-                collectionHelper.createRealCollection(COLLECTION2);
-                collectionHelper.createRealCollection(COLLECTION3);
+                COLLECTION_HELPER.createRealCollection(COLLECTION1);
+                COLLECTION_HELPER.createRealCollection(COLLECTION2);
+                COLLECTION_HELPER.createRealCollection(COLLECTION3);
 
             } catch (Exception e) {
                 throw new RuntimeException("Test Error", e);
@@ -52,11 +52,11 @@ public class CollectionRepositoryTest {
         runOnFXThread(() -> {
             try {
 
-                collectionHelper.deleteCollection(COLLECTION1);
-                collectionHelper.deleteCollection(COLLECTION2);
-                collectionHelper.deleteCollection(COLLECTION3);
+                COLLECTION_HELPER.deleteCollection(COLLECTION1);
+                COLLECTION_HELPER.deleteCollection(COLLECTION2);
+                COLLECTION_HELPER.deleteCollection(COLLECTION3);
 
-                deleteWorkDirectory(resolver);
+                deleteWorkDirectory(RESOLVER);
 
             } catch (IOException e) {
                 throw new RuntimeException("Test Error", e);
@@ -66,18 +66,18 @@ public class CollectionRepositoryTest {
 
     @Test
     public void shouldGetEmptyCollectionListWhenCollectionsDirectoryDonExist() throws Exception {
-        deleteWorkDirectory(resolver);
+        deleteWorkDirectory(RESOLVER);
 
-        assertTrue(repository.getCollections().isEmpty());
+        assertTrue(REPOSITORY.getCollections().isEmpty());
 
         createCollections();
 
-        assertFalse(repository.getCollections().isEmpty());
+        assertFalse(REPOSITORY.getCollections().isEmpty());
     }
 
     @Test
     public void shouldGetCollectionsFromDisk() throws Exception {
-        List<Collection> collections = repository.getCollections();
+        List<Collection> collections = REPOSITORY.getCollections();
 
         assertThat(collections.size(), is(3));
         assertTrue(collections.contains(COLLECTION1));
@@ -87,7 +87,7 @@ public class CollectionRepositoryTest {
 
     @Test
     public void shouldGetCollectionsWithImagesPaths() throws Exception {
-        List<Collection> collections = repository.getCollections();
+        List<Collection> collections = REPOSITORY.getCollections();
 
         List<String> paths = collections.get(0).getImagePaths();
 
