@@ -89,9 +89,10 @@ public class CollectionRepositoryTest {
     public void shouldReturnCollectionsWithImagesPaths() throws Exception {
         List<Collection> collections = repository.getCollections();
 
-        List<String> paths = collections.get(0).getImagePaths();
+        Collection collection = collections.get(0);
 
-        String imagesDir = collections.get(0).getImagesDirectory();
+        String imagesDir = collection.getImagesDirectory();
+        List<String> paths = collection.getImagePaths();
 
         assertThat(paths.size(), is(10));
 
