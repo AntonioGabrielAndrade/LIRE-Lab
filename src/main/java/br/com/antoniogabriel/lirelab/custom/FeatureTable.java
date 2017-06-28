@@ -21,10 +21,10 @@ public class FeatureTable extends TableView<ViewableFeature> implements Initiali
 
     public static final String FXML = "table-view.fxml";
 
-    @FXML
-    private TableColumn<ViewableFeature, Boolean> selectedCol;
-    @FXML
-    private TableColumn<ViewableFeature, String> nameCol;
+    @FXML private TableColumn<ViewableFeature, Boolean> selectedCol;
+    @FXML private TableColumn<ViewableFeature, String> nameCol;
+
+    FeatureUtils featureUtils = new FeatureUtils();
 
     public FeatureTable() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML));
@@ -39,11 +39,11 @@ public class FeatureTable extends TableView<ViewableFeature> implements Initiali
     }
 
     public BooleanBinding noFeatureSelected() {
-        return FeatureUtils.noFeatureIsSelectedIn(getItems());
+        return featureUtils.noFeatureIsSelectedIn(getItems());
     }
 
     public List<Feature> getSelectedFeatures() {
-        return FeatureUtils.getSelectedFeaturesFrom(getItems());
+        return featureUtils.getSelectedFeaturesFrom(getItems());
     }
 
     private void setupTableColumns() {

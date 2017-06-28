@@ -9,9 +9,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static br.com.antoniogabriel.lirelab.util.FeatureUtils.getSelectedFeaturesFrom;
-import static br.com.antoniogabriel.lirelab.util.FeatureUtils.noFeatureIsSelectedIn;
-import static br.com.antoniogabriel.lirelab.util.FeatureUtils.toViewableFeatures;
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.FCTH;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
@@ -21,9 +18,11 @@ import static org.junit.Assert.assertTrue;
 
 public class FeatureUtilsTest {
 
+    private FeatureUtils utils = new FeatureUtils();
+
     @Test
     public void shouldConvertFeaturesIntoViewableFeatures() throws Exception {
-        ObservableList<ViewableFeature> result = toViewableFeatures(CEDD, TAMURA);
+        ObservableList<ViewableFeature> result = utils.toViewableFeatures(CEDD, TAMURA);
 
         assertThat(firstFeatureOf(result), is(CEDD));
         assertThat(secondFeatureOf(result), is(TAMURA));
@@ -32,7 +31,7 @@ public class FeatureUtilsTest {
 
     @Test
     public void shouldGetSelectedFeatures() throws Exception {
-        ArrayList<Feature> selected = getSelectedFeaturesFrom(
+        ArrayList<Feature> selected = utils.getSelectedFeaturesFrom(
                                                 someFeatures(
                                                         selected(CEDD),
                                                         selected(TAMURA),
@@ -51,7 +50,7 @@ public class FeatureUtilsTest {
                                                         notSelected(TAMURA)
                                                         );
 
-        BooleanBinding binding = noFeatureIsSelectedIn(features);
+        BooleanBinding binding = utils.noFeatureIsSelectedIn(features);
 
         assertThat(valueOf(binding), is(true));
 

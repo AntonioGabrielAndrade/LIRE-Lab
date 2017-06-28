@@ -8,35 +8,28 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class FeatureUtils {
 
-    public static ObservableList<ViewableFeature> toViewableFeatures(Feature... features) {
+    public ObservableList<ViewableFeature> toViewableFeatures(Feature... features) {
         return Arrays.stream(features)
                 .map(f -> new ViewableFeature(f))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     public ObservableList<ViewableFeature> toViewable(Feature... features) {
-        return FeatureUtils.toViewableFeatures(features);
+        return this.toViewableFeatures(features);
     }
 
-    public ObservableList<ViewableFeature> toViewableFeatures(List<Feature> features) {
-        return features.stream()
-                .map(f -> new ViewableFeature(f))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-    }
-
-    public static ArrayList<Feature> getSelectedFeaturesFrom(ObservableList<ViewableFeature> viewableFeatures) {
+    public ArrayList<Feature> getSelectedFeaturesFrom(ObservableList<ViewableFeature> viewableFeatures) {
         return viewableFeatures.stream()
                 .filter(v -> v.isSelected())
                 .map(v -> v.getFeature())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static BooleanBinding noFeatureIsSelectedIn(ObservableList<ViewableFeature> viewableFeatures) {
+    public BooleanBinding noFeatureIsSelectedIn(ObservableList<ViewableFeature> viewableFeatures) {
         return viewableFeatures.stream()
                 .map(v -> v.selectedProperty().not())
                 .reduce(BooleanBinding::and)
