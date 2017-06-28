@@ -1,30 +1,31 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.app.App;
-import javafx.stage.Stage;
-import org.junit.After;
+import br.com.antoniogabriel.lirelab.app.AppFXML;
+import br.com.antoniogabriel.lirelab.collection.PathResolver;
+import br.com.antoniogabriel.lirelab.test.FXMLTest;
+import com.google.inject.AbstractModule;
 import org.junit.Before;
 import org.junit.Test;
-import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit.ApplicationTest;
 
-public class AppViewTest extends ApplicationTest {
+import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
+
+public class AppViewTest extends FXMLTest<AppFXML> {
 
     private AppViewObject view;
 
     @Override
-    public void start(Stage stage) throws Exception {
-        new App().start(stage);
+    protected AbstractModule getBindings() {
+        return new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(PathResolver.class).toInstance(new PathResolver(TEST_ROOT));
+            }
+        };
     }
 
     @Before
     public void setUp() throws Exception {
         view = new AppViewObject();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        FxToolkit.hideStage();
     }
 
     @Test
@@ -33,5 +34,4 @@ public class AppViewTest extends ApplicationTest {
         view.checkToolBar();
         view.checkWelcomeView();
     }
-
 }
