@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ThumbnailBuilder {
+
     public void createDirectory(String thumbnailsDir) throws IOException {
         Path path = Paths.get(thumbnailsDir);
         if(!Files.exists(path))
