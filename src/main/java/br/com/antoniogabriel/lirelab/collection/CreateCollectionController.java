@@ -1,13 +1,11 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.custom.FeatureTable;
-import br.com.antoniogabriel.lirelab.custom.ViewableFeature;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,10 +77,6 @@ public class CreateCollectionController implements Initializable {
         featuresTable.setItems(featureUtils.toViewable(Feature.values()));
     }
 
-    private ObservableList<ViewableFeature> getViewableFeatures() {
-        return FeatureUtils.toViewableFeatures(Feature.values());
-    }
-
     private void bindCreateButton() {
         createIsDisabledWhen(nameIsEmpty().or(imagesDirectoryIsEmpty().or(noFeatureSelected())));
     }
@@ -107,15 +101,15 @@ public class CreateCollectionController implements Initializable {
         return dialogProvider.getWindowFrom(event);
     }
 
-    String imagesDirectory() {
+    private String imagesDirectory() {
         return imagesDirectoryField.getText();
     }
 
-    List<Feature> collectionFeatures() {
+    private List<Feature> collectionFeatures() {
         return Collections.unmodifiableList(featuresTable.getSelectedFeatures());
     }
 
-    String collectionName() {
+    private String collectionName() {
         return nameField.getText();
     }
 }
