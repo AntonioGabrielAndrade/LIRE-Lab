@@ -35,14 +35,21 @@ public class MainAreaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        collectionTree.addCollectionSelectionListener(
-                new ShowImagesWhenCollectionIsSelectedListener()
-        );
+        listenToCollectionSelection();
+        listenToCollectionsChange();
+        loadCollections();
+    }
+
+    protected void listenToCollectionsChange() {
         collectionService.addCollectionsChangeListener(
                 new LoadCollectionsWhenAnyCollectionChangeListener()
         );
+    }
 
-        loadCollections();
+    protected void listenToCollectionSelection() {
+        collectionTree.addCollectionSelectionListener(
+                new ShowImagesWhenCollectionIsSelectedListener()
+        );
     }
 
     private void loadCollections() {
