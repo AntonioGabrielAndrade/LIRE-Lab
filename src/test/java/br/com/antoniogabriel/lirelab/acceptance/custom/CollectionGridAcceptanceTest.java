@@ -10,10 +10,7 @@ import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -28,14 +25,14 @@ import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class CollectionGridAcceptanceTest extends ApplicationTest {
 
+    private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
+    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
     private static final Collection COLLECTION = collection("Collection", TEST_IMAGES, CEDD);
 
-    private static final PathResolver resolver = new PathResolver(TEST_ROOT);
-    private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
-    private static final ImageViewFactory imageViewFactory = new ImageViewFactory();
-    private static final FileUtils fileUtils = new FileUtils();
-    private static final ImageGridBuilder imageGridBuilder = new ImageGridBuilder(imageViewFactory, fileUtils);
-    private static final CollectionUtils collectionUtils = new CollectionUtils(resolver);
+    private CollectionUtils collectionUtils = new CollectionUtils(RESOLVER);
+    private ImageViewFactory imageViewFactory = new ImageViewFactory();
+    private FileUtils fileUtils = new FileUtils();
+    private ImageGridBuilder imageGridBuilder = new ImageGridBuilder(imageViewFactory, fileUtils);
 
     private CollectionGrid collectionGrid;
 
@@ -44,7 +41,7 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
         startJavaFX();
         runOnFXThread(() -> {
             try {
-                collectionHelper.createRealCollection(COLLECTION);
+                COLLECTION_HELPER.createRealCollection(COLLECTION);
             } catch (Exception e) {
                 throw new RuntimeException("Test Error", e);
             }
@@ -55,12 +52,20 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
     public static void deleteCollections() throws Exception {
         runOnFXThread(() -> {
             try {
-                collectionHelper.deleteCollection(COLLECTION);
-                deleteWorkDirectory(resolver);
+                COLLECTION_HELPER.deleteCollection(COLLECTION);
+                deleteWorkDirectory(RESOLVER);
             } catch (IOException e) {
                 throw new RuntimeException("Test Error", e);
             }
         });
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        collectionUtils = new CollectionUtils(RESOLVER);
+        imageViewFactory = new ImageViewFactory();
+        fileUtils = new FileUtils();
+        imageGridBuilder = new ImageGridBuilder(imageViewFactory, fileUtils);
     }
 
     @After
