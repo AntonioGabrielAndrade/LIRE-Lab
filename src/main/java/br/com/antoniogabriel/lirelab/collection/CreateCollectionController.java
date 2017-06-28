@@ -31,17 +31,22 @@ public class CreateCollectionController implements Initializable {
 
     private DialogProvider dialogProvider;
     private CollectionService service;
+    private FeatureUtils featureUtils;
 
     @Inject
-    public CreateCollectionController(DialogProvider dialogProvider, CollectionService service) {
+    public CreateCollectionController(DialogProvider dialogProvider,
+                                      CollectionService service,
+                                      FeatureUtils featureUtils) {
+
         this.dialogProvider = dialogProvider;
         this.service = service;
+        this.featureUtils = featureUtils;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         populateTable();
-        setupCreateButton();
+        bindCreateButton();
     }
 
     @FXML
@@ -66,20 +71,19 @@ public class CreateCollectionController implements Initializable {
                 collectionFeatures()
         );
 
-        ProgressDialog dialog = dialogProvider.getProgressDialog(
-                                                    task, getWindowFrom(event));
+        ProgressDialog dialog = dialogProvider.getProgressDialog(task, getWindowFrom(event));
         dialog.showAndStart();
     }
 
     private void populateTable() {
-        featuresTable.setItems(getViewableFeatures());
+        featuresTable.setItems(featureUtils.toViewable(Feature.values()));
     }
 
     private ObservableList<ViewableFeature> getViewableFeatures() {
         return FeatureUtils.toViewableFeatures(Feature.values());
     }
 
-    private void setupCreateButton() {
+    private void bindCreateButton() {
         createIsDisabledWhen(nameIsEmpty().or(imagesDirectoryIsEmpty().or(noFeatureSelected())));
     }
 
@@ -114,23 +118,4 @@ public class CreateCollectionController implements Initializable {
     String collectionName() {
         return nameField.getText();
     }
-
-    /* SHOULD BE USED ONLY BY TESTS */
-
-    void imagesDirectory(String dir) {
-        imagesDirectoryField.setText(dir);
-    }
-
-    void collectionFeatures(List<Feature> features) {
-        for (ViewableFeature viewableFeature : featuresTable.getItems()) {
-            if(features.contains(viewableFeature.getFeature())) {
-                viewableFeature.setSelected(true);
-            }
-        };
-    }
-
-    void collectionName(String name) {
-        nameField.setText(name);
-    }
-
 }

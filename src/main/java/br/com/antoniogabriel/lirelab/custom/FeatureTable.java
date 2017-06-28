@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.custom;
 
-import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -42,7 +42,7 @@ public class FeatureTable extends TableView<ViewableFeature> implements Initiali
         return FeatureUtils.noFeatureIsSelectedIn(getItems());
     }
 
-    public ArrayList<Feature> getSelectedFeatures() {
+    public List<Feature> getSelectedFeatures() {
         return FeatureUtils.getSelectedFeaturesFrom(getItems());
     }
 
