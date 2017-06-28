@@ -79,13 +79,7 @@ public class CollectionsMonitor {
                         if (OVERFLOW == kind) {
                             continue; //loop
                         } else if (ENTRY_DELETE == kind || ENTRY_MODIFY == kind) {
-
                             CollectionsMonitor.this.executeListeners();
-
-//                        // A new Path was created
-//                        Path newPath = ((WatchEvent<Path>) watchEvent).context();
-//                        // Output
-//                        System.out.println("New path created: " + newPath);
                         }
                     }
 
@@ -96,9 +90,7 @@ public class CollectionsMonitor {
         };
 
         Thread t = new Thread(loop);
-//            t.setDaemon(true);
+        t.setDaemon(true);
         t.start();
-
-
     }
 }
