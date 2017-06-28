@@ -35,7 +35,8 @@ public abstract class FXML {
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("css/style.css");
+        scene.getStylesheets().add(
+                FXML.class.getResource("style.css").toExternalForm());
 
         if(stage.getOwner() != null) {
             stage.initModality(Modality.WINDOW_MODAL);
