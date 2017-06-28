@@ -70,20 +70,19 @@ public class MainAreaControllerTest {
 
     @Test
     public void shouldListenToCollectionSelectionToShowImages() throws Exception {
+        controller.initialize(null, null);
+
+        verify(collectionTree).addCollectionSelectionListener(
+                any(MainAreaController.ShowImagesWhenCollectionIsSelectedListener.class));
+    }
+
+    @Test
+    public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
         given(collectionGridBuilder.build()).willReturn(collectionGrid);
 
         controller.showCollectionImages(new Collection("Collection"));
 
         verify(centerPane).setCenter(collectionGrid);
-    }
-
-    @Test
-    public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
-        controller.initialize(null, null);
-
-        verify(collectionTree).addCollectionSelectionListener(
-                any(MainAreaController.ShowImagesWhenCollectionIsSelectedListener.class));
-
     }
 
     @Test
