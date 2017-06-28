@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static java.util.Collections.EMPTY_LIST;
+import static java.util.Arrays.asList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -31,19 +31,21 @@ public class MainAreaControllerTest {
     @Mock private CollectionService collectionService;
     @Mock private CollectionTree collectionTree;
 
-
     @InjectMocks MainAreaController controller = new MainAreaController(collectionService, collectionGridBuilder);
 
     private Collection collection;
-    private List<Collection> collections = EMPTY_LIST;
+    private List<Collection> collections;
 
     @Before
     public void setUp() throws Exception {
         collection = new Collection();
+        collections = asList(new Collection("Collection1"), new Collection("Collection2"));
     }
 
     @Test
     public void shouldAddCollectionsToTreeWhenInitialize() throws Exception {
+        given(collectionService.getCollections()).willReturn(collections);
+
         controller.initialize(null, null);
 
         verify(collectionService).getCollections();
