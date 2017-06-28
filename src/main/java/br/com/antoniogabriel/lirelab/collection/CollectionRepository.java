@@ -31,13 +31,27 @@ public class CollectionRepository {
     }
 
     public List<Collection> getCollections() {
-        Path dir = Paths.get(resolver.getCollectionsPath());
+        if(collectionsPathDontExist())
+            return emptyCollectionsList();
 
-        if(!Files.exists(dir)) return Collections.EMPTY_LIST;
+        return readCollectionsFromCollectionsDirectory();
+    }
 
-        DirectoryStream.Filter<Path> filter = entry -> Files.isDirectory(entry);
+    private List<Collection> emptyCollectionsList() {
+        return Collections.EMPTY_LIST;
+    }
+
+    private boolean collectionsPathDontExist() {
+        return !Files.exists(collectionsPath());
+    }
+
+    private List<Collection> readCollectionsFromCollectionsDirectory() {
 
         List<Collection> collections = new ArrayList<>();
+
+        Path dir = collectionsPath();
+
+        DirectoryStream.Filter<Path> filter = entry -> Files.isDirectory(entry);
 
         try(DirectoryStream<Path> stream = Files.newDirectoryStream(dir, filter)) {
             for (Path path : stream) {
@@ -55,8 +69,11 @@ public class CollectionRepository {
         return collections;
     }
 
-    @NotNull
-    protected Collection getCollection(Path path) throws JAXBException, IOException {
+    protected Path collectionsPath() {
+        return Paths.get(resolver.getCollectionsPath());
+    }
+
+    private Collection getCollection(Path path) throws JAXBException, IOException {
         CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
         Collection collection = dao.readCollection();
 
@@ -79,7 +96,7 @@ public class CollectionRepository {
         List<String> results = new ArrayList<>();
 
         try {
-            IndexReader ir = DirectoryReader.open(FSDirectory.open(Paths.get(resolver.getIndexDirectoryPath(collection.getName()))));
+            IndexReader ir = DirectoryReader.open(FSDirectory.open(indexPath(collection)));
 
             int num = ir.numDocs();
             for ( int i = 0; i < num; i++)
@@ -94,5 +111,9 @@ public class CollectionRepository {
         }
 
         return results;
+    }
+
+    private Path indexPath(Collection collection) {
+        return Paths.get(resolver.getIndexDirectoryPath(collection.getName()));
     }
 }
