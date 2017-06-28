@@ -8,12 +8,12 @@
             xmlns:fx="http://javafx.com/fxml">
 
     <left>
-        <CollectionTree id="collection-tree" fx:id="collectionTree"/>
+        <CollectionTree visible="false" id="collection-tree" fx:id="collectionTree"/>
     </left>
     <center>
         <BorderPane fx:id="centerPane">
             <center>
-                <fx:include source="welcome.fxml"/>
+                <fx:include fx:id="welcomeView" visible="true" source="welcome.fxml"/>
             </center>
         </BorderPane>
     </center>

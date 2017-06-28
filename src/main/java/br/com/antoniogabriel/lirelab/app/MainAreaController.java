@@ -11,11 +11,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Singleton
@@ -26,6 +28,7 @@ public class MainAreaController implements Initializable {
 
     @FXML private BorderPane centerPane;
     @FXML private CollectionTree collectionTree;
+    @FXML private StackPane welcomeView;
 
     @Inject
     public MainAreaController(CollectionService collectionService, CollectionGridBuilder collectionGridBuilder) {
@@ -53,7 +56,13 @@ public class MainAreaController implements Initializable {
     }
 
     private void loadCollections() {
-        collectionTree.setCollections(collectionService.getCollections());
+        List<Collection> collections = collectionService.getCollections();
+        if(!collections.isEmpty()) {
+            collectionTree.setCollections(collections);
+            collectionTree.setVisible(true);
+            collectionTree.selectCollection(0);
+            welcomeView.setVisible(false);
+        }
     }
 
     public void showCollectionImages(Collection collection) {
