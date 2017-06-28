@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
 
@@ -14,9 +14,9 @@ public class CreateCollectionTaskTest {
 
     private CreateCollectionTask task;
 
-    @Mock IndexCreator indexCreator;
-    @Mock ThumbnailsCreator thumbnailsCreator;
-    @Mock XMLCreator xmlCreator;
+    @Mock private IndexCreator indexCreator;
+    @Mock private ThumbnailsCreator thumbnailsCreator;
+    @Mock private XMLCreator xmlCreator;
 
     @Before
     public void setUp() throws Exception {
