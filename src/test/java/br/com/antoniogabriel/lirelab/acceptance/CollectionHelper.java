@@ -39,7 +39,13 @@ public class CollectionHelper {
     }
 
     public void deleteCollection(String collectionName) throws IOException {
-        FileUtils.deleteDirectory(new File(resolver.getCollectionPath(collectionName)));
+        File directory = new File(resolver.getCollectionPath(collectionName));
+        File renamed = new File(System.getProperty("java.io.tmpdir") + "/" + collectionName);
+
+        if(!directory.exists()) return;
+
+        FileUtils.moveDirectory(directory, renamed);
+        FileUtils.deleteDirectory(renamed);
     }
 
     public void createStubCollection(Collection collection) throws IOException, JAXBException {
