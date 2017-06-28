@@ -2,7 +2,7 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.collection.LireLabException;
+import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.CollectionGridBuilder;
 import br.com.antoniogabriel.lirelab.custom.CollectionSelectionListener;

@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.app.AppFXML;
-import br.com.antoniogabriel.lirelab.collection.LireLabException;
+import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import javafx.stage.Stage;
 import org.junit.After;
