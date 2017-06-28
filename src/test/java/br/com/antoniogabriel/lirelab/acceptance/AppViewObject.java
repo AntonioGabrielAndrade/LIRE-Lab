@@ -32,7 +32,7 @@ public class AppViewObject extends FxRobot {
     }
 
     public CreateCollectionViewObject createCollection() {
-        clickOn("#welcome-create-collection-button")
+        clickOn("#toolbar-create-collection")
                 .interrupt();
 
         return new CreateCollectionViewObject();
