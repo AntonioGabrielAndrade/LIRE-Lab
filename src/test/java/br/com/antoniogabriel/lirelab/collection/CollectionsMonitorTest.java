@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
 
@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFXThread;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
@@ -63,8 +64,14 @@ public class CollectionsMonitorTest {
 
     @After
     public void tearDown() throws Exception {
-        helper.deleteCollection(COLLECTION_1);
-        helper.deleteCollection(COLLECTION_2);
+        runOnFXThread(() -> {
+            try {
+                helper.deleteCollection(COLLECTION_1);
+                helper.deleteCollection(COLLECTION_2);
+            } catch (IOException e) {
+                throw new RuntimeException("Error", e);
+            }
+        });
     }
 
     @Test
