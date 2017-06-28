@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -40,7 +41,11 @@ public class CollectionRepository {
 
         try(DirectoryStream<Path> stream = Files.newDirectoryStream(dir, filter)) {
             for (Path path : stream) {
-                collections.add(getCollection(path));
+                try {
+                    collections.add(getCollection(path));
+                } catch (UnmarshalException e) {
+                    continue;
+                }
             }
 
         } catch (IOException | JAXBException e) {
