@@ -11,16 +11,15 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Collection {
 
-
     @XmlElement
     private String name = "";
+
+    @XmlElement
+    private String imagesDirectory = "";
 
     @XmlElementWrapper(name="features")
     @XmlElement(name="feature")
     private List<Feature> features = new ArrayList<>();
-
-    @XmlElement
-    private String imagesDirectory = "";
 
     @XmlTransient
     private List<String> imagePaths = new ArrayList<>();
