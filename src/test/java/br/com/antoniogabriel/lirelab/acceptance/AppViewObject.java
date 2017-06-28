@@ -39,7 +39,7 @@ public class AppViewObject extends FxRobot {
     }
 
     public void checkCollectionIsListed(String collectionName) throws TimeoutException {
-        verifyThat("#collections-tree", isVisible());
+        verifyThat("#collection-tree", isVisible());
         waitFor(isPresent(collectionName));
 
     }

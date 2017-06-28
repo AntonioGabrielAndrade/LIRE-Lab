@@ -2,9 +2,10 @@ package br.com.antoniogabriel.lirelab.app;
 
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.LireLabException;
+import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.CollectionGridBuilder;
+import br.com.antoniogabriel.lirelab.custom.CollectionTree;
 import javafx.scene.layout.BorderPane;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.IOException;
+import java.util.List;
 
+import static java.util.Collections.EMPTY_LIST;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -26,30 +28,52 @@ public class MainAreaControllerTest {
     @Mock private CollectionGridBuilder collectionGridBuilder;
     @Mock private CollectionGrid collectionGrid;
 
-    @InjectMocks MainAreaController controller = new MainAreaController(collectionGridBuilder);
+    @Mock private CollectionService collectionService;
+    @Mock private CollectionTree collectionTree;
+
+
+    @InjectMocks MainAreaController controller = new MainAreaController(collectionService, collectionGridBuilder);
 
     private Collection collection;
+    private List<Collection> collections = EMPTY_LIST;
 
     @Before
     public void setUp() throws Exception {
         collection = new Collection();
     }
 
-    @Test(expected = LireLabException.class)
-    public void shouldThrowCustomExceptionWhenIOExceptionOccurs() throws Exception {
-        given(collectionGridBuilder.build()).willReturn(collectionGrid);
-        doThrow(IOException.class).when(collectionGrid).setCollection(collection);
+    @Test
+    public void shouldAddCollectionsToTreeWhenInitialize() throws Exception {
+        controller.initialize(null, null);
 
-        controller.showCollectionImages(collection);
+        verify(collectionService).getCollections();
+        verify(collectionTree).setCollections(collections);
     }
 
     @Test
-    public void shouldAddCollectionGridToCenter() throws Exception {
+    public void shouldListenToCollectionSelectionToShowImages() throws Exception {
         given(collectionGridBuilder.build()).willReturn(collectionGrid);
 
-        controller.showCollectionImages(collection);
+        controller.showCollectionImages(new Collection("Collection"));
 
-        verify(collectionGrid).setCollection(collection);
         verify(centerPane).setCenter(collectionGrid);
+    }
+
+    @Test
+    public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
+        controller.initialize(null, null);
+
+        verify(collectionTree).addCollectionSelectionListener(
+                any(MainAreaController.ShowImagesWhenCollectionIsSelectedListener.class));
+
+    }
+
+    @Test
+    public void shouldListenToCollectionChangeToReloadCollections() throws Exception {
+        controller.initialize(null, null);
+
+        verify(collectionService).addCollectionsChangeListener(
+                any(MainAreaController.LoadCollectionsWhenAnyCollectionChangeListener.class)
+        );
     }
 }

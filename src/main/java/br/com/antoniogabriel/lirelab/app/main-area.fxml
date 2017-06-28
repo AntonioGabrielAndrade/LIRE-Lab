@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
+<?import br.com.antoniogabriel.lirelab.custom.CollectionTree?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             fx:controller="br.com.antoniogabriel.lirelab.app.MainAreaController"
             xmlns:fx="http://javafx.com/fxml">
 
     <left>
-        <fx:include source="../collection/collection-list.fxml"/>
+        <CollectionTree id="collection-tree" fx:id="collectionTree"/>
     </left>
     <center>
         <BorderPane fx:id="centerPane">
