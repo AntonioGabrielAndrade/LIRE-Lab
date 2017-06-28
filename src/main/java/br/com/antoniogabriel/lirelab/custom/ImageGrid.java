@@ -26,6 +26,10 @@ public class ImageGrid extends StackPane {
 
     private int imagesHeight;
 
+    public ImageGrid() {
+        this(new ImageViewFactory(), new FileUtils());
+    }
+
     @Inject
     public ImageGrid(ImageViewFactory imageViewFactory, FileUtils fileUtils) {
         this.imageViewFactory = imageViewFactory;
