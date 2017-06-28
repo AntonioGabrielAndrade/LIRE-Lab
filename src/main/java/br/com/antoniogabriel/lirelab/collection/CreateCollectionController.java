@@ -24,17 +24,12 @@ import java.util.ResourceBundle;
 
 public class CreateCollectionController implements Initializable {
 
-    @FXML
-    private TextField nameField;
-    @FXML
-    private TextField imagesDirectoryField;
-    @FXML
-    private FeatureTable featuresTable;
-    @FXML
-    private Button createButton;
+    @FXML private TextField nameField;
+    @FXML private TextField imagesDirectoryField;
+    @FXML private FeatureTable featuresTable;
+    @FXML private Button createButton;
 
     private DialogProvider dialogProvider;
-
     private CollectionService service;
 
     @Inject
