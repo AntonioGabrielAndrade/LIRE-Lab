@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import br.com.antoniogabriel.lirelab.custom.ImageGrid?>
 
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          type="StackPane">
 
-    <StackPane fx:id="root"/>
+    <ImageGrid fx:id="grid"/>
 
 </fx:root>

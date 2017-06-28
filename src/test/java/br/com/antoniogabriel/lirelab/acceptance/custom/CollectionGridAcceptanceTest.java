@@ -1,13 +1,10 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
-import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
-import br.com.antoniogabriel.lirelab.custom.ImageGridBuilder;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
-import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.*;
@@ -30,9 +27,6 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
     private static final Collection COLLECTION = collection("Collection", TEST_IMAGES, CEDD);
 
     private CollectionUtils collectionUtils = new CollectionUtils(RESOLVER);
-    private ImageViewFactory imageViewFactory = new ImageViewFactory();
-    private FileUtils fileUtils = new FileUtils();
-    private ImageGridBuilder imageGridBuilder = new ImageGridBuilder(imageViewFactory, fileUtils);
 
     private CollectionGrid collectionGrid;
 
@@ -63,9 +57,6 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
     @Before
     public void setUp() throws Exception {
         collectionUtils = new CollectionUtils(RESOLVER);
-        imageViewFactory = new ImageViewFactory();
-        fileUtils = new FileUtils();
-        imageGridBuilder = new ImageGridBuilder(imageViewFactory, fileUtils);
     }
 
     @After
@@ -75,7 +66,7 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        collectionGrid = new CollectionGrid(imageGridBuilder, collectionUtils);
+        collectionGrid = new CollectionGrid(collectionUtils);
         collectionGrid.setCollection(COLLECTION);
 
         Scene scene = new Scene(collectionGrid, 600, 400);

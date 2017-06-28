@@ -13,13 +13,11 @@ public class CollectionGrid extends StackPane {
     private static final String COLLECTION_GRID_FXML = "collection-grid.fxml";
 
     private Collection collection;
-    private ImageGridBuilder imageGridBuilder;
     private CollectionUtils collectionUtils;
 
-    @FXML private StackPane root;
+    @FXML private ImageGrid grid;
 
-    public CollectionGrid(ImageGridBuilder imageGridBuilder, CollectionUtils collectionUtils) {
-        this.imageGridBuilder = imageGridBuilder;
+    public CollectionGrid(CollectionUtils collectionUtils) {
         this.collectionUtils = collectionUtils;
 
         loadFXML();
@@ -39,9 +37,7 @@ public class CollectionGrid extends StackPane {
 
     public void setCollection(Collection collection) throws IOException {
         this.collection = collection;
-        ImageGrid imageGrid = imageGridBuilder.build();
-        imageGrid.setImages(collectionUtils.getThumbnailsPaths(collection));
-        root.getChildren().add(imageGrid);
+        grid.setImages(collectionUtils.getThumbnailsPaths(collection));
     }
 
     public Collection getCollection() {

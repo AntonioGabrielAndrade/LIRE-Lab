@@ -7,17 +7,15 @@ import javax.inject.Inject;
 
 public class CollectionGridBuilder implements Builder<CollectionGrid> {
 
-    private ImageGridBuilder imageGridBuilder;
     private CollectionUtils collectionUtils;
 
     @Inject
-    public CollectionGridBuilder(ImageGridBuilder imageGridBuilder, CollectionUtils collectionUtils) {
-        this.imageGridBuilder = imageGridBuilder;
+    public CollectionGridBuilder(CollectionUtils collectionUtils) {
         this.collectionUtils = collectionUtils;
     }
 
     @Override
     public CollectionGrid build() {
-        return new CollectionGrid(imageGridBuilder, collectionUtils);
+        return new CollectionGrid(collectionUtils);
     }
 }
