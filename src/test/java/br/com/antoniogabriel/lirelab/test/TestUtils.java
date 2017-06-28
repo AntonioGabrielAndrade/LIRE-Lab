@@ -9,6 +9,7 @@ import org.testfx.api.FxRobot;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static java.util.Arrays.asList;
@@ -29,9 +30,18 @@ public class TestUtils {
     }
 
     public static Collection collection(String name, String imagesPath, Feature... features) {
-        Collection collection = new Collection(name);
-        collection.setImagesDirectory(imagesPath);
-        collection.setFeatures(asList(features));
-        return collection;
+        try {
+            Collection collection = new Collection(name);
+            collection.setImagesDirectory(imagesPath);
+            collection.setFeatures(asList(features));
+
+            if(Files.isDirectory(Paths.get(imagesPath)))
+                    collection.setImagePaths(
+                            net.semanticmetadata.lire.utils.FileUtils.getAllImages(new File(imagesPath), true));
+
+            return collection;
+        } catch (IOException e) {
+            throw new RuntimeException("Error creating collection", e);
+        }
     }
 }
