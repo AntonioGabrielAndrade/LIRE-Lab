@@ -69,7 +69,7 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
         collectionGrid = new CollectionGrid(collectionUtils);
         collectionGrid.setCollection(COLLECTION);
 
-        Scene scene = new Scene(collectionGrid, 600, 400);
+        Scene scene = new Scene(collectionGrid, 900, 600);
         stage.setScene(scene);
         stage.show();
     }

@@ -35,7 +35,7 @@ public class ImageGridAcceptanceTest extends ApplicationTest {
         imageGrid.setImagesHeight(100);
         imageGrid.setImages(paths);
 
-        Scene scene = new Scene(imageGrid, 600, 400);
+        Scene scene = new Scene(imageGrid, 900, 600);
         stage.setScene(scene);
         stage.show();
     }

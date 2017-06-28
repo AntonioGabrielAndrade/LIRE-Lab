@@ -5,7 +5,8 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             fx:controller="br.com.antoniogabriel.lirelab.app.MainAreaController"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="900.0" prefWidth="1200.0">
 
     <left>
         <CollectionTree visible="false" id="collection-tree" fx:id="collectionTree"/>
