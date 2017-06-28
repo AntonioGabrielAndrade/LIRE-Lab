@@ -17,7 +17,6 @@ public abstract class FXML {
     @Inject
     public FXML(FXMLLoader loader) {
         this.loader = loader;
-        this.loader.setLocation(getClass().getResource(getFXMLResourceName()));
     }
 
     public void loadOwnedBy(Window owner) throws IOException {
@@ -31,8 +30,7 @@ public abstract class FXML {
     }
 
     public void loadIn(Stage stage, boolean maximized) throws IOException {
-        this.loader.setRoot(null);
-        Parent root = loader.load();
+        Parent root = load();
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(
@@ -48,8 +46,18 @@ public abstract class FXML {
         stage.show();
     }
 
+    protected Parent load() throws IOException {
+        this.loader.setLocation(getClass().getResource(getFXMLResourceName()));
+        this.loader.setRoot(null);
+
+        Parent root = loader.load();
+
+        this.loader.setLocation(null);
+        return root;
+    }
+
     public <C> C getController() throws IOException {
-        loader.load();
+        load();
         return loader.getController();
     }
 
