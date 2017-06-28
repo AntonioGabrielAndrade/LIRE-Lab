@@ -16,6 +16,8 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionServiceTest {
 
+    public static final String ANY_NAME = "";
+    public static final String ANY_PATH = "";
     private CollectionService service;
 
     @Mock private CollectionRepository collectionRepository;
@@ -36,15 +38,15 @@ public class CollectionServiceTest {
     }
 
     @Test
-    public void shouldBuildTaskToCreateCollection() throws Exception {
-        String name = "";
-        String path = "";
+    public void shouldBuildTaskToCreateCollectionAndMonitorItsCompletion() throws Exception {
+        String name = ANY_NAME;
+        String path = ANY_PATH;
         List<Feature> features = EMPTY_LIST;
 
         CreateCollectionTask task = service.getTaskToCreateCollection(name, path, features);
 
-        verify(collectionsMonitor).bindListenersTo(task);
         assertNotNull(task);
+        verify(collectionsMonitor).bindListenersTo(task);
     }
 
     @Test

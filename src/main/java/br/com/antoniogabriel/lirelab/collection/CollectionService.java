@@ -23,6 +23,10 @@ public class CollectionService {
         this.collectionRepository = collectionRepository;
         this.collectionsMonitor = collectionsMonitor;
 
+        startMonitoringCollectionsDeleteAndUpdate();
+    }
+
+    private void startMonitoringCollectionsDeleteAndUpdate() {
         try {
             this.collectionsMonitor.startMonitoringCollectionsDeleteAndUpdate();
         } catch (IOException e) {
