@@ -93,10 +93,12 @@ public class MainAreaControllerTest {
 
     @Test
     public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
+        Collection collection = new Collection("Collection");
         given(collectionGridBuilder.build()).willReturn(collectionGrid);
 
-        controller.showCollectionImages(new Collection("Collection"));
+        controller.showCollectionImages(collection);
 
+        verify(collectionGrid).setCollection(collection);
         verify(centerPane).setCenter(collectionGrid);
     }
 
