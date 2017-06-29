@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
 <?import br.com.antoniogabriel.lirelab.custom.CollectionTree?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            fx:controller="br.com.antoniogabriel.lirelab.app.MainAreaController"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="900.0" prefWidth="1200.0">
+<SplitPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="br.com.antoniogabriel.lirelab.app.MainAreaController"
+           orientation="HORIZONTAL"
+           dividerPositions="0.0"
+           prefHeight="900.0" prefWidth="1200.0">
 
-    <left>
-        <CollectionTree visible="false" id="collection-tree" fx:id="collectionTree"/>
-    </left>
-    <center>
+    <items>
+        <CollectionTree visible="false"
+                        minWidth="150"
+                        id="collection-tree"
+                        fx:id="collectionTree"/>
+
         <BorderPane id="center-pane" fx:id="centerPane">
             <center>
                 <fx:include fx:id="welcomeView" visible="true" source="welcome.fxml"/>
             </center>
         </BorderPane>
-    </center>
+    </items>
 
-</BorderPane>
+</SplitPane>
