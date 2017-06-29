@@ -116,7 +116,8 @@ public class MainAreaController implements Initializable {
     class ShowImageWhenImageIsSelectedListener implements ImageSelectionListener {
         @Override
         public void selected(String imagePath) {
-            showImage(imagePath);
+            if(imagePath != null)
+                showImage(imagePath);
         }
     }
 
