@@ -92,4 +92,21 @@ public class CollectionTreeTest {
 
         assertThat(collection1.getName(), equalTo("was selected"));
     }
+
+    @Test
+    public void shouldAddListenerForImageSelection() throws Exception {
+        final String[] selectedImage = new String[1];
+
+        CollectionTree realTree = new CollectionTree();
+
+        realTree.setCollections(asList(collection1, collection2));
+
+        realTree.addImageSelectionListener(imagePath -> {
+            selectedImage[0] = imagePath;
+        });
+
+        realTree.selectImage(0,0);
+
+        assertThat(selectedImage[0], equalTo("path/image1"));
+    }
 }

@@ -6,6 +6,7 @@ import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.CollectionGridBuilder;
 import br.com.antoniogabriel.lirelab.custom.CollectionTree;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.junit.Before;
@@ -27,14 +28,20 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class MainAreaControllerTest {
 
+    private static final String SOME_IMAGE_PATH = "some/image/path";
+
     @Mock private BorderPane centerPane;
     @Mock private CollectionGridBuilder collectionGridBuilder;
     @Mock private CollectionGrid collectionGrid;
     @Mock private CollectionService collectionService;
     @Mock private CollectionTree collectionTree;
     @Mock private StackPane welcomeView;
+    @Mock private ImageView imageView;
+    @Mock private ImageViewFactory imageViewFactory;
+    @Mock private ImageViewConfig imageViewConfig;
 
-    @InjectMocks MainAreaController controller = new MainAreaController(collectionService, collectionGridBuilder);
+    @InjectMocks MainAreaController controller =
+            new MainAreaController(collectionService, collectionGridBuilder, imageViewFactory, imageViewConfig);
 
     private Collection collection;
     private List<Collection> collections;
@@ -77,12 +84,30 @@ public class MainAreaControllerTest {
     }
 
     @Test
+    public void shouldListenToImageSelectionToShowImage() throws Exception {
+        controller.initialize(null, null);
+
+        verify(collectionTree).addImageSelectionListener(
+                any(MainAreaController.ShowImageWhenImageIsSelectedListener.class));
+    }
+
+    @Test
     public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
         given(collectionGridBuilder.build()).willReturn(collectionGrid);
 
         controller.showCollectionImages(new Collection("Collection"));
 
         verify(centerPane).setCenter(collectionGrid);
+    }
+
+    @Test
+    public void shouldShowCollectionImageWhenImageIsSelected() throws Exception {
+        given(imageViewFactory.create(SOME_IMAGE_PATH)).willReturn(imageView);
+
+        controller.showImage(SOME_IMAGE_PATH);
+
+        verify(imageViewConfig).bindImageHeight(imageView, centerPane, 2);
+        verify(centerPane).setCenter(imageView);
     }
 
     @Test

@@ -9,6 +9,7 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import javafx.scene.Node;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -151,10 +152,12 @@ public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
         verifyThat("#26489383923_98d419eb0d_k", isVisible());
     }
 
-//    @Test
-//    public void shouldShowImageWhenImageIsSelected() throws Exception {
-//        view.selectImage("14474347006_99aa0fd981_k.jpg");
-//
-//        verify(mainAreaController).showImage(collection1, "14474347006_99aa0fd981_k.jpg");
-//    }
+    @Test
+    public void shouldShowImageWhenImageIsSelected() throws Exception {
+        view.expandCollection(COLLECTION_1);
+        view.selectImage("14474347006_99aa0fd981_k.jpg");
+
+        Node image = from(lookup("#center-pane")).lookup("#14474347006_99aa0fd981_k").query();
+        verifyThat(image, isVisible());
+    }
 }

@@ -2,19 +2,18 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
+import br.com.antoniogabriel.lirelab.custom.*;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
-import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
-import br.com.antoniogabriel.lirelab.custom.CollectionGridBuilder;
-import br.com.antoniogabriel.lirelab.custom.CollectionSelectionListener;
-import br.com.antoniogabriel.lirelab.custom.CollectionTree;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -25,33 +24,50 @@ public class MainAreaController implements Initializable {
 
     private CollectionService collectionService;
     private CollectionGridBuilder collectionGridBuilder;
+    private ImageViewFactory viewFactory;
+    private ImageViewConfig viewConfig;
 
     @FXML private BorderPane centerPane;
     @FXML private CollectionTree collectionTree;
     @FXML private StackPane welcomeView;
 
+
     @Inject
-    public MainAreaController(CollectionService collectionService, CollectionGridBuilder collectionGridBuilder) {
+    public MainAreaController(CollectionService collectionService,
+                              CollectionGridBuilder collectionGridBuilder,
+                              ImageViewFactory viewFactory,
+                              ImageViewConfig viewConfig) {
+
         this.collectionService = collectionService;
         this.collectionGridBuilder = collectionGridBuilder;
+        this.viewFactory = viewFactory;
+        this.viewConfig = viewConfig;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listenToCollectionSelection();
+        listenToImageSelection();
         listenToCollectionsChange();
         loadCollections();
     }
 
-    protected void listenToCollectionsChange() {
+
+    private void listenToCollectionsChange() {
         collectionService.addCollectionsChangeListener(
                 new LoadCollectionsWhenAnyCollectionChangeListener()
         );
     }
 
-    protected void listenToCollectionSelection() {
+    private void listenToCollectionSelection() {
         collectionTree.addCollectionSelectionListener(
                 new ShowImagesWhenCollectionIsSelectedListener()
+        );
+    }
+
+    private void listenToImageSelection() {
+        collectionTree.addImageSelectionListener(
+                new ShowImageWhenImageIsSelectedListener()
         );
     }
 
@@ -77,10 +93,30 @@ public class MainAreaController implements Initializable {
         }
     }
 
+    public void showImage(String imagePath) {
+        try {
+
+            ImageView image = viewFactory.create(imagePath);
+            viewConfig.bindImageHeight(image, centerPane, 2);
+            centerPane.setCenter(image);
+
+        } catch (FileNotFoundException e) {
+            throw new LireLabException("Could not show image", e);
+        }
+
+    }
+
     class ShowImagesWhenCollectionIsSelectedListener implements CollectionSelectionListener {
         @Override
         public void selected(Collection collection) {
             MainAreaController.this.showCollectionImages(collection);
+        }
+    }
+
+    class ShowImageWhenImageIsSelectedListener implements ImageSelectionListener {
+        @Override
+        public void selected(String imagePath) {
+            showImage(imagePath);
         }
     }
 
@@ -90,4 +126,5 @@ public class MainAreaController implements Initializable {
             Platform.runLater(() -> MainAreaController.this.loadCollections());
         }
     }
+
 }
