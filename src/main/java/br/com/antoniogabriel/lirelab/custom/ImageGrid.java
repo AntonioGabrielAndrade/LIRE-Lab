@@ -53,17 +53,23 @@ public class ImageGrid extends StackPane {
 
     public void setImages(List<String> paths) throws FileNotFoundException {
         for (String path : paths) {
-            if(fileUtils.fileExists(path)) {
-                addImageToGrid(path);
-            }
+            addImage(path);
         }
     }
 
-    private void addImageToGrid(String path) throws FileNotFoundException {
+    public ImageView addImage(String path) throws FileNotFoundException {
+        if(fileUtils.fileExists(path)) {
+            return addImageToGrid(path);
+        }
+        return null;
+    }
+
+    private ImageView addImageToGrid(String path) throws FileNotFoundException {
         ImageView imageView = imageViewFactory.create(path);
         imageView.setFitHeight(imagesHeight);
         imageView.setPreserveRatio(true);
         images().add(imageView);
+        return imageView;
     }
 
     private ObservableList<Node> images() {
