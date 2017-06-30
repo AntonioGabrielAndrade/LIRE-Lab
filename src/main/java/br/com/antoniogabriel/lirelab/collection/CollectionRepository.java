@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
+import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.utils.FileUtils;
 import org.apache.lucene.document.Document;
@@ -24,10 +25,12 @@ import java.util.List;
 public class CollectionRepository {
 
     private PathResolver resolver;
+    private CollectionUtils collectionUtils;
 
     @Inject
-    public CollectionRepository(PathResolver resolver) {
+    public CollectionRepository(PathResolver resolver, CollectionUtils collectionUtils) {
         this.resolver = resolver;
+        this.collectionUtils = collectionUtils;
     }
 
     public List<Collection> getCollections() {
@@ -83,6 +86,8 @@ public class CollectionRepository {
         List<String> thumbnailsPaths = getThumbnailPaths(collection);
         collection.setThumbnailPaths(thumbnailsPaths);
 
+        collection.setImages(getImages(collection));
+
         return collection;
     }
 
@@ -102,7 +107,32 @@ public class CollectionRepository {
             for ( int i = 0; i < num; i++)
             {
                 Document d = ir.document(i);
-                results.add(d.getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue());
+                String imagePath = d.getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue();
+                results.add(imagePath);
+            }
+            ir.close();
+
+        } catch (IOException e) {
+            throw new LireLabException("Could not read index", e);
+        }
+
+        return results;
+    }
+
+    private List<Image> getImages(Collection collection) {
+
+        List<Image> results = new ArrayList<>();
+
+        try {
+            IndexReader ir = DirectoryReader.open(FSDirectory.open(indexPath(collection)));
+
+            int num = ir.numDocs();
+            for ( int i = 0; i < num; i++)
+            {
+                Document d = ir.document(i);
+                String imagePath = d.getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue();
+                String thumbnailPath = collectionUtils.getThumbnailPathFromImagePath(collection, imagePath);
+                results.add(new Image(imagePath, thumbnailPath));
             }
             ir.close();
 
@@ -115,5 +145,13 @@ public class CollectionRepository {
 
     private Path indexPath(Collection collection) {
         return Paths.get(resolver.getIndexDirectoryPath(collection.getName()));
+    }
+
+    public Collection getCollection(String name) {
+        try {
+            return getCollection(Paths.get(resolver.getCollectionPath(name)));
+        } catch (Exception e) {
+            throw new LireLabException("Could not read collection", e);
+        }
     }
 }
