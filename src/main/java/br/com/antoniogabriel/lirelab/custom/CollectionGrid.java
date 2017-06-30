@@ -9,8 +9,6 @@ import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -50,7 +48,7 @@ public class CollectionGrid extends StackPane {
         this.collection = collection;
         for (Image image : collection.getImages()) {
             ImageView imageView = grid.addImage(image.getThumbnailPath());
-            imageView.setOnMouseClicked(new DisplayOriginalImageInDialogHandler(image));
+            imageView.setOnMouseClicked(new DisplayImageInDialogHandler(image));
         }
     }
 
@@ -58,27 +56,21 @@ public class CollectionGrid extends StackPane {
         return collection;
     }
 
-    class DisplayOriginalImageInDialogHandler implements EventHandler<MouseEvent> {
+    class DisplayImageInDialogHandler implements EventHandler<MouseEvent> {
 
         private Image image;
 
-        public DisplayOriginalImageInDialogHandler(Image image) {
+        public DisplayImageInDialogHandler(Image image) {
             this.image = image;
         }
 
         @Override
         public void handle(MouseEvent event) {
             try {
-                Alert alert = new Alert(Alert.AlertType.NONE);
-                DialogProvider dialogProvider = new DialogProvider();
-                alert.initOwner(dialogProvider.getWindowFrom(event));
-                alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
-                ImageView originalImageView = imageViewFactory.create(image.getImagePath());
-                originalImageView.setPreserveRatio(true);
-                originalImageView.setFitHeight(800);
-                alert.getDialogPane().setId("image-dialog");
-                alert.getDialogPane().setContent(originalImageView);
-                alert.show();
+                ImageDialog dialog = new ImageDialog(image.getImagePath());
+                dialog.initOwner(new DialogProvider().getWindowFrom(event));
+                dialog.show();
+
             } catch (FileNotFoundException e) {
                 throw new LireLabException("Error displaying image", e);
             }
