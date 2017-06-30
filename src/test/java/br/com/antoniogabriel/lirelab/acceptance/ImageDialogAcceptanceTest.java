@@ -1,5 +1,6 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.custom.ImageDialog;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
