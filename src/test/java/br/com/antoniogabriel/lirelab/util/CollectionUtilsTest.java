@@ -3,7 +3,7 @@ package br.com.antoniogabriel.lirelab.util;
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,6 +14,8 @@ import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
 import static br.com.antoniogabriel.lirelab.test.TestUtils.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class CollectionUtilsTest {
@@ -32,8 +34,8 @@ public class CollectionUtilsTest {
         runOnFXThread(() -> COLLECTION_HELPER.createRealCollection(COLLECTION));
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
         runOnFXThread(() -> {
             try {
 
@@ -63,4 +65,10 @@ public class CollectionUtilsTest {
         assertTrue(paths.contains(THUMBNAILS_DIRECTORY_PATH + "26489383923_98d419eb0d_k.thumbnail.jpg"));
     }
 
+    @Test
+    public void shouldGetThumbnailPathFromImagePath() throws Exception {
+        String thumbnailPath = utils.getThumbnailPathFromImagePath(COLLECTION, TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+
+        assertThat(thumbnailPath, equalTo(THUMBNAILS_DIRECTORY_PATH + "14474347006_99aa0fd981_k.thumbnail.jpg"));
+    }
 }
