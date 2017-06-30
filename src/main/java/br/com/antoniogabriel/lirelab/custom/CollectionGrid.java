@@ -56,7 +56,7 @@ public class CollectionGrid extends StackPane {
         return collection;
     }
 
-    class DisplayImageInDialogHandler implements EventHandler<MouseEvent> {
+    static class DisplayImageInDialogHandler implements EventHandler<MouseEvent> {
 
         private Image image;
 
