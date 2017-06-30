@@ -2,8 +2,10 @@ package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
+import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
@@ -43,7 +45,7 @@ public class CollectionGrid extends StackPane {
         this.collection = collection;
         for (Image image : collection.getImages()) {
             ImageView imageView = grid.addImage(image.getThumbnailPath());
-            imageView.setOnMouseClicked(new DisplayImageInDialogHandler(image));
+            imageView.setOnMouseClicked(new DisplayImageDialogHandler(image, new DialogProvider(), new FileUtils()));
         }
     }
 
