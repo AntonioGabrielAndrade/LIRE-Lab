@@ -13,12 +13,12 @@ public class ImageDialog extends Dialog<Void> {
     private final ImageViewFactory imageViewFactory = new ImageViewFactory();
 
     public ImageDialog(String imagePath) throws FileNotFoundException {
-        ImageView originalImageView = imageViewFactory.create(imagePath);
-        originalImageView.setPreserveRatio(true);
-        originalImageView.setFitHeight(800);
+        ImageView imageView = imageViewFactory.create(imagePath);
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(800);
 
         getDialogPane().getButtonTypes().add(ButtonType.OK);
         getDialogPane().setId("image-dialog");
-        getDialogPane().setContent(originalImageView);
+        getDialogPane().setContent(imageView);
     }
 }
