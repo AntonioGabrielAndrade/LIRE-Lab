@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class ImageViewFactoryTest {
 
@@ -39,6 +40,12 @@ public class ImageViewFactoryTest {
     public void shouldSetIdAsFilenameWithoutThumbnailAndJPGExtension() throws Exception {
         ImageView imageView = factory.create(existentFilePath());
         assertThat(imageView.getId(), equalTo(EXISTENT_FILE_NAME_WITH_NO_EXTENSIONS));
+    }
+
+    @Test
+    public void shouldSetupImageViewToPreserveRatio() throws Exception {
+        ImageView imageView = factory.create(existentFilePath());
+        assertTrue(imageView.isPreserveRatio());
     }
 
     private String existentFilePath() {

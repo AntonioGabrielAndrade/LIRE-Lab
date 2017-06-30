@@ -13,6 +13,7 @@ public class ImageViewFactory {
         ImageView imageView = createImageView(path);
         String id = createId(path);
         imageView.setId(id);
+        imageView.setPreserveRatio(true);
 
         return imageView;
     }
