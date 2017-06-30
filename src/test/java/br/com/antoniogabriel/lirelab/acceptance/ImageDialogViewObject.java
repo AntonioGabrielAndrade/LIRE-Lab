@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import javafx.scene.Node;
 import org.testfx.api.FxRobot;
 
 import static org.testfx.api.FxAssert.verifyThat;
@@ -7,8 +8,9 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 public class ImageDialogViewObject extends FxRobot {
 
-    public void checkImageIsDisplayed(String image) {
-        verifyThat("#" + image + "-dialog", isVisible());
+    public void checkImageIsDisplayed(String imageName) {
+        Node imageNode = from(lookup("#dialog-image-container")).lookup(imageName).query();
+        verifyThat(imageNode, isVisible());
     }
 
     public void close() {
