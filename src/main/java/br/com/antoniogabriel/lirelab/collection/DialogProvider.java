@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.custom.ImageDialog;
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.concurrent.Task;
 import javafx.event.Event;
@@ -8,6 +9,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class DialogProvider {
 
@@ -23,6 +25,12 @@ public class DialogProvider {
 
     public ProgressDialog getProgressDialog(Task<Void> task, Window window) {
         ProgressDialog dialog = new ProgressDialog(task);
+        dialog.initOwner(window);
+        return dialog;
+    }
+
+    public ImageDialog getImageDialog(String imagePath, Window window) throws FileNotFoundException {
+        ImageDialog dialog = new ImageDialog(imagePath);
         dialog.initOwner(window);
         return dialog;
     }
