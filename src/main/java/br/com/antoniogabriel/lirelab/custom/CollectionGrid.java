@@ -1,11 +1,21 @@
 package br.com.antoniogabriel.lirelab.custom;
 
+import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.DialogProvider;
+import br.com.antoniogabriel.lirelab.collection.Image;
+import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class CollectionGrid extends StackPane {
@@ -14,6 +24,7 @@ public class CollectionGrid extends StackPane {
 
     private Collection collection;
     private CollectionUtils collectionUtils;
+    private ImageViewFactory imageViewFactory = new ImageViewFactory();
 
     @FXML private ImageGrid grid;
 
@@ -37,10 +48,40 @@ public class CollectionGrid extends StackPane {
 
     public void setCollection(Collection collection) throws IOException {
         this.collection = collection;
-        grid.setImages(collectionUtils.getThumbnailsPaths(collection));
+        for (Image image : collection.getImages()) {
+            ImageView imageView = grid.addImage(image.getThumbnailPath());
+            imageView.setOnMouseClicked(new DisplayOriginalImageInDialogHandler(image));
+        }
     }
 
     public Collection getCollection() {
         return collection;
+    }
+
+    class DisplayOriginalImageInDialogHandler implements EventHandler<MouseEvent> {
+
+        private Image image;
+
+        public DisplayOriginalImageInDialogHandler(Image image) {
+            this.image = image;
+        }
+
+        @Override
+        public void handle(MouseEvent event) {
+            try {
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                DialogProvider dialogProvider = new DialogProvider();
+                alert.initOwner(dialogProvider.getWindowFrom(event));
+                alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+                ImageView originalImageView = imageViewFactory.create(image.getImagePath());
+                originalImageView.setPreserveRatio(true);
+                originalImageView.setFitHeight(800);
+                alert.getDialogPane().setId("image-dialog");
+                alert.getDialogPane().setContent(originalImageView);
+                alert.show();
+            } catch (FileNotFoundException e) {
+                throw new LireLabException("Error displaying image", e);
+            }
+        }
     }
 }
