@@ -53,6 +53,6 @@ public class CollectionGridTest {
 
         collectionGrid.setCollection(collection);
 
-        verify(imageView, times(3)).setOnMouseClicked(any(CollectionGrid.DisplayImageInDialogHandler.class));
+        verify(imageView, times(3)).setOnMouseClicked(any(DisplayImageInDialogHandler.class));
     }
 }

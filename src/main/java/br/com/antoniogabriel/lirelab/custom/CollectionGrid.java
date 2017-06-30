@@ -2,18 +2,13 @@ package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class CollectionGrid extends StackPane {
@@ -56,24 +51,4 @@ public class CollectionGrid extends StackPane {
         return collection;
     }
 
-    static class DisplayImageInDialogHandler implements EventHandler<MouseEvent> {
-
-        private Image image;
-
-        public DisplayImageInDialogHandler(Image image) {
-            this.image = image;
-        }
-
-        @Override
-        public void handle(MouseEvent event) {
-            try {
-                ImageDialog dialog = new ImageDialog(image.getImagePath());
-                dialog.initOwner(new DialogProvider().getWindowFrom(event));
-                dialog.show();
-
-            } catch (FileNotFoundException e) {
-                throw new LireLabException("Error displaying image", e);
-            }
-        }
-    }
 }
