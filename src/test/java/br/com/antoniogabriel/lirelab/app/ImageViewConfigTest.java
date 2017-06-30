@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.app;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.image.ImageView;
@@ -19,18 +20,20 @@ public class ImageViewConfigTest {
     @Mock private Region container;
     @Mock private DoubleProperty fitHeightProperty;
     @Mock private ReadOnlyDoubleProperty heightProperty;
+    @Mock private DoubleBinding doubleBinding;
 
     private ImageViewConfig viewConfig = new ImageViewConfig();
 
     @Test
-    public void shouldBindImageHeightToContainerGivenADividerFactor() throws Exception {
-        int divider = 2;
+    public void shouldBindImageHeightToContainerGivenAMultiplicationFactor() throws Exception {
+        double factor = 0.5;
         given(imageView.fitHeightProperty()).willReturn(fitHeightProperty);
         given(container.heightProperty()).willReturn(heightProperty);
+        given(heightProperty.multiply(factor)).willReturn(doubleBinding);
 
-        viewConfig.bindImageHeight(imageView, container, divider);
+        viewConfig.bindImageHeight(imageView, container, factor);
 
         verify(imageView).setPreserveRatio(true);
-        verify(fitHeightProperty).bind(heightProperty.divide(divider));
+        verify(fitHeightProperty).bind(doubleBinding);
     }
 }

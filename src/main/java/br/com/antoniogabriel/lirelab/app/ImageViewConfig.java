@@ -5,8 +5,8 @@ import javafx.scene.layout.Region;
 
 public class ImageViewConfig {
 
-    public void bindImageHeight(ImageView imageView, Region container, int divider) {
+    public void bindImageHeight(ImageView imageView, Region container, double factor) {
         imageView.setPreserveRatio(true);
-        imageView.fitHeightProperty().bind(container.heightProperty().divide(divider));
+        imageView.fitHeightProperty().bind(container.heightProperty().multiply(factor));
     }
 }
