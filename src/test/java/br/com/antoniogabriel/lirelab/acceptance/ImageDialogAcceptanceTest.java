@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import java.io.FileNotFoundException;
-
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
@@ -27,12 +25,8 @@ public class ImageDialogAcceptanceTest extends ApplicationTest {
     @Before
     public void setUp() throws Exception {
         interact(() -> {
-            try {
-                dialog = new ImageDialog(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
-                dialog.show();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException("Error", e);
-            }
+            dialog = new ImageDialog(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+            dialog.show();
         });
     }
 
