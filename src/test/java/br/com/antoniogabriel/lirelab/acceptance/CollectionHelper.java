@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.collection.*;
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -74,6 +75,10 @@ public class CollectionHelper {
                         );
 
         task.run();
+    }
+
+    public Collection readCollection(String name) {
+        return new CollectionRepository(resolver, new CollectionUtils(resolver)).getCollection(name);
     }
 
     private List<Feature> getFeatures(Collection collection) {
