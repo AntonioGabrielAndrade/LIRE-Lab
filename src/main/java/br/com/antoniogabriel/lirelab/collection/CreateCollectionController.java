@@ -3,7 +3,7 @@ package br.com.antoniogabriel.lirelab.collection;
 import br.com.antoniogabriel.lirelab.custom.FeatureTable;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.FeatureUtils;
-import br.com.antoniogabriel.lirelab.util.ProgressDialog;
+import br.com.antoniogabriel.lirelab.custom.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;

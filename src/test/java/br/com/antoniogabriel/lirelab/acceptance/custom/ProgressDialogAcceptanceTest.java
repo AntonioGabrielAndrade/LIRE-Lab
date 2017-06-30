@@ -1,6 +1,7 @@
-package br.com.antoniogabriel.lirelab.acceptance;
+package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.util.ProgressDialog;
+import br.com.antoniogabriel.lirelab.acceptance.ProgressDialogViewObject;
+import br.com.antoniogabriel.lirelab.custom.ProgressDialog;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import org.junit.After;
@@ -8,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-public class ProgressDialogTest extends ApplicationTest {
+public class ProgressDialogAcceptanceTest extends ApplicationTest {
 
     private static final Exception EXCEPTION = new RuntimeException("Some Error!");
 

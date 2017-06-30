@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.custom.ImageDialog;
-import br.com.antoniogabriel.lirelab.util.ProgressDialog;
+import br.com.antoniogabriel.lirelab.custom.ProgressDialog;
 import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.scene.Node;

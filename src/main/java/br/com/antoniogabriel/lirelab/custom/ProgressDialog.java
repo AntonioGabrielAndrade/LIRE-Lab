@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.util;
+package br.com.antoniogabriel.lirelab.custom;
 
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
