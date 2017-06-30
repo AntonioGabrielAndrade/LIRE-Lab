@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.custom;
 
+import br.com.antoniogabriel.lirelab.app.ImageViewConfig;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.scene.control.ButtonType;
@@ -11,19 +12,23 @@ import java.io.FileNotFoundException;
 
 public class ImageDialog extends Dialog<Void> {
 
+    public static final double MAX_IMAGE_HEIGHT = 700;
+
     private ImageViewFactory imageViewFactory;
     private DialogActions dialogActions;
+    private ImageViewConfig imageViewConfig;
 
     public ImageDialog(String imagePath) {
-        this(imagePath, new ImageViewFactory(), null);
+        this(imagePath, new ImageViewFactory(), new ImageViewConfig(), null);
     }
 
     public ImageDialog(String imagePath,
                        ImageViewFactory imageViewFactory,
-                       DialogActions dialogActions) {
+                       ImageViewConfig imageViewConfig, DialogActions dialogActions) {
 
         setDialogActions(dialogActions);
         setImageViewFactory(imageViewFactory);
+        setImageViewConfig(imageViewConfig);
         setImageAsContent(imagePath);
         addOkButton();
         setDialogPaneId();
@@ -42,7 +47,7 @@ public class ImageDialog extends Dialog<Void> {
     private void setImageAsContent(String imagePath) {
         try {
             ImageView imageView = this.imageViewFactory.create(imagePath);
-            imageView.setFitHeight(800);
+            imageViewConfig.limitImageHeight(imageView, MAX_IMAGE_HEIGHT);
 
             this.dialogActions.setContent(imageView);
 
@@ -57,5 +62,9 @@ public class ImageDialog extends Dialog<Void> {
 
     private void setDialogPaneId() {
         this.dialogActions.setDialogPaneId("image-dialog");
+    }
+
+    public void setImageViewConfig(ImageViewConfig imageViewConfig) {
+        this.imageViewConfig = imageViewConfig;
     }
 }

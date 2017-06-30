@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.custom;
 
+import br.com.antoniogabriel.lirelab.app.ImageViewConfig;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ButtonType;
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static br.com.antoniogabriel.lirelab.custom.ImageDialog.MAX_IMAGE_HEIGHT;
 import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFXThread;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -24,6 +26,7 @@ public class ImageDialogTest {
     @Mock private ImageView imageView;
     @Mock private ImageViewFactory imageViewFactory;
     @Mock private DialogActions dialogActions;
+    @Mock private ImageViewConfig imageViewConfig;
 
     private ImageDialog dialog;
 
@@ -43,7 +46,16 @@ public class ImageDialogTest {
         verify(dialogActions).addButtonType(ButtonType.OK);
     }
 
+    @Test
+    public void shouldLimitImageHeightToAMaximum() throws Exception {
+        verify(imageViewConfig).limitImageHeight(imageView, MAX_IMAGE_HEIGHT);
+    }
+
     private void createDialog() {
-        runOnFXThread(() -> dialog = new ImageDialog(IMAGE_PATH, imageViewFactory, dialogActions));
+        runOnFXThread(() -> dialog =
+                new ImageDialog(IMAGE_PATH,
+                                imageViewFactory,
+                                imageViewConfig,
+                                dialogActions));
     }
 }
