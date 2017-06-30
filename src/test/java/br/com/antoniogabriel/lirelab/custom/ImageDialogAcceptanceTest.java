@@ -49,7 +49,7 @@ public class ImageDialogAcceptanceTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldSHowOkButton() throws Exception {
+    public void shouldShowOkButton() throws Exception {
         clickOn("OK");
     }
 }
