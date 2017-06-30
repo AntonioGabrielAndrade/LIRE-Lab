@@ -9,4 +9,17 @@ public class ImageViewConfig {
         imageView.setPreserveRatio(true);
         imageView.fitHeightProperty().bind(container.heightProperty().multiply(factor));
     }
+
+    public ImageView limitImageHeight(ImageView imageView, double limit) {
+
+        double height = imageView.getImage().getHeight();
+
+        if(height > limit) {
+            imageView.setFitHeight(limit);
+        } else {
+            imageView.setFitHeight(height);
+        }
+
+        return imageView;
+    }
 }
