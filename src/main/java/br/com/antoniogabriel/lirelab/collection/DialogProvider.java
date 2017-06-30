@@ -2,7 +2,7 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.util.ProgressDialog;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -17,7 +17,7 @@ public class DialogProvider {
         return chooser.showDialog(window);
     }
 
-    public Window getWindowFrom(ActionEvent event) {
+    public Window getWindowFrom(Event event) {
         return ((Node) event.getSource()).getScene().getWindow();
     }
 
