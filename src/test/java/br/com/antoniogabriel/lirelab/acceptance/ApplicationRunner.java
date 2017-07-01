@@ -2,14 +2,16 @@ package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
 
-import javax.inject.Inject;
 import java.util.concurrent.TimeoutException;
 
 
 public class ApplicationRunner {
 
-    @Inject
     private CollectionHelper collectionHelper;
+
+    public ApplicationRunner(CollectionHelper collectionHelper) {
+        this.collectionHelper = collectionHelper;
+    }
 
     public void createCollection(String collectionName,
                                  String imagesDirectory,
