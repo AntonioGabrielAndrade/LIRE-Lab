@@ -42,6 +42,7 @@ public abstract class FXML {
     protected Parent load() throws IOException {
         this.loader.setLocation(getClass().getResource(getFXMLResourceName()));
         this.loader.setRoot(null);
+        this.loader.setController(null);
 
         Parent root = loader.load();
 
