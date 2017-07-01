@@ -6,11 +6,14 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.embed.swing.JFXPanel;
 import org.apache.commons.io.FileUtils;
 import org.testfx.api.FxRobot;
+import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static java.util.Arrays.asList;
 
@@ -43,5 +46,10 @@ public class TestUtils {
         } catch (IOException e) {
             throw new RuntimeException("Error creating collection", e);
         }
+    }
+
+    public static void waitUntilIsPresent(String query) throws TimeoutException {
+        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS,
+                () -> new FxRobot().lookup(query).tryQuery().isPresent());
     }
 }

@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TreeItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class TreeItemBuilderTest {
+
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     private TreeItemBuilder builder;
 

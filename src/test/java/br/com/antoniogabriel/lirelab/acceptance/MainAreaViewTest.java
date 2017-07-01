@@ -99,7 +99,7 @@ public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
 
     @Test
     public void shouldListCollections() throws Exception {
-        view.checkCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
+        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
 
     @Test
     public void shouldUpdateCollectionsListWhenCollectionIsDeleted() throws Exception {
-        view.checkCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
+        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
 
         collectionHelper.deleteCollection(COLLECTION_1);
 
@@ -144,18 +144,19 @@ public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
 
     @Test
     public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
+        view.waitUntilCollectionIsListed(COLLECTION_1);
         view.selectCollection(COLLECTION_1);
 
-        verifyThat("#14474347006_99aa0fd981_k", isVisible());
-        verifyThat("#16903390174_1d670a5849_h", isVisible());
-        verifyThat("#17099294578_0ba4068bad_k", isVisible());
-        verifyThat("#17338370170_1e620bfb18_h", isVisible());
-        verifyThat("#17525978165_86dc26e8cb_h", isVisible());
-        verifyThat("#19774866363_757555901c_k", isVisible());
-        verifyThat("#25601366680_b57441bb52_k", isVisible());
-        verifyThat("#25601374660_78e6a9bba8_k", isVisible());
-        verifyThat("#26487616294_b22b87133e_k", isVisible());
-        verifyThat("#26489383923_98d419eb0d_k", isVisible());
+        waitUntilIsPresent("#14474347006_99aa0fd981_k");
+        waitUntilIsPresent("#16903390174_1d670a5849_h");
+        waitUntilIsPresent("#17099294578_0ba4068bad_k");
+        waitUntilIsPresent("#17338370170_1e620bfb18_h");
+        waitUntilIsPresent("#17525978165_86dc26e8cb_h");
+        waitUntilIsPresent("#19774866363_757555901c_k");
+        waitUntilIsPresent("#25601366680_b57441bb52_k");
+        waitUntilIsPresent("#25601374660_78e6a9bba8_k");
+        waitUntilIsPresent("#26487616294_b22b87133e_k");
+        waitUntilIsPresent("#26489383923_98d419eb0d_k");
     }
 
     @Test

@@ -103,7 +103,7 @@ public class MainAreaControllerTest {
 
         controller.showImage(SOME_IMAGE_PATH);
 
-        verify(imageViewConfig).bindImageHeight(imageView, centerPane, 0.5);
+        verify(imageViewConfig).bindImageHeight(imageView, centerPane, 0.8);
         verify(centerPane).setCenter(imageView);
     }
 

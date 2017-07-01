@@ -118,8 +118,26 @@
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.codehaus.griffon.plugins</groupId>
+            <artifactId>griffon-tangoicons-javafx</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
     </dependencies>
 
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.codehaus.griffon.plugins</groupId>
+                <artifactId>griffon-tangoicons-plugin</artifactId>
+                <version>2.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <resources>
             <resource>
