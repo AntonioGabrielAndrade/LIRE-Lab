@@ -1,6 +1,7 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.imagegrid;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
+import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;

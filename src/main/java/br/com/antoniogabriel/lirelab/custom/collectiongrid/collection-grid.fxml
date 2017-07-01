@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
-<?import br.com.antoniogabriel.lirelab.custom.ImageGrid?>
+<?import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid?>
 <?import java.net.URL?>
 
 <fx:root xmlns="http://javafx.com/javafx"

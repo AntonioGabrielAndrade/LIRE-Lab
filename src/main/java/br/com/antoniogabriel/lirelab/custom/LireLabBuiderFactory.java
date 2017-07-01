@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
+import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid;
+import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGridBuilder;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.util.Builder;
