@@ -1,7 +1,0 @@
-.image-view:hover {
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 10,0,0,1 );
-}
-
-.tree-cell:selected .text {
-    -fx-fill: white;
-}

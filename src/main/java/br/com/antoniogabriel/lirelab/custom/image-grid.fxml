@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.geometry.Insets?>
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
+         styleClass="image-grid"
          type="StackPane">
 
     <FlowPane fx:id="flowPane" alignment="TOP_CENTER" hgap="5" vgap="5">

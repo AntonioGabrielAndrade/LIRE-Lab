@@ -27,14 +27,12 @@ public abstract class FXML {
 
     public void loadIn(Stage stage) throws IOException {
         Parent root = load();
-
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(
-                FXML.class.getResource("style.css").toExternalForm());
 
         if(stage.getOwner() != null) {
             stage.initModality(Modality.WINDOW_MODAL);
         }
+
         stage.setTitle(getTitle());
         stage.setScene(scene);
         stage.centerOnScreen();
