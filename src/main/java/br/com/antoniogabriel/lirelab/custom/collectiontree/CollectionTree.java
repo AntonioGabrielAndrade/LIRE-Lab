@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.custom.collectiontree;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.custom.ImageSelectionListener;
+import br.com.antoniogabriel.lirelab.custom.collectiongrid.ImageSelectionListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;

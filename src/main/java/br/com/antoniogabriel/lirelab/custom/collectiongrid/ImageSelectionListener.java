@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.collectiongrid;
 
 @FunctionalInterface
 public interface ImageSelectionListener {
