@@ -17,6 +17,15 @@
         </graphic>
     </Button>
 
+    <Button id="toolbar-search-collection" onAction="#searchCollection">
+        <tooltip>
+            <Tooltip text="Search Collection"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="actions:system-search"/>
+        </graphic>
+    </Button>
+
     <Button id="toolbar-about">
         <tooltip>
             <Tooltip text="About"/>

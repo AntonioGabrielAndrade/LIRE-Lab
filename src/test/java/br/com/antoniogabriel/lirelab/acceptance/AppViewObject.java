@@ -55,7 +55,7 @@ public class AppViewObject extends FxRobot {
     }
 
     public SearchViewObject search() {
-        clickOn("#toolbar-search");
+        clickOn("#toolbar-search-collection");
         return new SearchViewObject();
     }
 }

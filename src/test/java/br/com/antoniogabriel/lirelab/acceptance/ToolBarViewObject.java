@@ -10,6 +10,7 @@ public class ToolBarViewObject extends FxRobot {
     public void checkStructure() {
         verifyThat("#toolbar", isVisible());
         verifyThat("#toolbar-create-collection", isVisible());
+        verifyThat("#toolbar-search-collection", isVisible());
         verifyThat("#toolbar-about", isVisible());
     }
 }

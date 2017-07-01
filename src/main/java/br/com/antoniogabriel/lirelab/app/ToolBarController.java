@@ -22,4 +22,8 @@ public class ToolBarController {
     public void openCreateCollectionDialog(ActionEvent event) throws IOException {
         createCollectionFXML.loadOwnedBy(dialogProvider.getWindowFrom(event));
     }
+
+    public void searchCollection(ActionEvent event) {
+        throw new UnsupportedOperationException();
+    }
 }
