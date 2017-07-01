@@ -162,6 +162,7 @@ public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
 
     @Test
     public void shouldShowImageWhenImageIsSelected() throws Exception {
+        view.waitUntilCollectionIsListed(COLLECTION_1);
         view.expandCollection(COLLECTION_1);
         view.selectImage("14474347006_99aa0fd981_k.jpg");
 
