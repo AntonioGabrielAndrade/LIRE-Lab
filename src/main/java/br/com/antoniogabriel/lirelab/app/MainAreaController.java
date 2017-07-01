@@ -4,6 +4,8 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.*;
 import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionSelectionListener;
+import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

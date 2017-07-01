@@ -4,7 +4,7 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
-import br.com.antoniogabriel.lirelab.custom.CollectionTree;
+import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;

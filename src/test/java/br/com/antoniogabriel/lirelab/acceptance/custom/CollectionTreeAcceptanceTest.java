@@ -2,7 +2,7 @@ package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.acceptance.ListCollectionViewObject;
 import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.custom.CollectionTree;
+import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.After;

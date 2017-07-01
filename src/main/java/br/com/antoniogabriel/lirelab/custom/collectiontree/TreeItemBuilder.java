@@ -1,6 +1,7 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.collectiontree;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper;
 import javafx.scene.control.TreeItem;
 
 import java.nio.file.Paths;
