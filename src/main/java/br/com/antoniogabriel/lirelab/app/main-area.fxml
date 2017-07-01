@@ -13,7 +13,6 @@
 
     <items>
         <CollectionTree visible="false"
-                        minWidth="150"
                         id="collection-tree"
                         fx:id="collectionTree"/>
 

@@ -94,7 +94,7 @@ public class MainAreaController implements Initializable {
         try {
 
             ImageView image = viewFactory.create(imagePath);
-            viewConfig.bindImageHeight(image, centerPane, 0.5);
+            viewConfig.bindImageHeight(image, centerPane, 0.8);
             centerPane.setCenter(image);
 
         } catch (FileNotFoundException e) {
