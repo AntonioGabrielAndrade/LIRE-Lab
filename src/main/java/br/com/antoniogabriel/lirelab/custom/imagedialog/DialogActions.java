@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.imagedialog;
 
 import javafx.scene.Node;
 import javafx.scene.control.ButtonType;

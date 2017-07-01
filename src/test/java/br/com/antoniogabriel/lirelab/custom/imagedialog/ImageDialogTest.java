@@ -1,7 +1,9 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.imagedialog;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewConfig;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
+import br.com.antoniogabriel.lirelab.custom.imagedialog.DialogActions;
+import br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
@@ -11,7 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static br.com.antoniogabriel.lirelab.custom.ImageDialog.MAX_IMAGE_HEIGHT;
+import static br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog.MAX_IMAGE_HEIGHT;
 import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFXThread;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;

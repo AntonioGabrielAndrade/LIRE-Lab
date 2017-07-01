@@ -2,7 +2,7 @@ package br.com.antoniogabriel.lirelab.custom.collectiongrid;
 
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.custom.ImageDialog;
+import br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.event.EventHandler;

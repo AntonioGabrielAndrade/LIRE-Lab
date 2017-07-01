@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.imagedialog;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewConfig;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;

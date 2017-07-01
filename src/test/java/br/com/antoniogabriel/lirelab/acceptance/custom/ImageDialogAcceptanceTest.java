@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.acceptance.ImageDialogViewObject;
-import br.com.antoniogabriel.lirelab.custom.ImageDialog;
+import br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
