@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.custom.FeatureTable;
-import br.com.antoniogabriel.lirelab.custom.ViewableFeature;
+import br.com.antoniogabriel.lirelab.custom.featuretable.FeatureTable;
+import br.com.antoniogabriel.lirelab.custom.featuretable.ViewableFeature;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import br.com.antoniogabriel.lirelab.custom.ProgressDialog;

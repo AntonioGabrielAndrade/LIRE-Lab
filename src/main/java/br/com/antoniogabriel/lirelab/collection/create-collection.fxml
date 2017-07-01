@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import br.com.antoniogabriel.lirelab.custom.FeatureTable?>
+<?import br.com.antoniogabriel.lirelab.custom.featuretable.FeatureTable?>
 
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
