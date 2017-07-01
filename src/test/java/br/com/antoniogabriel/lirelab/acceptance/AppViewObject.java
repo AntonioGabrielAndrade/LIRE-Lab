@@ -53,4 +53,9 @@ public class AppViewObject extends FxRobot {
     private Callable<Boolean> isPresent(String text) {
         return () -> lookup(text).tryQuery().isPresent();
     }
+
+    public SearchViewObject search() {
+        clickOn("#toolbar-search");
+        return new SearchViewObject();
+    }
 }

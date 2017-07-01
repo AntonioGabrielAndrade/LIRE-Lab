@@ -33,5 +33,6 @@ public class LireLabAcceptanceTest extends FXMLTest<AppFXML> {
     public void userJourneyTest() throws Exception {
         app.createCollection(ACCEPTANCE_TEST_COLLECTION, TEST_IMAGES, CEDD, TAMURA);
         app.viewCollection(ACCEPTANCE_TEST_COLLECTION);
+        app.searchCollection(ACCEPTANCE_TEST_COLLECTION);
     }
 }
