@@ -9,11 +9,11 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 public class ImageDialogViewObject extends FxRobot {
 
     public void checkImageIsDisplayed(String imageName) {
-        Node imageNode = from(lookup("#dialog-image-container")).lookup(imageName).query();
+        Node imageNode = from(lookup("#image-dialog")).lookup("#" + imageName).query();
         verifyThat(imageNode, isVisible());
     }
 
     public void close() {
-        clickOn("Close").interrupt();
+        clickOn("OK").interrupt();
     }
 }

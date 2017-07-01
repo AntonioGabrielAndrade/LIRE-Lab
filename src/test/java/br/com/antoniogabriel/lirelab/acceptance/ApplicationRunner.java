@@ -58,8 +58,8 @@ public class ApplicationRunner {
 
         ImageDialogViewObject imageView = gridView.selectImage("14474347006_99aa0fd981_k");
 
-//        imageView.checkImageIsDisplayed("14474347006_99aa0fd981_k-display");
-//
-//        imageView.close();
+        imageView.checkImageIsDisplayed("14474347006_99aa0fd981_k");
+
+        imageView.close();
     }
 }
