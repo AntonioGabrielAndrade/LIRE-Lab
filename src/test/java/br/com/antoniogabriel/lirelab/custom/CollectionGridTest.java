@@ -2,7 +2,6 @@ package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import javafx.scene.image.ImageView;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
-
 import static java.util.Arrays.asList;
-import static java.util.Collections.EMPTY_LIST;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -27,14 +23,12 @@ public class CollectionGridTest {
     private static final String IMAGE_PATH = "some/image/path";
 
     @Mock private ImageGrid imageGrid;
-    @Mock private CollectionUtils collectionUtils;
     @Mock private ImageView imageView;
 
-    private List<String> thumbnailsPaths = EMPTY_LIST;
     private Collection collection = new Collection("A Collection");
 
     @InjectMocks
-    private CollectionGrid collectionGrid = new CollectionGrid(collectionUtils);
+    private CollectionGrid collectionGrid = new CollectionGrid();
 
     @Before
     public void setUp() throws Exception {

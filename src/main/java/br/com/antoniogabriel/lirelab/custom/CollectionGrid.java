@@ -1,10 +1,8 @@
 package br.com.antoniogabriel.lirelab.custom;
 
-import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,18 +16,14 @@ public class CollectionGrid extends StackPane {
     private static final String COLLECTION_GRID_FXML = "collection-grid.fxml";
 
     private Collection collection;
-    private CollectionUtils collectionUtils;
-    private ImageViewFactory imageViewFactory = new ImageViewFactory();
 
     @FXML private ImageGrid grid;
 
-    public CollectionGrid(CollectionUtils collectionUtils) {
-        this.collectionUtils = collectionUtils;
-
+    public CollectionGrid() {
         loadFXML();
     }
 
-    protected void loadFXML() {
+    private void loadFXML() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(COLLECTION_GRID_FXML));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

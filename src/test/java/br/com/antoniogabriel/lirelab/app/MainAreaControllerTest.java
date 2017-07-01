@@ -4,7 +4,6 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.CollectionGrid;
-import br.com.antoniogabriel.lirelab.custom.CollectionGridBuilder;
 import br.com.antoniogabriel.lirelab.custom.CollectionTree;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -31,8 +30,6 @@ public class MainAreaControllerTest {
     private static final String SOME_IMAGE_PATH = "some/image/path";
 
     @Mock private BorderPane centerPane;
-    @Mock private CollectionGridBuilder collectionGridBuilder;
-    @Mock private CollectionGrid collectionGrid;
     @Mock private CollectionService collectionService;
     @Mock private CollectionTree collectionTree;
     @Mock private StackPane welcomeView;
@@ -41,7 +38,7 @@ public class MainAreaControllerTest {
     @Mock private ImageViewConfig imageViewConfig;
 
     @InjectMocks MainAreaController controller =
-            new MainAreaController(collectionService, collectionGridBuilder, imageViewFactory, imageViewConfig);
+            new MainAreaController(collectionService, imageViewFactory, imageViewConfig);
 
     private Collection collection;
     private List<Collection> collections;
@@ -94,12 +91,10 @@ public class MainAreaControllerTest {
     @Test
     public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
         Collection collection = new Collection("Collection");
-        given(collectionGridBuilder.build()).willReturn(collectionGrid);
 
         controller.showCollectionImages(collection);
 
-        verify(collectionGrid).setCollection(collection);
-        verify(centerPane).setCenter(collectionGrid);
+        verify(centerPane).setCenter(any(CollectionGrid.class));
     }
 
     @Test

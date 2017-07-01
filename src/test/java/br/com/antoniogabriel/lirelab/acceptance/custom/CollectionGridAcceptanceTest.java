@@ -28,8 +28,6 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     private static Collection collection = collection("Collection", TEST_IMAGES, CEDD);
 
-    private CollectionUtils collectionUtils = new CollectionUtils(RESOLVER);
-
     private CollectionGrid collectionGrid;
 
     @BeforeClass
@@ -57,11 +55,6 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
         });
     }
 
-    @Before
-    public void setUp() throws Exception {
-        collectionUtils = new CollectionUtils(RESOLVER);
-    }
-
     @After
     public void tearDown() throws Exception {
         FxToolkit.hideStage();
@@ -69,7 +62,7 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        collectionGrid = new CollectionGrid(collectionUtils);
+        collectionGrid = new CollectionGrid();
         collectionGrid.setCollection(collection);
 
         Scene scene = new Scene(collectionGrid, 900, 600);

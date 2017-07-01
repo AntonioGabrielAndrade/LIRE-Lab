@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 public class MainAreaController implements Initializable {
 
     private CollectionService collectionService;
-    private CollectionGridBuilder collectionGridBuilder;
     private ImageViewFactory viewFactory;
     private ImageViewConfig viewConfig;
 
@@ -34,12 +33,10 @@ public class MainAreaController implements Initializable {
 
     @Inject
     public MainAreaController(CollectionService collectionService,
-                              CollectionGridBuilder collectionGridBuilder,
                               ImageViewFactory viewFactory,
                               ImageViewConfig viewConfig) {
 
         this.collectionService = collectionService;
-        this.collectionGridBuilder = collectionGridBuilder;
         this.viewFactory = viewFactory;
         this.viewConfig = viewConfig;
     }
@@ -84,7 +81,7 @@ public class MainAreaController implements Initializable {
     public void showCollectionImages(Collection collection) {
         try {
 
-            CollectionGrid grid = collectionGridBuilder.build();
+            CollectionGrid grid = new CollectionGrid();
             grid.setCollection(collection);
             centerPane.setCenter(grid);
 
