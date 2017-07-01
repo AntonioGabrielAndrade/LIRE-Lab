@@ -2,20 +2,20 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.com.antoniogabriel.lirelab.Main"
-            prefHeight="600.0" prefWidth="800.0">
+            prefHeight="800.0" prefWidth="1100.0">
 
     <top>
         <VBox>
-            <fx:include source="menubar.fxml"></fx:include>
-            <fx:include source="toolbar.fxml"></fx:include>
+            <fx:include source="menubar.fxml"/>
+            <fx:include source="toolbar.fxml"/>
         </VBox>
     </top>
 
     <center>
-        <fx:include source="welcome-view.fxml"></fx:include>
+        <fx:include source="main-area.fxml"/>
     </center>
 
 </BorderPane>

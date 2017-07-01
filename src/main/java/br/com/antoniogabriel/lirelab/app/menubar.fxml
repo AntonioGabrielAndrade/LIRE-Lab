@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+
+<MenuBar id="menu-bar"
+         xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
+
+    <Menu id="file-menu" text="File">
+        <MenuItem id="create-collection" text="Create Collection"/>
+    </Menu>
+
+    <Menu id="help-menu" text="Help">
+        <MenuItem id="about" text="About"/>
+    </Menu>
+
+</MenuBar>

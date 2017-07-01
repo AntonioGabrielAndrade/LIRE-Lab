@@ -1,28 +1,37 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.app.AppFXML;
+import br.com.antoniogabriel.lirelab.collection.PathResolver;
+import br.com.antoniogabriel.lirelab.test.FXMLTest;
+import javafx.stage.Stage;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-public class LireLabAcceptanceTest {
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
+import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 
-    private ApplicationRunner runner = new ApplicationRunner();
+public class LireLabAcceptanceTest extends FXMLTest<AppFXML> {
 
-    @Before
-    public void setUp() throws Exception {
-        runner.setUpApp();
+    private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
+
+    private PathResolver resolver = new PathResolver();
+    private CollectionHelper collectionHelper = new CollectionHelper(resolver);
+    private ApplicationRunner app = new ApplicationRunner(collectionHelper);
+
+    @Override
+    protected void configStage(Stage stage) {
+        stage.setMaximized(true);
     }
 
     @After
-    public void tearDown() throws Exception {
-        runner.tearDownApp();
+    public void cleanEnvironment() throws Exception {
+        collectionHelper.deleteCollection(ACCEPTANCE_TEST_COLLECTION);
     }
 
     @Test
-    public void shouldShowBasicUIStructure() throws Exception {
-        runner.checkMenus();
-        runner.checkToolBar();
-        runner.checkWelcomeView();
+    public void userJourneyTest() throws Exception {
+        app.createCollection(ACCEPTANCE_TEST_COLLECTION, TEST_IMAGES, CEDD, TAMURA);
+        app.viewCollection(ACCEPTANCE_TEST_COLLECTION);
     }
-
 }

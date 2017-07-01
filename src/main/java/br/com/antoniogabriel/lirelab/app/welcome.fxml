@@ -1,16 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.text.Font?>
-<StackPane id="main-content">
+
+<StackPane id="main-content"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="br.com.antoniogabriel.lirelab.app.WelcomeController">
+
     <GridPane id="welcome-view"
               vgap="10"
               alignment="CENTER"
               gridLinesVisible="false">
+
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER"></ColumnConstraints>
+            <ColumnConstraints halignment="CENTER"/>
         </columnConstraints>
 
         <Text id="welcome-title"
@@ -18,16 +25,21 @@
               GridPane.rowIndex="0"
               GridPane.columnIndex="0">
             <font>
-                <Font size="60"></Font>
+                <Font size="60"/>
             </font>
         </Text>
+
         <Text id="welcome-text"
               text="With LIRE Lab you can test LIRE Features in an easy way"
               GridPane.rowIndex="1"
-              GridPane.columnIndex="0"></Text>
+              GridPane.columnIndex="0"/>
+
         <Button id="welcome-create-collection-button"
+                fx:id="createCollectionButton"
                 text="Create Collection"
+                onAction="#openCreateCollectionDialog"
                 GridPane.rowIndex="2"
-                GridPane.columnIndex="0"></Button>
+                GridPane.columnIndex="0"/>
+
     </GridPane>
 </StackPane>

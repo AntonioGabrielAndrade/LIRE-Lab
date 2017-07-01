@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
+<?import javafx.scene.control.*?>
+
+<ToolBar id="toolbar"
+         xmlns="http://javafx.com/javafx"
+         fx:controller="br.com.antoniogabriel.lirelab.app.ToolBarController"
+         xmlns:fx="http://javafx.com/fxml">
+
+    <Button id="toolbar-create-collection" onAction="#openCreateCollectionDialog">
+        <tooltip>
+            <Tooltip text="Create Collection"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="actions:folder-new"/>
+        </graphic>
+    </Button>
+
+    <Button id="toolbar-about">
+        <tooltip>
+            <Tooltip text="About"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="apps:system-users"/>
+        </graphic>
+    </Button>
+
+</ToolBar>
