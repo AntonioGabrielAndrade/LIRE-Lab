@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -17,7 +15,6 @@ import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test.TestUtils.collection;
 import static java.util.Arrays.asList;
 
-@RunWith(MockitoJUnitRunner.class)
 public class CollectionTreeAcceptanceTest extends ApplicationTest {
 
     private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES, CEDD);
