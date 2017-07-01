@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Singleton
-public class MainAreaController implements Initializable {
+public class HomeViewController implements Initializable {
 
     private CollectionService collectionService;
     private ImageViewFactory viewFactory;
@@ -35,7 +35,7 @@ public class MainAreaController implements Initializable {
 
 
     @Inject
-    public MainAreaController(CollectionService collectionService,
+    public HomeViewController(CollectionService collectionService,
                               ImageViewFactory viewFactory,
                               ImageViewConfig viewConfig) {
 
@@ -109,7 +109,7 @@ public class MainAreaController implements Initializable {
     class ShowImagesWhenCollectionIsSelectedListener implements CollectionSelectionListener {
         @Override
         public void selected(Collection collection) {
-            MainAreaController.this.showCollectionImages(collection);
+            HomeViewController.this.showCollectionImages(collection);
         }
     }
 
@@ -124,7 +124,7 @@ public class MainAreaController implements Initializable {
     class LoadCollectionsWhenAnyCollectionChangeListener implements Runnable {
         @Override
         public void run() {
-            Platform.runLater(() -> MainAreaController.this.loadCollections());
+            Platform.runLater(() -> HomeViewController.this.loadCollections());
         }
     }
 

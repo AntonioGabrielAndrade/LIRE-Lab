@@ -25,7 +25,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MainAreaControllerTest {
+public class HomeViewControllerTest {
 
     private static final String SOME_IMAGE_PATH = "some/image/path";
 
@@ -37,8 +37,9 @@ public class MainAreaControllerTest {
     @Mock private ImageViewFactory imageViewFactory;
     @Mock private ImageViewConfig imageViewConfig;
 
-    @InjectMocks MainAreaController controller =
-            new MainAreaController(collectionService, imageViewFactory, imageViewConfig);
+    @InjectMocks
+    HomeViewController controller =
+            new HomeViewController(collectionService, imageViewFactory, imageViewConfig);
 
     private Collection collection;
     private List<Collection> collections;
@@ -77,7 +78,7 @@ public class MainAreaControllerTest {
         controller.initialize(null, null);
 
         verify(collectionTree).addCollectionSelectionListener(
-                any(MainAreaController.ShowImagesWhenCollectionIsSelectedListener.class));
+                any(HomeViewController.ShowImagesWhenCollectionIsSelectedListener.class));
     }
 
     @Test
@@ -85,7 +86,7 @@ public class MainAreaControllerTest {
         controller.initialize(null, null);
 
         verify(collectionTree).addImageSelectionListener(
-                any(MainAreaController.ShowImageWhenImageIsSelectedListener.class));
+                any(HomeViewController.ShowImageWhenImageIsSelectedListener.class));
     }
 
     @Test
@@ -112,7 +113,7 @@ public class MainAreaControllerTest {
         controller.initialize(null, null);
 
         verify(collectionService).addCollectionsChangeListener(
-                any(MainAreaController.LoadCollectionsWhenAnyCollectionChangeListener.class)
+                any(HomeViewController.LoadCollectionsWhenAnyCollectionChangeListener.class)
         );
     }
 }

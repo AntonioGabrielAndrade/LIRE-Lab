@@ -24,6 +24,6 @@ public class ToolBarController {
     }
 
     public void searchCollection(ActionEvent event) {
-        throw new UnsupportedOperationException();
+//        throw new UnsupportedOperationException();
     }
 }

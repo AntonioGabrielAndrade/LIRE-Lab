@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.StackPane?>
 
-<?import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.BorderPane?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
 
-<SplitPane xmlns="http://javafx.com/javafx"
-           xmlns:fx="http://javafx.com/fxml"
-           fx:controller="br.com.antoniogabriel.lirelab.app.MainAreaController"
-           orientation="HORIZONTAL"
-           dividerPositions="0.0"
-           prefHeight="900.0" prefWidth="1200.0">
+    <fx:define>
+        <fx:include fx:id="homeView" source="home-view.fxml"/>
+    </fx:define>
 
-    <items>
-        <CollectionTree visible="false"
-                        id="collection-tree"
-                        fx:id="collectionTree"/>
-
-        <BorderPane id="center-pane" fx:id="centerPane">
-            <center>
-                <fx:include fx:id="welcomeView" visible="true" source="welcome.fxml"/>
-            </center>
-        </BorderPane>
-    </items>
-
-</SplitPane>
+    <fx:reference source="homeView"/>
+</StackPane>
