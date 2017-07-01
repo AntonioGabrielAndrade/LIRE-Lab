@@ -143,4 +143,7 @@ public class CollectionTree extends StackPane {
         this.imageListeners.add(listener);
     }
 
+    public Collection getSelectedCollection() {
+        return getCollection(treeView.getSelectionModel().getSelectedItem());
+    }
 }

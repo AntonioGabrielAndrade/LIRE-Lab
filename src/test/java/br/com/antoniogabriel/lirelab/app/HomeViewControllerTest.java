@@ -19,6 +19,8 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.EMPTY_LIST;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
@@ -115,5 +117,15 @@ public class HomeViewControllerTest {
         verify(collectionService).addCollectionsChangeListener(
                 any(HomeViewController.LoadCollectionsWhenAnyCollectionChangeListener.class)
         );
+    }
+
+    @Test
+    public void shouldReturnSelectedCollection() throws Exception {
+        given(collectionTree.getSelectedCollection()).willReturn(collection);
+
+        Collection retrievedCollection = controller.getSelectedCollection();
+
+        verify(collectionTree).getSelectedCollection();
+        assertThat(retrievedCollection, equalTo(collection));
     }
 }

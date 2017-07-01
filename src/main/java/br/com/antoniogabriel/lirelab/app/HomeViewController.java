@@ -106,6 +106,10 @@ public class HomeViewController implements Initializable {
 
     }
 
+    public Collection getSelectedCollection() {
+        return collectionTree.getSelectedCollection();
+    }
+
     class ShowImagesWhenCollectionIsSelectedListener implements CollectionSelectionListener {
         @Override
         public void selected(Collection collection) {

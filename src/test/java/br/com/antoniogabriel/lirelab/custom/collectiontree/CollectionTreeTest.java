@@ -111,4 +111,15 @@ public class CollectionTreeTest {
 
         assertThat(selectedImage[0], equalTo("path/image1"));
     }
+
+    @Test
+    public void shouldReturnSelectedCollection() throws Exception {
+        CollectionTree realTree = new CollectionTree();
+
+        realTree.setCollections(asList(collection1, collection2));
+
+        realTree.selectCollection(0);
+
+        assertThat(realTree.getSelectedCollection(), equalTo(collection1));
+    }
 }
