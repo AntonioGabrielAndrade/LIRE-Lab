@@ -1,7 +1,10 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.collectiongrid;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
+import br.com.antoniogabriel.lirelab.custom.ImageGrid;
+import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.collectiongrid.DisplayImageDialogHandler;
 import javafx.scene.image.ImageView;
 import org.junit.Before;
 import org.junit.Test;

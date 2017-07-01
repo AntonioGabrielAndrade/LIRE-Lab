@@ -1,8 +1,9 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.collectiongrid;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.collection.Image;
+import br.com.antoniogabriel.lirelab.custom.ImageGrid;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
