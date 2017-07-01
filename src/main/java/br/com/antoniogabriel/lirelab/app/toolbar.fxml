@@ -5,7 +5,7 @@
 
 <ToolBar id="toolbar"
          xmlns="http://javafx.com/javafx"
-         fx:controller="br.com.antoniogabriel.lirelab.app.ToolBarController"
+         fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
          xmlns:fx="http://javafx.com/fxml">
 
     <Button id="toolbar-create-collection" onAction="#openCreateCollectionDialog">

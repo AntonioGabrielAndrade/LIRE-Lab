@@ -14,14 +14,14 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ToolBarControllerControllerTest {
+public class AppControllerTest {
 
     @Mock private Window window;
     @Mock private CreateCollectionFXML createCollectionFXML;
     @Mock private ActionEvent event;
     @Mock private DialogProvider dialogProvider;
 
-    @InjectMocks private ToolBarController controller;
+    @InjectMocks private AppController controller;
 
     @Test
     public void shouldOpenCreateCollectionDialog() throws Exception {

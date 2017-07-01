@@ -8,13 +8,13 @@ import javafx.event.ActionEvent;
 import javax.inject.Inject;
 import java.io.IOException;
 
-public class ToolBarController {
+public class AppController {
 
     private CreateCollectionFXML createCollectionFXML;
     private DialogProvider dialogProvider;
 
     @Inject
-    public ToolBarController(CreateCollectionFXML createCollectionFXML, DialogProvider dialogProvider) {
+    public AppController(CreateCollectionFXML createCollectionFXML, DialogProvider dialogProvider) {
         this.createCollectionFXML = createCollectionFXML;
         this.dialogProvider = dialogProvider;
     }
