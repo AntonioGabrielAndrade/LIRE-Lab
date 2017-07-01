@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.custom.ImageGrid;
-import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.semanticmetadata.lire.utils.FileUtils;
@@ -10,7 +9,6 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
-import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,14 +20,11 @@ import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class ImageGridAcceptanceTest extends ApplicationTest {
 
+    private ImageGrid imageGrid = new ImageGrid();
     private List<String> paths = new ArrayList<>();
-
-    @Inject
-    private ImageGrid imageGrid;
 
     @Override
     public void start(Stage stage) throws Exception {
-        DependencyInjection.init(this);
         paths = getPaths(TEST_IMAGES);
 
         imageGrid.setImagesHeight(100);
