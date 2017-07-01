@@ -32,7 +32,8 @@ public class LireLabAcceptanceTest extends ApplicationTest {
         DependencyInjection.init(this);
         new FxRobot().interact(() -> {
             try {
-                fxml.loadIn(stage, true);
+                stage.setMaximized(true);
+                fxml.loadIn(stage);
             } catch (IOException e) {
                 throw new LireLabException("Could not load fxml", e);
             }

@@ -9,6 +9,7 @@ public abstract class FXMLTest<T extends FXML> extends InjectableViewTest<T> {
 
     @Override
     public void start(Stage stage) throws Exception {
+        stage.setMaximized(false);
         super.start(stage);
         configStage(stage);
         fxml.loadIn(stage);

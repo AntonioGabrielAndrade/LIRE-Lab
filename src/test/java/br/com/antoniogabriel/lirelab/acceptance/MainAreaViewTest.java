@@ -10,6 +10,7 @@ import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import javafx.scene.Node;
+import javafx.stage.Stage;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -89,6 +90,11 @@ public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
                 bind(PathResolver.class).toInstance(resolver);
             }
         };
+    }
+
+    @Override
+    protected void configStage(Stage stage) {
+        stage.setMaximized(true);
     }
 
     @Test

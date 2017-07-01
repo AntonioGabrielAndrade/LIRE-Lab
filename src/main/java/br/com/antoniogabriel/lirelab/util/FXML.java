@@ -26,10 +26,6 @@ public abstract class FXML {
     }
 
     public void loadIn(Stage stage) throws IOException {
-        loadIn(stage, false);
-    }
-
-    public void loadIn(Stage stage, boolean maximized) throws IOException {
         Parent root = load();
 
         Scene scene = new Scene(root);
@@ -40,7 +36,6 @@ public abstract class FXML {
             stage.initModality(Modality.WINDOW_MODAL);
         }
         stage.setTitle(getTitle());
-        stage.setMaximized(maximized);
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();

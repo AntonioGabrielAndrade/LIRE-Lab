@@ -4,6 +4,7 @@ import br.com.antoniogabriel.lirelab.app.AppFXML;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import com.google.inject.AbstractModule;
+import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,6 +22,11 @@ public class AppViewTest extends FXMLTest<AppFXML> {
                 bind(PathResolver.class).toInstance(new PathResolver(TEST_ROOT));
             }
         };
+    }
+
+    @Override
+    protected void configStage(Stage stage) {
+        stage.setMaximized(true);
     }
 
     @Before

@@ -18,6 +18,7 @@ public class App extends Application {
             System.exit(0);
         });
         DependencyInjection.init(this);
-        appFXML.loadIn(stage, true);
+        stage.setMaximized(true);
+        appFXML.loadIn(stage);
     }
 }
