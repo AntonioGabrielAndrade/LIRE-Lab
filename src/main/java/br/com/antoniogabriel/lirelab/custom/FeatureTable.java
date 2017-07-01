@@ -16,7 +16,7 @@ import java.util.List;
 
 public class FeatureTable extends TableView<ViewableFeature> {
 
-    public static final String FXML = "table-view.fxml";
+    public static final String FXML = "feature-table.fxml";
 
     @FXML private TableColumn<ViewableFeature, Boolean> selectedCol;
     @FXML private TableColumn<ViewableFeature, String> nameCol;
