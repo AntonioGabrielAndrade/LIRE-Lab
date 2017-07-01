@@ -104,6 +104,7 @@ public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
 
     @Test
     public void shouldListImagesInCollection() throws Exception {
+        view.waitUntilCollectionIsListed(COLLECTION_1);
         view.expandCollection(COLLECTION_1);
 
         view.checkImageIsListed("14474347006_99aa0fd981_k.jpg");
