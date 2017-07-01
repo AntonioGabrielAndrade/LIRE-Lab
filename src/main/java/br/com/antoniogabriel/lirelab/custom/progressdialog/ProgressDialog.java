@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.custom;
+package br.com.antoniogabriel.lirelab.custom.progressdialog;
 
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;

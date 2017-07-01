@@ -4,7 +4,7 @@ import br.com.antoniogabriel.lirelab.custom.featuretable.FeatureTable;
 import br.com.antoniogabriel.lirelab.custom.featuretable.ViewableFeature;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.FeatureUtils;
-import br.com.antoniogabriel.lirelab.custom.ProgressDialog;
+import br.com.antoniogabriel.lirelab.custom.progressdialog.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;
