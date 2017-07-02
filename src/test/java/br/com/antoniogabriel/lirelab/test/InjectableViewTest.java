@@ -25,8 +25,7 @@ public abstract class InjectableViewTest<T> extends ApplicationTest {
     protected AbstractModule getBindings() {
         return new AbstractModule() {
             @Override
-            protected void configure() {
-            }
+            protected void configure() {}
         };
     }
 }
