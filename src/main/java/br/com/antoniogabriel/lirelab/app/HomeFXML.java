@@ -5,15 +5,15 @@ import javafx.fxml.FXMLLoader;
 
 import javax.inject.Inject;
 
-public class MainAreaFXML extends FXML{
+public class HomeFXML extends FXML{
 
     @Inject
-    public MainAreaFXML(FXMLLoader loader) {
+    public HomeFXML(FXMLLoader loader) {
         super(loader);
     }
 
     @Override
     public String getFXMLResourceName() {
-        return "main-area.fxml";
+        return "home.fxml";
     }
 }

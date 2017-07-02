@@ -8,7 +8,7 @@
             fx:id="mainArea">
 
     <fx:define>
-        <fx:include fx:id="homeView" source="home-view.fxml"/>
+        <fx:include fx:id="homeView" source="home.fxml"/>
     </fx:define>
 
     <fx:define>

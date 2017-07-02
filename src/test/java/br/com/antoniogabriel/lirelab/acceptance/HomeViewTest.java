@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.app.MainAreaFXML;
+import br.com.antoniogabriel.lirelab.app.HomeFXML;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionTask;
@@ -29,7 +29,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MainAreaViewTest extends FXMLTest<MainAreaFXML>{
+public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION_2 = collection("Collection2", TEST_IMAGES, CEDD);
