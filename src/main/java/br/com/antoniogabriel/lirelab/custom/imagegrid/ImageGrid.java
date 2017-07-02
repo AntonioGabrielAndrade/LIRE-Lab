@@ -24,7 +24,7 @@ public class ImageGrid extends StackPane {
 
     @FXML private FlowPane flowPane;
 
-    private int imagesHeight;
+    private int imagesHeight = 100;
 
     public ImageGrid() {
         this(new ImageViewFactory(), new FileUtils());
