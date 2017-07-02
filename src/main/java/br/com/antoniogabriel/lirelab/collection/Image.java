@@ -1,5 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import java.nio.file.Paths;
+
 public class Image {
 
     private final String imagePath;
@@ -16,6 +18,10 @@ public class Image {
 
     public String getThumbnailPath() {
         return thumbnailPath;
+    }
+
+    public String getImageName() {
+        return Paths.get(imagePath).getFileName().toString().replace(".jpg", "");
     }
 
     @Override
@@ -35,4 +41,5 @@ public class Image {
         result = 31 * result + (thumbnailPath != null ? thumbnailPath.hashCode() : 0);
         return result;
     }
+
 }
