@@ -38,6 +38,7 @@ public class CollectionGrid extends StackPane {
 
     public void setCollection(Collection collection) throws IOException {
         this.collection = collection;
+        grid.clear();
         for (Image image : collection.getImages()) {
             ImageView imageView = grid.addImage(image.getThumbnailPath());
             imageView.setOnMouseClicked(new DisplayImageDialogHandler(image, new DialogProvider(), new FileUtils()));

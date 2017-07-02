@@ -79,4 +79,8 @@ public class ImageGrid extends StackPane {
     public void setImagesHeight(int imagesHeight) {
         this.imagesHeight = imagesHeight;
     }
+
+    public void clear() {
+        images().clear();
+    }
 }

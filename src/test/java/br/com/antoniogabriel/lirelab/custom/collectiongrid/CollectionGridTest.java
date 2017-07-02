@@ -40,14 +40,20 @@ public class CollectionGridTest {
                         new Image(IMAGE_PATH, THUMBNAIL_PATH)
                 )
         );
+        given(imageGrid.addImage(THUMBNAIL_PATH)).willReturn(imageView);
     }
 
     @Test
     public void shouldAddThumbnailsToGridAndDisplayOriginalImageWhenClick() throws Exception {
-        given(imageGrid.addImage(THUMBNAIL_PATH)).willReturn(imageView);
-
         collectionGrid.setCollection(collection);
 
         verify(imageView, times(3)).setOnMouseClicked(any(DisplayImageDialogHandler.class));
+    }
+
+    @Test
+    public void shouldClearImagesWhenSetCollection() throws Exception {
+        collectionGrid.setCollection(collection);
+
+        verify(imageGrid).clear();
     }
 }
