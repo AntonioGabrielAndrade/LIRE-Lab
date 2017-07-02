@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.antoniogabriel.lirelab.search.SearchViewController">
 
     <center>
-        <Text text="Search View"/>
+        <CollectionGrid fx:id="grid"/>
     </center>
 
 </BorderPane>

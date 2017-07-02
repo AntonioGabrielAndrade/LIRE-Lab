@@ -1,8 +1,13 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.Image;
 import javafx.scene.Node;
 import org.testfx.api.FxRobot;
 
+import java.util.concurrent.TimeoutException;
+
+import static br.com.antoniogabriel.lirelab.test.TestUtils.waitUntilIsPresent;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class SearchViewObject extends FxRobot {
@@ -24,4 +29,9 @@ public class SearchViewObject extends FxRobot {
         throw new UnsupportedOperationException();
     }
 
+    public void waitUntilShowCollection(Collection collection) throws TimeoutException {
+        for (Image image : collection.getImages()) {
+            waitUntilIsPresent("#" + image.getImageName());
+        }
+    }
 }
