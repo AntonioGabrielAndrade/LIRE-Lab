@@ -13,6 +13,7 @@ import java.io.IOException;
 public abstract class FXML {
 
     private FXMLLoader loader;
+    private Object controller;
 
     @Inject
     public FXML(FXMLLoader loader) {
@@ -39,20 +40,20 @@ public abstract class FXML {
         stage.show();
     }
 
-    protected Parent load() throws IOException {
+    private Parent load() throws IOException {
         this.loader.setLocation(getClass().getResource(getFXMLResourceName()));
         this.loader.setRoot(null);
         this.loader.setController(null);
 
         Parent root = loader.load();
+        controller = loader.getController();
 
         this.loader.setLocation(null);
         return root;
     }
 
     public <C> C getController() throws IOException {
-        load();
-        return loader.getController();
+        return (C) controller;
     }
 
     public String getTitle() {
