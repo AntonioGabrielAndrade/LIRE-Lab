@@ -20,6 +20,8 @@ public class CollectionGrid extends StackPane {
 
     @FXML private ImageGrid grid;
 
+    private EventHandlerFactory eventHandlerFactory = new EventHandlerFactory();
+
     public CollectionGrid() {
         loadFXML();
     }
@@ -37,11 +39,15 @@ public class CollectionGrid extends StackPane {
     }
 
     public void setCollection(Collection collection) throws IOException {
+        setCollection(collection, new DisplayImageDialogHandler(new DialogProvider(), new FileUtils()));
+    }
+
+    public void setCollection(Collection collection, ImageClickHandler handler) throws IOException {
         this.collection = collection;
         grid.clear();
         for (Image image : collection.getImages()) {
             ImageView imageView = grid.addImage(image.getThumbnailPath());
-            imageView.setOnMouseClicked(new DisplayImageDialogHandler(image, new DialogProvider(), new FileUtils()));
+            imageView.setOnMouseClicked(eventHandlerFactory.createFrom(image, handler));
         }
     }
 

@@ -3,7 +3,10 @@ package br.com.antoniogabriel.lirelab.custom.collectiongrid;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid;
+import javafx.embed.swing.JFXPanel;
+import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static java.util.Arrays.asList;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -20,11 +24,16 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionGridTest {
 
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
+
     private static final String THUMBNAIL_PATH = "some/thumbnail/path";
     private static final String IMAGE_PATH = "some/image/path";
 
     @Mock private ImageGrid imageGrid;
     @Mock private ImageView imageView;
+    @Mock private ImageClickHandler imageClickHandler;
+    @Mock private EventHandlerFactory eventHandlerFactory;
+    @Mock private EventHandler<MouseEvent> eventHandler;
 
     private Collection collection = new Collection("A Collection");
 
@@ -45,9 +54,12 @@ public class CollectionGridTest {
 
     @Test
     public void shouldAddThumbnailsToGridAndDisplayOriginalImageWhenClick() throws Exception {
+        given(eventHandlerFactory.createFrom(any(Image.class), any(DisplayImageDialogHandler.class)))
+                .willReturn(eventHandler);
+
         collectionGrid.setCollection(collection);
 
-        verify(imageView, times(3)).setOnMouseClicked(any(DisplayImageDialogHandler.class));
+        verify(imageView, times(3)).setOnMouseClicked(eventHandler);
     }
 
     @Test
@@ -55,5 +67,15 @@ public class CollectionGridTest {
         collectionGrid.setCollection(collection);
 
         verify(imageGrid).clear();
+    }
+
+    @Test
+    public void shouldRegisterImageClickHandlerWithCollectionImages() throws Exception {
+        given(eventHandlerFactory.createFrom(any(Image.class), eq(imageClickHandler)))
+                .willReturn(eventHandler);
+
+        collectionGrid.setCollection(collection, imageClickHandler);
+
+        verify(imageView, times(3)).setOnMouseClicked(eventHandler);
     }
 }
