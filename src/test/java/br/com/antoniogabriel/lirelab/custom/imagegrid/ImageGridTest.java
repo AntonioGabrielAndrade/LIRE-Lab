@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.custom.imagegrid;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
-import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -45,7 +44,7 @@ public class ImageGridTest {
         doReturn(true).when(fileUtils).fileExists(PATH2);
         doReturn(false).when(fileUtils).fileExists(INEXISTENT_PATH);
 
-        grid.setImages(asList(PATH1, PATH2, INEXISTENT_PATH));
+        grid.setPaths(asList(PATH1, PATH2, INEXISTENT_PATH));
 
         verify(children, times(2)).add(imageView);
     }
@@ -56,7 +55,7 @@ public class ImageGridTest {
         doReturn(true).when(fileUtils).fileExists(PATH2);
         doReturn(true).when(fileUtils).fileExists(PATH3);
 
-        grid.setImages(asList(PATH1, PATH2, PATH3));
+        grid.setPaths(asList(PATH1, PATH2, PATH3));
 
         verify(children, times(3)).add(imageView);
     }
@@ -70,7 +69,7 @@ public class ImageGridTest {
         doReturn(true).when(fileUtils).fileExists(PATH3);
 
         grid.setImagesHeight(height);
-        grid.setImages(asList(PATH1, PATH2, PATH3));
+        grid.setPaths(asList(PATH1, PATH2, PATH3));
 
         verify(imageView, times(3)).setFitHeight(height);
     }

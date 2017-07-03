@@ -51,7 +51,7 @@ public class ImageGrid extends StackPane {
     }
 
 
-    public void setImages(List<String> paths) throws FileNotFoundException {
+    public void setPaths(List<String> paths) throws FileNotFoundException {
         for (String path : paths) {
             addImage(path);
         }
