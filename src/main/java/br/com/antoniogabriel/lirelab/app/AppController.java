@@ -1,13 +1,16 @@
 package br.com.antoniogabriel.lirelab.app;
 
 
+import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.search.SearchViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Window;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -41,7 +44,24 @@ public class AppController {
     }
 
     public void searchCollection(ActionEvent event) {
+        Collection selectedCollection = homeViewController.getSelectedCollection();
+        Feature feature = chooseFeature(selectedCollection, dialogProvider.getWindowFrom(event));
+
         mainArea.setCenter(searchView);
-        searchViewController.startSearchSession(homeViewController.getSelectedCollection());
+        searchViewController.startSearchSession(selectedCollection, feature);
+    }
+
+    private Feature chooseFeature(Collection collection, Window window) {
+        return hasMoreThanOneFeature(collection) ?
+                dialogProvider.chooseFeatureFrom(collection) :
+                firstFeatureOf(collection);
+    }
+
+    private Feature firstFeatureOf(Collection collection) {
+        return collection.getFeatures().get(0);
+    }
+
+    private boolean hasMoreThanOneFeature(Collection collection) {
+        return collection.getFeatures().size() > 1;
     }
 }

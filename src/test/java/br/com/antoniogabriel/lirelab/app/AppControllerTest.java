@@ -14,6 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
+import static java.util.Arrays.asList;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -32,7 +35,7 @@ public class AppControllerTest {
     @InjectMocks private AppController controller =
             new AppController(createCollectionFXML,
                                     dialogProvider,
-                    searchViewController,
+                                    searchViewController,
                                     homeController);
 
     private Collection collection = new Collection();
@@ -48,11 +51,24 @@ public class AppControllerTest {
 
     @Test
     public void shouldShowSearchViewWhenSearchingCollection() throws Exception {
+        collection.setFeatures(asList(CEDD));
         given(homeController.getSelectedCollection()).willReturn(collection);
 
         controller.searchCollection(event);
 
         verify(mainArea).setCenter(searchView);
-        verify(searchViewController).startSearchSession(collection);
+        verify(searchViewController).startSearchSession(collection, CEDD);
+    }
+
+    @Test
+    public void shouldLetUserChooseFeatureWhenSearchingCollectionWithMoreThanOneFeature() throws Exception {
+        collection.setFeatures(asList(CEDD, TAMURA));
+        given(homeController.getSelectedCollection()).willReturn(collection);
+        given(dialogProvider.chooseFeatureFrom(collection)).willReturn(TAMURA);
+
+        controller.searchCollection(event);
+
+        verify(mainArea).setCenter(searchView);
+        verify(searchViewController).startSearchSession(collection, TAMURA);
     }
 }
