@@ -34,4 +34,16 @@ public class SearchViewObject extends FxRobot {
             waitUntilIsPresent("#" + image.getImageName());
         }
     }
+
+    public void selectQuery(String image) {
+        clickOn("#" + image).interrupt();
+    }
+
+    public void waitUntilShowQuery(String image) throws TimeoutException {
+        waitUntilIsPresent("#" + image, "#query");
+    }
+
+    public void waitUntilImagesOrderIs() {
+        throw new UnsupportedOperationException();
+    }
 }

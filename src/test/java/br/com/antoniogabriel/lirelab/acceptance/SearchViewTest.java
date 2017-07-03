@@ -77,8 +77,11 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @Test
     public void shouldShowCollection() throws Exception {
-        interact(() -> controller.startSearchSession(collection));
+        interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
+        view.selectQuery("14474347006_99aa0fd981_k");
+        view.waitUntilShowQuery("14474347006_99aa0fd981_k");
+//        view.waitUntilImagesOrderIs();
     }
 }
