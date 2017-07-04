@@ -3,20 +3,20 @@
 <?import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid?>
 
-<?import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="br.com.antoniogabriel.lirelab.search.SearchViewController">
 
     <top>
         <TitledPane text="Query" collapsible="false" minHeight="200">
-            <ImageGrid fx:id="queryGrid" id="query"/>
+            <SingleImageGrid fx:id="queryGrid" id="query"/>
         </TitledPane>
     </top>
 
     <center>
-        <TitledPane text="Collection" collapsible="false" minHeight="1000">
+        <TitledPane text="Collection" collapsible="false" prefHeight="Infinity">
             <CollectionGrid fx:id="collectionGrid"/>
         </TitledPane>
     </center>
