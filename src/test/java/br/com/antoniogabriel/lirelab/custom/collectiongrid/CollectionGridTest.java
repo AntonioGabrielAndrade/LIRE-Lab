@@ -28,12 +28,14 @@ public class CollectionGridTest {
 
     private static final String THUMBNAIL_PATH = "some/thumbnail/path";
     private static final String IMAGE_PATH = "some/image/path";
+    private static final Image IMAGE = new Image(IMAGE_PATH, THUMBNAIL_PATH);
 
     @Mock private ImageGrid imageGrid;
     @Mock private ImageView imageView;
     @Mock private ImageClickHandler imageClickHandler;
     @Mock private EventHandlerFactory eventHandlerFactory;
     @Mock private EventHandler<MouseEvent> eventHandler;
+    @Mock private ToolTipProvider toolTipProvider;
 
     private Collection collection = new Collection("A Collection");
 
@@ -42,13 +44,7 @@ public class CollectionGridTest {
 
     @Before
     public void setUp() throws Exception {
-        collection.setImages(
-                asList(
-                        new Image(IMAGE_PATH, THUMBNAIL_PATH),
-                        new Image(IMAGE_PATH, THUMBNAIL_PATH),
-                        new Image(IMAGE_PATH, THUMBNAIL_PATH)
-                )
-        );
+        collection.setImages(asList(IMAGE, IMAGE, IMAGE));
         given(imageGrid.addImage(THUMBNAIL_PATH)).willReturn(imageView);
     }
 
@@ -60,6 +56,16 @@ public class CollectionGridTest {
         collectionGrid.setCollection(collection);
 
         verify(imageView, times(3)).setOnMouseClicked(eventHandler);
+    }
+
+    @Test
+    public void shouldAddToolTipToImage() throws Exception {
+        given(eventHandlerFactory.createFrom(any(Image.class), any(DisplayImageDialogHandler.class)))
+                .willReturn(eventHandler);
+
+        collectionGrid.setCollection(collection);
+
+        verify(toolTipProvider, times(3)).setToolTip(imageView, IMAGE.getImageName());
     }
 
     @Test

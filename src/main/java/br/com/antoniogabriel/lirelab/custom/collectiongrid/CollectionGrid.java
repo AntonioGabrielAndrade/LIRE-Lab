@@ -21,6 +21,7 @@ public class CollectionGrid extends StackPane {
     @FXML private ImageGrid grid;
 
     private EventHandlerFactory eventHandlerFactory = new EventHandlerFactory();
+    private ToolTipProvider toolTipProvider = new ToolTipProvider();
 
     public CollectionGrid() {
         loadFXML();
@@ -47,6 +48,7 @@ public class CollectionGrid extends StackPane {
         grid.clear();
         for (Image image : collection.getImages()) {
             ImageView imageView = grid.addImage(image.getThumbnailPath());
+            toolTipProvider.setToolTip(imageView, image.getImageName());
             imageView.setOnMouseClicked(eventHandlerFactory.createFrom(image, handler));
         }
     }

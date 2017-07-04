@@ -7,7 +7,7 @@ import br.com.antoniogabriel.lirelab.search.SearchViewController;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Window;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class AppControllerTest {
     @Mock private Node homeView;
     @Mock private SearchViewController searchViewController;
     @Mock private HomeViewController homeController;
-    @Mock private StackPane searchToolBar;
+    @Mock private HBox searchToolBar;
 
     @InjectMocks private AppController controller =
             new AppController(createCollectionFXML,
