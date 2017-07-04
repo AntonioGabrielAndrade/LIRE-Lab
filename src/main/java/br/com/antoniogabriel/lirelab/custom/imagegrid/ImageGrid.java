@@ -11,7 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 
 import javax.inject.Inject;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -51,20 +50,20 @@ public class ImageGrid extends StackPane {
     }
 
 
-    public void setPaths(List<String> paths) throws FileNotFoundException {
+    public void setPaths(List<String> paths) {
         for (String path : paths) {
             addImage(path);
         }
     }
 
-    public ImageView addImage(String path) throws FileNotFoundException {
+    public ImageView addImage(String path) {
         if(fileUtils.fileExists(path)) {
             return addImageToGrid(path);
         }
         return null;
     }
 
-    private ImageView addImageToGrid(String path) throws FileNotFoundException {
+    private ImageView addImageToGrid(String path) {
         ImageView imageView = imageViewFactory.create(path);
         imageView.setFitHeight(imagesHeight);
         imageView.setPreserveRatio(true);
