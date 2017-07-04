@@ -2,12 +2,9 @@ package br.com.antoniogabriel.lirelab.custom.imagedialog;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewConfig;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.image.ImageView;
-
-import java.io.FileNotFoundException;
 
 
 public class ImageDialog extends Dialog<Void> {
@@ -45,15 +42,10 @@ public class ImageDialog extends Dialog<Void> {
     }
 
     private void setImageAsContent(String imagePath) {
-        try {
-            ImageView imageView = this.imageViewFactory.create(imagePath);
-            imageViewConfig.limitImageHeight(imageView, MAX_IMAGE_HEIGHT);
+        ImageView imageView = this.imageViewFactory.create(imagePath, false);
+        imageViewConfig.limitImageHeight(imageView, MAX_IMAGE_HEIGHT);
 
-            this.dialogActions.setContent(imageView);
-
-        } catch (FileNotFoundException e) {
-            throw new LireLabException("Could not display image", e);
-        }
+        this.dialogActions.setContent(imageView);
     }
 
     private void addOkButton() {

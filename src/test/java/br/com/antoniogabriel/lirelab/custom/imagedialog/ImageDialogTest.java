@@ -34,7 +34,7 @@ public class ImageDialogTest {
 
     @Before
     public void setUp() throws Exception {
-        given(imageViewFactory.create(IMAGE_PATH)).willReturn(imageView);
+        given(imageViewFactory.create(IMAGE_PATH, false)).willReturn(imageView);
         createDialog();
     }
 

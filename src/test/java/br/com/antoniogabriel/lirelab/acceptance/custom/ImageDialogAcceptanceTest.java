@@ -16,8 +16,7 @@ public class ImageDialogAcceptanceTest extends ApplicationTest {
     private ImageDialogViewObject view = new ImageDialogViewObject();
 
     @Override
-    public void start(Stage stage) throws Exception {
-    }
+    public void start(Stage stage) throws Exception {}
 
     @Before
     public void setUp() throws Exception {
