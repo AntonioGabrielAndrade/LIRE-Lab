@@ -10,7 +10,8 @@ import javafx.stage.Window;
 
 import java.io.FileNotFoundException;
 
-class DisplayImageDialogHandler implements ImageClickHandler {
+public class DisplayImageDialogHandler implements ImageClickHandler {
+
     private final DialogProvider dialogProvider;
     private final FileUtils fileUtils;
 
