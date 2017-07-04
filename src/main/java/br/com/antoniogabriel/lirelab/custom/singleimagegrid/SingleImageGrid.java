@@ -61,4 +61,8 @@ public class SingleImageGrid extends StackPane {
     public void setOnChange(ImageChangeListener listener) {
         listeners.add(listener);
     }
+
+    public void clear() {
+        imageGrid.clear();
+    }
 }

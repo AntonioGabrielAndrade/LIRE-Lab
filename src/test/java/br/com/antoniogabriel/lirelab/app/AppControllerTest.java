@@ -7,7 +7,9 @@ import br.com.antoniogabriel.lirelab.search.SearchViewController;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Window;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,8 +31,10 @@ public class AppControllerTest {
     @Mock private DialogProvider dialogProvider;
     @Mock private BorderPane mainArea;
     @Mock private Node searchView;
+    @Mock private Node homeView;
     @Mock private SearchViewController searchViewController;
     @Mock private HomeViewController homeController;
+    @Mock private StackPane searchToolBar;
 
     @InjectMocks private AppController controller =
             new AppController(createCollectionFXML,
@@ -38,7 +42,13 @@ public class AppControllerTest {
                                     searchViewController,
                                     homeController);
 
-    private Collection collection = new Collection();
+    private Collection collection;
+
+    @Before
+    public void setUp() throws Exception {
+        collection = new Collection();
+        collection.setFeatures(asList(CEDD));
+    }
 
     @Test
     public void shouldOpenCreateCollectionDialog() throws Exception {
@@ -51,13 +61,21 @@ public class AppControllerTest {
 
     @Test
     public void shouldShowSearchViewWhenSearchingCollection() throws Exception {
-        collection.setFeatures(asList(CEDD));
         given(homeController.getSelectedCollection()).willReturn(collection);
 
         controller.searchCollection(event);
 
         verify(mainArea).setCenter(searchView);
         verify(searchViewController).startSearchSession(collection, CEDD);
+    }
+
+    @Test
+    public void shouldShowSearchToolbarWhenSearchingCollection() throws Exception {
+        given(homeController.getSelectedCollection()).willReturn(collection);
+
+        controller.searchCollection(event);
+
+        verify(searchToolBar).setVisible(true);
     }
 
     @Test
@@ -70,5 +88,13 @@ public class AppControllerTest {
 
         verify(mainArea).setCenter(searchView);
         verify(searchViewController).startSearchSession(collection, TAMURA);
+    }
+
+    @Test
+    public void shouldShowHomeView() throws Exception {
+        controller.showHomeView(event);
+
+        verify(searchToolBar).setVisible(false);
+        verify(mainArea).setCenter(homeView);
     }
 }

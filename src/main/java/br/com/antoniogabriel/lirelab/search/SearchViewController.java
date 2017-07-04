@@ -32,6 +32,7 @@ public class SearchViewController {
     public void startSearchSession(Collection collection, Feature feature) {
         try {
 
+            queryGrid.clear();
             collectionGrid.setCollection(collection, new SetImageToGridClickHandler(queryGrid));
             queryGrid.setOnChange(new ImageChangeListenerImpl(collection, feature, service, collectionGrid, queryGrid));
 
