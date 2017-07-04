@@ -16,10 +16,9 @@
 
         <BorderPane>
             <center>
-                <TitledPane text="Collections" collapsible="false">
+                <TitledPane text="Collections" collapsible="false" prefHeight="Infinity">
                     <CollectionTree visible="false"
                                     id="collection-tree"
-                                    minHeight="1000"
                                     fx:id="collectionTree"/>
                 </TitledPane>
             </center>
