@@ -16,7 +16,6 @@ import javafx.scene.layout.StackPane;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -85,8 +84,8 @@ public class HomeViewController implements Initializable {
         try {
 
             CollectionGrid grid = new CollectionGrid();
-            grid.setCollection(collection);
             centerPane.setCenter(grid);
+            grid.setCollection(collection);
 
         } catch (IOException e) {
             throw new LireLabException("Could not show collections", e);
@@ -94,16 +93,9 @@ public class HomeViewController implements Initializable {
     }
 
     public void showImage(String imagePath) {
-        try {
-
-            ImageView image = viewFactory.create(imagePath);
-            viewConfig.bindImageHeight(image, centerPane, 0.8);
-            centerPane.setCenter(image);
-
-        } catch (FileNotFoundException e) {
-            throw new LireLabException("Could not show image", e);
-        }
-
+        ImageView image = viewFactory.create(imagePath);
+        viewConfig.bindImageHeight(image, centerPane, 0.8);
+        centerPane.setCenter(image);
     }
 
     public Collection getSelectedCollection() {

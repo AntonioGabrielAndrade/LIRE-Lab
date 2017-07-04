@@ -5,6 +5,7 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -28,6 +29,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HomeViewControllerTest {
+
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     private static final String SOME_IMAGE_PATH = "some/image/path";
 
