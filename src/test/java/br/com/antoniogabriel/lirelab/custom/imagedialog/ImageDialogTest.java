@@ -2,11 +2,10 @@ package br.com.antoniogabriel.lirelab.custom.imagedialog;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewConfig;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
-import br.com.antoniogabriel.lirelab.custom.imagedialog.DialogActions;
-import br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +28,7 @@ public class ImageDialogTest {
     @Mock private ImageViewFactory imageViewFactory;
     @Mock private DialogActions dialogActions;
     @Mock private ImageViewConfig imageViewConfig;
+    @Mock private BorderPane contentRoot;
 
     private ImageDialog dialog;
 
@@ -40,7 +40,8 @@ public class ImageDialogTest {
 
     @Test
     public void shouldSetImageAsContentWhenInitialize() throws Exception {
-        verify(dialogActions).setContent(imageView);
+        verify(contentRoot).setCenter(imageView);
+        verify(dialogActions).setContent(contentRoot);
     }
 
     @Test
@@ -53,11 +54,22 @@ public class ImageDialogTest {
         verify(imageViewConfig).limitImageHeight(imageView, MAX_IMAGE_HEIGHT);
     }
 
+    @Test
+    public void shouldSetDialogTitleAsImagePath() throws Exception {
+        verify(dialogActions).setTitle(IMAGE_PATH);
+    }
+
+    @Test
+    public void shouldSetDialogAsResizable() throws Exception {
+        verify(dialogActions).setResizable(true);
+    }
+
     private void createDialog() {
         runOnFXThread(() -> dialog =
                 new ImageDialog(IMAGE_PATH,
                                 imageViewFactory,
                                 imageViewConfig,
-                                dialogActions));
+                                dialogActions,
+                                contentRoot));
     }
 }

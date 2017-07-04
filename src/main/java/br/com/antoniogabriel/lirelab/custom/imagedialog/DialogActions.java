@@ -23,4 +23,12 @@ public class DialogActions {
     public void setContent(Node content) {
         dialog.getDialogPane().setContent(content);
     }
+
+    public void setTitle(String title) {
+        dialog.setTitle(title);
+    }
+
+    public void setResizable(boolean value) {
+        dialog.setResizable(value);
+    }
 }
