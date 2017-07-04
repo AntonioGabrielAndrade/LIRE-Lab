@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.acceptance.custom.singleimagegrid;
+package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid;
