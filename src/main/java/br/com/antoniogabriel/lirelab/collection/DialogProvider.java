@@ -43,9 +43,10 @@ public class DialogProvider {
         return dialog;
     }
 
-    public Feature chooseFeatureFrom(Collection collection) {
+    public Feature chooseFeatureFrom(Collection collection, Window owner) {
         List<Feature> features = collection.getFeatures();
         ChooseFeatureDialog dialog = new ChooseFeatureDialog(features);
+        dialog.initOwner(owner);
         return dialog.showAndGetFeature();
     }
 
@@ -54,7 +55,7 @@ public class DialogProvider {
         Platform.runLater(() -> {
             Collection collection = new Collection("Collection");
             collection.setFeatures(asList(CEDD, TAMURA, FCTH, COLOR_HISTOGRAM));
-            Feature feature = new DialogProvider().chooseFeatureFrom(collection);
+            Feature feature = new DialogProvider().chooseFeatureFrom(collection, null);
             System.out.println("selected feature: " + feature);
         });
 

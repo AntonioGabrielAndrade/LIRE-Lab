@@ -62,7 +62,7 @@ public class AppController {
 
     private Feature chooseFeature(Collection collection, Window window) {
         return hasMoreThanOneFeature(collection) ?
-                dialogProvider.chooseFeatureFrom(collection) :
+                dialogProvider.chooseFeatureFrom(collection, window) :
                 firstFeatureOf(collection);
     }
 

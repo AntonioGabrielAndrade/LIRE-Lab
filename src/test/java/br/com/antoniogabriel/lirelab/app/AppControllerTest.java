@@ -48,12 +48,13 @@ public class AppControllerTest {
     public void setUp() throws Exception {
         collection = new Collection();
         collection.setFeatures(asList(CEDD));
+
+        given(dialogProvider.getWindowFrom(event)).willReturn(window);
+        given(homeController.getSelectedCollection()).willReturn(collection);
     }
 
     @Test
     public void shouldOpenCreateCollectionDialog() throws Exception {
-        given(dialogProvider.getWindowFrom(event)).willReturn(window);
-
         controller.openCreateCollectionDialog(event);
 
         verify(createCollectionFXML).loadOwnedBy(window);
@@ -61,8 +62,6 @@ public class AppControllerTest {
 
     @Test
     public void shouldShowSearchViewWhenSearchingCollection() throws Exception {
-        given(homeController.getSelectedCollection()).willReturn(collection);
-
         controller.searchCollection(event);
 
         verify(mainArea).setCenter(searchView);
@@ -71,8 +70,6 @@ public class AppControllerTest {
 
     @Test
     public void shouldShowSearchToolbarWhenSearchingCollection() throws Exception {
-        given(homeController.getSelectedCollection()).willReturn(collection);
-
         controller.searchCollection(event);
 
         verify(searchToolBar).setVisible(true);
@@ -81,8 +78,7 @@ public class AppControllerTest {
     @Test
     public void shouldLetUserChooseFeatureWhenSearchingCollectionWithMoreThanOneFeature() throws Exception {
         collection.setFeatures(asList(CEDD, TAMURA));
-        given(homeController.getSelectedCollection()).willReturn(collection);
-        given(dialogProvider.chooseFeatureFrom(collection)).willReturn(TAMURA);
+        given(dialogProvider.chooseFeatureFrom(collection, window)).willReturn(TAMURA);
 
         controller.searchCollection(event);
 
