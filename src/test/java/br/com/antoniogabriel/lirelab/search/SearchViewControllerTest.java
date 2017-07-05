@@ -3,7 +3,7 @@ package br.com.antoniogabriel.lirelab.search;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchViewControllerTest {
 
-    @Mock private CollectionGrid collectionGrid;
+    @Mock private PaginatedCollectionGrid collectionGrid;
     @Mock private SingleImageGrid queryGrid;
     @Mock private CollectionService service;
 

@@ -2,10 +2,10 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collectiongrid.ImageSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
+import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -23,6 +23,8 @@ import java.util.ResourceBundle;
 
 @Singleton
 public class HomeViewController implements Initializable {
+
+    public static final int DEFAULT_COLLECTION_PAGE_SIZE = 120;
 
     private CollectionService collectionService;
     private ImageViewFactory viewFactory;
@@ -83,7 +85,8 @@ public class HomeViewController implements Initializable {
     public void showCollectionImages(Collection collection) {
         try {
 
-            CollectionGrid grid = new CollectionGrid();
+            PaginatedCollectionGrid grid = new PaginatedCollectionGrid();
+            grid.setPageSize(DEFAULT_COLLECTION_PAGE_SIZE);
             centerPane.setCenter(grid);
             grid.setCollection(collection);
 

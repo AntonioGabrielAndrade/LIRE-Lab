@@ -3,8 +3,8 @@ package br.com.antoniogabriel.lirelab.search;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collectiongrid.ImageClickHandler;
+import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.singleimagegrid.ImageChangeListener;
 import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class SearchViewController {
 
     @FXML private SingleImageGrid queryGrid;
-    @FXML private CollectionGrid collectionGrid;
+    @FXML private PaginatedCollectionGrid collectionGrid;
 
     private CollectionService service;
 
@@ -60,13 +60,13 @@ public class SearchViewController {
         private final Collection collection;
         private final Feature feature;
         private CollectionService service;
-        private CollectionGrid collectionGrid;
+        private PaginatedCollectionGrid collectionGrid;
         private SingleImageGrid queryGrid;
 
         public ImageChangeListenerImpl(Collection collection,
                                        Feature feature,
                                        CollectionService service,
-                                       CollectionGrid collectionGrid,
+                                       PaginatedCollectionGrid collectionGrid,
                                        SingleImageGrid queryGrid) {
 
             this.collection = collection;

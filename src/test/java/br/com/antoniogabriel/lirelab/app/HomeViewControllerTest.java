@@ -3,8 +3,8 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
+import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -100,7 +100,7 @@ public class HomeViewControllerTest {
 
         controller.showCollectionImages(collection);
 
-        verify(centerPane).setCenter(any(CollectionGrid.class));
+        verify(centerPane).setCenter(any(PaginatedCollectionGrid.class));
     }
 
     @Test

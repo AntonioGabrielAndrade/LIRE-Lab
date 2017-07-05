@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.TitledPane?>
+<?import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid?>
 <?import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -17,7 +17,7 @@
 
     <center>
         <TitledPane text="Collection" collapsible="false" prefHeight="Infinity">
-            <CollectionGrid fx:id="collectionGrid"/>
+            <PaginatedCollectionGrid fx:id="collectionGrid"/>
         </TitledPane>
     </center>
 
