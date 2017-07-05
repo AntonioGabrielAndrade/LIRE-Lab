@@ -22,49 +22,47 @@ public class CollectionGridPageFactoryTest {
 
     private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
-    @Mock private List<Image> images;
-    @Mock private CollectionGrid grid;
+    @Mock private CollectionGrid page;
     @Mock private ImageClickHandler handler;
+    @Mock private Collection collection;
+    @Mock private List<Image> imagesSubSet;
 
     @Test
     public void shouldReturnCollectionGridWithImagesSubsetForInformedPage() throws Exception {
         TestableCollectionGridPageFactory factory;
         int pageSize = 10;
-        int totalImages = 100;
+        int totalImages = 95;
 
         factory = getFactory(pageSize, totalImages);
 
         factory.call(0);
-        verify(images).subList(0, 10);
-        verify(grid).setImages(images, handler);
+        verify(collection).getImagesInRange(0, 10);
+        verify(page).setImages(imagesSubSet, handler);
 
         factory = getFactory(pageSize, totalImages);
 
         factory.call(1);
-        verify(images).subList(10, 20);
-        verify(grid).setImages(images, handler);
+        verify(collection).getImagesInRange(10, 20);
+        verify(page).setImages(imagesSubSet, handler);
 
         factory = getFactory(pageSize, totalImages);
 
-        factory.call(2);
-        verify(images).subList(20, 30);
-        verify(grid).setImages(images, handler);
+        factory.call(6);
+        verify(collection).getImagesInRange(60, 70);
+        verify(page).setImages(imagesSubSet, handler);
 
         factory = getFactory(pageSize, totalImages);
 
-        factory.call(3);
-        verify(images).subList(30, 40);
-        verify(grid).setImages(images, handler);
+        factory.call(9);
+        verify(collection).getImagesInRange(90, 95);
+        verify(page).setImages(imagesSubSet, handler);
     }
 
     private TestableCollectionGridPageFactory getFactory(int pageSize, int totalImages) {
-        reset(grid);
+        reset(page);
 
-        given(images.size()).willReturn(totalImages);
-        given(images.subList(anyInt(), anyInt())).willReturn(images);
-
-        Collection collection = new Collection();
-        collection.setImages(images);
+        given(collection.getImagesInRange(anyInt(), anyInt())).willReturn(imagesSubSet);
+        given(collection.totalImages()).willReturn(totalImages);
 
         return new TestableCollectionGridPageFactory(collection, pageSize, handler);
     }
@@ -77,7 +75,7 @@ public class CollectionGridPageFactoryTest {
 
         @Override
         protected CollectionGrid createCollectionGrid() {
-            return grid;
+            return page;
         }
     }
 }
