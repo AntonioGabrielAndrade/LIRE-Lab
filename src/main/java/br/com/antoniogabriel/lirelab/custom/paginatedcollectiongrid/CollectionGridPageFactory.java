@@ -32,7 +32,7 @@ class CollectionGridPageFactory implements Callback<Integer, Node> {
     private CollectionGrid createPage(int pageIndex) {
         try {
 
-            CollectionGrid collectionGrid = new CollectionGrid();
+            CollectionGrid collectionGrid = createCollectionGrid();
 
             int lastIndex = collection.getImages().size() - 1;
             int fromIndex = pageIndex * pageSize;
@@ -48,5 +48,9 @@ class CollectionGridPageFactory implements Callback<Integer, Node> {
         } catch (IOException e) {
             throw new LireLabException("Could not create grid", e);
         }
+    }
+
+    protected CollectionGrid createCollectionGrid() {
+        return new CollectionGrid();
     }
 }
