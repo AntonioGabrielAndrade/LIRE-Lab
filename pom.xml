@@ -138,6 +138,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <build>
         <resources>
             <resource>
@@ -145,6 +146,7 @@
                 <includes>
                     <include>**/*.fxml</include>
                     <include>**/*.css</include>
+                    <include>**/*.jpg</include>
                 </includes>
             </resource>
         </resources>
@@ -177,6 +179,25 @@
                             <goal>install-file</goal>
                         </goals>
                         <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.6.0</version>
+                <configuration>
+                    <mainClass>br.com.antoniogabriel.lirelab.app.App</mainClass>
+                    <jfxMainAppJarName>lirelab.jar</jfxMainAppJarName>
+                    <preLoader>br.com.antoniogabriel.lirelab.preloader.SplashScreenPreloader</preLoader>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-jfxjar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-jar</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
