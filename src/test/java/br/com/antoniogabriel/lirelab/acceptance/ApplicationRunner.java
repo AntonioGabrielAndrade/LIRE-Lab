@@ -1,8 +1,11 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.acceptance.custom.ChooseFeatureDialogViewObject;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 
 import java.util.concurrent.TimeoutException;
+
+import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 
 
 public class ApplicationRunner {
@@ -68,10 +71,14 @@ public class ApplicationRunner {
     public void searchCollection(String collection) {
         AppViewObject appView = new AppViewObject();
         ListCollectionViewObject listView = new ListCollectionViewObject();
+        ChooseFeatureDialogViewObject chooseView = new ChooseFeatureDialogViewObject();
 
         listView.selectCollection(collection);
 
         SearchViewObject searchView = appView.search();
+
+        chooseView.selectFeature(CEDD);
+        chooseView.ok();
 
 //        searchView.checkImagesAreVisible( "14474347006_99aa0fd981_k",
 //                                            "16903390174_1d670a5849_h",
