@@ -11,8 +11,12 @@ public class App extends Application {
     @Inject private AppFXML appFXML;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void init() throws Exception {
         DependencyInjection.init(this);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
         stage.setMaximized(true);
         appFXML.loadIn(stage);
     }
