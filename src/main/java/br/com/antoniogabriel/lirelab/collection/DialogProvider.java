@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.custom.ChooseFeatureDialog;
 import br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog;
 import br.com.antoniogabriel.lirelab.custom.progressdialog.ProgressDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
@@ -8,7 +9,6 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.Event;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceDialog;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
@@ -45,13 +45,8 @@ public class DialogProvider {
 
     public Feature chooseFeatureFrom(Collection collection) {
         List<Feature> features = collection.getFeatures();
-
-        ChoiceDialog<Feature> dialog = new ChoiceDialog<>(features.get(0), features);
-        dialog.setTitle("Choose Feature to use in query");
-        dialog.setHeaderText("Choose Feature to use in query");
-        dialog.setGraphic(null);
-
-        return dialog.showAndWait().get();
+        ChooseFeatureDialog dialog = new ChooseFeatureDialog(features);
+        return dialog.showAndGetFeature();
     }
 
     public static void main(String[] args) {

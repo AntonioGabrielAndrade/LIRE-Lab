@@ -2,7 +2,6 @@ package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.custom.ChooseFeatureDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.test.TestUtils;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.junit.After;
