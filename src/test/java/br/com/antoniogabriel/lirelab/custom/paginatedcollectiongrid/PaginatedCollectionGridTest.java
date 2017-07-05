@@ -29,7 +29,7 @@ public class PaginatedCollectionGridTest {
     @Mock private Pagination pagination;
     @Mock private ImageClickHandler handler;
     @Mock private Callback<Integer, Node> pageFactory;
-    @Mock private PaginatedCollectionGrid.PageFactoryProvider pageFactoryProvider;
+    @Mock private PageFactoryProvider pageFactoryProvider;
 
     @InjectMocks private PaginatedCollectionGrid grid = new PaginatedCollectionGrid();
 
