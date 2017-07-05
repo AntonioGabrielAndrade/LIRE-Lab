@@ -18,9 +18,7 @@ public class PaginatedCollectionGrid extends StackPane {
     private static final int DEFAULT_PAGE_SIZE = 120;
 
     private PageFactoryProvider pageFactoryProvider = new PageFactoryProvider();
-
     private Collection collection;
-    private ImageClickHandler handler;
 
     @FXML private Pagination pagination;
 
@@ -52,18 +50,19 @@ public class PaginatedCollectionGrid extends StackPane {
 
     public void setCollection(Collection collection, ImageClickHandler handler) throws IOException {
         this.collection = collection;
-        this.handler = handler;
 
-        calcPageCount(collection);
+        calcPageCount(collection, pageSize);
         setPageFactory(collection, pageSize, handler);
     }
 
-    private void calcPageCount(Collection collection) {
-        int pageCount = divideAndCeil(collection.getImages().size(), pageSize);
+    private void calcPageCount(Collection collection, int pageSize) {
+        int numberOfImages = collection.totalImages();
+        int pageCount = divideAndGetCeil(numberOfImages, pageSize);
+
         pagination.setPageCount(pageCount);
     }
 
-    private int divideAndCeil(int a, int b) {
+    private int divideAndGetCeil(int a, int b) {
         return a / b + ((a % b == 0) ? 0 : 1);
     }
 
@@ -76,5 +75,4 @@ public class PaginatedCollectionGrid extends StackPane {
     public Collection getCollection() {
         return collection;
     }
-
 }

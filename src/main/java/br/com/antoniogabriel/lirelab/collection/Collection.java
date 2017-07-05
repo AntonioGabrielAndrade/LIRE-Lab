@@ -84,6 +84,10 @@ public class Collection {
         this.images = images;
     }
 
+    public int totalImages() {
+        return images.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
