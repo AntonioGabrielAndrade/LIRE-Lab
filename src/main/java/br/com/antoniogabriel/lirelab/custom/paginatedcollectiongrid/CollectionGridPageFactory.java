@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collectiongrid.ImageClickHandler;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
@@ -8,20 +9,21 @@ import javafx.scene.Node;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.List;
 
 class CollectionGridPageFactory implements Callback<Integer, Node> {
 
     private final Collection collection;
     private final int pageSize;
-    private final ImageClickHandler imageClickHandler;
+    private final ImageClickHandler clickHandler;
 
     public CollectionGridPageFactory(Collection collection,
                                      int pageSize,
-                                     ImageClickHandler imageClickHandler) {
+                                     ImageClickHandler clickHandler) {
 
         this.collection = collection;
         this.pageSize = pageSize;
-        this.imageClickHandler = imageClickHandler;
+        this.clickHandler = clickHandler;
     }
 
     @Override
@@ -32,22 +34,40 @@ class CollectionGridPageFactory implements Callback<Integer, Node> {
     private CollectionGrid createPage(int pageIndex) {
         try {
 
-            CollectionGrid collectionGrid = createCollectionGrid();
+            CollectionGrid page = createCollectionGrid();
 
-            int lastIndex = collection.getImages().size() - 1;
-            int fromIndex = pageIndex * pageSize;
-            int toIndex = (fromIndex + pageSize) > lastIndex ?
-                    lastIndex + 1 : (fromIndex + pageSize);
+            int fromIndex = indexOfFirstImageInPage(pageIndex);
+            int toIndex = indexOfLastImageInPage(pageIndex) + 1;
 
-            collectionGrid.setImages(
-                    collection.getImages().subList(fromIndex, toIndex),
-                    imageClickHandler);
+            page.setImages(imagesInRange(fromIndex, toIndex), clickHandler);
 
-            return collectionGrid;
+            return page;
 
         } catch (IOException e) {
             throw new LireLabException("Could not create grid", e);
         }
+    }
+
+    private int indexOfLastImageInPage(int pageIndex) {
+        return lastPossibleIndexInPage(pageIndex) < collectionLastIndex() ?
+                lastPossibleIndexInPage(pageIndex) :
+                collectionLastIndex();
+    }
+
+    private int lastPossibleIndexInPage(int pageIndex) {
+        return indexOfFirstImageInPage(pageIndex) + (pageSize - 1);
+    }
+
+    private int collectionLastIndex() {
+        return collection.totalImages() - 1;
+    }
+
+    private int indexOfFirstImageInPage(int pageIndex) {
+        return pageIndex * pageSize;
+    }
+
+    private List<Image> imagesInRange(int fromIndex, int toIndex) {
+        return collection.getImagesInRange(fromIndex, toIndex);
     }
 
     protected CollectionGrid createCollectionGrid() {

@@ -27,7 +27,7 @@ public class CollectionGridPageFactoryTest {
     @Mock private ImageClickHandler handler;
 
     @Test
-    public void shouldReturnCollectionGridWithImagesRangeForInformedPage() throws Exception {
+    public void shouldReturnCollectionGridWithImagesSubsetForInformedPage() throws Exception {
         TestableCollectionGridPageFactory factory;
         int pageSize = 10;
         int totalImages = 100;

@@ -80,6 +80,10 @@ public class Collection {
         return images;
     }
 
+    public List<Image> getImagesInRange(int fromIndex, int toIndex) {
+        return getImages().subList(fromIndex, toIndex);
+    }
+
     public void setImages(List<Image> images) {
         this.images = images;
     }
