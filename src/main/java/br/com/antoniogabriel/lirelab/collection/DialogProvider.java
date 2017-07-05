@@ -31,15 +31,15 @@ public class DialogProvider {
         return ((Node) event.getSource()).getScene().getWindow();
     }
 
-    public ProgressDialog getProgressDialog(Task<Void> task, Window window) {
+    public ProgressDialog getProgressDialog(Task<Void> task, Window owner) {
         ProgressDialog dialog = new ProgressDialog(task);
-        dialog.initOwner(window);
+        dialog.initOwner(owner);
         return dialog;
     }
 
-    public ImageDialog getImageDialog(String imagePath, Window window) throws FileNotFoundException {
+    public ImageDialog getImageDialog(String imagePath, Window owner) throws FileNotFoundException {
         ImageDialog dialog = new ImageDialog(imagePath);
-        dialog.initOwner(window);
+        dialog.initOwner(owner);
         return dialog;
     }
 
