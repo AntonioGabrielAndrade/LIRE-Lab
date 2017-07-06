@@ -21,9 +21,7 @@ public abstract class FXMLTest<T extends FXML> extends InjectableViewTest<T> {
         });
     }
 
-    protected void configStage(Stage stage) {
-        //to be overriden by subclassses
-    }
+    protected void configStage(Stage stage) { /* to be overridden by subclasses */ }
 
     @After
     public void tearDown() throws Exception {
