@@ -149,6 +149,12 @@
                     <include>**/*.jpg</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/test/java</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                </includes>
+            </resource>
         </resources>
 
         <plugins>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="br.com.antoniogabriel.lirelab.acceptance.fxml.FxmlImplForTestsController"
+           id="fxml-impl-root"
+           prefHeight="100.0" prefWidth="200.0">
+
+    <Text text="FXML Implementation" id="fxml-text"/>
+
+</StackPane>

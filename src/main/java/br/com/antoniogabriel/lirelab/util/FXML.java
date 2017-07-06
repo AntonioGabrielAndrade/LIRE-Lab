@@ -46,14 +46,14 @@ public abstract class FXML {
     }
 
     private Parent load() throws IOException {
-        this.loader.setLocation(getClass().getResource(getFXMLResourceName()));
         this.loader.setRoot(null);
         this.loader.setController(null);
+
+        this.loader.setLocation(getClass().getResource(getFXMLResourceName()));
 
         Parent root = loader.load();
         controller = loader.getController();
 
-        this.loader.setLocation(null);
         return root;
     }
 
