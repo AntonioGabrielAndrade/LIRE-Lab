@@ -50,7 +50,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
     @BeforeClass
     public static void createCollections() throws Exception {
         startJavaFX();
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
 
                 collectionHelper.createRealCollection(COLLECTION_1);
@@ -66,7 +66,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
 
                 collectionHelper.deleteCollection(COLLECTION_1);
@@ -141,7 +141,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         view.waitUntilCollectionIsNotListed(COLLECTION_1);
         view.waitUntilCollectionsAreListed(COLLECTION_2, COLLECTION_3);
 
-        runOnFXThread(() -> collectionHelper.createRealCollection(COLLECTION_1));
+        runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
     }
 
     @Test

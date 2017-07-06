@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog.MAX_IMAGE_HEIGHT;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFXThread;
+import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFxThreadAndWait;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -65,7 +65,7 @@ public class ImageDialogTest {
     }
 
     private void createDialog() {
-        runOnFXThread(() -> dialog =
+        runOnFxThreadAndWait(() -> dialog =
                 new ImageDialog(IMAGE_PATH,
                                 imageViewFactory,
                                 imageViewConfig,

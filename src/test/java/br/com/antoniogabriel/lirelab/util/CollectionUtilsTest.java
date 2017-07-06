@@ -31,12 +31,12 @@ public class CollectionUtilsTest {
     @BeforeClass
     public static void setUp() throws Exception {
         startJavaFX();
-        runOnFXThread(() -> COLLECTION_HELPER.createRealCollection(COLLECTION));
+        runOnFxThreadAndWait(() -> COLLECTION_HELPER.createRealCollection(COLLECTION));
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
 
                 COLLECTION_HELPER.deleteCollection(COLLECTION);

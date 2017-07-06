@@ -37,7 +37,7 @@ public class CollectionRepositoryTest {
     @BeforeClass
     public static void createCollections() throws Exception {
         startJavaFX();
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
 
                 COLLECTION_HELPER.createRealCollection(COLLECTION1);
@@ -52,7 +52,7 @@ public class CollectionRepositoryTest {
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
 
                 COLLECTION_HELPER.deleteCollection(COLLECTION1);

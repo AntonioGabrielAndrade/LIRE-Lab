@@ -37,7 +37,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     @BeforeClass
     public static void createCollections() throws Exception {
         startJavaFX();
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
 
                 collectionHelper.createRealCollection(COLLECTION_1);
@@ -52,7 +52,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
 
                 collectionHelper.deleteCollection(COLLECTION_1);

@@ -36,7 +36,7 @@ public class PaginatedCollectionGridAcceptanceTest extends ApplicationTest {
     @BeforeClass
     public static void createCollections() throws Exception {
         startJavaFX();
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
                 COLLECTION_HELPER.createRealCollection(collection);
                 collection = COLLECTION_HELPER.readCollection(collection.getName());
@@ -48,7 +48,7 @@ public class PaginatedCollectionGridAcceptanceTest extends ApplicationTest {
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFXThread(() -> {
+        runOnFxThreadAndWait(() -> {
             try {
                 COLLECTION_HELPER.deleteCollection(collection);
                 deleteWorkDirectory(RESOLVER);

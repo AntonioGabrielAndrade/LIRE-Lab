@@ -20,7 +20,7 @@ public class TestUtils {
         new JFXPanel();
     }
 
-    public static void runOnFXThread(Runnable runnable) {
+    public static void runOnFxThreadAndWait(Runnable runnable) {
         new FxRobot().interact(runnable);
     }
 
