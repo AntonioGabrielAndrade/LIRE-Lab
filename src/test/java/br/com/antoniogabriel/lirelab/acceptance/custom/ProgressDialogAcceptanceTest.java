@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.acceptance.ProgressDialogViewObject;
-import br.com.antoniogabriel.lirelab.custom.progressdialog.ProgressDialog;
+import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import org.junit.After;

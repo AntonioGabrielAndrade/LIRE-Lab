@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid?>
-<?import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid?>
+<?import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid?>
+<?import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
 

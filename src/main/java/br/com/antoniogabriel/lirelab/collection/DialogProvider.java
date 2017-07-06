@@ -1,8 +1,8 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.custom.ChooseFeatureDialog;
-import br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog;
-import br.com.antoniogabriel.lirelab.custom.progressdialog.ProgressDialog;
+import br.com.antoniogabriel.lirelab.custom.image_dialog.ImageDialog;
+import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.application.Platform;
 import javafx.concurrent.Task;

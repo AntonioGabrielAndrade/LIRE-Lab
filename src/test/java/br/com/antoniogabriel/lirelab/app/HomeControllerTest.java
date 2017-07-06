@@ -3,8 +3,8 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
-import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
+import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;

@@ -3,15 +3,13 @@ package br.com.antoniogabriel.lirelab.acceptance.custom;
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
-import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.collection_grid.CollectionGrid;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.*;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-
-import java.io.IOException;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;

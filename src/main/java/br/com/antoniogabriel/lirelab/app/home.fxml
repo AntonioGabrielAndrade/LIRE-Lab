@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree?>
+<?import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>

@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid;
+import br.com.antoniogabriel.lirelab.custom.image_grid.ImageGrid;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.semanticmetadata.lire.utils.FileUtils;

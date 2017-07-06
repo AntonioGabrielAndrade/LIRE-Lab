@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid;
+import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

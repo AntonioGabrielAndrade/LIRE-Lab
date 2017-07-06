@@ -4,7 +4,7 @@ import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
-import br.com.antoniogabriel.lirelab.custom.paginatedcollectiongrid.PaginatedCollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.After;
@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
-import java.io.IOException;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
