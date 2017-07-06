@@ -21,6 +21,7 @@ public class TestUtils {
     }
 
     public static void runOnFxThreadAndWait(Runnable runnable) {
+        startJavaFX();
         new FxRobot().interact(runnable);
     }
 

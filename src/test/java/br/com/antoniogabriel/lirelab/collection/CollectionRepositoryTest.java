@@ -36,7 +36,6 @@ public class CollectionRepositoryTest {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        startJavaFX();
         runOnFxThreadAndWait(() -> {
             COLLECTION_HELPER.createRealCollection(COLLECTION1);
             COLLECTION_HELPER.createRealCollection(COLLECTION2);

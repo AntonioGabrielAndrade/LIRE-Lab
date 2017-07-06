@@ -49,7 +49,6 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        startJavaFX();
         runOnFxThreadAndWait(() -> {
             collectionHelper.createRealCollection(COLLECTION_1);
             collectionHelper.createRealCollection(COLLECTION_2);

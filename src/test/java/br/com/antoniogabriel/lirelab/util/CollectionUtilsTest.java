@@ -30,7 +30,6 @@ public class CollectionUtilsTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        startJavaFX();
         runOnFxThreadAndWait(() -> COLLECTION_HELPER.createRealCollection(COLLECTION));
     }
 

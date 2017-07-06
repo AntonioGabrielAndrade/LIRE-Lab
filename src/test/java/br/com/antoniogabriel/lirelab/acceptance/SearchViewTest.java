@@ -36,7 +36,6 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        startJavaFX();
         runOnFxThreadAndWait(() -> {
             collectionHelper.createRealCollection(COLLECTION_1);
             collection = collectionHelper.readCollection(COLLECTION_1.getName());

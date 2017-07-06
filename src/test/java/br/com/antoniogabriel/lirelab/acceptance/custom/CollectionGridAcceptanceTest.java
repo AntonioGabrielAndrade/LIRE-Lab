@@ -31,7 +31,6 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        startJavaFX();
         runOnFxThreadAndWait(() -> {
             COLLECTION_HELPER.createRealCollection(collection);
             collection = COLLECTION_HELPER.readCollection(collection.getName());
