@@ -22,39 +22,49 @@ public abstract class FXML {
     }
 
     public void loadOwnedBy(Window owner) {
-        Stage stage = new Stage();
+        Stage stage = createStage();
         stage.initOwner(owner);
         loadIn(stage);
     }
 
     public void loadIn(Stage stage) {
         try {
-            Parent root = load();
-            Scene scene = new Scene(root);
 
-            if(stage.getOwner() != null) {
-                stage.initModality(Modality.WINDOW_MODAL);
-            }
-
-            stage.setTitle(getTitle());
-            stage.setScene(scene);
-            stage.centerOnScreen();
+            Parent root = resetAndLoad();
+            stage = setupStage(stage, root);
             stage.show();
+
         } catch (IOException e) {
-            throw new LireLabException("Could not load fxml file", e);
+            throw new LireLabException("Could not resetAndLoad fxml file", e);
         }
     }
 
-    private Parent load() throws IOException {
-        this.loader.setRoot(null);
-        this.loader.setController(null);
+    private Stage setupStage(Stage stage, Parent root) {
+        Scene scene = createScene(root);
+        stage.setScene(scene);
 
-        this.loader.setLocation(getClass().getResource(getFXMLResourceName()));
+        if(stage.getOwner() != null) {
+            stage.initModality(Modality.WINDOW_MODAL);
+        }
 
+        stage.setTitle(getTitle());
+        stage.centerOnScreen();
+        return stage;
+    }
+
+    private Parent resetAndLoad() throws IOException {
+        resetLoader();
+
+        loader.setLocation(getClass().getResource(getFXMLResourceName()));
         Parent root = loader.load();
         controller = loader.getController();
 
         return root;
+    }
+
+    private void resetLoader() {
+        this.loader.setRoot(null);
+        this.loader.setController(null);
     }
 
     public <C> C getController() throws IOException {
@@ -66,4 +76,12 @@ public abstract class FXML {
     }
 
     public abstract String getFXMLResourceName();
+
+    protected Scene createScene(Parent root) {
+        return new Scene(root);
+    }
+
+    protected Stage createStage() {
+        return new Stage();
+    }
 }
