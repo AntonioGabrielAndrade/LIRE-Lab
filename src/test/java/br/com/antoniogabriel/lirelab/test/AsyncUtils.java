@@ -37,21 +37,18 @@ public class AsyncUtils {
         });
     }
 
+    public static void waitUntilIsVisible(String query, String queryFrom) throws TimeoutException {
+        waitUntil(() -> {
+            FxRobot robot = new FxRobot();
+            Node node = robot.from(robot.lookup(queryFrom)).lookup(query).query();
+            return node == null ? false : node.isVisible();
+        });
+    }
+
     public static void waitUntilIsNotVisible(String query) throws TimeoutException {
         waitUntil(() -> {
             Node node = (new FxRobot()).lookup(query).query();
             return node == null ? true : !node.isVisible();
         });
-    }
-
-    public static void waitUntilIsPresent(String query) throws TimeoutException {
-        WaitForAsyncUtils.waitFor(5, SECONDS,
-                () -> new FxRobot().lookup(query).tryQuery().isPresent());
-    }
-
-    public static void waitUntilIsPresent(String query, String queryFrom) throws TimeoutException {
-        FxRobot robot = new FxRobot();
-        WaitForAsyncUtils.waitFor(5, SECONDS,
-                () -> robot.from(robot.lookup(queryFrom)).lookup(query).tryQuery().isPresent());
     }
 }

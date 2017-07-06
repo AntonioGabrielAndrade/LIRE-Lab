@@ -7,7 +7,7 @@ import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsPresent;
+import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsVisible;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class SearchViewObject extends FxRobot {
@@ -31,7 +31,7 @@ public class SearchViewObject extends FxRobot {
 
     public void waitUntilShowCollection(Collection collection) throws TimeoutException {
         for (Image image : collection.getImages()) {
-            waitUntilIsPresent("#" + image.getImageName());
+            waitUntilIsVisible("#" + image.getImageName());
         }
     }
 
@@ -40,7 +40,7 @@ public class SearchViewObject extends FxRobot {
     }
 
     public void waitUntilShowQuery(String image) throws TimeoutException {
-        waitUntilIsPresent("#" + image, "#query");
+        waitUntilIsVisible("#" + image, "#query");
     }
 
     public void waitUntilImagesOrderIs() {

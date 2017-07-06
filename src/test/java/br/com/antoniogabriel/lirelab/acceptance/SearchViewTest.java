@@ -11,7 +11,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,7 +40,6 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
             collection = collectionHelper.readCollection(COLLECTION_1.getName());
         });
     }
-
 
     @AfterClass
     public static void deleteCollections() throws Exception {

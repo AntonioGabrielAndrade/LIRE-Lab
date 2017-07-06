@@ -2,7 +2,6 @@ package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.singleimagegrid.SingleImageGrid;
-import br.com.antoniogabriel.lirelab.test.AsyncUtils;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
+import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsVisible;
 import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
@@ -53,10 +53,10 @@ public class SingleImageGridAcceptanceTest extends ApplicationTest {
     @Test
     public void shouldShowOnlyOneImage() throws Exception {
         interact(() -> singleImageGrid.setImage(image2));
-        AsyncUtils.waitUntilIsPresent("#16903390174_1d670a5849_h");
+        waitUntilIsVisible("#16903390174_1d670a5849_h");
 
         interact(() -> singleImageGrid.setImage(image1));
-        AsyncUtils.waitUntilIsPresent("#14474347006_99aa0fd981_k");
+        waitUntilIsVisible("#14474347006_99aa0fd981_k");
     }
 
 }

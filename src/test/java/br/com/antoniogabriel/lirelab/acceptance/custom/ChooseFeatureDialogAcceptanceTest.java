@@ -12,7 +12,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.*;
-import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsPresent;
+import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsVisible;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -37,14 +37,12 @@ public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
 
         Platform.runLater(() -> featureHolder.setFeature(dialog.showAndGetFeature()));
 
-        waitUntilIsPresent(".list-cell");
+        waitUntilIsVisible(".list-cell");
     }
 
     @After
     public void tearDown() throws Exception {
-        interact(() -> {
-            dialog.close();
-        });
+        interact(() -> dialog.close());
     }
 
     @Test
