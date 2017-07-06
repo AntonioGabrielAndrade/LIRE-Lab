@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +34,6 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
     private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION_2 = collection("Collection2", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION_3 = collection("Collection3", TEST_IMAGES, CEDD);
-    private static final Collection COLLECTION_4 = collection("Collection4", TEST_IMAGES, CEDD);
 
     private static final PathResolver resolver = new PathResolver(TEST_ROOT);
     private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
@@ -52,7 +50,6 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         runOnFxThreadAndWait(() -> {
             collectionHelper.createRealCollection(COLLECTION_1);
             collectionHelper.createRealCollection(COLLECTION_2);
-            collectionHelper.createRealCollection(COLLECTION_3);
         });
     }
 
@@ -63,7 +60,6 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
             collectionHelper.deleteCollection(COLLECTION_1);
             collectionHelper.deleteCollection(COLLECTION_2);
             collectionHelper.deleteCollection(COLLECTION_3);
-            collectionHelper.deleteCollection(COLLECTION_4);
 
             deleteWorkDirectory(resolver);
         });
@@ -87,7 +83,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @Test
     public void shouldListCollections() throws Exception {
-        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
+        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
     }
 
     @Test
@@ -110,23 +106,23 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
     @Test
     public void shouldUpdateCollectionsListWhenNewCollectionIsCreated() throws Exception {
         CreateCollectionTask creationTask = service.getTaskToCreateCollection(
-                COLLECTION_4.getName(),
+                COLLECTION_3.getName(),
                 TEST_IMAGES,
                 FEATURES);
 
         new Thread(creationTask).start();
 
-        view.waitUntilCollectionIsListed(COLLECTION_4);
+        view.waitUntilCollectionIsListed(COLLECTION_3);
     }
 
     @Test
     public void shouldUpdateCollectionsListWhenCollectionIsDeleted() throws Exception {
-        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2, COLLECTION_3);
+        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
 
         collectionHelper.deleteCollection(COLLECTION_1);
 
         view.waitUntilCollectionIsNotListed(COLLECTION_1);
-        view.waitUntilCollectionsAreListed(COLLECTION_2, COLLECTION_3);
+        view.waitUntilCollectionsAreListed(COLLECTION_2);
 
         runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
     }
