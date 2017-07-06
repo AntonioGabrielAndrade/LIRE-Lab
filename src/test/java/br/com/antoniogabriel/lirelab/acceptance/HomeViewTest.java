@@ -6,7 +6,6 @@ import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionTask;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.test.AsyncUtils;
 import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -91,16 +90,16 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         view.waitUntilCollectionIsListed(COLLECTION_1);
         view.expandCollection(COLLECTION_1);
 
-        view.checkImageIsListed("14474347006_99aa0fd981_k.jpg");
-        view.checkImageIsListed("16903390174_1d670a5849_h.jpg");
-        view.checkImageIsListed("17099294578_0ba4068bad_k.jpg");
-        view.checkImageIsListed("17338370170_1e620bfb18_h.jpg");
-        view.checkImageIsListed("17525978165_86dc26e8cb_h.jpg");
-        view.checkImageIsListed("19774866363_757555901c_k.jpg");
-        view.checkImageIsListed("25601366680_b57441bb52_k.jpg");
-        view.checkImageIsListed("25601374660_78e6a9bba8_k.jpg");
-        view.checkImageIsListed("26487616294_b22b87133e_k.jpg");
-        view.checkImageIsListed("26489383923_98d419eb0d_k.jpg");
+        view.waitUntilImageIsListed("14474347006_99aa0fd981_k.jpg");
+        view.waitUntilImageIsListed("16903390174_1d670a5849_h.jpg");
+        view.waitUntilImageIsListed("17099294578_0ba4068bad_k.jpg");
+        view.waitUntilImageIsListed("17338370170_1e620bfb18_h.jpg");
+        view.waitUntilImageIsListed("17525978165_86dc26e8cb_h.jpg");
+        view.waitUntilImageIsListed("19774866363_757555901c_k.jpg");
+        view.waitUntilImageIsListed("25601366680_b57441bb52_k.jpg");
+        view.waitUntilImageIsListed("25601374660_78e6a9bba8_k.jpg");
+        view.waitUntilImageIsListed("26487616294_b22b87133e_k.jpg");
+        view.waitUntilImageIsListed("26489383923_98d419eb0d_k.jpg");
     }
 
     @Test
@@ -132,16 +131,16 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         view.waitUntilCollectionIsListed(COLLECTION_1);
         view.selectCollection(COLLECTION_1);
 
-        AsyncUtils.waitUntilIsPresent("#14474347006_99aa0fd981_k");
-        AsyncUtils.waitUntilIsPresent("#16903390174_1d670a5849_h");
-        AsyncUtils.waitUntilIsPresent("#17099294578_0ba4068bad_k");
-        AsyncUtils.waitUntilIsPresent("#17338370170_1e620bfb18_h");
-        AsyncUtils.waitUntilIsPresent("#17525978165_86dc26e8cb_h");
-        AsyncUtils.waitUntilIsPresent("#19774866363_757555901c_k");
-        AsyncUtils.waitUntilIsPresent("#25601366680_b57441bb52_k");
-        AsyncUtils.waitUntilIsPresent("#25601374660_78e6a9bba8_k");
-        AsyncUtils.waitUntilIsPresent("#26487616294_b22b87133e_k");
-        AsyncUtils.waitUntilIsPresent("#26489383923_98d419eb0d_k");
+        view.waitUntilImageIsVisible("14474347006_99aa0fd981_k");
+        view.waitUntilImageIsVisible("16903390174_1d670a5849_h");
+        view.waitUntilImageIsVisible("17099294578_0ba4068bad_k");
+        view.waitUntilImageIsVisible("17338370170_1e620bfb18_h");
+        view.waitUntilImageIsVisible("17525978165_86dc26e8cb_h");
+        view.waitUntilImageIsVisible("19774866363_757555901c_k");
+        view.waitUntilImageIsVisible("25601366680_b57441bb52_k");
+        view.waitUntilImageIsVisible("25601374660_78e6a9bba8_k");
+        view.waitUntilImageIsVisible("26487616294_b22b87133e_k");
+        view.waitUntilImageIsVisible("26489383923_98d419eb0d_k");
     }
 
     @Test

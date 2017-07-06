@@ -2,14 +2,12 @@ package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import javafx.scene.Node;
-import org.jetbrains.annotations.NotNull;
 import org.testfx.api.FxRobot;
-import org.testfx.util.WaitForAsyncUtils;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsNotVisible;
+import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsVisible;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
@@ -28,15 +26,11 @@ public class CollectionTreeViewObject extends FxRobot {
     }
 
     public void waitUntilCollectionIsListed(Collection collection) throws TimeoutException {
-        waitFor(isPresent(collection.getName()));
+        waitUntilIsVisible(collection.getName());
     }
 
     public void waitUntilCollectionIsNotListed(Collection collection) throws TimeoutException {
-        waitFor(notPresent(collection.getName()));
-    }
-
-    private void waitFor(Callable<Boolean> condition) throws TimeoutException {
-        WaitForAsyncUtils.waitFor(10, TimeUnit.SECONDS, condition);
+        waitUntilIsNotVisible(collection.getName());
     }
 
     public void expandCollection(Collection collection) throws TimeoutException {
@@ -50,8 +44,12 @@ public class CollectionTreeViewObject extends FxRobot {
         clickOn(arrow).interrupt();
     }
 
-    public void checkImageIsListed(String image) throws TimeoutException {
-        waitFor(isPresent(image));
+    public void waitUntilImageIsListed(String image) throws TimeoutException {
+        waitUntilIsVisible(image);
+    }
+
+    public void waitUntilImageIsVisible(String imageName) throws TimeoutException {
+        waitUntilIsVisible("#" + imageName);
     }
 
     public void selectCollection(Collection collection) {
@@ -65,27 +63,4 @@ public class CollectionTreeViewObject extends FxRobot {
     public void selectImage(String image) {
         clickOn(image).interrupt();
     }
-
-    @NotNull
-    private Callable<Boolean> isPresent(String text) {
-        return () -> {
-            Node node = CollectionTreeViewObject.this.lookup(text).query();
-            if(node == null)
-                return false;
-            else
-                return node.isVisible();
-        };
-    }
-
-    @NotNull
-    private Callable<Boolean> notPresent(String text) {
-        return () -> {
-            Node node = CollectionTreeViewObject.this.lookup(text).query();
-            if(node == null)
-                return true;
-            else
-                return !node.isVisible();
-        };
-    }
-
 }
