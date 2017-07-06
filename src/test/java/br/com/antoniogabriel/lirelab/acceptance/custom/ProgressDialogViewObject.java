@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.test.TimeOut;
+import br.com.antoniogabriel.lirelab.test_utilities.TimeOut;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
@@ -12,7 +12,7 @@ import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntil;
+import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntil;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testfx.api.FxAssert.verifyThat;

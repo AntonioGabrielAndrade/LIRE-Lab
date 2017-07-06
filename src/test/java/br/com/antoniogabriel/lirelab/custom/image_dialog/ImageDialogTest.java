@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static br.com.antoniogabriel.lirelab.custom.image_dialog.ImageDialog.MAX_IMAGE_HEIGHT;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFxThreadAndWait;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.runOnFxThreadAndWait;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 

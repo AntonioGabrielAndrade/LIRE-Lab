@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.test;
+package br.com.antoniogabriel.lirelab.test_utilities;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;

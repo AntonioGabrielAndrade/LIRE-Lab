@@ -2,13 +2,13 @@ package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.app.AppFXML;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
-import br.com.antoniogabriel.lirelab.test.FXMLTest;
+import br.com.antoniogabriel.lirelab.test_utilities.FXMLTest;
 import com.google.inject.AbstractModule;
 import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
 
 public class AppViewTest extends FXMLTest<AppFXML> {
 

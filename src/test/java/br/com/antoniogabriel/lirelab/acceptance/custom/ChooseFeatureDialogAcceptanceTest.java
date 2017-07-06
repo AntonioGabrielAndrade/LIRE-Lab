@@ -12,7 +12,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.*;
-import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsVisible;
+import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

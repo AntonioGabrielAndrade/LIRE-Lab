@@ -21,8 +21,8 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.runOnFxThreadAndWait;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.runOnFxThreadAndWait;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;

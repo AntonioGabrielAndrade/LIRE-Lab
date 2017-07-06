@@ -1,12 +1,10 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
-import br.com.antoniogabriel.lirelab.test.FXMLTest;
+import br.com.antoniogabriel.lirelab.test_utilities.FXMLTest;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.testfx.api.FxToolkit;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;

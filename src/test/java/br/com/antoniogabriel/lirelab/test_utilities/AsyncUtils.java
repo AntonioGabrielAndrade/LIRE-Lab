@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.test;
+package br.com.antoniogabriel.lirelab.test_utilities;
 
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
