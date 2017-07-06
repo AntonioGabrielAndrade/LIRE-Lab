@@ -51,15 +51,9 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
     public static void createCollections() throws Exception {
         startJavaFX();
         runOnFxThreadAndWait(() -> {
-            try {
-
-                collectionHelper.createRealCollection(COLLECTION_1);
-                collectionHelper.createRealCollection(COLLECTION_2);
-                collectionHelper.createRealCollection(COLLECTION_3);
-
-            } catch (Exception e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            collectionHelper.createRealCollection(COLLECTION_1);
+            collectionHelper.createRealCollection(COLLECTION_2);
+            collectionHelper.createRealCollection(COLLECTION_3);
         });
     }
 
@@ -67,18 +61,12 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
     @AfterClass
     public static void deleteCollections() throws Exception {
         runOnFxThreadAndWait(() -> {
-            try {
+            collectionHelper.deleteCollection(COLLECTION_1);
+            collectionHelper.deleteCollection(COLLECTION_2);
+            collectionHelper.deleteCollection(COLLECTION_3);
+            collectionHelper.deleteCollection(COLLECTION_4);
 
-                collectionHelper.deleteCollection(COLLECTION_1);
-                collectionHelper.deleteCollection(COLLECTION_2);
-                collectionHelper.deleteCollection(COLLECTION_3);
-                collectionHelper.deleteCollection(COLLECTION_4);
-
-                deleteWorkDirectory(resolver);
-
-            } catch (IOException e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            deleteWorkDirectory(resolver);
         });
     }
 

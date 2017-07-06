@@ -38,32 +38,20 @@ public class CollectionRepositoryTest {
     public static void createCollections() throws Exception {
         startJavaFX();
         runOnFxThreadAndWait(() -> {
-            try {
-
-                COLLECTION_HELPER.createRealCollection(COLLECTION1);
-                COLLECTION_HELPER.createRealCollection(COLLECTION2);
-                COLLECTION_HELPER.createRealCollection(COLLECTION3);
-
-            } catch (Exception e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            COLLECTION_HELPER.createRealCollection(COLLECTION1);
+            COLLECTION_HELPER.createRealCollection(COLLECTION2);
+            COLLECTION_HELPER.createRealCollection(COLLECTION3);
         });
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
         runOnFxThreadAndWait(() -> {
-            try {
+            COLLECTION_HELPER.deleteCollection(COLLECTION1);
+            COLLECTION_HELPER.deleteCollection(COLLECTION2);
+            COLLECTION_HELPER.deleteCollection(COLLECTION3);
 
-                COLLECTION_HELPER.deleteCollection(COLLECTION1);
-                COLLECTION_HELPER.deleteCollection(COLLECTION2);
-                COLLECTION_HELPER.deleteCollection(COLLECTION3);
-
-                deleteWorkDirectory(RESOLVER);
-
-            } catch (IOException e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            deleteWorkDirectory(RESOLVER);
         });
     }
 

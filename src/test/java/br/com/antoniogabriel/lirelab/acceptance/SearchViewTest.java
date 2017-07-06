@@ -38,14 +38,8 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     public static void createCollections() throws Exception {
         startJavaFX();
         runOnFxThreadAndWait(() -> {
-            try {
-
-                collectionHelper.createRealCollection(COLLECTION_1);
-                collection = collectionHelper.readCollection(COLLECTION_1.getName());
-
-            } catch (Exception e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            collectionHelper.createRealCollection(COLLECTION_1);
+            collection = collectionHelper.readCollection(COLLECTION_1.getName());
         });
     }
 
@@ -53,14 +47,8 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     @AfterClass
     public static void deleteCollections() throws Exception {
         runOnFxThreadAndWait(() -> {
-            try {
-
-                collectionHelper.deleteCollection(COLLECTION_1);
-                deleteWorkDirectory(resolver);
-
-            } catch (IOException e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            collectionHelper.deleteCollection(COLLECTION_1);
+            deleteWorkDirectory(resolver);
         });
     }
 

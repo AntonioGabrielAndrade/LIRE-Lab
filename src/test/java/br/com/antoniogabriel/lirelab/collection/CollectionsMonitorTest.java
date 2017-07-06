@@ -65,12 +65,8 @@ public class CollectionsMonitorTest {
     @After
     public void tearDown() throws Exception {
         runOnFxThreadAndWait(() -> {
-            try {
-                helper.deleteCollection(COLLECTION_1);
-                helper.deleteCollection(COLLECTION_2);
-            } catch (IOException e) {
-                throw new RuntimeException("Error", e);
-            }
+            helper.deleteCollection(COLLECTION_1);
+            helper.deleteCollection(COLLECTION_2);
         });
     }
 

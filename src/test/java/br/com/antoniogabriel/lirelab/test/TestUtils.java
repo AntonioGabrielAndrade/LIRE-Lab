@@ -24,9 +24,13 @@ public class TestUtils {
         new FxRobot().interact(runnable);
     }
 
-    public static void deleteWorkDirectory(PathResolver resolver) throws IOException {
-        File directory =  Paths.get(resolver.getWorkDirectoryPath()).toFile();
-        FileUtils.deleteDirectory(directory);
+    public static void deleteWorkDirectory(PathResolver resolver) {
+        try {
+            File directory =  Paths.get(resolver.getWorkDirectoryPath()).toFile();
+            FileUtils.deleteDirectory(directory);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Collection collection(String name, String imagesPath, Feature... features) {

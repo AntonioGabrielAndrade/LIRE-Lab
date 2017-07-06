@@ -37,14 +37,8 @@ public class CollectionUtilsTest {
     @AfterClass
     public static void tearDown() throws Exception {
         runOnFxThreadAndWait(() -> {
-            try {
-
-                COLLECTION_HELPER.deleteCollection(COLLECTION);
-                deleteWorkDirectory(RESOLVER);
-
-            } catch (IOException e) {
-                throw new RuntimeException("Test Error");
-            }
+            COLLECTION_HELPER.deleteCollection(COLLECTION);
+            deleteWorkDirectory(RESOLVER);
         });
     }
 

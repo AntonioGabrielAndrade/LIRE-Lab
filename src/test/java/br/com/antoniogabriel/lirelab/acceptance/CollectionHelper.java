@@ -35,18 +35,22 @@ public class CollectionHelper {
         assertTrue(xmlFileExist(collection));
     }
 
-    public void deleteCollection(Collection collection) throws IOException {
+    public void deleteCollection(Collection collection) {
         deleteCollection(collection.getName());
     }
 
-    public void deleteCollection(String collectionName) throws IOException {
-        File directory = new File(resolver.getCollectionPath(collectionName));
-        File renamed = new File(System.getProperty("java.io.tmpdir") + "/" + collectionName);
+    public void deleteCollection(String collectionName) {
+        try {
+            File directory = new File(resolver.getCollectionPath(collectionName));
+            File renamed = new File(System.getProperty("java.io.tmpdir") + "/" + collectionName);
 
-        if(!directory.exists()) return;
+            if(!directory.exists()) return;
 
-        FileUtils.moveDirectory(directory, renamed);
-        FileUtils.deleteDirectory(renamed);
+            FileUtils.moveDirectory(directory, renamed);
+            FileUtils.deleteDirectory(renamed);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void createStubCollection(Collection collection) throws IOException, JAXBException {

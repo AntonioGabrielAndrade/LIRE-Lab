@@ -37,24 +37,16 @@ public class PaginatedCollectionGridAcceptanceTest extends ApplicationTest {
     public static void createCollections() throws Exception {
         startJavaFX();
         runOnFxThreadAndWait(() -> {
-            try {
-                COLLECTION_HELPER.createRealCollection(collection);
-                collection = COLLECTION_HELPER.readCollection(collection.getName());
-            } catch (Exception e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            COLLECTION_HELPER.createRealCollection(collection);
+            collection = COLLECTION_HELPER.readCollection(collection.getName());
         });
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
         runOnFxThreadAndWait(() -> {
-            try {
-                COLLECTION_HELPER.deleteCollection(collection);
-                deleteWorkDirectory(RESOLVER);
-            } catch (IOException e) {
-                throw new RuntimeException("Test Error", e);
-            }
+            COLLECTION_HELPER.deleteCollection(collection);
+            deleteWorkDirectory(RESOLVER);
         });
     }
 
