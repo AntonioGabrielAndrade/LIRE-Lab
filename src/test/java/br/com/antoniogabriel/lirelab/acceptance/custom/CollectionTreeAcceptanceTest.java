@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.acceptance.ListCollectionViewObject;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTreeViewObject;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
 import javafx.scene.Scene;
@@ -22,7 +22,7 @@ public class CollectionTreeAcceptanceTest extends ApplicationTest {
     private static final Collection COLLECTION_3 = collection("Collection3", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION_4 = collection("Collection4", TEST_IMAGES, CEDD);
 
-    private ListCollectionViewObject view = new ListCollectionViewObject();
+    private CollectionTreeViewObject view = new CollectionTreeViewObject();
 
     @After
     public void tearDown() throws Exception {
