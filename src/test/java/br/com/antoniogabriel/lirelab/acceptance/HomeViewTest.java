@@ -14,8 +14,6 @@ import javafx.stage.Stage;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +25,6 @@ import static br.com.antoniogabriel.lirelab.test.TestUtils.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
-@RunWith(MockitoJUnitRunner.class)
 public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES, CEDD);
