@@ -1,8 +1,8 @@
-package br.com.antoniogabriel.lirelab.acceptance;
+package br.com.antoniogabriel.lirelab.test;
 
 import java.util.concurrent.TimeUnit;
 
-class TimeOut {
+public class TimeOut {
     public final long value;
     public final TimeUnit unit;
 

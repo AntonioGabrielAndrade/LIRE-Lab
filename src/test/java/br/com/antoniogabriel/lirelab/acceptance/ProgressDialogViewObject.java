@@ -1,19 +1,18 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.test.TimeOut;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
-import org.jetbrains.annotations.Contract;
 import org.testfx.api.FxRobot;
-import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.concurrent.TimeoutException;
 
+import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntil;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -44,8 +43,7 @@ public class ProgressDialogViewObject extends FxRobot {
     }
 
     public ProgressDialogViewObject checkOkIsEnabledWhenFinish() throws TimeoutException {
-        waitUntil(progressComplete().and(buttonEnabled()),
-                    TimeOut.of(15, SECONDS));
+        waitUntil(progressComplete().and(buttonEnabled()), TimeOut.of(15, SECONDS));
 
         return this;
     }
@@ -59,15 +57,6 @@ public class ProgressDialogViewObject extends FxRobot {
         clickOn("#ok-button").interrupt();
     }
 
-    private void waitUntil(ObservableBooleanValue condition) throws TimeoutException {
-        waitUntil(condition, TimeOut.of(5, SECONDS));
-    }
-
-    private void waitUntil(ObservableBooleanValue condition, TimeOut timeout) throws TimeoutException {
-        WaitForAsyncUtils.waitFor(timeout.value, timeout.unit, condition);
-    }
-
-    @Contract(pure = true)
     private double percentToDecimal(Integer percentage) {
         return percentage / 100.00;
     }
