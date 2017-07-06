@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.util;
 
+import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,24 +21,28 @@ public abstract class FXML {
         this.loader = loader;
     }
 
-    public void loadOwnedBy(Window owner) throws IOException {
+    public void loadOwnedBy(Window owner) {
         Stage stage = new Stage();
         stage.initOwner(owner);
         loadIn(stage);
     }
 
-    public void loadIn(Stage stage) throws IOException {
-        Parent root = load();
-        Scene scene = new Scene(root);
+    public void loadIn(Stage stage) {
+        try {
+            Parent root = load();
+            Scene scene = new Scene(root);
 
-        if(stage.getOwner() != null) {
-            stage.initModality(Modality.WINDOW_MODAL);
+            if(stage.getOwner() != null) {
+                stage.initModality(Modality.WINDOW_MODAL);
+            }
+
+            stage.setTitle(getTitle());
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new LireLabException("Could not load fxml file", e);
         }
-
-        stage.setTitle(getTitle());
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
     }
 
     private Parent load() throws IOException {
