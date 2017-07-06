@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import org.jetbrains.annotations.NotNull;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
 
@@ -13,9 +12,9 @@ import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class AppViewObject extends FxRobot {
 
-    MenuViewObject menuView = new MenuViewObject();
-    ToolBarViewObject toolBarView = new ToolBarViewObject();
-    WelcomeViewObject welcomeView = new WelcomeViewObject();
+    private MenuViewObject menuView = new MenuViewObject();
+    private ToolBarViewObject toolBarView = new ToolBarViewObject();
+    private WelcomeViewObject welcomeView = new WelcomeViewObject();
 
     public void checkMenus() {
         menuView.checkMenuBar();
@@ -32,8 +31,7 @@ public class AppViewObject extends FxRobot {
     }
 
     public CreateCollectionViewObject createCollection() {
-        clickOn("#toolbar-create-collection")
-                .interrupt();
+        clickOn("#toolbar-create-collection").interrupt();
 
         return new CreateCollectionViewObject();
     }
@@ -41,15 +39,12 @@ public class AppViewObject extends FxRobot {
     public void checkCollectionIsListed(String collectionName) throws TimeoutException {
         verifyThat("#collection-tree", isVisible());
         waitFor(isPresent(collectionName));
-
     }
 
     private void waitFor(Callable<Boolean> present) throws TimeoutException {
-        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS,
-                present);
+        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS, present);
     }
 
-    @NotNull
     private Callable<Boolean> isPresent(String text) {
         return () -> lookup(text).tryQuery().isPresent();
     }
