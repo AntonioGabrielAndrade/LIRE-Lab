@@ -13,6 +13,8 @@ import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class CollectionTreeViewObject extends FxRobot {
 
+    public static final String COLLECTION_TREE = "#collection-tree";
+
     public void checkCollectionsAreListed(Collection... collections) {
         for (Collection collection : collections) {
             verifyThat(collection.getName(), isVisible());
@@ -26,11 +28,11 @@ public class CollectionTreeViewObject extends FxRobot {
     }
 
     public void waitUntilCollectionIsListed(Collection collection) throws TimeoutException {
-        waitUntilIsVisible(collection.getName());
+        waitUntilIsVisible(collection.getName(), COLLECTION_TREE);
     }
 
     public void waitUntilCollectionIsNotListed(Collection collection) throws TimeoutException {
-        waitUntilIsNotVisible(collection.getName());
+        waitUntilIsNotVisible(collection.getName(), COLLECTION_TREE);
     }
 
     public void expandCollection(Collection collection) throws TimeoutException {
@@ -38,14 +40,15 @@ public class CollectionTreeViewObject extends FxRobot {
 
         //hack for when the robot cant find the arrow at first
         while(arrow == null) {
-            arrow = lookup(collection.getName()).lookup(".arrow").query();
+            arrow = from(lookup(COLLECTION_TREE))
+                    .lookup(collection.getName()).lookup(".arrow").query();
         }
 
         clickOn(arrow).interrupt();
     }
 
     public void waitUntilImageIsListed(String image) throws TimeoutException {
-        waitUntilIsVisible(image);
+        waitUntilIsVisible(image, COLLECTION_TREE);
     }
 
     public void waitUntilImageIsVisible(String imageName) throws TimeoutException {
