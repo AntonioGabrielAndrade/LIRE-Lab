@@ -42,7 +42,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     private static final List<Feature> FEATURES = Arrays.asList(CEDD);
 
-    private ListCollectionViewObject view = new ListCollectionViewObject();
+    private CollectionTreeViewObject view = new CollectionTreeViewObject();
 
     @Inject
     private CollectionService service;

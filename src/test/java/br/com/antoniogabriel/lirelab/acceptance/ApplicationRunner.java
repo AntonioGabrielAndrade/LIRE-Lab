@@ -44,7 +44,7 @@ public class ApplicationRunner {
     }
 
     public void viewCollection(String collection) throws TimeoutException, InterruptedException {
-        ListCollectionViewObject listView = new ListCollectionViewObject();
+        CollectionTreeViewObject listView = new CollectionTreeViewObject();
         CollectionGridViewObject gridView = new CollectionGridViewObject();
 
         listView.selectCollection(collection);
@@ -70,7 +70,7 @@ public class ApplicationRunner {
 
     public void searchCollection(String collection) {
         AppViewObject appView = new AppViewObject();
-        ListCollectionViewObject listView = new ListCollectionViewObject();
+        CollectionTreeViewObject listView = new CollectionTreeViewObject();
         ChooseFeatureDialogViewObject chooseView = new ChooseFeatureDialogViewObject();
 
         listView.selectCollection(collection);
