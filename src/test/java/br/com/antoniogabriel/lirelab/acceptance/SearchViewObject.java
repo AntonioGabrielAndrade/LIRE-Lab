@@ -7,7 +7,7 @@ import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.test.TestUtils.waitUntilIsPresent;
+import static br.com.antoniogabriel.lirelab.test.AsyncUtils.waitUntilIsPresent;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class SearchViewObject extends FxRobot {

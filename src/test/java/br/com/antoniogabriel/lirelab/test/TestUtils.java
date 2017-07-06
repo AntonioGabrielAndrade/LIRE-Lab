@@ -4,17 +4,13 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Node;
 import org.apache.commons.io.FileUtils;
 import org.testfx.api.FxRobot;
-import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import static java.util.Arrays.asList;
 
@@ -49,14 +45,4 @@ public class TestUtils {
         }
     }
 
-    public static void waitUntilIsPresent(String query) throws TimeoutException {
-        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS,
-                () -> new FxRobot().lookup(query).tryQuery().isPresent());
-    }
-
-    public static void waitUntilIsPresent(String query, String queryFrom) throws TimeoutException {
-        FxRobot robot = new FxRobot();
-        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS,
-                () -> robot.from(robot.lookup(queryFrom)).lookup(query).tryQuery().isPresent());
-    }
 }

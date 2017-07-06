@@ -6,6 +6,7 @@ import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionTask;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import br.com.antoniogabriel.lirelab.test.AsyncUtils;
 import br.com.antoniogabriel.lirelab.test.FXMLTest;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -148,16 +149,16 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         view.waitUntilCollectionIsListed(COLLECTION_1);
         view.selectCollection(COLLECTION_1);
 
-        waitUntilIsPresent("#14474347006_99aa0fd981_k");
-        waitUntilIsPresent("#16903390174_1d670a5849_h");
-        waitUntilIsPresent("#17099294578_0ba4068bad_k");
-        waitUntilIsPresent("#17338370170_1e620bfb18_h");
-        waitUntilIsPresent("#17525978165_86dc26e8cb_h");
-        waitUntilIsPresent("#19774866363_757555901c_k");
-        waitUntilIsPresent("#25601366680_b57441bb52_k");
-        waitUntilIsPresent("#25601374660_78e6a9bba8_k");
-        waitUntilIsPresent("#26487616294_b22b87133e_k");
-        waitUntilIsPresent("#26489383923_98d419eb0d_k");
+        AsyncUtils.waitUntilIsPresent("#14474347006_99aa0fd981_k");
+        AsyncUtils.waitUntilIsPresent("#16903390174_1d670a5849_h");
+        AsyncUtils.waitUntilIsPresent("#17099294578_0ba4068bad_k");
+        AsyncUtils.waitUntilIsPresent("#17338370170_1e620bfb18_h");
+        AsyncUtils.waitUntilIsPresent("#17525978165_86dc26e8cb_h");
+        AsyncUtils.waitUntilIsPresent("#19774866363_757555901c_k");
+        AsyncUtils.waitUntilIsPresent("#25601366680_b57441bb52_k");
+        AsyncUtils.waitUntilIsPresent("#25601374660_78e6a9bba8_k");
+        AsyncUtils.waitUntilIsPresent("#26487616294_b22b87133e_k");
+        AsyncUtils.waitUntilIsPresent("#26489383923_98d419eb0d_k");
     }
 
     @Test
