@@ -1,5 +1,6 @@
-package br.com.antoniogabriel.lirelab.acceptance;
+package br.com.antoniogabriel.lirelab.acceptance.view;
 
+import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.lire.Feature;

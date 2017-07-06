@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.acceptance;
+package br.com.antoniogabriel.lirelab.acceptance.view;
 
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;

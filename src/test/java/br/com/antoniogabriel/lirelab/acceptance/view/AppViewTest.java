@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.acceptance;
+package br.com.antoniogabriel.lirelab.acceptance.view;
 
 import br.com.antoniogabriel.lirelab.app.AppFXML;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;

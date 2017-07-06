@@ -1,6 +1,9 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 import br.com.antoniogabriel.lirelab.acceptance.custom.*;
+import br.com.antoniogabriel.lirelab.acceptance.view.AppViewObject;
+import br.com.antoniogabriel.lirelab.acceptance.view.CreateCollectionViewObject;
+import br.com.antoniogabriel.lirelab.acceptance.view.SearchViewObject;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 
 import java.util.concurrent.TimeoutException;
