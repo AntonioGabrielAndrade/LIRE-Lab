@@ -27,19 +27,19 @@ public class AppController {
 
     private CreateCollectionFXML createCollectionFXML;
     private DialogProvider dialogProvider;
-    private HomeViewController homeViewController;
+    private HomeController homeController;
     private SearchViewController searchViewController;
 
     @Inject
     public AppController(CreateCollectionFXML createCollectionFXML,
                          DialogProvider dialogProvider,
                          SearchViewController searchViewController,
-                         HomeViewController homeController) {
+                         HomeController homeController) {
 
         this.createCollectionFXML = createCollectionFXML;
         this.dialogProvider = dialogProvider;
         this.searchViewController = searchViewController;
-        this.homeViewController = homeController;
+        this.homeController = homeController;
     }
 
     public void openCreateCollectionDialog(ActionEvent event) throws IOException {
@@ -47,7 +47,7 @@ public class AppController {
     }
 
     public void searchCollection(ActionEvent event) {
-        Collection selectedCollection = homeViewController.getSelectedCollection();
+        Collection selectedCollection = homeController.getSelectedCollection();
         Feature feature = chooseFeature(selectedCollection, dialogProvider.getWindowFrom(event));
 
         mainArea.setCenter(searchView);

@@ -33,7 +33,7 @@ public class AppControllerTest {
     @Mock private Node searchView;
     @Mock private Node homeView;
     @Mock private SearchViewController searchViewController;
-    @Mock private HomeViewController homeController;
+    @Mock private HomeController homeController;
     @Mock private HBox searchToolBar;
 
     @InjectMocks private AppController controller =

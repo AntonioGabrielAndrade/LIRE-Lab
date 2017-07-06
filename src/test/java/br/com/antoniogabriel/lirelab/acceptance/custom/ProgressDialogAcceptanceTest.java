@@ -18,8 +18,7 @@ public class ProgressDialogAcceptanceTest extends ApplicationTest {
     private ProgressDialogViewObject view = new ProgressDialogViewObject();
 
     @Override
-    public void start(Stage stage) throws Exception {
-    }
+    public void start(Stage stage) throws Exception {}
 
     @Before
     public void setup() {

@@ -28,7 +28,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HomeViewControllerTest {
+public class HomeControllerTest {
 
     private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
@@ -43,8 +43,8 @@ public class HomeViewControllerTest {
     @Mock private ImageViewConfig imageViewConfig;
 
     @InjectMocks
-    HomeViewController controller =
-            new HomeViewController(collectionService, imageViewFactory, imageViewConfig);
+    HomeController controller =
+            new HomeController(collectionService, imageViewFactory, imageViewConfig);
 
     private Collection collection;
     private List<Collection> collections;
@@ -83,7 +83,7 @@ public class HomeViewControllerTest {
         controller.initialize(null, null);
 
         verify(collectionTree).addCollectionSelectionListener(
-                any(HomeViewController.ShowImagesWhenCollectionIsSelectedListener.class));
+                any(HomeController.ShowImagesWhenCollectionIsSelectedListener.class));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class HomeViewControllerTest {
         controller.initialize(null, null);
 
         verify(collectionTree).addImageSelectionListener(
-                any(HomeViewController.ShowImageWhenImageIsSelectedListener.class));
+                any(HomeController.ShowImageWhenImageIsSelectedListener.class));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class HomeViewControllerTest {
         controller.initialize(null, null);
 
         verify(collectionService).addCollectionsChangeListener(
-                any(HomeViewController.LoadCollectionsWhenAnyCollectionChangeListener.class)
+                any(HomeController.LoadCollectionsWhenAnyCollectionChangeListener.class)
         );
     }
 

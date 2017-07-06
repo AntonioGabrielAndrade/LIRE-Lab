@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Singleton
-public class HomeViewController implements Initializable {
+public class HomeController implements Initializable {
 
     public static final int DEFAULT_COLLECTION_PAGE_SIZE = 120;
 
@@ -36,9 +36,9 @@ public class HomeViewController implements Initializable {
 
 
     @Inject
-    public HomeViewController(CollectionService collectionService,
-                              ImageViewFactory viewFactory,
-                              ImageViewConfig viewConfig) {
+    public HomeController(CollectionService collectionService,
+                          ImageViewFactory viewFactory,
+                          ImageViewConfig viewConfig) {
 
         this.collectionService = collectionService;
         this.viewFactory = viewFactory;
@@ -108,7 +108,7 @@ public class HomeViewController implements Initializable {
     class ShowImagesWhenCollectionIsSelectedListener implements CollectionSelectionListener {
         @Override
         public void selected(Collection collection) {
-            HomeViewController.this.showCollectionImages(collection);
+            HomeController.this.showCollectionImages(collection);
         }
     }
 
@@ -123,7 +123,7 @@ public class HomeViewController implements Initializable {
     class LoadCollectionsWhenAnyCollectionChangeListener implements Runnable {
         @Override
         public void run() {
-            Platform.runLater(() -> HomeViewController.this.loadCollections());
+            Platform.runLater(() -> HomeController.this.loadCollections());
         }
     }
 
