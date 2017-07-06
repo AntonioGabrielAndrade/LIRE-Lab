@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.acceptance;
+package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import javafx.scene.Node;
 import org.testfx.api.FxRobot;

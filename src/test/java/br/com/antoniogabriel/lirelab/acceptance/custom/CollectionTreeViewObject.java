@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.acceptance;
+package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import javafx.scene.Node;

@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
 
+import br.com.antoniogabriel.lirelab.acceptance.custom.ProgressDialogViewObject;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.scene.control.CheckBox;

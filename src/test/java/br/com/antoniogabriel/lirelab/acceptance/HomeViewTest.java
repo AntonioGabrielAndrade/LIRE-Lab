@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
+import br.com.antoniogabriel.lirelab.acceptance.custom.CollectionTreeViewObject;
 import br.com.antoniogabriel.lirelab.app.HomeFXML;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;

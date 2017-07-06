@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionTreeViewObject;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
 import javafx.scene.Scene;

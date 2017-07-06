@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance;
 
-import br.com.antoniogabriel.lirelab.acceptance.custom.ChooseFeatureDialogViewObject;
+import br.com.antoniogabriel.lirelab.acceptance.custom.*;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 
 import java.util.concurrent.TimeoutException;
