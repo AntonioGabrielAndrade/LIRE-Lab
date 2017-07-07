@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.custom.feature_table;
 
+import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import javafx.beans.binding.BooleanBinding;
@@ -23,16 +24,20 @@ public class FeatureTable extends TableView<ViewableFeature> {
 
     private FeatureUtils featureUtils = new FeatureUtils();
 
-    public FeatureTable() throws IOException {
+    public FeatureTable() {
         loadFXML();
         setupTableColumns();
     }
 
-    protected void loadFXML() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML));
-        loader.setRoot(this);
-        loader.setController(this);
-        loader.load();
+    protected void loadFXML() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+        } catch (IOException e) {
+            throw new LireLabException("Could not load fxml", e);
+        }
     }
 
     public BooleanBinding noFeatureSelected() {
