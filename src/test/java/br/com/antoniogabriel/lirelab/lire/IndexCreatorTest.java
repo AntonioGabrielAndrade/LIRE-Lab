@@ -48,7 +48,7 @@ public class IndexCreatorTest {
     public void setUp() throws Exception {
         setupIndexCreator();
         setupInOrder();
-        setupExpectationsForIndexBuilder();
+        setupExpectations();
     }
 
     private void setupIndexCreator() {
@@ -60,7 +60,7 @@ public class IndexCreatorTest {
         inOrder = Mockito.inOrder(lire, callback, indexWriter);
     }
 
-    private void setupExpectationsForIndexBuilder() throws IOException {
+    private void setupExpectations() throws IOException {
         given(lire.createDocumentBuilder()).willReturn(docBuilder);
         given(lire.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
         given(lire.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
