@@ -46,7 +46,7 @@ public class AsyncUtils {
         waitUntilVisibilityIs(query, queryFrom, false);
     }
 
-    public static void waitUntilVisibilityIs(String query, String queryFrom, boolean visibility) throws TimeoutException {
+    private static void waitUntilVisibilityIs(String query, String queryFrom, boolean visibility) throws TimeoutException {
         waitUntil(() -> {
             FxRobot robot = new FxRobot();
             Node node = robot.from(robot.lookup(queryFrom)).lookup(query).query();
@@ -54,7 +54,7 @@ public class AsyncUtils {
         });
     }
 
-    public static void waitUntilVisibilityIs(String query, boolean visibility) throws TimeoutException {
+    private static void waitUntilVisibilityIs(String query, boolean visibility) throws TimeoutException {
         waitUntil(() -> {
             FxRobot robot = new FxRobot();
             Node node = robot.lookup(query).query();
