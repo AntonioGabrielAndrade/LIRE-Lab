@@ -8,6 +8,7 @@ import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
 
+import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilElementsAreOrderedLike;
 import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
 import static org.testfx.api.FxAssert.verifyThat;
 
@@ -44,7 +45,7 @@ public class SearchViewObject extends FxRobot {
         waitUntilIsVisible("#" + image, "#query");
     }
 
-    public void waitUntilImagesOrderIs() {
-        throw new UnsupportedOperationException();
+    public void waitUntilImagesAreOrderedLike(String... images) throws TimeoutException {
+        waitUntilElementsAreOrderedLike("#result", ".image-view", images);
     }
 }
