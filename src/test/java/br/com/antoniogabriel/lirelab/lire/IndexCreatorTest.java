@@ -56,7 +56,7 @@ public class IndexCreatorTest {
     }
 
     private void setupInOrder() {
-        inOrder = Mockito.inOrder(indexBuilder, callback);
+        inOrder = Mockito.inOrder(indexBuilder, callback, indexWriter);
     }
 
     private void setupExpectationsForIndexBuilder() throws IOException {
@@ -66,10 +66,10 @@ public class IndexCreatorTest {
         given(indexBuilder.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
 
         given(indexBuilder.getBufferedImage(IMG1)).willReturn(bufImg1);
-        given(indexBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
+        given(docBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
 
         given(indexBuilder.getBufferedImage(IMG2)).willReturn(bufImg2);
-        given(indexBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
+        given(docBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
     }
 
     @Test
@@ -77,14 +77,13 @@ public class IndexCreatorTest {
         creator.create();
 
         inOrder.verify(indexBuilder).createDocumentBuilder();
-        inOrder.verify(indexBuilder).addFeaturesToDocumentBuilder(FEATURES);
         inOrder.verify(indexBuilder).createIndexWriter(INDEX_DIR);
 
         inOrder.verify(callback).beforeAddImageToIndex(1, PATHS.size(), IMG1);
-        inOrder.verify(indexBuilder).addDocument(DOC1);
+        inOrder.verify(indexWriter).addDocument(DOC1);
         inOrder.verify(callback).afterAddImageToIndex(1, PATHS.size(), IMG1);
 
-        inOrder.verify(indexBuilder).closeIndexWriter();
+        inOrder.verify(indexBuilder).closeIndexWriter(indexWriter);
         inOrder.verify(callback).afterIndexAllImages(PATHS.size());
     }
 }

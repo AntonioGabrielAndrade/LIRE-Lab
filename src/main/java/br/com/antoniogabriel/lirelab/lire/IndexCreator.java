@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.lire;
 
+import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexWriter;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -26,22 +28,28 @@ public class IndexCreator {
     }
 
     public void create() throws IOException {
-        indexBuilder.createDocumentBuilder();
-        indexBuilder.addFeaturesToDocumentBuilder(features);
-        indexBuilder.createIndexWriter(indexDir);
+        GlobalDocumentBuilder docBuilder = indexBuilder.createDocumentBuilder();
+        addFeaturesToDocumentBuilder(features, docBuilder);
+        IndexWriter indexWriter = indexBuilder.createIndexWriter(indexDir);
         List<String> paths = indexBuilder.getAllImagesPaths(imagesDir);
 
         for (int i = 0; i < paths.size(); i++) {
             String path = paths.get(i);
             callback.beforeAddImageToIndex(i+1, paths.size(), path);
             BufferedImage img = indexBuilder.getBufferedImage(path);
-            Document document = indexBuilder.createDocument(img, path);
-            indexBuilder.addDocument(document);
+            Document document = docBuilder.createDocument(img, path);
+            indexWriter.addDocument(document);
             callback.afterAddImageToIndex(i+1, paths.size(), path);
         }
 
-        indexBuilder.closeIndexWriter();
+        indexBuilder.closeIndexWriter(indexWriter);
         callback.afterIndexAllImages(paths.size());
+    }
+
+    private void addFeaturesToDocumentBuilder(List<Feature> features, GlobalDocumentBuilder docBuilder) {
+        for (Feature feature : features) {
+            docBuilder.addExtractor(feature.getLireClass());
+        }
     }
 
     public void setCallback(IndexCreatorCallback callback) {
