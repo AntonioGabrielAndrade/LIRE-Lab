@@ -5,6 +5,8 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 
 import java.util.concurrent.TimeoutException;
 
+import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
+
 public class HomeViewObject {
 
     private CollectionTreeViewObject treeViewObject = new CollectionTreeViewObject();
@@ -35,7 +37,7 @@ public class HomeViewObject {
     }
 
     public void waitUntilImageIsVisible(String imageName) throws TimeoutException {
-        treeViewObject.waitUntilImageIsVisible(imageName);
+        waitUntilIsVisible("#" + imageName, "#center-pane");
     }
 
     public void selectImage(String imageName) {
