@@ -61,4 +61,28 @@ public class AsyncUtils {
             return (node == null) ? (!visibility) : (node.isVisible() == visibility);
         });
     }
+
+    public static void waitUntilElementsAreOrderedLike(String queryFrom,
+                                                       String queryElementType,
+                                                       String... orderedIds) throws TimeoutException {
+        for (int i = 0; i < orderedIds.length; i++) {
+            waitUntilElementsOrderIs(queryFrom, queryElementType, orderedIds[i], i);
+        }
+    }
+
+    public static void waitUntilElementsOrderIs(String queryFrom,
+                                                String queryElementType,
+                                                String elementId,
+                                                int index) throws TimeoutException {
+        waitUntil(() -> {
+            FxRobot robot = new FxRobot();
+
+            return robot
+                    .from(robot.lookup(queryFrom))
+                    .lookup(queryElementType)
+                    .nth(index).query()
+                    .getId()
+                    .equals(elementId);
+        });
+    }
 }
