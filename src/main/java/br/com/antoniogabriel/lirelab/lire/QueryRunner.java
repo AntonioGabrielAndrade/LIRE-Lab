@@ -7,8 +7,6 @@ import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class QueryRunner {
 
@@ -40,34 +38,8 @@ public class QueryRunner {
         return new LireIndexSearcher(lire, callback);
     }
 
-    protected QueryRunner.ImagesSearchedCallback createSearcherCallback(Collection collection) {
+    protected ImagesSearchedCallback createSearcherCallback(Collection collection) {
         return new ImagesSearchedCallback(collectionUtils, collection);
     }
 
-    static class ImagesSearchedCallback implements IndexSearcherCallback {
-
-        private CollectionUtils collectionUtils;
-        private Collection collection;
-
-        private List<Image> images = new ArrayList<>();
-
-        public ImagesSearchedCallback(CollectionUtils collectionUtils, Collection collection) {
-            this.collectionUtils = collectionUtils;
-            this.collection = collection;
-        }
-
-        @Override
-        public void receivedImage(String imgPath, int position) {
-            Image image = createImage(collection, imgPath);
-            images.add(image);
-        }
-
-        public List<Image> getImages() {
-            return images;
-        }
-
-        private Image createImage(Collection collection, String fileName) {
-            return new Image(fileName, collectionUtils.getThumbnailPathFromImagePath(collection, fileName));
-        }
-    }
 }

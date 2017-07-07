@@ -35,7 +35,7 @@ public class QueryRunnerTest {
     @Mock private CollectionUtils collectionUtils;
     @Mock private PathResolver resolver;
     @Mock private LireIndexSearcher lireIndexSearcher;
-    @Mock private QueryRunner.ImagesSearchedCallback callback;
+    @Mock private ImagesSearchedCallback callback;
 
     private List<Image> images = new ArrayList<Image>();
     private Feature feature = CEDD;
@@ -62,7 +62,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void shouldRunQueryStepByStep() throws Exception {
+    public void shouldRunQuery() throws Exception {
         Collection result = queryRunner.runQuery(collection, feature, queryImage);
 
         verify(lireIndexSearcher).search(IMG_PATH, INDEX_DIR, feature.getLireClass(), 2);

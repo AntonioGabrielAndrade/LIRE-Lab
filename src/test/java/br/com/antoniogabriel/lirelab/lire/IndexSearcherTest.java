@@ -82,7 +82,7 @@ public class IndexSearcherTest {
     public void shouldPassDocumentIdsToCallback() throws Exception {
         indexSearcher.search(IMG_PATH, INDEX_DIR, feature.getLireClass(), 2);
 
-        verify(callback).receivedImage(IMG_PATH, 0);
-        verify(callback).receivedImage(IMG_PATH, 1);
+        verify(callback).imageSearched(IMG_PATH, 0);
+        verify(callback).imageSearched(IMG_PATH, 1);
     }
 }
