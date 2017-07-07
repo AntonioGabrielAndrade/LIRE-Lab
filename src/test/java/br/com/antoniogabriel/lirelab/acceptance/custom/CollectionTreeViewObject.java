@@ -47,8 +47,8 @@ public class CollectionTreeViewObject extends FxRobot {
         clickOn(arrow).interrupt();
     }
 
-    public void waitUntilImageIsListed(String image) throws TimeoutException {
-        waitUntilIsVisible(image, COLLECTION_TREE);
+    public void waitUntilImageIsListed(String imageFileName) throws TimeoutException {
+        waitUntilIsVisible(imageFileName, COLLECTION_TREE);
     }
 
     public void waitUntilImageIsVisible(String imageName) throws TimeoutException {
