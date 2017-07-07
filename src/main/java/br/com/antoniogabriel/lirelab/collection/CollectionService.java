@@ -69,7 +69,7 @@ public class CollectionService {
     }
 
     public Collection runQuery(Collection collection, Feature feature, Image queryImage) throws IOException {
-        return queryRunnerFactory.createQueryRunner(collection, feature, queryImage, resolver).runQuery();
+        return queryRunnerFactory.createQueryRunner(resolver).runQuery(collection, feature, queryImage);
     }
 
 }

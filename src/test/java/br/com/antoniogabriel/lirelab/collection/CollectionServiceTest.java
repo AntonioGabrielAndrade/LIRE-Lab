@@ -78,11 +78,11 @@ public class CollectionServiceTest {
         Feature feature = Feature.CEDD;
         Image queryImage = new Image("", "");
 
-        given(queryRunnerFactory.createQueryRunner(collection, feature, queryImage, resolver))
+        given(queryRunnerFactory.createQueryRunner(resolver))
                 .willReturn(queryRunner);
 
         service.runQuery(collection, feature, queryImage);
 
-        verify(queryRunner).runQuery();
+        verify(queryRunner).runQuery(collection, feature, queryImage);
     }
 }

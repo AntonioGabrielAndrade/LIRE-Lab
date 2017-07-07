@@ -22,19 +22,13 @@ import java.util.List;
 
 public class QueryRunner {
 
-    private Collection collection;
-    private Feature feature;
-    private Image queryImage;
     private PathResolver resolver;
 
-    public QueryRunner(Collection collection, Feature feature, Image queryImage, PathResolver resolver) {
-        this.collection = collection;
-        this.feature = feature;
-        this.queryImage = queryImage;
+    public QueryRunner(PathResolver resolver) {
         this.resolver = resolver;
     }
 
-    public Collection runQuery() throws IOException {
+    public Collection runQuery(Collection collection, Feature feature, Image queryImage) throws IOException {
         BufferedImage img = null;
         File f = new File(queryImage.getImagePath());
         if (f.exists()) {
