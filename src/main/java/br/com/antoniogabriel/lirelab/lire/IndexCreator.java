@@ -35,10 +35,13 @@ public class IndexCreator {
 
         for (int i = 0; i < paths.size(); i++) {
             String path = paths.get(i);
+
             callback.beforeAddImageToIndex(i+1, paths.size(), path);
+
             BufferedImage img = lire.getBufferedImage(path);
             Document document = docBuilder.createDocument(img, path);
             indexWriter.addDocument(document);
+
             callback.afterAddImageToIndex(i+1, paths.size(), path);
         }
 
