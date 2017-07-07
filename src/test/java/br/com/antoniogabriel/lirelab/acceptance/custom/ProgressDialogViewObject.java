@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntil;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
@@ -50,7 +50,7 @@ public class ProgressDialogViewObject extends FxRobot {
 
     public void checkErrorAreaShow(String error) throws TimeoutException {
         waitUntil(dialogPaneIsExpanded());
-        assertThat("Error was not printed", errorAreaContains(error));
+        assertTrue(errorAreaContains(error));
     }
 
     public void ok() {
