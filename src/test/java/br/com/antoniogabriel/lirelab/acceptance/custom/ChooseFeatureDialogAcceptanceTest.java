@@ -12,7 +12,6 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.*;
-import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -38,7 +37,7 @@ public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
         targetWindow(dialog.getWindow());
         Platform.runLater(() -> featureHolder.setFeature(dialog.showAndGetFeature()));
 
-        waitUntilIsVisible(".list-cell");
+        view.waitUntilViewIsVisible();
     }
 
     @After
@@ -55,6 +54,7 @@ public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
     public void shouldSelectFeature() throws Exception {
         view.selectFeature(TAMURA);
         view.ok();
+
         assertThat(featureHolder.getFeature(), is(TAMURA));
     }
 
@@ -64,6 +64,7 @@ public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
     }
 
     class FeatureHolder {
+
         private Feature feature;
 
         public Feature getFeature() {
