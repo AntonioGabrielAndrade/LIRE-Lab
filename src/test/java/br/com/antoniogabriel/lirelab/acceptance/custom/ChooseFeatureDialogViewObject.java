@@ -6,8 +6,6 @@ import org.testfx.api.FxRobot;
 import java.util.concurrent.TimeoutException;
 
 import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 public class ChooseFeatureDialogViewObject extends FxRobot {
 
@@ -28,10 +26,10 @@ public class ChooseFeatureDialogViewObject extends FxRobot {
         clickOn("Cancel");
     }
 
-    public void checkOptionsAreAvailable(Feature... features) {
+    public void checkOptionsAreAvailable(Feature... features) throws TimeoutException {
         openPopup();
         for (Feature feature : features) {
-            verifyThat(feature.name(), isVisible());
+            waitUntilIsVisible(feature.name());
         }
     }
 
