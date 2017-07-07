@@ -4,14 +4,8 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
-import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
-import net.semanticmetadata.lire.searchers.ImageSearchHits;
-import net.semanticmetadata.lire.searchers.ImageSearcher;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,32 +23,51 @@ public class QueryRunner {
     }
 
     public Collection runQuery(Collection collection, Feature feature, Image queryImage) throws IOException {
-
-        String imagePath  = queryImage.getImagePath();
+        String queryPath  = queryImage.getImagePath();
         String indexDir = resolver.getIndexDirectoryPath(collection.getName());
         int maxHits = collection.totalImages();
         Class<? extends GlobalFeature> globalFeature = feature.getLireClass();
 
-        List<Image> result = new ArrayList<>();
+        ImagesSearchedCallback callback = createSearcherCallback(collection);
+        LireIndexSearcher searcher = createIndexSearcher(callback);
+        searcher.search(queryPath, indexDir, globalFeature, maxHits);
 
-        BufferedImage img = lire.getBufferedImage(imagePath);
-        IndexReader ir = lire.createIndexReader(indexDir);
-        ImageSearcher searcher = lire.createImageSearcher(maxHits, globalFeature);
-        ImageSearchHits hits = searcher.search(img, ir);
-
-        for (int i = 0; i < hits.length(); i++) {
-            Document document = ir.document(hits.documentID(i));
-            String fileName = document.getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
-            Image image = getImage(collection, fileName);
-            result.add(image);
-            System.out.println(hits.score(i) + ": \t" + fileName);
-        }
-
-        collection.setImages(result);
+        collection.setImages(callback.getImages());
         return collection;
     }
 
-    private Image getImage(Collection collection, String fileName) {
-        return new Image(fileName, collectionUtils.getThumbnailPathFromImagePath(collection, fileName));
+    protected LireIndexSearcher createIndexSearcher(ImagesSearchedCallback callback) {
+        return new LireIndexSearcher(lire, callback);
+    }
+
+    protected QueryRunner.ImagesSearchedCallback createSearcherCallback(Collection collection) {
+        return new ImagesSearchedCallback(collectionUtils, collection);
+    }
+
+    static class ImagesSearchedCallback implements IndexSearcherCallback {
+
+        private CollectionUtils collectionUtils;
+        private Collection collection;
+
+        private List<Image> images = new ArrayList<>();
+
+        public ImagesSearchedCallback(CollectionUtils collectionUtils, Collection collection) {
+            this.collectionUtils = collectionUtils;
+            this.collection = collection;
+        }
+
+        @Override
+        public void receivedImage(String imgPath, int position) {
+            Image image = createImage(collection, imgPath);
+            images.add(image);
+        }
+
+        public List<Image> getImages() {
+            return images;
+        }
+
+        private Image createImage(Collection collection, String fileName) {
+            return new Image(fileName, collectionUtils.getThumbnailPathFromImagePath(collection, fileName));
+        }
     }
 }
