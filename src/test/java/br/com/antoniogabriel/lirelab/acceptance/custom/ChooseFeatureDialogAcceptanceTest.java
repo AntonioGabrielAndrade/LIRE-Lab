@@ -35,6 +35,7 @@ public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
             dialog = new ChooseFeatureDialog(features);
         });
 
+        targetWindow(dialog.getWindow());
         Platform.runLater(() -> featureHolder.setFeature(dialog.showAndGetFeature()));
 
         waitUntilIsVisible(".list-cell");

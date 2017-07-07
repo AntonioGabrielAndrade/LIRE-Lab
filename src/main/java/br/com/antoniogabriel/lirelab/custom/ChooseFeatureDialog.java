@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.custom;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.scene.control.ChoiceDialog;
+import javafx.stage.Window;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,5 +25,9 @@ public class ChooseFeatureDialog extends ChoiceDialog<Feature> {
         } catch (NoSuchElementException e) {
             return null;
         }
+    }
+
+    public Window getWindow() {
+        return getDialogPane().getScene().getWindow();
     }
 }
