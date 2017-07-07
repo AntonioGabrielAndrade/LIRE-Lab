@@ -79,13 +79,12 @@ public class CollectionService {
 
     public Collection runQuery(Collection collection, Feature feature, Image queryImage) throws IOException {
         BufferedImage img = null;
-        boolean passed = false;
         File f = new File(queryImage.getImagePath());
         if (f.exists()) {
             try {
                 img = ImageIO.read(f);
             } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
 
