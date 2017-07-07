@@ -14,35 +14,35 @@ public class IndexCreator {
     private String imagesDir;
     private List<Feature> features;
     private String indexDir;
-    private IndexBuilder indexBuilder;
+    private LIRE lire;
 
-    public IndexCreator(IndexBuilder indexBuilder,
+    public IndexCreator(LIRE lire,
                         String imagesDir,
                         String indexDir,
                         List<Feature> features) {
 
-        this.indexBuilder = indexBuilder;
+        this.lire = lire;
         this.imagesDir = imagesDir;
         this.indexDir = indexDir;
         this.features = features;
     }
 
     public void create() throws IOException {
-        GlobalDocumentBuilder docBuilder = indexBuilder.createDocumentBuilder();
+        GlobalDocumentBuilder docBuilder = lire.createDocumentBuilder();
         addFeaturesToDocumentBuilder(features, docBuilder);
-        IndexWriter indexWriter = indexBuilder.createIndexWriter(indexDir);
-        List<String> paths = indexBuilder.getAllImagesPaths(imagesDir);
+        IndexWriter indexWriter = lire.createIndexWriter(indexDir);
+        List<String> paths = lire.getAllImagesPaths(imagesDir);
 
         for (int i = 0; i < paths.size(); i++) {
             String path = paths.get(i);
             callback.beforeAddImageToIndex(i+1, paths.size(), path);
-            BufferedImage img = indexBuilder.getBufferedImage(path);
+            BufferedImage img = lire.getBufferedImage(path);
             Document document = docBuilder.createDocument(img, path);
             indexWriter.addDocument(document);
             callback.afterAddImageToIndex(i+1, paths.size(), path);
         }
 
-        indexBuilder.closeIndexWriter(indexWriter);
+        lire.closeIndexWriter(indexWriter);
         callback.afterIndexAllImages(paths.size());
     }
 

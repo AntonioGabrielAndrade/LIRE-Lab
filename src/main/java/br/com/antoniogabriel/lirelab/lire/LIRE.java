@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-public class IndexBuilder {
+public class LIRE {
 
     public GlobalDocumentBuilder createDocumentBuilder() {
         return new GlobalDocumentBuilder(false);

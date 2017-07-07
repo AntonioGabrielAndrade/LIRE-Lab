@@ -1,7 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.lire.IndexBuilder;
+import br.com.antoniogabriel.lirelab.lire.LIRE;
 import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 
 import java.io.File;
@@ -16,8 +16,8 @@ public class CreateCollectionTaskFactory {
                                            String indexPath,
                                            String thumbnailsPath) {
 
-        IndexBuilder indexBuilder = new IndexBuilder();
-        IndexCreator indexCreator = new IndexCreator(indexBuilder,
+        LIRE lire = new LIRE();
+        IndexCreator indexCreator = new IndexCreator(lire,
                                                     imagesPath,
                                                     indexPath,
                                                     collectionFeatures);

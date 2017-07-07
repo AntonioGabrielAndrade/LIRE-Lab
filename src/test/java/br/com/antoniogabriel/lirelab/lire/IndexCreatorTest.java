@@ -33,7 +33,7 @@ public class IndexCreatorTest {
     private static final String INDEX_DIR = "/some/index/dir";
     private static final String IMAGES_DIR = "/some/images/dir";
 
-    @Mock private IndexBuilder indexBuilder;
+    @Mock private LIRE lire;
     @Mock private IndexWriter indexWriter;
     @Mock private GlobalDocumentBuilder docBuilder;
     @Mock private BufferedImage bufImg1;
@@ -51,24 +51,24 @@ public class IndexCreatorTest {
     }
 
     private void setupIndexCreator() {
-        creator = new IndexCreator(indexBuilder, IMAGES_DIR, INDEX_DIR, FEATURES);
+        creator = new IndexCreator(lire, IMAGES_DIR, INDEX_DIR, FEATURES);
         creator.setCallback(callback);
     }
 
     private void setupInOrder() {
-        inOrder = Mockito.inOrder(indexBuilder, callback, indexWriter);
+        inOrder = Mockito.inOrder(lire, callback, indexWriter);
     }
 
     private void setupExpectationsForIndexBuilder() throws IOException {
-        given(indexBuilder.createDocumentBuilder()).willReturn(docBuilder);
+        given(lire.createDocumentBuilder()).willReturn(docBuilder);
 
-        given(indexBuilder.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
-        given(indexBuilder.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
+        given(lire.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
+        given(lire.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
 
-        given(indexBuilder.getBufferedImage(IMG1)).willReturn(bufImg1);
+        given(lire.getBufferedImage(IMG1)).willReturn(bufImg1);
         given(docBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
 
-        given(indexBuilder.getBufferedImage(IMG2)).willReturn(bufImg2);
+        given(lire.getBufferedImage(IMG2)).willReturn(bufImg2);
         given(docBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
     }
 
@@ -76,14 +76,14 @@ public class IndexCreatorTest {
     public void shouldCreateIndexStepByStep() throws Exception {
         creator.create();
 
-        inOrder.verify(indexBuilder).createDocumentBuilder();
-        inOrder.verify(indexBuilder).createIndexWriter(INDEX_DIR);
+        inOrder.verify(lire).createDocumentBuilder();
+        inOrder.verify(lire).createIndexWriter(INDEX_DIR);
 
         inOrder.verify(callback).beforeAddImageToIndex(1, PATHS.size(), IMG1);
         inOrder.verify(indexWriter).addDocument(DOC1);
         inOrder.verify(callback).afterAddImageToIndex(1, PATHS.size(), IMG1);
 
-        inOrder.verify(indexBuilder).closeIndexWriter(indexWriter);
+        inOrder.verify(lire).closeIndexWriter(indexWriter);
         inOrder.verify(callback).afterIndexAllImages(PATHS.size());
     }
 }
