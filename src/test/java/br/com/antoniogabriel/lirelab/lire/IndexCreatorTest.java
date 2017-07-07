@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IndexCreatorTest {
@@ -61,7 +62,6 @@ public class IndexCreatorTest {
 
     private void setupExpectationsForIndexBuilder() throws IOException {
         given(lire.createDocumentBuilder()).willReturn(docBuilder);
-
         given(lire.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
         given(lire.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
 
@@ -73,17 +73,21 @@ public class IndexCreatorTest {
     }
 
     @Test
-    public void shouldCreateIndexStepByStep() throws Exception {
+    public void shouldAddFeaturesToDocumentBuilder() throws Exception {
         creator.create();
 
-        inOrder.verify(lire).createDocumentBuilder();
-        inOrder.verify(lire).createIndexWriter(INDEX_DIR);
-
-        inOrder.verify(callback).beforeAddImageToIndex(1, PATHS.size(), IMG1);
-        inOrder.verify(indexWriter).addDocument(DOC1);
-        inOrder.verify(callback).afterAddImageToIndex(1, PATHS.size(), IMG1);
-
-        inOrder.verify(lire).closeIndexWriter(indexWriter);
-        inOrder.verify(callback).afterIndexAllImages(PATHS.size());
+        for (Feature feature : FEATURES) {
+            verify(docBuilder).addExtractor(feature.getLireClass());
+        }
     }
+
+    @Test
+    public void shouldAddImagesToIndexAndCloseIndex() throws Exception {
+        creator.create();
+
+        inOrder.verify(indexWriter).addDocument(DOC1);
+        inOrder.verify(indexWriter).addDocument(DOC2);
+        inOrder.verify(lire).closeIndexWriter(indexWriter);
+    }
+
 }
