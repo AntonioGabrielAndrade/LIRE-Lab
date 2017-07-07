@@ -9,6 +9,7 @@
     <columnResizePolicy>
         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
     </columnResizePolicy>
+
     <columns>
         <TableColumn fx:id="selectedCol"
                      text=""
