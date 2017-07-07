@@ -18,12 +18,13 @@ public class CollectionServiceTest {
 
     public static final String ANY_NAME = "";
     public static final String ANY_PATH = "";
-    private CollectionService service;
 
     @Mock private CollectionRepository collectionRepository;
     @Mock private CollectionsMonitor collectionsMonitor;
 
     private Runnable SOME_CALLBACK = () -> {};
+
+    private CollectionService service;
 
     @Before
     public void  setUp() throws Exception {
