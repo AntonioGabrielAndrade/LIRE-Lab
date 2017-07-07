@@ -10,7 +10,6 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.test_utilities.FXMLTest;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -23,8 +22,6 @@ import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class HomeViewTest extends FXMLTest<HomeFXML>{
 
@@ -49,7 +46,6 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
             collectionHelper.createRealCollection(COLLECTION_2);
         });
     }
-
 
     @AfterClass
     public static void deleteCollections() throws Exception {
@@ -146,8 +142,6 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         homeView.waitUntilCollectionIsListed(COLLECTION_1);
         homeView.expandCollection(COLLECTION_1);
         homeView.selectImage("14474347006_99aa0fd981_k.jpg");
-
-        Node image = from(lookup("#center-pane")).lookup("#14474347006_99aa0fd981_k").query();
-        verifyThat(image, isVisible());
+        homeView.waitUntilImageIsVisible("14474347006_99aa0fd981_k");
     }
 }
