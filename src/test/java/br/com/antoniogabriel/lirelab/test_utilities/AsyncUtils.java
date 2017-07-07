@@ -38,12 +38,12 @@ public class AsyncUtils {
         waitUntilVisibilityIs(query, queryFrom, true);
     }
 
-    public static void waitUntilIsNotVisible(String query, String queryFrom) throws TimeoutException {
-        waitUntilVisibilityIs(query, queryFrom, false);
-    }
-
     public static void waitUntilIsNotVisible(String query) throws TimeoutException {
         waitUntilVisibilityIs(query, false);
+    }
+
+    public static void waitUntilIsNotVisible(String query, String queryFrom) throws TimeoutException {
+        waitUntilVisibilityIs(query, queryFrom, false);
     }
 
     public static void waitUntilVisibilityIs(String query, String queryFrom, boolean visibility) throws TimeoutException {
