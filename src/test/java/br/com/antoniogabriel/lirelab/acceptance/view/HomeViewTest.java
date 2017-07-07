@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.view;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
-import br.com.antoniogabriel.lirelab.acceptance.custom.CollectionTreeViewObject;
 import br.com.antoniogabriel.lirelab.app.HomeFXML;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
@@ -38,7 +37,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     private static final List<Feature> FEATURES = Arrays.asList(CEDD);
 
-    private CollectionTreeViewObject view = new CollectionTreeViewObject();
+    private HomeViewObject homeView = new HomeViewObject();
 
     @Inject
     private CollectionService service;
@@ -81,24 +80,24 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @Test
     public void shouldListCollections() throws Exception {
-        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
+        homeView.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
     }
 
     @Test
     public void shouldListImagesInCollection() throws Exception {
-        view.waitUntilCollectionIsListed(COLLECTION_1);
-        view.expandCollection(COLLECTION_1);
+        homeView.waitUntilCollectionIsListed(COLLECTION_1);
+        homeView.expandCollection(COLLECTION_1);
 
-        view.waitUntilImageIsListed("14474347006_99aa0fd981_k.jpg");
-        view.waitUntilImageIsListed("16903390174_1d670a5849_h.jpg");
-        view.waitUntilImageIsListed("17099294578_0ba4068bad_k.jpg");
-        view.waitUntilImageIsListed("17338370170_1e620bfb18_h.jpg");
-        view.waitUntilImageIsListed("17525978165_86dc26e8cb_h.jpg");
-        view.waitUntilImageIsListed("19774866363_757555901c_k.jpg");
-        view.waitUntilImageIsListed("25601366680_b57441bb52_k.jpg");
-        view.waitUntilImageIsListed("25601374660_78e6a9bba8_k.jpg");
-        view.waitUntilImageIsListed("26487616294_b22b87133e_k.jpg");
-        view.waitUntilImageIsListed("26489383923_98d419eb0d_k.jpg");
+        homeView.waitUntilImageIsListed("14474347006_99aa0fd981_k.jpg");
+        homeView.waitUntilImageIsListed("16903390174_1d670a5849_h.jpg");
+        homeView.waitUntilImageIsListed("17099294578_0ba4068bad_k.jpg");
+        homeView.waitUntilImageIsListed("17338370170_1e620bfb18_h.jpg");
+        homeView.waitUntilImageIsListed("17525978165_86dc26e8cb_h.jpg");
+        homeView.waitUntilImageIsListed("19774866363_757555901c_k.jpg");
+        homeView.waitUntilImageIsListed("25601366680_b57441bb52_k.jpg");
+        homeView.waitUntilImageIsListed("25601374660_78e6a9bba8_k.jpg");
+        homeView.waitUntilImageIsListed("26487616294_b22b87133e_k.jpg");
+        homeView.waitUntilImageIsListed("26489383923_98d419eb0d_k.jpg");
     }
 
     @Test
@@ -110,43 +109,43 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
         new Thread(creationTask).start();
 
-        view.waitUntilCollectionIsListed(COLLECTION_3);
+        homeView.waitUntilCollectionIsListed(COLLECTION_3);
     }
 
     @Test
     public void shouldUpdateCollectionsListWhenCollectionIsDeleted() throws Exception {
-        view.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
+        homeView.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
 
         collectionHelper.deleteCollection(COLLECTION_1);
 
-        view.waitUntilCollectionIsNotListed(COLLECTION_1);
-        view.waitUntilCollectionsAreListed(COLLECTION_2);
+        homeView.waitUntilCollectionIsNotListed(COLLECTION_1);
+        homeView.waitUntilCollectionsAreListed(COLLECTION_2);
 
         runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
     }
 
     @Test
     public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
-        view.waitUntilCollectionIsListed(COLLECTION_1);
-        view.selectCollection(COLLECTION_1);
+        homeView.waitUntilCollectionIsListed(COLLECTION_1);
+        homeView.selectCollection(COLLECTION_1);
 
-        view.waitUntilImageIsVisible("14474347006_99aa0fd981_k");
-        view.waitUntilImageIsVisible("16903390174_1d670a5849_h");
-        view.waitUntilImageIsVisible("17099294578_0ba4068bad_k");
-        view.waitUntilImageIsVisible("17338370170_1e620bfb18_h");
-        view.waitUntilImageIsVisible("17525978165_86dc26e8cb_h");
-        view.waitUntilImageIsVisible("19774866363_757555901c_k");
-        view.waitUntilImageIsVisible("25601366680_b57441bb52_k");
-        view.waitUntilImageIsVisible("25601374660_78e6a9bba8_k");
-        view.waitUntilImageIsVisible("26487616294_b22b87133e_k");
-        view.waitUntilImageIsVisible("26489383923_98d419eb0d_k");
+        homeView.waitUntilImageIsVisible("14474347006_99aa0fd981_k");
+        homeView.waitUntilImageIsVisible("16903390174_1d670a5849_h");
+        homeView.waitUntilImageIsVisible("17099294578_0ba4068bad_k");
+        homeView.waitUntilImageIsVisible("17338370170_1e620bfb18_h");
+        homeView.waitUntilImageIsVisible("17525978165_86dc26e8cb_h");
+        homeView.waitUntilImageIsVisible("19774866363_757555901c_k");
+        homeView.waitUntilImageIsVisible("25601366680_b57441bb52_k");
+        homeView.waitUntilImageIsVisible("25601374660_78e6a9bba8_k");
+        homeView.waitUntilImageIsVisible("26487616294_b22b87133e_k");
+        homeView.waitUntilImageIsVisible("26489383923_98d419eb0d_k");
     }
 
     @Test
     public void shouldShowImageWhenImageIsSelected() throws Exception {
-        view.waitUntilCollectionIsListed(COLLECTION_1);
-        view.expandCollection(COLLECTION_1);
-        view.selectImage("14474347006_99aa0fd981_k.jpg");
+        homeView.waitUntilCollectionIsListed(COLLECTION_1);
+        homeView.expandCollection(COLLECTION_1);
+        homeView.selectImage("14474347006_99aa0fd981_k.jpg");
 
         Node image = from(lookup("#center-pane")).lookup("#14474347006_99aa0fd981_k").query();
         verifyThat(image, isVisible());
