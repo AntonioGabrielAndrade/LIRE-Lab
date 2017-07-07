@@ -31,9 +31,7 @@ public class ProgressDialogAcceptanceTest extends ApplicationTest {
 
     @After
     public void tearDown() throws Exception {
-        interact(() -> {
-           dialog.close();
-        });
+        interact(() -> dialog.close());
     }
 
     @Test
