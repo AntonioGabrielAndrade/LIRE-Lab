@@ -73,10 +73,10 @@ public class ApplicationRunner {
 
     public void searchCollection(String collection) throws TimeoutException {
         AppViewObject appView = new AppViewObject();
-        CollectionTreeViewObject listView = new CollectionTreeViewObject();
+        CollectionTreeViewObject treeView = new CollectionTreeViewObject();
         ChooseFeatureDialogViewObject chooseView = new ChooseFeatureDialogViewObject();
 
-        listView.selectCollection(collection);
+        treeView.selectCollection(collection);
 
         SearchViewObject searchView = appView.search();
 
