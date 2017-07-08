@@ -77,12 +77,12 @@ public class CollectionRepository {
         CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
         Collection collection = dao.readCollection();
 
-        collection.setImages(getImages(collection));
+        collection.setImages(getImagesOf(collection));
 
         return collection;
     }
 
-    private List<Image> getImages(Collection collection) {
+    private List<Image> getImagesOf(Collection collection) {
 
         List<Image> results = new ArrayList<>();
 
