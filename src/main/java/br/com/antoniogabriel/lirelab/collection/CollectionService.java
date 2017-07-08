@@ -39,7 +39,6 @@ public class CollectionService {
         }
     }
 
-
     public CreateCollectionTask getTaskToCreateCollection(String collectionName,
                                                           String imagesPath,
                                                           List<Feature> collectionFeatures) {

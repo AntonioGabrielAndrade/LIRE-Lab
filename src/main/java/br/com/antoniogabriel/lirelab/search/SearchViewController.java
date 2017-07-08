@@ -79,9 +79,8 @@ public class SearchViewController {
         @Override
         public void changed(Image queryImage) {
             try {
-                collectionGrid.setCollection(
-                        service.runQuery(collection, feature, queryImage),
-                        new SetImageToGridClickHandler(queryGrid));
+                collectionGrid.setCollection(service.runQuery(collection, feature, queryImage),
+                                        new SetImageToGridClickHandler(queryGrid));
             } catch (IOException e) {
                 throw new LireLabException("Could not run query", e);
             }
