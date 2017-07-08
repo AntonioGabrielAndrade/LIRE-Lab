@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.test_utilities;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.embed.swing.JFXPanel;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
 
@@ -40,9 +42,15 @@ public class TestUtils {
             collection.setImagesDirectory(imagesPath);
             collection.setFeatures(asList(features));
 
-            if(Files.isDirectory(Paths.get(imagesPath)))
-                    collection.setImagePaths(
-                            net.semanticmetadata.lire.utils.FileUtils.getAllImages(new File(imagesPath), true));
+            if(Files.isDirectory(Paths.get(imagesPath))) {
+                ArrayList<String> paths = net.semanticmetadata.lire.utils.FileUtils.getAllImages(new File(imagesPath), true);
+
+                ArrayList<Image> images = new ArrayList<>();
+                for (String path : paths) {
+                    images.add(new Image(path, path));
+                }
+                collection.setImages(images);
+            }
 
             return collection;
         } catch (IOException e) {

@@ -71,52 +71,6 @@ public class CollectionRepositoryTest {
     }
 
     @Test
-    public void shouldReturnCollectionsWithImagesPaths() throws Exception {
-        List<Collection> collections = repository.getCollections();
-
-        Collection collection = collections.get(0);
-
-        String imagesDir = collection.getImagesDirectory();
-        List<String> paths = collection.getImagePaths();
-
-        assertThat(paths.size(), is(10));
-
-        assertTrue(paths.contains(imagesDir + "14474347006_99aa0fd981_k.jpg"));
-        assertTrue(paths.contains(imagesDir + "16903390174_1d670a5849_h.jpg"));
-        assertTrue(paths.contains(imagesDir + "17099294578_0ba4068bad_k.jpg"));
-        assertTrue(paths.contains(imagesDir + "17338370170_1e620bfb18_h.jpg"));
-        assertTrue(paths.contains(imagesDir + "17525978165_86dc26e8cb_h.jpg"));
-        assertTrue(paths.contains(imagesDir + "19774866363_757555901c_k.jpg"));
-        assertTrue(paths.contains(imagesDir + "25601366680_b57441bb52_k.jpg"));
-        assertTrue(paths.contains(imagesDir + "25601374660_78e6a9bba8_k.jpg"));
-        assertTrue(paths.contains(imagesDir + "26487616294_b22b87133e_k.jpg"));
-        assertTrue(paths.contains(imagesDir + "26489383923_98d419eb0d_k.jpg"));
-    }
-
-    @Test
-    public void shouldReturnCollectionsWithThumbnailsPaths() throws Exception {
-        List<Collection> collections = repository.getCollections();
-
-        Collection collection = collections.get(0);
-
-        String thumbnailsDir = RESOLVER.getThumbnailsDirectoryPath(collection.getName()) + "/";
-        List<String> paths = collection.getThumbnailPaths();
-
-        assertThat(paths.size(), is(10));
-
-        assertTrue(paths.contains(thumbnailsDir + "14474347006_99aa0fd981_k.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "16903390174_1d670a5849_h.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "17099294578_0ba4068bad_k.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "17338370170_1e620bfb18_h.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "17525978165_86dc26e8cb_h.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "19774866363_757555901c_k.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "25601366680_b57441bb52_k.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "25601374660_78e6a9bba8_k.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "26487616294_b22b87133e_k.thumbnail.jpg"));
-        assertTrue(paths.contains(thumbnailsDir + "26489383923_98d419eb0d_k.thumbnail.jpg"));
-    }
-
-    @Test
     public void shouldReturnCollectionsWithImagesInfo() throws Exception {
         List<Collection> collections = repository.getCollections();
 

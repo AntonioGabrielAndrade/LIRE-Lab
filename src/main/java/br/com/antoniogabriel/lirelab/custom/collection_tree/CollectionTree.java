@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.custom.collection_tree;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -102,17 +103,13 @@ public class CollectionTree extends StackPane {
     private TreeItem<String> buildCollectionItem(Collection collection) {
         TreeItem<String> collectionItem = createCollectionItem(collection);
 
-        for (String image : imagesIn(collection)) {
-            TreeItem<String> imageItem = createImageItem(image);
-            imageMap.put(imageItem, image);
+        for (Image image : collection.getImages()) {
+            TreeItem<String> imageItem = createImageItem(image.getImagePath());
+            imageMap.put(imageItem, image.getImagePath());
             addImageItemToCollectionItem(collectionItem, imageItem);
         }
 
         return collectionItem;
-    }
-
-    private List<String> imagesIn(Collection collection) {
-        return collection.getImagePaths();
     }
 
     private boolean addImageItemToCollectionItem(TreeItem<String> collectionItem, TreeItem<String> imageItem) {

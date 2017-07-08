@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.custom.collection_tree;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.Image;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TreeItem;
@@ -57,9 +58,10 @@ public class CollectionTreeTest {
     }
 
     protected void setupCollections() {
-        collection1.setImagePaths(asList("path/image1", "path/image2"));
-        collection2.setImagePaths(asList("path/image3", "path/image4"));
-        collection3.setImagePaths(asList("path/image5", "path/image6"));
+        collection1.setImages(asList(new Image("path/image1", "path/image1"), new Image("path/image2", "path/image2")));
+        collection2.setImages(asList(new Image("path/image3", "path/image3"), new Image("path/image4", "path/image4")));
+        collection3.setImages(asList(new Image("path/image5", "path/image5"), new Image("path/image6", "path/image6")));
+
         collections = asList(collection1, collection2, collection3);
     }
 

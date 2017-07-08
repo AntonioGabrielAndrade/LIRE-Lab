@@ -3,7 +3,6 @@ package br.com.antoniogabriel.lirelab.collection;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
-import net.semanticmetadata.lire.utils.FileUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -12,7 +11,6 @@ import org.apache.lucene.store.FSDirectory;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -79,43 +77,9 @@ public class CollectionRepository {
         CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
         Collection collection = dao.readCollection();
 
-        List<String> imagesPaths = getImagesPaths(collection);
-        collection.setImagePaths(imagesPaths);
-
-        List<String> thumbnailsPaths = getThumbnailPaths(collection);
-        collection.setThumbnailPaths(thumbnailsPaths);
-
         collection.setImages(getImages(collection));
 
         return collection;
-    }
-
-    private List<String> getThumbnailPaths(Collection collection) throws IOException {
-        return FileUtils.getAllImages(
-                new File(resolver.getThumbnailsDirectoryPath(collection.getName())), false);
-    }
-
-    private List<String> getImagesPaths(Collection collection) {
-
-        List<String> results = new ArrayList<>();
-
-        try {
-            IndexReader ir = DirectoryReader.open(FSDirectory.open(indexPath(collection)));
-
-            int num = ir.numDocs();
-            for ( int i = 0; i < num; i++)
-            {
-                Document d = ir.document(i);
-                String imagePath = d.getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue();
-                results.add(imagePath);
-            }
-            ir.close();
-
-        } catch (IOException e) {
-            throw new LireLabException("Could not read index", e);
-        }
-
-        return results;
     }
 
     private List<Image> getImages(Collection collection) {
