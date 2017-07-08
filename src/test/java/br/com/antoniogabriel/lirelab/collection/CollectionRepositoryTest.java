@@ -2,6 +2,8 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
+import br.com.antoniogabriel.lirelab.util.FileUtils;
+import br.com.antoniogabriel.lirelab.util.LireLabUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,8 +31,11 @@ public class CollectionRepositoryTest {
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
     private static final CollectionUtils COLLECTION_UTILS = new CollectionUtils(RESOLVER);
+    private static final FileUtils fileUtils = new FileUtils();
+    private static final CollectionAssembler collectionAssembler = new CollectionAssembler(RESOLVER, COLLECTION_UTILS);
+    private static final LireLabUtils lireLabUtils = new LireLabUtils(RESOLVER, fileUtils);
 
-    private CollectionRepository repository = new CollectionRepository(RESOLVER, COLLECTION_UTILS);
+    private CollectionRepository repository = new CollectionRepository(lireLabUtils, collectionAssembler);
 
     @BeforeClass
     public static void createCollections() throws Exception {
