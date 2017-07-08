@@ -14,7 +14,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,21 +44,17 @@ public class CollectionRepository {
     }
 
     private boolean collectionsDirectoryDontExist() {
-        return !Files.exists(collectionsPath());
+        return !Files.exists(collectionsFolder());
     }
 
     private List<Collection> readCollectionsFromCollectionsDirectory() {
 
         List<Collection> collections = new ArrayList<>();
 
-        Path dir = collectionsPath();
-
-        DirectoryStream.Filter<Path> filter = entry -> Files.isDirectory(entry);
-
-        try(DirectoryStream<Path> stream = Files.newDirectoryStream(dir, filter)) {
-            for (Path path : stream) {
+        try(Subfolders subfolders = getSubfoldersOf(collectionsFolder())) {
+            for (Path folder : subfolders) {
                 try {
-                    collections.add(getCollection(path));
+                    collections.add(getCollectionIn(folder));
                 } catch (UnmarshalException e) {
                     continue;
                 }
@@ -72,11 +67,15 @@ public class CollectionRepository {
         return collections;
     }
 
-    protected Path collectionsPath() {
+    private Subfolders getSubfoldersOf(Path dir) throws IOException {
+        return Subfolders.of(dir);
+    }
+
+    private Path collectionsFolder() {
         return Paths.get(resolver.getCollectionsPath());
     }
 
-    private Collection getCollection(Path path) throws JAXBException, IOException {
+    private Collection getCollectionIn(Path path) throws JAXBException, IOException {
         CollectionXMLDAO dao = new CollectionXMLDAO(path.toFile());
         Collection collection = dao.readCollection();
 
@@ -149,7 +148,7 @@ public class CollectionRepository {
 
     public Collection getCollection(String name) {
         try {
-            return getCollection(Paths.get(resolver.getCollectionPath(name)));
+            return getCollectionIn(Paths.get(resolver.getCollectionPath(name)));
         } catch (Exception e) {
             throw new LireLabException("Could not read collection", e);
         }
