@@ -46,10 +46,9 @@ public class QueryRunnerTest {
 
     @Before
     public void setUp() throws Exception {
+        queryRunner = new TestableQueryRunner();
         images.add(IMAGE1);
         images.add(IMAGE2);
-
-        queryRunner = new TestableQueryRunner();
         collection.setImages(images);
         setupExpectations();
     }
