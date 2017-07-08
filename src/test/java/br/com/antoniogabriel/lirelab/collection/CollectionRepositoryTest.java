@@ -25,7 +25,6 @@ public class CollectionRepositoryTest {
 
     private static final Collection COLLECTION1 = collection("Collection1", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION2 = collection("Collection2", TEST_IMAGES, CEDD);
-    private static final Collection COLLECTION3 = collection("Collection3", TEST_IMAGES, CEDD);
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
@@ -38,7 +37,6 @@ public class CollectionRepositoryTest {
         runOnFxThreadAndWait(() -> {
             COLLECTION_HELPER.createRealCollection(COLLECTION1);
             COLLECTION_HELPER.createRealCollection(COLLECTION2);
-            COLLECTION_HELPER.createRealCollection(COLLECTION3);
         });
     }
 
@@ -47,7 +45,6 @@ public class CollectionRepositoryTest {
         runOnFxThreadAndWait(() -> {
             COLLECTION_HELPER.deleteCollection(COLLECTION1);
             COLLECTION_HELPER.deleteCollection(COLLECTION2);
-            COLLECTION_HELPER.deleteCollection(COLLECTION3);
 
             deleteWorkDirectory(RESOLVER);
         });
@@ -68,10 +65,9 @@ public class CollectionRepositoryTest {
     public void shouldReturnCollectionsFromDisk() throws Exception {
         List<Collection> collections = repository.getCollections();
 
-        assertThat(collections.size(), is(3));
+        assertThat(collections.size(), is(2));
         assertTrue(collections.contains(COLLECTION1));
         assertTrue(collections.contains(COLLECTION2));
-        assertTrue(collections.contains(COLLECTION3));
     }
 
     @Test
