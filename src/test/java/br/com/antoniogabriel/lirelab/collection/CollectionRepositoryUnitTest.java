@@ -28,7 +28,6 @@ public class CollectionRepositoryUnitTest {
     private Collection collection1 = new Collection("Collection1");
     private Collection collection2 = new Collection("Collection2");
 
-
     private CollectionRepository repository;
 
     @Before
@@ -54,8 +53,8 @@ public class CollectionRepositoryUnitTest {
         given(subfoldersIterator.hasNext()).willReturn(true, true, false);
         given(subfoldersIterator.next()).willReturn(collectionPath1, collectionPath2);
 
-        given(collectionAssembler.assembleCollection(collectionPath1)).willReturn(collection1);
-        given(collectionAssembler.assembleCollection(collectionPath2)).willReturn(collection2);
+        given(collectionAssembler.assembleCollectionFrom(collectionPath1)).willReturn(collection1);
+        given(collectionAssembler.assembleCollectionFrom(collectionPath2)).willReturn(collection2);
 
         List<Collection> collections = repository.getCollections();
 

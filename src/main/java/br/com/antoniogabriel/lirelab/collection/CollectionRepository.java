@@ -74,7 +74,7 @@ public class CollectionRepository {
     }
 
     private Collection getCollectionIn(Path path) throws JAXBException, IOException {
-        return collectionAssembler.assembleCollection(path);
+        return collectionAssembler.assembleCollectionFrom(path);
     }
 
 }

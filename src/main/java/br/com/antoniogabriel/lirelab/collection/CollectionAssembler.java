@@ -27,7 +27,7 @@ public class CollectionAssembler {
         this.collectionUtils = collectionUtils;
     }
 
-    public Collection assembleCollection(Path collectionPath) throws JAXBException {
+    public Collection assembleCollectionFrom(Path collectionPath) throws JAXBException {
         CollectionXMLDAO dao = new CollectionXMLDAO(collectionPath.toFile());
         Collection collection = dao.readCollection();
 
