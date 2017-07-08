@@ -10,7 +10,7 @@ import java.util.List;
 
 public class IndexCreator {
 
-    private IndexCreatorCallback callback;
+    private IndexCreatorCallback callback = new DumbIndexCreatorCallback();
     private String imagesDir;
     private List<Feature> features;
     private String indexDir;
@@ -59,4 +59,14 @@ public class IndexCreator {
         this.callback = callback;
     }
 
+    private class DumbIndexCreatorCallback implements IndexCreatorCallback {
+        @Override
+        public void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {}
+
+        @Override
+        public void afterAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {}
+
+        @Override
+        public void afterIndexAllImages(int totalImages) {}
+    }
 }

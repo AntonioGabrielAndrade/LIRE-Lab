@@ -67,9 +67,9 @@ public class CollectionHelper {
 
         List<Feature> collectionFeatures = getFeatures(collection);
 
-        CreateCollectionTask task =
+        Runnable task =
                 new CreateCollectionTaskFactory()
-                        .createTask(
+                        .createTaskAsRunnable(
                                 collection.getName(),
                                 collectionFeatures,
                                 collection.getImagesDirectory(),

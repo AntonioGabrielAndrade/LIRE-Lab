@@ -1,38 +1,25 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 import br.com.antoniogabriel.lirelab.lire.IndexCreatorCallback;
 import javafx.concurrent.Task;
 
 import java.nio.file.Paths;
 
 public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback, XMLCreatorCallback {
-    private final IndexCreator indexCreator;
-    private final ThumbnailsCreator thumbnailsCreator;
-    private final XMLCreator xmlCreator;
 
-    public CreateCollectionTask(IndexCreator indexCreator,
-                                ThumbnailsCreator thumbnailsCreator,
-                                XMLCreator xmlCreator) {
+    private CreateCollectionRunnable runnable;
 
-        this.indexCreator = indexCreator;
-        this.thumbnailsCreator = thumbnailsCreator;
-        this.xmlCreator = xmlCreator;
+    public CreateCollectionTask(CreateCollectionRunnable runnable) {
+        this.runnable = runnable;
 
-        setItselfAsCallback();
-    }
-
-    private void setItselfAsCallback() {
-        this.indexCreator.setCallback(this);
-        this.thumbnailsCreator.setCallback(this);
-        this.xmlCreator.setCallback(this);
+        runnable.setIndexCreatorCallback(this);
+        runnable.setThumbnailsCreatorCallback(this);
+        runnable.setXmlCreatorCallback(this);
     }
 
     @Override
     protected Void call() throws Exception {
-        indexCreator.create();
-        thumbnailsCreator.create();
-        xmlCreator.create();
+        runnable.run();
         return null;
     }
 

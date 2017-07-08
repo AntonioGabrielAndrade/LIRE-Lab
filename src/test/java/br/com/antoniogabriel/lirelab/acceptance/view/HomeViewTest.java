@@ -41,21 +41,15 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            collectionHelper.createRealCollection(COLLECTION_1);
-            collectionHelper.createRealCollection(COLLECTION_2);
-        });
+        collectionHelper.createRealCollection(COLLECTION_1);
+        collectionHelper.createRealCollection(COLLECTION_2);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            collectionHelper.deleteCollection(COLLECTION_1);
-            collectionHelper.deleteCollection(COLLECTION_2);
-            collectionHelper.deleteCollection(COLLECTION_3);
-
-            deleteWorkDirectory(resolver);
-        });
+        collectionHelper.deleteCollection(COLLECTION_1);
+        collectionHelper.deleteCollection(COLLECTION_2);
+        collectionHelper.deleteCollection(COLLECTION_3);
     }
 
 

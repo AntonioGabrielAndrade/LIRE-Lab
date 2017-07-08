@@ -29,18 +29,14 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            COLLECTION_HELPER.createRealCollection(collection);
-            collection = COLLECTION_HELPER.readCollection(collection.getName());
-        });
+        COLLECTION_HELPER.createRealCollection(collection);
+        collection = COLLECTION_HELPER.readCollection(collection.getName());
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            COLLECTION_HELPER.deleteCollection(collection);
-            deleteWorkDirectory(RESOLVER);
-        });
+        COLLECTION_HELPER.deleteCollection(collection);
+        deleteWorkDirectory(RESOLVER);
     }
 
     @After
