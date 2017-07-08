@@ -49,8 +49,8 @@ public class CreateCollectionController implements Initializable {
 
     @FXML
     void chooseImagesDirectory(ActionEvent event) {
-        Window parent = getWindowFrom(event);
-        File dir = dialogProvider.chooseImagesDirectory(parent);
+        Window owner = getWindowFrom(event);
+        File dir = dialogProvider.chooseImagesDirectory(owner);
         if (dir != null) {
             imagesDirectoryField.setText(dir.getAbsolutePath());
         }
