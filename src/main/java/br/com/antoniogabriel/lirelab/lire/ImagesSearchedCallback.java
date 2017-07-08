@@ -20,8 +20,10 @@ class ImagesSearchedCallback implements IndexSearcherCallback {
     }
 
     @Override
-    public void imageSearched(String imgPath, int position) {
+    public void imageSearched(String imgPath, int position, double score) {
         Image image = createImage(collection, imgPath);
+        image.setScore(score);
+        image.setPosition(position);
         images.add(image);
     }
 

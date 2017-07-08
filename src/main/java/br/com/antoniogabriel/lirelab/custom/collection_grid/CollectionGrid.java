@@ -58,7 +58,7 @@ public class CollectionGrid extends StackPane {
         grid.clear();
         for (Image image : images) {
             ImageView imageView = grid.addImage(image.getThumbnailPath());
-            toolTipProvider.setToolTip(imageView, image.getImageName());
+            toolTipProvider.setToolTip(imageView, image);
             imageView.setOnMouseClicked(eventHandlerFactory.createFrom(image, handler));
             imageView.setOnMouseEntered(event -> getScene().setCursor(Cursor.HAND));
             imageView.setOnMouseExited(event -> getScene().setCursor(Cursor.DEFAULT));

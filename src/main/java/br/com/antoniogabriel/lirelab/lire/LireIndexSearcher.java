@@ -33,8 +33,7 @@ public class LireIndexSearcher {
         for (int i = 0; i < hits.length(); i++) {
             Document document = ir.document(hits.documentID(i));
             String fileName = document.getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
-            callback.imageSearched(fileName, i);
-            System.out.println(hits.score(i) + ": \t" + fileName);
+            callback.imageSearched(fileName, i, hits.score(i));
         }
     }
 }

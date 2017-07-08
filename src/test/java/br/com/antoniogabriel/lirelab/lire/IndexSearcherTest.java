@@ -69,6 +69,9 @@ public class IndexSearcherTest {
         given(hits.documentID(0)).willReturn(0);
         given(hits.documentID(1)).willReturn(1);
 
+        given(hits.score(0)).willReturn(0.0);
+        given(hits.score(1)).willReturn(1.0);
+
         given(indexReader.document(0)).willReturn(doc1);
         given(indexReader.document(1)).willReturn(doc2);
 
@@ -82,7 +85,7 @@ public class IndexSearcherTest {
     public void shouldPassDocumentIdsToCallback() throws Exception {
         indexSearcher.search(IMG_PATH, INDEX_DIR, feature.getLireClass(), 2);
 
-        verify(callback).imageSearched(IMG_PATH, 0);
-        verify(callback).imageSearched(IMG_PATH, 1);
+        verify(callback).imageSearched(IMG_PATH, 0, 0.0);
+        verify(callback).imageSearched(IMG_PATH, 1, 1.0);
     }
 }

@@ -7,6 +7,9 @@ public class Image {
     private final String imagePath;
     private final String thumbnailPath;
 
+    private double score = -1;
+    private int position = -1;
+
     public Image(String imagePath, String thumbnailPath) {
         this.imagePath = imagePath;
         this.thumbnailPath = thumbnailPath;
@@ -22,6 +25,22 @@ public class Image {
 
     public String getImageName() {
         return Paths.get(imagePath).getFileName().toString().replace(".jpg", "");
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     @Override

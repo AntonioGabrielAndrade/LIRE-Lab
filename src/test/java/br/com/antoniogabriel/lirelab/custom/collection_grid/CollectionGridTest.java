@@ -65,7 +65,7 @@ public class CollectionGridTest {
 
         collectionGrid.setCollection(collection);
 
-        verify(toolTipProvider, times(3)).setToolTip(imageView, IMAGE.getImageName());
+        verify(toolTipProvider, times(3)).setToolTip(imageView, IMAGE);
     }
 
     @Test
