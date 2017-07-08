@@ -34,7 +34,7 @@ public class CollectionRepository {
     }
 
     public List<Collection> getCollections() {
-        if(collectionsPathDontExist())
+        if(collectionsDirectoryDontExist())
             return emptyCollectionsList();
 
         return readCollectionsFromCollectionsDirectory();
@@ -44,7 +44,7 @@ public class CollectionRepository {
         return Collections.EMPTY_LIST;
     }
 
-    private boolean collectionsPathDontExist() {
+    private boolean collectionsDirectoryDontExist() {
         return !Files.exists(collectionsPath());
     }
 
