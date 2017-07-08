@@ -9,12 +9,13 @@ import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilI
 
 public class ChooseFeatureDialogViewObject extends FxRobot {
 
-    public void selectFeature(Feature feature) {
+    public void selectFeature(Feature feature) throws TimeoutException {
         openPopup();
         clickOn(feature.name()).interrupt();
     }
 
-    private void openPopup() {
+    private void openPopup() throws TimeoutException {
+        waitUntilViewIsVisible();
         clickOn(".list-cell").interrupt();
     }
 
