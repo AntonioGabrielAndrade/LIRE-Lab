@@ -42,10 +42,12 @@ public class AppController {
         this.homeController = homeController;
     }
 
+    @FXML
     public void openCreateCollectionDialog(ActionEvent event) throws IOException {
         createCollectionFXML.loadOwnedBy(dialogProvider.getWindowFrom(event));
     }
 
+    @FXML
     public void searchCollection(ActionEvent event) {
         Collection selectedCollection = homeController.getSelectedCollection();
         Feature feature = chooseFeature(selectedCollection, dialogProvider.getWindowFrom(event));
@@ -55,6 +57,7 @@ public class AppController {
         searchViewController.startSearchSession(selectedCollection, feature);
     }
 
+    @FXML
     public void showHomeView(ActionEvent event) {
         searchToolBar.setVisible(false);
         mainArea.setCenter(homeView);
