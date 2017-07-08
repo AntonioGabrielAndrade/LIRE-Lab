@@ -15,8 +15,16 @@ public class ChooseFeatureDialogViewObject extends FxRobot {
     }
 
     private void openPopup() throws TimeoutException {
-        waitUntilViewIsVisible();
-        clickOn(".list-cell").interrupt();
+        //deal with weird testfx exception that cant find scene bounds
+        boolean clicked = false;
+        while(!clicked) {
+            try {
+                clickOn(".list-cell").interrupt();
+                clicked = true;
+            } catch (RuntimeException e) {
+                continue;
+            }
+        }
     }
 
     public void ok() {
