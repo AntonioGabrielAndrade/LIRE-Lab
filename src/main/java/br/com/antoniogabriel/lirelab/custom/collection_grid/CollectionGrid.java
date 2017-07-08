@@ -7,6 +7,7 @@ import br.com.antoniogabriel.lirelab.custom.image_grid.ImageGrid;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
@@ -59,6 +60,8 @@ public class CollectionGrid extends StackPane {
             ImageView imageView = grid.addImage(image.getThumbnailPath());
             toolTipProvider.setToolTip(imageView, image.getImageName());
             imageView.setOnMouseClicked(eventHandlerFactory.createFrom(image, handler));
+            imageView.setOnMouseEntered(event -> getScene().setCursor(Cursor.HAND));
+            imageView.setOnMouseExited(event -> getScene().setCursor(Cursor.DEFAULT));
         }
     }
 
