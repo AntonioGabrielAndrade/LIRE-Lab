@@ -8,13 +8,20 @@
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="br.com.antoniogabriel.lirelab.collection.CreateCollectionController"
-          prefHeight="400.0" prefWidth="600.0"
+          prefHeight="600.0" prefWidth="600.0"
           vgap="10"
           gridLinesVisible="false">
 
     <columnConstraints>
-        <ColumnConstraints percentWidth="100"/>
+        <ColumnConstraints percentWidth="100" />
     </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints vgrow="ALWAYS"/>
+        <RowConstraints maxHeight="50" />
+    </rowConstraints>
 
     <padding>
         <Insets top="20" bottom="20" left="20" right="20"/>
@@ -31,7 +38,7 @@
           GridPane.rowIndex="1"
           GridPane.columnIndex="0">
         <Label text="Images directory"/>
-        <HBox spacing="5">
+        <HBox spacing="7">
             <TextField id="images-directory" fx:id="imagesDirectoryField" HBox.hgrow="ALWAYS"/>
             <Button text="Browse" onAction="#chooseImagesDirectory"/>
         </HBox>
@@ -41,11 +48,13 @@
           GridPane.rowIndex="2"
           GridPane.columnIndex="0">
         <Label text="Features for indexing"/>
-        <FeatureTable fx:id="featuresTable" editable="true"/>
+        <FeatureTable fx:id="featuresTable"
+                      editable="true"
+                      GridPane.vgrow="ALWAYS"/>
     </VBox>
 
     <HBox alignment="BOTTOM_RIGHT"
-          spacing="3"
+          spacing="7"
           GridPane.rowIndex="3"
           GridPane.columnIndex="0">
         <Button text="Cancel" id="cancel" onAction="#close"/>

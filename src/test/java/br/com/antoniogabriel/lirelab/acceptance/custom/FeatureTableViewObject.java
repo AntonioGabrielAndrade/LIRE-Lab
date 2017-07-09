@@ -18,7 +18,7 @@ public class FeatureTableViewObject extends FxRobot {
     }
 
     public void waitUntilFeatureIsVisible(Feature feature) throws TimeoutException {
-        waitUntilIsVisible(feature.name(), ".table-view");
+        waitUntilIsVisible(feature.getFeatureName(), ".table-view");
     }
 
     public void selectFeatures(Feature... features) {

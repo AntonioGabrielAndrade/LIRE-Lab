@@ -11,7 +11,7 @@ public class ViewableFeature {
 
     public ViewableFeature(Feature feature) {
         this.selected = new SimpleBooleanProperty(false);
-        this.name = new SimpleStringProperty(feature.name());
+        this.name = new SimpleStringProperty(feature.getFeatureName());
         this.feature = feature;
     }
 
