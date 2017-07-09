@@ -6,6 +6,7 @@ import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -22,11 +23,14 @@ public class FeatureTable extends TableView<ViewableFeature> {
     @FXML private TableColumn<ViewableFeature, Boolean> selectedCol;
     @FXML private TableColumn<ViewableFeature, String> nameCol;
 
+    @FXML private CheckBox selectAll;
+
     private FeatureUtils featureUtils = new FeatureUtils();
 
     public FeatureTable() {
         loadFXML();
         setupTableColumns();
+        setupSelectAll();
     }
 
     protected void loadFXML() {
@@ -52,5 +56,27 @@ public class FeatureTable extends TableView<ViewableFeature> {
         selectedCol.setCellValueFactory(new PropertyValueFactory<>("selected"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
+    }
+
+    private void setupSelectAll() {
+        selectAll.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
+            if(isSelected) {
+                selectAllFeatures();
+            } else {
+                unselectAllFeatures();
+            }
+        });
+    }
+
+    private void selectAllFeatures() {
+        for (ViewableFeature viewableFeature : getItems()) {
+            viewableFeature.setSelected(true);
+        }
+    }
+
+    private void unselectAllFeatures() {
+        for (ViewableFeature viewableFeature : getItems()) {
+            viewableFeature.setSelected(false);
+        }
     }
 }

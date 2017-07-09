@@ -14,9 +14,14 @@
         <TableColumn fx:id="selectedCol"
                      text=""
                      minWidth="50"
-                     maxWidth="50"/>
+                     maxWidth="50">
+            <graphic>
+                <CheckBox fx:id="selectAll" id="select-all" selected="false"/>
+            </graphic>
+        </TableColumn>
+
         <TableColumn fx:id="nameCol"
-                     text="Name"/>
+                     text=""/>
     </columns>
 
 </fx:root>
