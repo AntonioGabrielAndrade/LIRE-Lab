@@ -2,7 +2,9 @@ package br.com.antoniogabriel.lirelab.acceptance.fxml;
 
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import org.junit.After;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import static org.junit.Assert.assertNotNull;
@@ -21,6 +23,11 @@ public class FXMLLoadInStageAcceptanceTest extends ApplicationTest {
         this.stage = stage;
         fxml = new FXMLImplForTests(loader);
         fxml.loadIn(stage);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        FxToolkit.hideStage();
     }
 
     @Test

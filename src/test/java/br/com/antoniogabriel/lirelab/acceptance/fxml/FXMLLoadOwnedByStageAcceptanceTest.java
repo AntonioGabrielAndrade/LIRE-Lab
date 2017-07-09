@@ -6,7 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.junit.After;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import static org.junit.Assert.assertNotNull;
@@ -25,7 +27,7 @@ public class FXMLLoadOwnedByStageAcceptanceTest extends ApplicationTest {
     public void start(Stage stage) throws Exception {
         owner = stage;
 
-        owner.setScene(new Scene(getOwnerRoot(), 600, 400));
+        owner.setScene(new Scene(getOwnerRoot(), 500, 300));
         owner.show();
 
         fxml = new FXMLImplForTests(loader);
@@ -34,8 +36,12 @@ public class FXMLLoadOwnedByStageAcceptanceTest extends ApplicationTest {
 
     private Parent getOwnerRoot() {
         Parent ownerRoot = new StackPane();
-        ownerRoot.setStyle("-fx-background-color: khaki");
         return ownerRoot;
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        FxToolkit.hideStage();
     }
 
     @Test
