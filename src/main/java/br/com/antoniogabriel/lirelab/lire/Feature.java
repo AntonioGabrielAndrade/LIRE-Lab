@@ -41,4 +41,9 @@ public enum Feature {
     public String getFeatureName() {
         return featureName;
     }
+
+    @Override
+    public String toString() {
+        return featureName;
+    }
 }
