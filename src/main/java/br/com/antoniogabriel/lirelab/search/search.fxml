@@ -2,12 +2,9 @@
 
 <?import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid?>
 <?import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ProgressBar?>
+<?import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -26,27 +23,7 @@
     </center>
 
     <bottom>
-        <BorderPane>
-
-            <padding>
-                <Insets top="2" bottom="2" right="2" left="2"/>
-            </padding>
-
-            <left>
-                <StackPane>
-                    <Text fx:id="statusMessage"/>
-                </StackPane>
-            </left>
-
-            <right>
-                <ProgressBar fx:id="queryProgress"
-                             visible="false"
-                             maxHeight="3"
-                             prefWidth="500"/>
-            </right>
-
-        </BorderPane>
-
+        <StatusBar fx:id="statusBar"/>
     </bottom>
 
 </BorderPane>

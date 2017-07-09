@@ -7,12 +7,12 @@ import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.single_image_grid.ImageChangeListener;
 import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid;
+import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar;
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import javafx.beans.value.ChangeListener;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,8 +22,7 @@ public class SearchViewController {
 
     @FXML private SingleImageGrid queryGrid;
     @FXML private PaginatedCollectionGrid collectionGrid;
-    @FXML private Text statusMessage;
-    @FXML private ProgressBar queryProgress;
+    @FXML private StatusBar statusBar;
 
     private CollectionService service;
 
@@ -40,20 +39,20 @@ public class SearchViewController {
     }
 
     public void runQuery(Collection collection, Feature feature, Image queryImage) {
-        RunQueryTask queryTask = new RunQueryTask(service, collection, feature, queryImage);
-        queryProgress.visibleProperty().bind(queryTask.runningProperty());
-        queryTask.valueProperty().addListener((observable, oldValue, newValue) -> {
+        RunQueryTask queryTask = createQueryTask(collection, feature, queryImage);
+        statusBar.bindProgressTo(queryTask);
+        queryTask.addValueListener((observable, oldValue, newValue) -> {
             collectionGrid.setCollection(newValue, new SetImageToGridClickHandler(queryGrid));
         });
         new Thread(queryTask).start();
     }
 
+    protected SearchViewController.RunQueryTask createQueryTask(Collection collection, Feature feature, Image queryImage) {
+        return new RunQueryTask(service, collection, feature, queryImage);
+    }
+
     private void setStatusMessage(Collection collection, Feature feature) {
-        String status = "";
-        status += "Collection: " + collection.getName();
-        status += "  ";
-        status += "Feature: " + feature.getFeatureName();
-        statusMessage.setText(status);
+        statusBar.setSearchStatusInfo(collection, feature);
     }
 
     static class SetImageToGridClickHandler implements ImageClickHandler {
@@ -91,7 +90,7 @@ public class SearchViewController {
         }
     }
 
-    private static class RunQueryTask extends Task<Collection> {
+    public static class RunQueryTask extends Task<Collection> {
 
         private final CollectionService service;
         private final Collection collection;
@@ -112,6 +111,10 @@ public class SearchViewController {
         @Override
         protected Collection call() throws Exception {
             return service.runQuery(collection, feature, queryImage);
+        }
+
+        public void addValueListener(ChangeListener<Collection> listener) {
+            valueProperty().addListener(listener);
         }
     }
 }
