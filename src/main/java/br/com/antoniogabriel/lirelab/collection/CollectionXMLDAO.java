@@ -31,7 +31,6 @@ public class CollectionXMLDAO {
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
         jaxbMarshaller.marshal(collection, file);
-        jaxbMarshaller.marshal(collection, System.out);
     }
 
     public Collection readCollection() throws JAXBException {

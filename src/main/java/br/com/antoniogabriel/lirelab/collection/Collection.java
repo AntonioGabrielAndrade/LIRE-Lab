@@ -22,12 +22,6 @@ public class Collection {
     private List<Feature> features = new ArrayList<>();
 
     @XmlTransient
-    private List<String> imagePaths = new ArrayList<>();
-
-    @XmlTransient
-    private List<String> thumbnailPaths = new ArrayList<>();
-
-    @XmlTransient
     private List<Image> images = new ArrayList<>();
 
     public Collection() {}
@@ -60,28 +54,20 @@ public class Collection {
         return imagesDirectory;
     }
 
-    public List<String> getImagePaths() {
-        return imagePaths;
-    }
-
-    public void setImagePaths(List<String> imagePaths) {
-        this.imagePaths = imagePaths;
-    }
-
-    public List<String> getThumbnailPaths() {
-        return thumbnailPaths;
-    }
-
-    public void setThumbnailPaths(List<String> thumbnailPaths) {
-        this.thumbnailPaths = thumbnailPaths;
-    }
-
     public List<Image> getImages() {
         return images;
     }
 
+    public List<Image> getImagesInRange(int fromIndex, int toIndex) {
+        return getImages().subList(fromIndex, toIndex);
+    }
+
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public int totalImages() {
+        return images.size();
     }
 
     @Override

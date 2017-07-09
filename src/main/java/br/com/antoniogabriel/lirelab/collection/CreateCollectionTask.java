@@ -1,43 +1,32 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
 import br.com.antoniogabriel.lirelab.lire.IndexCreatorCallback;
 import javafx.concurrent.Task;
 
 import java.nio.file.Paths;
 
 public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback, XMLCreatorCallback {
-    private final IndexCreator indexCreator;
-    private final ThumbnailsCreator thumbnailsCreator;
-    private final XMLCreator xmlCreator;
 
-    public CreateCollectionTask(IndexCreator indexCreator,
-                                ThumbnailsCreator thumbnailsCreator,
-                                XMLCreator xmlCreator) {
+    private CreateCollectionRunnable runnable;
 
-        this.indexCreator = indexCreator;
-        this.thumbnailsCreator = thumbnailsCreator;
-        this.xmlCreator = xmlCreator;
+    public CreateCollectionTask(CreateCollectionRunnable runnable) {
+        this.runnable = runnable;
 
-        setItselfAsCallback();
-    }
-
-    private void setItselfAsCallback() {
-        this.indexCreator.setCallback(this);
-        this.thumbnailsCreator.setCallback(this);
-        this.xmlCreator.setCallback(this);
+        updateTitle("Create Collection...");
+        runnable.setIndexCreatorCallback(this);
+        runnable.setThumbnailsCreatorCallback(this);
+        runnable.setXmlCreatorCallback(this);
     }
 
     @Override
     protected Void call() throws Exception {
-        indexCreator.create();
-        thumbnailsCreator.create();
-        xmlCreator.create();
+        runnable.run();
         return null;
     }
 
     @Override
     public void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {
+        updateTitle("Step 1: Create index");
         updateMessage("Indexing " + Paths.get(imageFilePath).getFileName().toString());
     }
 
@@ -53,6 +42,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
 
     @Override
     public void beforeCreateThumbnail(int currentImage, int totalImages, String imagePath) {
+        updateTitle("Step 2: Create thumbnails");
         updateMessage("Creating thumbnail for  " + Paths.get(imagePath).getFileName().toString());
     }
 
@@ -74,7 +64,8 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
 
     @Override
     public void afterCreateXML() {
-        updateMessage("Collection Created");
+        updateTitle("Completed");
+        updateMessage("Collection Created!");
         updateProgress(1,1);
     }
 }

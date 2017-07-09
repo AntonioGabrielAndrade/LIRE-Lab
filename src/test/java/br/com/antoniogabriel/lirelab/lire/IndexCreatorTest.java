@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IndexCreatorTest {
@@ -33,7 +34,7 @@ public class IndexCreatorTest {
     private static final String INDEX_DIR = "/some/index/dir";
     private static final String IMAGES_DIR = "/some/images/dir";
 
-    @Mock private IndexBuilder indexBuilder;
+    @Mock private LIRE lire;
     @Mock private IndexWriter indexWriter;
     @Mock private GlobalDocumentBuilder docBuilder;
     @Mock private BufferedImage bufImg1;
@@ -47,44 +48,46 @@ public class IndexCreatorTest {
     public void setUp() throws Exception {
         setupIndexCreator();
         setupInOrder();
-        setupExpectationsForIndexBuilder();
+        setupExpectations();
     }
 
     private void setupIndexCreator() {
-        creator = new IndexCreator(indexBuilder, IMAGES_DIR, INDEX_DIR, FEATURES);
+        creator = new IndexCreator(lire, IMAGES_DIR, INDEX_DIR, FEATURES);
         creator.setCallback(callback);
     }
 
     private void setupInOrder() {
-        inOrder = Mockito.inOrder(indexBuilder, callback);
+        inOrder = Mockito.inOrder(lire, callback, indexWriter);
     }
 
-    private void setupExpectationsForIndexBuilder() throws IOException {
-        given(indexBuilder.createDocumentBuilder()).willReturn(docBuilder);
+    private void setupExpectations() throws IOException {
+        given(lire.createDocumentBuilder()).willReturn(docBuilder);
+        given(lire.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
+        given(lire.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
 
-        given(indexBuilder.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
-        given(indexBuilder.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
+        given(lire.getBufferedImage(IMG1)).willReturn(bufImg1);
+        given(docBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
 
-        given(indexBuilder.getBufferedImage(IMG1)).willReturn(bufImg1);
-        given(indexBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);
-
-        given(indexBuilder.getBufferedImage(IMG2)).willReturn(bufImg2);
-        given(indexBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
+        given(lire.getBufferedImage(IMG2)).willReturn(bufImg2);
+        given(docBuilder.createDocument(bufImg2, IMG2)).willReturn(DOC2);
     }
 
     @Test
-    public void shouldCreateIndexStepByStep() throws Exception {
+    public void shouldAddFeaturesToDocumentBuilder() throws Exception {
         creator.create();
 
-        inOrder.verify(indexBuilder).createDocumentBuilder();
-        inOrder.verify(indexBuilder).addFeaturesToDocumentBuilder(FEATURES);
-        inOrder.verify(indexBuilder).createIndexWriter(INDEX_DIR);
-
-        inOrder.verify(callback).beforeAddImageToIndex(1, PATHS.size(), IMG1);
-        inOrder.verify(indexBuilder).addDocument(DOC1);
-        inOrder.verify(callback).afterAddImageToIndex(1, PATHS.size(), IMG1);
-
-        inOrder.verify(indexBuilder).closeIndexWriter();
-        inOrder.verify(callback).afterIndexAllImages(PATHS.size());
+        for (Feature feature : FEATURES) {
+            verify(docBuilder).addExtractor(feature.getLireClass());
+        }
     }
+
+    @Test
+    public void shouldAddImagesToIndexAndCloseIndex() throws Exception {
+        creator.create();
+
+        inOrder.verify(indexWriter).addDocument(DOC1);
+        inOrder.verify(indexWriter).addDocument(DOC2);
+        inOrder.verify(lire).closeIndexWriter(indexWriter);
+    }
+
 }

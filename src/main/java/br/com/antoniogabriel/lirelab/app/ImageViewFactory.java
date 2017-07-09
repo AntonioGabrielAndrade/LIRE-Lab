@@ -3,14 +3,16 @@ package br.com.antoniogabriel.lirelab.app;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 
 public class ImageViewFactory {
 
-    public ImageView create(String path) throws FileNotFoundException {
-        ImageView imageView = createImageView(path);
+    public ImageView create(String path) {
+        return create(path, true);
+    }
+
+    public ImageView create(String path, boolean backgroundLoading) {
+        ImageView imageView = createImageView(path, backgroundLoading);
         String id = createId(path);
         imageView.setId(id);
         imageView.setPreserveRatio(true);
@@ -36,8 +38,8 @@ public class ImageViewFactory {
         return Paths.get(path).getFileName().toString();
     }
 
-    private ImageView createImageView(String path) throws FileNotFoundException {
-        Image image = new Image(new FileInputStream(path));
+    private ImageView createImageView(String path, boolean backgroundLoading) {
+        Image image = new Image("file://" + path, backgroundLoading);
         return new ImageView(image);
     }
 }

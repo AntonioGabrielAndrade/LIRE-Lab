@@ -3,7 +3,7 @@ package br.com.antoniogabriel.lirelab.acceptance.custom;
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
-import br.com.antoniogabriel.lirelab.custom.collectiongrid.CollectionGrid;
+import br.com.antoniogabriel.lirelab.custom.collection_grid.CollectionGrid;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,12 +11,10 @@ import org.junit.*;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
-import java.io.IOException;
-
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.*;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
@@ -31,27 +29,14 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        startJavaFX();
-        runOnFXThread(() -> {
-            try {
-                COLLECTION_HELPER.createRealCollection(collection);
-                collection = COLLECTION_HELPER.readCollection(collection.getName());
-            } catch (Exception e) {
-                throw new RuntimeException("Test Error", e);
-            }
-        });
+        COLLECTION_HELPER.createRealCollection(collection);
+        collection = COLLECTION_HELPER.readCollection(collection.getName());
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFXThread(() -> {
-            try {
-                COLLECTION_HELPER.deleteCollection(collection);
-                deleteWorkDirectory(RESOLVER);
-            } catch (IOException e) {
-                throw new RuntimeException("Test Error", e);
-            }
-        });
+        COLLECTION_HELPER.deleteCollection(collection);
+        deleteWorkDirectory(RESOLVER);
     }
 
     @After

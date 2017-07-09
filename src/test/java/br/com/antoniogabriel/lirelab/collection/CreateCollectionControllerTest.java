@@ -1,10 +1,10 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.custom.featuretable.FeatureTable;
-import br.com.antoniogabriel.lirelab.custom.featuretable.ViewableFeature;
+import br.com.antoniogabriel.lirelab.custom.feature_table.FeatureTable;
+import br.com.antoniogabriel.lirelab.custom.feature_table.ViewableFeature;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.FeatureUtils;
-import br.com.antoniogabriel.lirelab.custom.progressdialog.ProgressDialog;
+import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;

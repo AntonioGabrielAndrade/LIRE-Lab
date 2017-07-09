@@ -2,6 +2,7 @@
 
 <?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
 
 <ToolBar id="toolbar"
          xmlns="http://javafx.com/javafx"
@@ -26,6 +27,8 @@
         </graphic>
     </Button>
 
+    <Separator/>
+
     <Button id="toolbar-about">
         <tooltip>
             <Tooltip text="About"/>
@@ -34,5 +37,20 @@
             <TangoIconWrapper description="apps:system-users"/>
         </graphic>
     </Button>
+
+    <HBox visible="false" fx:id="searchToolBar">
+        <Separator orientation="VERTICAL"/>
+
+        <Button id="toolbar-back" onAction="#showHomeView">
+            <tooltip>
+                <Tooltip text="Back"/>
+            </tooltip>
+            <graphic>
+                <TangoIconWrapper description="actions:go-previous"/>
+            </graphic>
+        </Button>
+    </HBox>
+
+
 
 </ToolBar>

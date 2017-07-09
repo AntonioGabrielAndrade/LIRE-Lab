@@ -7,13 +7,12 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.*;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -30,21 +29,14 @@ public class CollectionUtilsTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        startJavaFX();
-        runOnFXThread(() -> COLLECTION_HELPER.createRealCollection(COLLECTION));
+        runOnFxThreadAndWait(() -> COLLECTION_HELPER.createRealCollection(COLLECTION));
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
-        runOnFXThread(() -> {
-            try {
-
-                COLLECTION_HELPER.deleteCollection(COLLECTION);
-                deleteWorkDirectory(RESOLVER);
-
-            } catch (IOException e) {
-                throw new RuntimeException("Test Error");
-            }
+        runOnFxThreadAndWait(() -> {
+            COLLECTION_HELPER.deleteCollection(COLLECTION);
+            deleteWorkDirectory(RESOLVER);
         });
     }
 

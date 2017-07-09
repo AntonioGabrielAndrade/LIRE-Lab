@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import br.com.antoniogabriel.lirelab.lire.QueryRunner;
+import br.com.antoniogabriel.lirelab.lire.QueryRunnerFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,7 @@ import java.util.List;
 
 import static java.util.Collections.EMPTY_LIST;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -18,18 +21,24 @@ public class CollectionServiceTest {
 
     public static final String ANY_NAME = "";
     public static final String ANY_PATH = "";
-    private CollectionService service;
 
     @Mock private CollectionRepository collectionRepository;
     @Mock private CollectionsMonitor collectionsMonitor;
+    @Mock private QueryRunnerFactory queryRunnerFactory;
+    @Mock private PathResolver resolver;
+    @Mock private QueryRunner queryRunner;
 
     private Runnable SOME_CALLBACK = () -> {};
 
+    private CollectionService service;
+
     @Before
     public void  setUp() throws Exception {
-        service = new CollectionService(new PathResolver(),
+        resolver = new PathResolver();
+        service = new CollectionService(resolver,
                                         collectionRepository,
-                                        collectionsMonitor);
+                                        collectionsMonitor,
+                                        queryRunnerFactory);
     }
 
     @Test
@@ -61,5 +70,19 @@ public class CollectionServiceTest {
         service.addCollectionsChangeListener(SOME_CALLBACK);
 
         verify(collectionsMonitor).addListener(SOME_CALLBACK);
+    }
+
+    @Test
+    public void shouldRunQuery() throws Exception {
+        Collection collection = new Collection();
+        Feature feature = Feature.CEDD;
+        Image queryImage = new Image("", "");
+
+        given(queryRunnerFactory.createQueryRunner(resolver))
+                .willReturn(queryRunner);
+
+        service.runQuery(collection, feature, queryImage);
+
+        verify(queryRunner).runQuery(collection, feature, queryImage);
     }
 }

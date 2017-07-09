@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree?>
+<?import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
 
 <SplitPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="br.com.antoniogabriel.lirelab.app.HomeViewController"
+           fx:controller="br.com.antoniogabriel.lirelab.app.HomeController"
            orientation="HORIZONTAL"
            dividerPositions="0.0"
            prefHeight="900.0" prefWidth="1200.0">
@@ -16,10 +16,9 @@
 
         <BorderPane>
             <center>
-                <TitledPane text="Collections" collapsible="false">
+                <TitledPane text="Collections" collapsible="false" prefHeight="Infinity">
                     <CollectionTree visible="false"
                                     id="collection-tree"
-                                    minHeight="1000"
                                     fx:id="collectionTree"/>
                 </TitledPane>
             </center>

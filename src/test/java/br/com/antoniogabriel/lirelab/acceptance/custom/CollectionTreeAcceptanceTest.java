@@ -1,8 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.acceptance.ListCollectionViewObject;
 import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.custom.collectiontree.CollectionTree;
+import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.After;
@@ -11,8 +10,8 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
-import static br.com.antoniogabriel.lirelab.test.TestUtils.collection;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.collection;
 import static java.util.Arrays.asList;
 
 public class CollectionTreeAcceptanceTest extends ApplicationTest {
@@ -22,7 +21,7 @@ public class CollectionTreeAcceptanceTest extends ApplicationTest {
     private static final Collection COLLECTION_3 = collection("Collection3", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION_4 = collection("Collection4", TEST_IMAGES, CEDD);
 
-    private ListCollectionViewObject view = new ListCollectionViewObject();
+    private CollectionTreeViewObject view = new CollectionTreeViewObject();
 
     @After
     public void tearDown() throws Exception {
@@ -50,15 +49,15 @@ public class CollectionTreeAcceptanceTest extends ApplicationTest {
     public void shouldListImagesInCollection() throws Exception {
         view.expandCollection(COLLECTION_1);
 
-        view.checkImageIsListed("14474347006_99aa0fd981_k.jpg");
-        view.checkImageIsListed("16903390174_1d670a5849_h.jpg");
-        view.checkImageIsListed("17099294578_0ba4068bad_k.jpg");
-        view.checkImageIsListed("17338370170_1e620bfb18_h.jpg");
-        view.checkImageIsListed("17525978165_86dc26e8cb_h.jpg");
-        view.checkImageIsListed("19774866363_757555901c_k.jpg");
-        view.checkImageIsListed("25601366680_b57441bb52_k.jpg");
-        view.checkImageIsListed("25601374660_78e6a9bba8_k.jpg");
-        view.checkImageIsListed("26487616294_b22b87133e_k.jpg");
-        view.checkImageIsListed("26489383923_98d419eb0d_k.jpg");
+        view.waitUntilImageIsListed("14474347006_99aa0fd981_k.jpg");
+        view.waitUntilImageIsListed("16903390174_1d670a5849_h.jpg");
+        view.waitUntilImageIsListed("17099294578_0ba4068bad_k.jpg");
+        view.waitUntilImageIsListed("17338370170_1e620bfb18_h.jpg");
+        view.waitUntilImageIsListed("17525978165_86dc26e8cb_h.jpg");
+        view.waitUntilImageIsListed("19774866363_757555901c_k.jpg");
+        view.waitUntilImageIsListed("25601366680_b57441bb52_k.jpg");
+        view.waitUntilImageIsListed("25601374660_78e6a9bba8_k.jpg");
+        view.waitUntilImageIsListed("26487616294_b22b87133e_k.jpg");
+        view.waitUntilImageIsListed("26489383923_98d419eb0d_k.jpg");
     }
 }

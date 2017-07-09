@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.acceptance.ProgressDialogViewObject;
-import br.com.antoniogabriel.lirelab.custom.progressdialog.ProgressDialog;
+import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import org.junit.After;
@@ -18,8 +17,7 @@ public class ProgressDialogAcceptanceTest extends ApplicationTest {
     private ProgressDialogViewObject view = new ProgressDialogViewObject();
 
     @Override
-    public void start(Stage stage) throws Exception {
-    }
+    public void start(Stage stage) throws Exception {}
 
     @Before
     public void setup() {
@@ -33,9 +31,7 @@ public class ProgressDialogAcceptanceTest extends ApplicationTest {
 
     @After
     public void tearDown() throws Exception {
-        interact(() -> {
-           dialog.close();
-        });
+        interact(() -> dialog.close());
     }
 
     @Test

@@ -10,7 +10,7 @@ public class XMLCreator {
     private final String imagesDir;
     private final List<Feature> features;
     private CollectionXMLDAO xmlDAO;
-    private XMLCreatorCallback callback;
+    private XMLCreatorCallback callback = new DumbXMLCreatorCallback();
 
     public XMLCreator(String collectionName,
                       String imagesDir,
@@ -38,5 +38,13 @@ public class XMLCreator {
 
     public void setCallback(XMLCreatorCallback callback) {
         this.callback = callback;
+    }
+
+    private class DumbXMLCreatorCallback implements XMLCreatorCallback {
+        @Override
+        public void beforeCreateXML() {}
+
+        @Override
+        public void afterCreateXML() {}
     }
 }

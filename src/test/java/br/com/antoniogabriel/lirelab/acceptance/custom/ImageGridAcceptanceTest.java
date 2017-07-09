@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.custom.imagegrid.ImageGrid;
+import br.com.antoniogabriel.lirelab.custom.image_grid.ImageGrid;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.semanticmetadata.lire.utils.FileUtils;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
@@ -28,7 +28,7 @@ public class ImageGridAcceptanceTest extends ApplicationTest {
         paths = getPaths(TEST_IMAGES);
 
         imageGrid.setImagesHeight(100);
-        imageGrid.setImages(paths);
+        imageGrid.setPaths(paths);
 
         Scene scene = new Scene(imageGrid, 900, 600);
         stage.setScene(scene);

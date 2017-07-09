@@ -3,8 +3,8 @@ package br.com.antoniogabriel.lirelab.acceptance;
 import br.com.antoniogabriel.lirelab.collection.*;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
+import br.com.antoniogabriel.lirelab.util.LireLabUtils;
 import org.apache.commons.io.FileUtils;
-import org.jetbrains.annotations.Nullable;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
@@ -35,18 +35,22 @@ public class CollectionHelper {
         assertTrue(xmlFileExist(collection));
     }
 
-    public void deleteCollection(Collection collection) throws IOException {
+    public void deleteCollection(Collection collection) {
         deleteCollection(collection.getName());
     }
 
-    public void deleteCollection(String collectionName) throws IOException {
-        File directory = new File(resolver.getCollectionPath(collectionName));
-        File renamed = new File(System.getProperty("java.io.tmpdir") + "/" + collectionName);
+    public void deleteCollection(String collectionName) {
+        try {
+            File directory = new File(resolver.getCollectionPath(collectionName));
+            File renamed = new File(System.getProperty("java.io.tmpdir") + "/" + collectionName);
 
-        if(!directory.exists()) return;
+            if(!directory.exists()) return;
 
-        FileUtils.moveDirectory(directory, renamed);
-        FileUtils.deleteDirectory(renamed);
+            FileUtils.moveDirectory(directory, renamed);
+            FileUtils.deleteDirectory(renamed);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void createStubCollection(Collection collection) throws IOException, JAXBException {
@@ -63,9 +67,9 @@ public class CollectionHelper {
 
         List<Feature> collectionFeatures = getFeatures(collection);
 
-        CreateCollectionTask task =
+        Runnable task =
                 new CreateCollectionTaskFactory()
-                        .createTask(
+                        .createTaskAsRunnable(
                                 collection.getName(),
                                 collectionFeatures,
                                 collection.getImagesDirectory(),
@@ -78,7 +82,8 @@ public class CollectionHelper {
     }
 
     public Collection readCollection(String name) {
-        return new CollectionRepository(resolver, new CollectionUtils(resolver)).getCollection(name);
+        CollectionUtils collectionUtils = new CollectionUtils(resolver);
+        return new CollectionRepository(new LireLabUtils(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils()), new CollectionAssembler(resolver, collectionUtils)).getCollection(name);
     }
 
     private List<Feature> getFeatures(Collection collection) {
@@ -111,17 +116,14 @@ public class CollectionHelper {
         return Files.exists(Paths.get(path)) && Files.isRegularFile(Paths.get(path));
     }
 
-    @Nullable
     private Path createRootFolder(Collection collection) throws IOException {
         return Files.createDirectories(Paths.get(resolver.getCollectionPath(collection.getName())));
     }
 
-    @Nullable
     private Path createThumbnailsFolder(Collection collection) throws IOException {
         return Files.createDirectories(Paths.get(resolver.getThumbnailsDirectoryPath(collection.getName())));
     }
 
-    @Nullable
     private Path createIndexFolder(Collection collection) throws IOException {
         return Files.createDirectories(Paths.get(resolver.getIndexDirectoryPath(collection.getName())));
     }

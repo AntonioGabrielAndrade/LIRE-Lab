@@ -5,8 +5,8 @@ import java.util.List;
 
 public class ThumbnailsCreator {
 
+    private ThumbnailsCreatorCallback callback = new DumbThumbnailsCreatorCallback();
     private ThumbnailBuilder builder;
-    private ThumbnailsCreatorCallback callback;
     private String thumbnailsDir;
     private String imagesDir;
 
@@ -32,5 +32,16 @@ public class ThumbnailsCreator {
 
     public void setCallback(ThumbnailsCreatorCallback callback) {
         this.callback = callback;
+    }
+
+    private class DumbThumbnailsCreatorCallback implements ThumbnailsCreatorCallback {
+        @Override
+        public void beforeCreateThumbnail(int currentImage, int totalImages, String imagePath) {}
+
+        @Override
+        public void afterCreateThumbnail(int currentImage, int totalImages, String imagePath) {}
+
+        @Override
+        public void afterCreateAllThumbnails(int totalImages) {}
     }
 }

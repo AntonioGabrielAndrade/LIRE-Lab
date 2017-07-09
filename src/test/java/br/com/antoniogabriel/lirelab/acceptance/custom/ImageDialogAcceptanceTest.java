@@ -1,14 +1,13 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.acceptance.ImageDialogViewObject;
-import br.com.antoniogabriel.lirelab.custom.imagedialog.ImageDialog;
+import br.com.antoniogabriel.lirelab.custom.image_dialog.ImageDialog;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import static br.com.antoniogabriel.lirelab.test.TestPaths.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
 
 public class ImageDialogAcceptanceTest extends ApplicationTest {
 
@@ -16,8 +15,7 @@ public class ImageDialogAcceptanceTest extends ApplicationTest {
     private ImageDialogViewObject view = new ImageDialogViewObject();
 
     @Override
-    public void start(Stage stage) throws Exception {
-    }
+    public void start(Stage stage) throws Exception {}
 
     @Before
     public void setUp() throws Exception {
