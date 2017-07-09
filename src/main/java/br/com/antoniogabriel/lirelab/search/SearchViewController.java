@@ -7,20 +7,23 @@ import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.single_image_grid.ImageChangeListener;
 import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid;
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.IOException;
 
 @Singleton
 public class SearchViewController {
 
     @FXML private SingleImageGrid queryGrid;
     @FXML private PaginatedCollectionGrid collectionGrid;
+    @FXML private Text statusMessage;
+    @FXML private ProgressBar queryProgress;
 
     private CollectionService service;
 
@@ -30,15 +33,27 @@ public class SearchViewController {
     }
 
     public void startSearchSession(Collection collection, Feature feature) {
-        try {
+        queryGrid.clear();
+        collectionGrid.setCollection(collection, new SetImageToGridClickHandler(queryGrid));
+        queryGrid.setOnChange(new ImageChangeListenerImpl(this, collection, feature));
+        setStatusMessage(collection, feature);
+    }
 
-            queryGrid.clear();
-            collectionGrid.setCollection(collection, new SetImageToGridClickHandler(queryGrid));
-            queryGrid.setOnChange(new ImageChangeListenerImpl(collection, feature, service, collectionGrid, queryGrid));
+    public void runQuery(Collection collection, Feature feature, Image queryImage) {
+        RunQueryTask queryTask = new RunQueryTask(service, collection, feature, queryImage);
+        queryProgress.visibleProperty().bind(queryTask.runningProperty());
+        queryTask.valueProperty().addListener((observable, oldValue, newValue) -> {
+            collectionGrid.setCollection(newValue, new SetImageToGridClickHandler(queryGrid));
+        });
+        new Thread(queryTask).start();
+    }
 
-        } catch (IOException e) {
-            throw new LireLabException("Could not show collection", e);
-        }
+    private void setStatusMessage(Collection collection, Feature feature) {
+        String status = "";
+        status += "Collection: " + collection.getName();
+        status += "  ";
+        status += "Feature: " + feature.getFeatureName();
+        statusMessage.setText(status);
     }
 
     static class SetImageToGridClickHandler implements ImageClickHandler {
@@ -59,31 +74,44 @@ public class SearchViewController {
 
         private final Collection collection;
         private final Feature feature;
-        private CollectionService service;
-        private PaginatedCollectionGrid collectionGrid;
-        private SingleImageGrid queryGrid;
+        private SearchViewController controller;
 
-        public ImageChangeListenerImpl(Collection collection,
-                                       Feature feature,
-                                       CollectionService service,
-                                       PaginatedCollectionGrid collectionGrid,
-                                       SingleImageGrid queryGrid) {
+        public ImageChangeListenerImpl(SearchViewController controller,
+                                       Collection collection,
+                                       Feature feature) {
 
+            this.controller = controller;
             this.collection = collection;
             this.feature = feature;
-            this.service = service;
-            this.collectionGrid = collectionGrid;
-            this.queryGrid = queryGrid;
         }
 
         @Override
         public void changed(Image queryImage) {
-            try {
-                collectionGrid.setCollection(service.runQuery(collection, feature, queryImage),
-                                        new SetImageToGridClickHandler(queryGrid));
-            } catch (IOException e) {
-                throw new LireLabException("Could not run query", e);
-            }
+            controller.runQuery(collection, feature, queryImage);
+        }
+    }
+
+    private static class RunQueryTask extends Task<Collection> {
+
+        private final CollectionService service;
+        private final Collection collection;
+        private final Feature feature;
+        private final Image queryImage;
+
+        public RunQueryTask(CollectionService service,
+                            Collection collection,
+                            Feature feature,
+                            Image queryImage) {
+
+            this.service = service;
+            this.collection = collection;
+            this.feature = feature;
+            this.queryImage = queryImage;
+        }
+
+        @Override
+        protected Collection call() throws Exception {
+            return service.runQuery(collection, feature, queryImage);
         }
     }
 }

@@ -48,7 +48,7 @@ public class PaginatedCollectionGrid extends StackPane {
         setCollection(collection, new DisplayImageDialogHandler(new DialogProvider(), new FileUtils()));
     }
 
-    public void setCollection(Collection collection, ImageClickHandler handler) throws IOException {
+    public void setCollection(Collection collection, ImageClickHandler handler) {
         this.collection = collection;
 
         calcPageCount(collection, pageSize);

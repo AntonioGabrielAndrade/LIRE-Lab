@@ -9,7 +9,9 @@ import javafx.stage.Window;
 import org.testfx.api.FxRobot;
 
 import java.util.Set;
+import java.util.concurrent.TimeoutException;
 
+import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntil;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isDisabled;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
@@ -22,6 +24,10 @@ public class CreateCollectionViewObject extends FxRobot {
     public CreateCollectionViewObject() {
         window = window(CreateCollectionFXML.TITLE);
         targetWindow(window);
+    }
+
+    public void waitUntilWindowIsShowing() throws TimeoutException {
+        waitUntil(() -> window.isShowing());
     }
 
     public void cancel() {

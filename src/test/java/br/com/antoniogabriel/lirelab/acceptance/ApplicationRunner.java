@@ -26,6 +26,8 @@ public class ApplicationRunner {
         AppViewObject appView = new AppViewObject();
         CreateCollectionViewObject createView = appView.createCollection();
 
+
+        createView.waitUntilWindowIsShowing();
         createView
                 .writeName(collectionName)
                 .writeImagesDirectory(imagesDirectory)

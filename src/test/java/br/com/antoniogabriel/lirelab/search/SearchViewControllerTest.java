@@ -2,9 +2,9 @@ package br.com.antoniogabriel.lirelab.search;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid;
+import javafx.embed.swing.JFXPanel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static java.util.Arrays.asList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -20,6 +19,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchViewControllerTest {
+
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     @Mock private PaginatedCollectionGrid collectionGrid;
     @Mock private SingleImageGrid queryGrid;
@@ -44,21 +45,5 @@ public class SearchViewControllerTest {
         controller.startSearchSession(collection, CEDD);
 
         verify(queryGrid).setOnChange(any(SearchViewController.ImageChangeListenerImpl.class));
-    }
-
-    @Test
-    public void shouldRunQueryWhenQueryImageIsSet() throws Exception {
-        Collection collection = new Collection();
-        collection.setImages(asList(new Image("path1", "path1"),
-                                    new Image("path2", "path2")));
-
-        Image queryImage = new Image("", "");
-
-        SearchViewController.ImageChangeListenerImpl listener =
-                new SearchViewController.ImageChangeListenerImpl(collection, CEDD, service, collectionGrid, queryGrid);
-
-        listener.changed(queryImage);
-
-        verify(service).runQuery(collection, CEDD, queryImage);
     }
 }
