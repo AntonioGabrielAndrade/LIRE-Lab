@@ -26,6 +26,7 @@ public class ProgressDialog extends Dialog<Void> {
         this.task = task;
         setupProgressBar();
         setupMessageText();
+        setupHeaderText();
         setupOkButton();
         setupWindowBehavior();
         setupExceptionHandling();
@@ -49,6 +50,10 @@ public class ProgressDialog extends Dialog<Void> {
         message = new Text();
         message.setId("message");
         bindProgressMessageTo(taskMessage());
+    }
+
+    private void setupHeaderText() {
+        bindHeaderMessageTo(taskTitle());
     }
 
     private void setupOkButton() {
@@ -156,6 +161,10 @@ public class ProgressDialog extends Dialog<Void> {
         progressbarMessage().bind(property);
     }
 
+    private void bindHeaderMessageTo(ReadOnlyStringProperty property) {
+        dialogHeader().bind(property);
+    }
+
     private DoubleProperty barProgress() {
         return progressBar.progressProperty();
     }
@@ -168,8 +177,16 @@ public class ProgressDialog extends Dialog<Void> {
         return message.textProperty();
     }
 
+    private StringProperty dialogHeader() {
+        return this.headerTextProperty();
+    }
+
     private ReadOnlyStringProperty taskMessage() {
         return this.task.messageProperty();
+    }
+
+    private ReadOnlyStringProperty taskTitle() {
+        return this.task.titleProperty();
     }
 
     private BooleanBinding taskNotCompleted() {

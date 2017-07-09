@@ -12,6 +12,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     public CreateCollectionTask(CreateCollectionRunnable runnable) {
         this.runnable = runnable;
 
+        updateTitle("Create Collection...");
         runnable.setIndexCreatorCallback(this);
         runnable.setThumbnailsCreatorCallback(this);
         runnable.setXmlCreatorCallback(this);
@@ -25,6 +26,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
 
     @Override
     public void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {
+        updateTitle("Step 1: Create index");
         updateMessage("Indexing " + Paths.get(imageFilePath).getFileName().toString());
     }
 
@@ -40,6 +42,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
 
     @Override
     public void beforeCreateThumbnail(int currentImage, int totalImages, String imagePath) {
+        updateTitle("Step 2: Create thumbnails");
         updateMessage("Creating thumbnail for  " + Paths.get(imagePath).getFileName().toString());
     }
 
@@ -61,7 +64,8 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
 
     @Override
     public void afterCreateXML() {
-        updateMessage("Collection Created");
+        updateTitle("Completed");
+        updateMessage("Collection Created!");
         updateProgress(1,1);
     }
 }
