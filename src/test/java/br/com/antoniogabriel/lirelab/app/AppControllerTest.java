@@ -50,6 +50,7 @@ public class AppControllerTest {
         collection.setFeatures(asList(CEDD));
 
         given(dialogProvider.getWindowFrom(event)).willReturn(window);
+        given(dialogProvider.getWindowFrom(mainArea)).willReturn(window);
         given(homeController.getSelectedCollection()).willReturn(collection);
     }
 

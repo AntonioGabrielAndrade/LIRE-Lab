@@ -44,7 +44,7 @@ public class AppController {
 
     @FXML
     public void openCreateCollectionDialog(ActionEvent event) throws IOException {
-        createCollectionFXML.loadOwnedBy(dialogProvider.getWindowFrom(event));
+        createCollectionFXML.loadOwnedBy(dialogProvider.getWindowFrom(mainArea));
     }
 
     @FXML
