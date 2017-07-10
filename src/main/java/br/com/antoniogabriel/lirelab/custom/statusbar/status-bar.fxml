@@ -5,10 +5,15 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import java.net.URL?>
 
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          type="javafx.scene.layout.BorderPane">
+
+    <stylesheets>
+        <URL value="@status-bar.css" />
+    </stylesheets>
 
     <padding>
         <Insets top="2" bottom="2" right="2" left="2"/>
@@ -24,7 +29,6 @@
         <ProgressBar fx:id="statusProgress"
                      id="status-progress"
                      visible="false"
-                     maxHeight="3"
                      prefWidth="200"/>
     </right>
 
