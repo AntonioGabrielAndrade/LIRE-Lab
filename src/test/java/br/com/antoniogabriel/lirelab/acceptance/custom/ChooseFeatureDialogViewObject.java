@@ -11,7 +11,7 @@ public class ChooseFeatureDialogViewObject extends FxRobot {
 
     public void selectFeature(Feature feature) throws TimeoutException {
         openPopup();
-        clickOn(feature.name()).interrupt();
+        clickOn(feature.getFeatureName()).interrupt();
     }
 
     private void openPopup() throws TimeoutException {
@@ -38,7 +38,7 @@ public class ChooseFeatureDialogViewObject extends FxRobot {
     public void checkOptionsAreAvailable(Feature... features) throws TimeoutException {
         openPopup();
         for (Feature feature : features) {
-            waitUntilIsVisible(feature.name());
+            waitUntilIsVisible(feature.getFeatureName());
         }
     }
 
