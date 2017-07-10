@@ -31,6 +31,10 @@ public class DialogProvider {
         return ((Node) event.getSource()).getScene().getWindow();
     }
 
+    public Window getWindowFrom(Node node) {
+        return node.getScene().getWindow();
+    }
+
     public ProgressDialog getProgressDialog(Task<Void> task, Window owner) {
         ProgressDialog dialog = new ProgressDialog(task);
         dialog.initOwner(owner);
