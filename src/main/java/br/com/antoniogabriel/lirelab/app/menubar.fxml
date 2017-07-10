@@ -6,10 +6,13 @@
 
 <MenuBar id="menu-bar"
          xmlns="http://javafx.com/javafx"
-         xmlns:fx="http://javafx.com/fxml">
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="br.com.antoniogabriel.lirelab.app.AppController">
 
     <Menu id="file-menu" text="File">
-        <MenuItem id="create-collection" text="Create Collection"/>
+        <MenuItem id="create-collection"
+                  text="Create Collection"
+                  onAction="#openCreateCollectionDialog"/>
     </Menu>
 
     <Menu id="help-menu" text="Help">
