@@ -61,10 +61,6 @@ public class CollectionHelper {
     }
 
     public void createRealCollection(Collection collection) {
-        System.out.println();
-        System.out.println("Creating collection: " + collection.getName());
-        System.out.println();
-
         List<Feature> collectionFeatures = getFeatures(collection);
 
         Runnable task =
