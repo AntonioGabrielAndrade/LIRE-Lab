@@ -11,6 +11,7 @@ import org.apache.lucene.store.FSDirectory;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -41,7 +42,10 @@ public class CollectionAssembler {
         List<Image> results = new ArrayList<>();
 
         try {
-            IndexReader ir = DirectoryReader.open(FSDirectory.open(indexPath(collection)));
+            Path path = indexPath(collection);
+            if(!Files.exists(path)) return results;
+
+            IndexReader ir = DirectoryReader.open(FSDirectory.open(path));
 
             int num = ir.numDocs();
             for ( int i = 0; i < num; i++)
