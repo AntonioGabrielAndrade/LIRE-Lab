@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.custom.NewChooseFeatureDialog;
+import br.com.antoniogabriel.lirelab.custom.ChooseFeatureDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import com.sun.glass.ui.monocle.MonoclePlatformFactory;
 import javafx.application.Platform;
@@ -18,10 +18,10 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class NewChooseFeatureDialogAcceptanceTest extends ApplicationTest {
+public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
 
-    private NewChooseFeatureDialog dialog;
-    private NewChooseFeatureDialogViewObject view = new NewChooseFeatureDialogViewObject();
+    private ChooseFeatureDialog dialog;
+    private ChooseFeatureDialogViewObject view = new ChooseFeatureDialogViewObject();
 
     private List<Feature> features;
     private FeatureHolder featureHolder = new FeatureHolder();
@@ -34,7 +34,7 @@ public class NewChooseFeatureDialogAcceptanceTest extends ApplicationTest {
         Class<MonoclePlatformFactory> clazz = MonoclePlatformFactory.class;
         interact(() -> {
             features = asList(CEDD, TAMURA, FCTH, COLOR_HISTOGRAM);
-            dialog = new NewChooseFeatureDialog(features);
+            dialog = new ChooseFeatureDialog(features);
         });
 
         Platform.runLater(() -> featureHolder.setFeature(dialog.showAndGetFeature()));

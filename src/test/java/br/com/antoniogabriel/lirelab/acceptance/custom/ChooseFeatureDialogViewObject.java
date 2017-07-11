@@ -7,7 +7,7 @@ import java.util.concurrent.TimeoutException;
 
 import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
 
-public class NewChooseFeatureDialogViewObject extends FxRobot {
+public class ChooseFeatureDialogViewObject extends FxRobot {
 
     public void selectFeature(Feature feature) throws TimeoutException {
         clickOn(feature.getFeatureName()).interrupt();

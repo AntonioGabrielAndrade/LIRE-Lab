@@ -7,7 +7,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import javafx.util.Callback;
@@ -22,7 +21,7 @@ import static br.com.antoniogabriel.lirelab.lire.Feature.COLOR_HISTOGRAM;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
 import static java.util.Arrays.asList;
 
-public class NewChooseFeatureDialog extends Dialog<Feature> {
+public class ChooseFeatureDialog extends Dialog<Feature> {
 
     private List<Feature> features;
 
@@ -32,7 +31,7 @@ public class NewChooseFeatureDialog extends Dialog<Feature> {
 
     private Map<String, Feature> nameToFeature = new HashMap<>();
 
-    public NewChooseFeatureDialog(List<Feature> features) {
+    public ChooseFeatureDialog(List<Feature> features) {
         this.features = features;
         this.selectedFeature = features.get(0);
 
@@ -103,7 +102,7 @@ public class NewChooseFeatureDialog extends Dialog<Feature> {
     public static void main(String[] args) {
         new JFXPanel();
         Platform.runLater(() -> {
-            NewChooseFeatureDialog dialog = new NewChooseFeatureDialog(asList(CEDD, TAMURA, COLOR_HISTOGRAM));
+            ChooseFeatureDialog dialog = new ChooseFeatureDialog(asList(CEDD, TAMURA, COLOR_HISTOGRAM));
             System.out.println(dialog.showAndGetFeature());
         });
     }
