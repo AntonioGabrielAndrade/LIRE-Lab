@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.custom.image_grid.ImageGrid;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.semanticmetadata.lire.utils.FileUtils;
@@ -19,6 +20,8 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class ImageGridAcceptanceTest extends ApplicationTest {
+
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     private ImageGrid imageGrid = new ImageGrid();
     private List<String> paths = new ArrayList<>();
