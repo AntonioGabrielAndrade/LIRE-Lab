@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.IndexCreator;
+import javafx.embed.swing.JFXPanel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateCollectionTaskTest {
+
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     private CreateCollectionTask task;
 

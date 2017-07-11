@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.custom.image_grid;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -18,6 +19,8 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ImageGridTest {
+
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     private static final String INEXISTENT_PATH = "INEXISTENT_PATH";
     private static final String PATH1 = "PATH1";

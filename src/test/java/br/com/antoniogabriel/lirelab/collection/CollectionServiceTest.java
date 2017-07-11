@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.collection;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.lire.QueryRunner;
 import br.com.antoniogabriel.lirelab.lire.QueryRunnerFactory;
+import javafx.embed.swing.JFXPanel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionServiceTest {
+
+    private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     public static final String ANY_NAME = "";
     public static final String ANY_PATH = "";
