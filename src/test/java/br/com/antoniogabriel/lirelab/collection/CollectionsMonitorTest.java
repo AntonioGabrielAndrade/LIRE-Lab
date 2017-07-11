@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.runOnFxThreadAndWait;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
@@ -64,10 +63,8 @@ public class CollectionsMonitorTest {
 
     @After
     public void tearDown() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            helper.deleteCollection(COLLECTION_1);
-            helper.deleteCollection(COLLECTION_2);
-        });
+        helper.deleteCollection(COLLECTION_1);
+        helper.deleteCollection(COLLECTION_2);
     }
 
     @Test
