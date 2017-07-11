@@ -79,6 +79,11 @@ public class CollectionsMonitor {
                         if (OVERFLOW == kind) {
                             continue; //loop
                         } else if (ENTRY_DELETE == kind || ENTRY_MODIFY == kind) {
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             CollectionsMonitor.this.executeListeners();
                         }
                     }
