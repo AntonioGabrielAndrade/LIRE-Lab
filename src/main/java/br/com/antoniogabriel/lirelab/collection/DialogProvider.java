@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.custom.ChooseFeatureDialog;
+import br.com.antoniogabriel.lirelab.custom.NewChooseFeatureDialog;
 import br.com.antoniogabriel.lirelab.custom.image_dialog.ImageDialog;
 import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
@@ -49,7 +49,7 @@ public class DialogProvider {
 
     public Feature chooseFeatureFrom(Collection collection, Window owner) {
         List<Feature> features = collection.getFeatures();
-        ChooseFeatureDialog dialog = new ChooseFeatureDialog(features);
+        NewChooseFeatureDialog dialog = new NewChooseFeatureDialog(features);
         dialog.initOwner(owner);
         return dialog.showAndGetFeature();
     }
