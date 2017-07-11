@@ -16,7 +16,7 @@ public enum Feature {
     EDGE_HISTOGRAM(EdgeHistogram.class, "Edge Histogram"),
     FUZZY_COLOR_HISTOGRAM(FuzzyColorHistogram.class, "Fuxxy Color Histogram"),
     FUZZY_OPPONENT_HISTOGRAM(FuzzyOpponentHistogram.class, "Fuzzy Opponent Histogram"),
-    JCD(JCD.class, "Tamura"),
+    JCD(JCD.class, "JCD"),
     JPEG_COEFFICIENT_HISTOGRAM(JpegCoefficientHistogram.class, "Jpeg Coefficient Histogram"),
     LOCAL_BINARY_PATTERNS(LocalBinaryPatterns.class, "Local Binary Patterns"),
     LUMINANCE_LAYOUT(LuminanceLayout.class, "Luminance Layout"),
