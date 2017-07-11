@@ -24,6 +24,64 @@
         </repository>
     </repositories>
 
+    <profiles>
+
+        <profile>
+            <id>testfx.headless</id>
+            <activation>
+                <property>
+                    <name>headless</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.20</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <testfx.robot>glass</testfx.robot>
+                                <testfx.headless>true</testfx.headless>
+                                <glass.platform>Monocle</glass.platform>
+                                <monocle.platform>Headless</monocle.platform>
+                                <prism.order>sw</prism.order>
+                                <prism.text>t2k</prism.text>
+                                <java.awt.headless>true</java.awt.headless>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>testfx.no.headless</id>
+            <activation>
+                <property>
+                    <name>headless</name>
+                    <value>false</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.20</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <testfx.headless>false</testfx.headless>
+                                <java.awt.headless>false</java.awt.headless>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -179,25 +237,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
-
                     <reuseForks>false</reuseForks>
-
                     <additionalClasspathElements>
                         <additionalClasspathElement>${java.home}/lib/ext/jfxrt.jar</additionalClasspathElement>
                     </additionalClasspathElements>
-
-                    <argLine>-Dheadless=true</argLine>
-
-                    <systemPropertyVariables>
-                        <testfx.robot>glass</testfx.robot>
-                        <testfx.headless>true</testfx.headless>
-                        <glass.platform>Monocle</glass.platform>
-                        <monocle.platform>Headless</monocle.platform>
-                        <prism.order>sw</prism.order>
-                        <prism.text>t2k</prism.text>
-                        <java.awt.headless>true</java.awt.headless>
-                    </systemPropertyVariables>
-
                 </configuration>
             </plugin>
 
@@ -211,7 +254,9 @@
                     <version>1.0_b04</version>
                     <packaging>jar</packaging>
                     <file>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04.jar</file>
-                    <sources>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04-sources.jar</sources>
+                    <sources>
+                        src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04-sources.jar
+                    </sources>
                 </configuration>
                 <executions>
                     <execution>
