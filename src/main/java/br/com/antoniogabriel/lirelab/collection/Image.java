@@ -61,4 +61,8 @@ public class Image {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return getImageName();
+    }
 }
