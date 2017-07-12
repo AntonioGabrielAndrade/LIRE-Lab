@@ -16,7 +16,9 @@
     </Menu>
 
     <Menu id="help-menu" text="Help">
-        <MenuItem id="about" text="About"/>
+        <MenuItem id="about"
+                  text="About"
+                  onAction="#openAboutDialog"/>
     </Menu>
 
 </MenuBar>
