@@ -29,7 +29,7 @@
 
     <Separator/>
 
-    <Button id="toolbar-about">
+    <Button id="toolbar-about" onAction="#openAboutDialog">
         <tooltip>
             <Tooltip text="About"/>
         </tooltip>

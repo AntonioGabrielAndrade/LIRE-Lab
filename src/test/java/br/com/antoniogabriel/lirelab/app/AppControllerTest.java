@@ -27,6 +27,7 @@ public class AppControllerTest {
 
     @Mock private Window window;
     @Mock private CreateCollectionFXML createCollectionFXML;
+    @Mock private AboutFXML aboutFXML;
     @Mock private ActionEvent event;
     @Mock private DialogProvider dialogProvider;
     @Mock private BorderPane mainArea;
@@ -38,6 +39,7 @@ public class AppControllerTest {
 
     @InjectMocks private AppController controller =
             new AppController(createCollectionFXML,
+                                    aboutFXML,
                                     dialogProvider,
                                     searchViewController,
                                     homeController);
@@ -93,5 +95,12 @@ public class AppControllerTest {
 
         verify(searchToolBar).setVisible(false);
         verify(mainArea).setCenter(homeView);
+    }
+
+    @Test
+    public void shouldShowAboutDialog() throws Exception {
+        controller.openAboutDialog(event);
+
+        verify(aboutFXML).loadOwnedBy(window);
     }
 }

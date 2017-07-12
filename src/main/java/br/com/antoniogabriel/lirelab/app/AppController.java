@@ -26,17 +26,19 @@ public class AppController {
     @FXML private HBox searchToolBar;
 
     private CreateCollectionFXML createCollectionFXML;
+    private AboutFXML aboutFXML;
     private DialogProvider dialogProvider;
     private HomeController homeController;
     private SearchViewController searchViewController;
 
     @Inject
     public AppController(CreateCollectionFXML createCollectionFXML,
-                         DialogProvider dialogProvider,
+                         AboutFXML aboutFXML, DialogProvider dialogProvider,
                          SearchViewController searchViewController,
                          HomeController homeController) {
 
         this.createCollectionFXML = createCollectionFXML;
+        this.aboutFXML = aboutFXML;
         this.dialogProvider = dialogProvider;
         this.searchViewController = searchViewController;
         this.homeController = homeController;
@@ -61,6 +63,11 @@ public class AppController {
     public void showHomeView(ActionEvent event) {
         searchToolBar.setVisible(false);
         mainArea.setCenter(homeView);
+    }
+
+    @FXML
+    public void openAboutDialog(ActionEvent event) {
+        aboutFXML.loadOwnedBy(dialogProvider.getWindowFrom(mainArea));
     }
 
     private Feature chooseFeature(Collection collection, Window window) {

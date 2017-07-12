@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
+            id="about-root"
+            prefHeight="300.0" prefWidth="500.0">
+
+    <center>
+        <StackPane id="splash-image">
+            <ImageView fitWidth="500" preserveRatio="true">
+                <Image url="@../preloader/splash-screen.jpg"/>
+            </ImageView>
+        </StackPane>
+    </center>
+
+    <bottom>
+        <StackPane id="about-info">
+            <padding>
+                <Insets top="10" bottom="10" right="10" left="10"/>
+            </padding>
+            <TextArea editable="false"
+                      prefHeight="20"
+                      text="LIRE-Lab created by Antonio Gabriel"/>
+        </StackPane>
+    </bottom>
+
+</BorderPane>

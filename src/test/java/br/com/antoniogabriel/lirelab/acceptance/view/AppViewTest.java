@@ -40,4 +40,10 @@ public class AppViewTest extends FXMLTest<AppFXML> {
         view.checkToolBar();
         view.checkWelcomeView();
     }
+
+    @Test
+    public void shouldShowAboutInformation() throws Exception {
+        view.openAboutDialog();
+        view.checkAboutDialog();
+    }
 }

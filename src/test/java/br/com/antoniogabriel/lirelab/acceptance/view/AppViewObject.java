@@ -7,10 +7,13 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class AppViewObject extends FxRobot {
+
+    private static final String ABOUT_ROOT = "#about-root";
 
     private MenuViewObject menuView = new MenuViewObject();
     private ToolBarViewObject toolBarView = new ToolBarViewObject();
@@ -52,5 +55,15 @@ public class AppViewObject extends FxRobot {
     public SearchViewObject search() {
         clickOn("#toolbar-search-collection");
         return new SearchViewObject();
+    }
+
+    public AppViewObject openAboutDialog() {
+        clickOn("#toolbar-about");
+        return this;
+    }
+
+    public void checkAboutDialog() throws TimeoutException {
+        waitUntilIsVisible("#splash-image", ABOUT_ROOT);
+        waitUntilIsVisible("#about-info", ABOUT_ROOT);
     }
 }
