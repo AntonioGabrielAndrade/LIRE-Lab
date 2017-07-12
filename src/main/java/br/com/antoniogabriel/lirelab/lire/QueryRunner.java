@@ -7,6 +7,7 @@ import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class QueryRunner {
@@ -31,7 +32,7 @@ public class QueryRunner {
         LireIndexSearcher searcher = createIndexSearcher(callback);
         searcher.search(queryPath, indexDir, globalFeature, maxHits);
 
-        return callback.getImages();
+        return Collections.unmodifiableList(callback.getImages());
     }
 
     protected LireIndexSearcher createIndexSearcher(ImagesSearchedCallback callback) {
