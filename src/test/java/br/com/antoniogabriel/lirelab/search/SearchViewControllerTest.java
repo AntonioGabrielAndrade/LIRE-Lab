@@ -29,7 +29,7 @@ public class SearchViewControllerTest {
     @Mock private SingleImageGrid queryGrid;
     @Mock private CollectionService service;
     @Mock private StatusBar statusBar;
-    @Mock private SearchViewController.RunQueryTask queryTask;
+    @Mock private RunQueryTask queryTask;
 
     @InjectMocks private SearchViewController controller = new TestableSearchViewController();
 
@@ -40,7 +40,7 @@ public class SearchViewControllerTest {
         controller.startSearchSession(collection, CEDD);
 
         verify(collectionGrid).setCollection(eq(collection),
-                any(SearchViewController.SetImageToGridClickHandler.class));
+                any(SetImageToGridClickHandler.class));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class SearchViewControllerTest {
 
         controller.startSearchSession(collection, CEDD);
 
-        verify(queryGrid).setOnChange(any(SearchViewController.ImageChangeListenerImpl.class));
+        verify(queryGrid).setOnChange(any(ImageChangeListenerImpl.class));
     }
 
     private class TestableSearchViewController extends SearchViewController {
@@ -76,7 +76,7 @@ public class SearchViewControllerTest {
         }
 
         @Override
-        protected SearchViewController.RunQueryTask createQueryTask(Collection collection, Feature feature, Image queryImage) {
+        protected RunQueryTask createQueryTask(Collection collection, Feature feature, Image queryImage) {
             return queryTask;
         }
     }
