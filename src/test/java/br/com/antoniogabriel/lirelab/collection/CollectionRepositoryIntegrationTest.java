@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CollectionRepositoryTest {
+public class CollectionRepositoryIntegrationTest {
 
     private static final Collection COLLECTION1 = collection("Collection1", TEST_IMAGES, CEDD);
     private static final Collection COLLECTION2 = collection("Collection2", TEST_IMAGES, CEDD);
