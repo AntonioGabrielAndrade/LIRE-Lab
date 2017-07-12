@@ -44,6 +44,10 @@ public class FeatureTable extends TableView<ViewableFeature> {
         }
     }
 
+    public void setFeatures(Feature... features) {
+        setItems(featureUtils.toViewable(features));
+    }
+
     public BooleanBinding noFeatureSelected() {
         return featureUtils.noFeatureIsSelectedIn(getItems());
     }
