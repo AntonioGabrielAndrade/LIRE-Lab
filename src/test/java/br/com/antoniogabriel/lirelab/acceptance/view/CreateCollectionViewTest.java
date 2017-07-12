@@ -12,8 +12,8 @@ import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
 public class CreateCollectionViewTest extends FXMLTest<CreateCollectionFXML> {
 
     private static final String EMPTY = "";
-    private static final String ANY_NAME = "Any Name";
-    private static final String ANY_PATH = "/any/dir/path";
+    private static final String ANY_NAME = "Some Name";
+    private static final String ANY_PATH = "/some/directory/with/images";
     private static final Feature[] ANY_FEATURES = {CEDD, TAMURA};
 
     private CreateCollectionViewObject view;
