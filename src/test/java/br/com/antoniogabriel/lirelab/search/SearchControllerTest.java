@@ -66,7 +66,7 @@ public class SearchControllerTest {
 
         controller.startSearchSession(collection, CEDD);
 
-        verify(queryGrid).setOnChange(any(ImageChangeListenerImpl.class));
+        verify(queryGrid).setOnChange(any(QueryChangeListener.class));
     }
 
     private class TestableSearchController extends SearchController {

@@ -29,7 +29,7 @@ public class SearchController {
     public void startSearchSession(Collection collection, Feature feature) {
         queryGrid.clear();
         outputGrid.setCollection(collection, new SetImageToGridClickHandler(queryGrid));
-        queryGrid.setOnChange(new ImageChangeListenerImpl(this, collection, feature));
+        queryGrid.setOnChange(new QueryChangeListener(this, collection, feature));
         setStatusMessage(collection, feature);
     }
 

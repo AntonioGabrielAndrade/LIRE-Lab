@@ -5,15 +5,15 @@ import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.single_image_grid.ImageChangeListener;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 
-class ImageChangeListenerImpl implements ImageChangeListener {
+class QueryChangeListener implements ImageChangeListener {
 
     private final Collection collection;
     private final Feature feature;
     private SearchController controller;
 
-    public ImageChangeListenerImpl(SearchController controller,
-                                   Collection collection,
-                                   Feature feature) {
+    public QueryChangeListener(SearchController controller,
+                               Collection collection,
+                               Feature feature) {
 
         this.controller = controller;
         this.collection = collection;
