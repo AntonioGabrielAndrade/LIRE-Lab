@@ -1,0 +1,21 @@
+#status-progress {
+    -fx-indeterminate-bar-length: 300;
+    -fx-indeterminate-bar-escape: false;
+}
+
+#status-progress > .track{
+    -fx-border-color: darkgray;
+}
+
+#status-progress > .bar {
+    -fx-background-color: linear-gradient(
+        from 0px .175em to .175em 0px,
+        repeat,
+        -fx-accent 0%,
+        -fx-accent 49%,
+        derive(-fx-accent, 30%) 50%,
+        derive(-fx-accent, 30%) 99%
+    );
+    -fx-background-insets: 1 1 1 1;
+    -fx-padding: 0.50em;
+}

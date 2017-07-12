@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
+            fx:id="mainArea">
+
+    <fx:define>
+        <fx:include fx:id="homeView" source="home.fxml"/>
+    </fx:define>
+
+    <fx:define>
+        <fx:include fx:id="searchView" source="../search/search.fxml"/>
+    </fx:define>
+
+    <center>
+        <fx:reference source="homeView"/>
+    </center>
+
+</BorderPane>

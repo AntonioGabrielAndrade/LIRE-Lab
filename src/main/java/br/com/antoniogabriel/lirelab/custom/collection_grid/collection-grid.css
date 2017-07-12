@@ -1,0 +1,7 @@
+.collection-grid {
+    -fx-background-color: white;
+}
+
+.collection-grid .image-view:hover {
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 10,0,0,1 );
+}

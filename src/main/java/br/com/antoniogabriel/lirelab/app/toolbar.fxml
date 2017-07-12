@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+
+<ToolBar id="toolbar"
+         xmlns="http://javafx.com/javafx"
+         fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
+         xmlns:fx="http://javafx.com/fxml">
+
+    <Button id="toolbar-create-collection" onAction="#openCreateCollectionDialog">
+        <tooltip>
+            <Tooltip text="Create Collection"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="actions:folder-new"/>
+        </graphic>
+    </Button>
+
+    <Button id="toolbar-search-collection" onAction="#searchCollection">
+        <tooltip>
+            <Tooltip text="Search Collection"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="actions:system-search"/>
+        </graphic>
+    </Button>
+
+    <Separator/>
+
+    <Button id="toolbar-about" onAction="#openAboutDialog">
+        <tooltip>
+            <Tooltip text="About"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="apps:system-users"/>
+        </graphic>
+    </Button>
+
+    <HBox visible="false" fx:id="searchToolBar">
+        <Separator orientation="VERTICAL"/>
+
+        <Button id="toolbar-back" onAction="#showHomeView">
+            <tooltip>
+                <Tooltip text="Back"/>
+            </tooltip>
+            <graphic>
+                <TangoIconWrapper description="actions:go-previous"/>
+            </graphic>
+        </Button>
+    </HBox>
+
+
+
+</ToolBar>

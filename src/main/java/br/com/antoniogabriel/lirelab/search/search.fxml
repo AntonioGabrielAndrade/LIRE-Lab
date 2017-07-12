@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid?>
+<?import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid?>
+<?import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.antoniogabriel.lirelab.search.SearchController">
+
+    <top>
+        <TitledPane text="Query" collapsible="false" minHeight="200">
+            <SingleImageGrid fx:id="queryGrid" id="query"/>
+        </TitledPane>
+    </top>
+
+    <center>
+        <TitledPane text="Output" collapsible="false" prefHeight="Infinity">
+            <PaginatedCollectionGrid fx:id="outputGrid" id="output"/>
+        </TitledPane>
+    </center>
+
+    <bottom>
+        <StatusBar fx:id="statusBar"/>
+    </bottom>
+
+</BorderPane>
