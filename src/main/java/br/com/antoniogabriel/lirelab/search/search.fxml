@@ -8,7 +8,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.com.antoniogabriel.lirelab.search.SearchViewController">
+            fx:controller="br.com.antoniogabriel.lirelab.search.SearchController">
 
     <top>
         <TitledPane text="Query" collapsible="false" minHeight="200">

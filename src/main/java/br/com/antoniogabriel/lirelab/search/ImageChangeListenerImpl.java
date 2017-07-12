@@ -9,9 +9,9 @@ class ImageChangeListenerImpl implements ImageChangeListener {
 
     private final Collection collection;
     private final Feature feature;
-    private SearchViewController controller;
+    private SearchController controller;
 
-    public ImageChangeListenerImpl(SearchViewController controller,
+    public ImageChangeListenerImpl(SearchController controller,
                                    Collection collection,
                                    Feature feature) {
 

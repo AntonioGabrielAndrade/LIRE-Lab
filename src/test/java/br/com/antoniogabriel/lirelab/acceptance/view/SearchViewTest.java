@@ -5,7 +5,7 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.search.SearchFXML;
-import br.com.antoniogabriel.lirelab.search.SearchViewController;
+import br.com.antoniogabriel.lirelab.search.SearchController;
 import br.com.antoniogabriel.lirelab.test_utilities.FXMLTest;
 import com.google.inject.AbstractModule;
 import javafx.stage.Stage;
@@ -32,7 +32,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     private static Collection collection;
 
-    private SearchViewController controller;
+    private SearchController controller;
     private SearchViewObject view = new SearchViewObject();
 
     @Override

@@ -3,7 +3,7 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
-import br.com.antoniogabriel.lirelab.search.SearchViewController;
+import br.com.antoniogabriel.lirelab.search.SearchController;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -33,7 +33,7 @@ public class AppControllerTest {
     @Mock private BorderPane mainArea;
     @Mock private Node searchView;
     @Mock private Node homeView;
-    @Mock private SearchViewController searchViewController;
+    @Mock private SearchController searchController;
     @Mock private HomeController homeController;
     @Mock private HBox searchToolBar;
 
@@ -41,7 +41,7 @@ public class AppControllerTest {
             new AppController(createCollectionFXML,
                                     aboutFXML,
                                     dialogProvider,
-                                    searchViewController,
+                    searchController,
                                     homeController);
 
     private Collection collection;
@@ -68,7 +68,7 @@ public class AppControllerTest {
         controller.searchCollection(event);
 
         verify(mainArea).setCenter(searchView);
-        verify(searchViewController).startSearchSession(collection, CEDD);
+        verify(searchController).startSearchSession(collection, CEDD);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class AppControllerTest {
         controller.searchCollection(event);
 
         verify(mainArea).setCenter(searchView);
-        verify(searchViewController).startSearchSession(collection, TAMURA);
+        verify(searchController).startSearchSession(collection, TAMURA);
     }
 
     @Test

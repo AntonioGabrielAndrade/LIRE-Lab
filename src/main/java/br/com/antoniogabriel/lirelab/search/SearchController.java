@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class SearchViewController {
+public class SearchController {
 
     @FXML private SingleImageGrid queryGrid;
     @FXML private PaginatedCollectionGrid collectionGrid;
@@ -22,7 +22,7 @@ public class SearchViewController {
     private CollectionService service;
 
     @Inject
-    public SearchViewController(CollectionService service) {
+    public SearchController(CollectionService service) {
         this.service = service;
     }
 

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class SearchViewControllerTest {
+public class SearchControllerTest {
 
     private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
@@ -31,7 +31,7 @@ public class SearchViewControllerTest {
     @Mock private StatusBar statusBar;
     @Mock private RunQueryTask queryTask;
 
-    @InjectMocks private SearchViewController controller = new TestableSearchViewController();
+    @InjectMocks private SearchController controller = new TestableSearchController();
 
     @Test
     public void shouldShowCollectionAndAddImageToQueryPaneWhenClicked() throws Exception {
@@ -69,9 +69,9 @@ public class SearchViewControllerTest {
         verify(queryGrid).setOnChange(any(ImageChangeListenerImpl.class));
     }
 
-    private class TestableSearchViewController extends SearchViewController {
+    private class TestableSearchController extends SearchController {
 
-        public TestableSearchViewController() {
+        public TestableSearchController() {
             super(service);
         }
 

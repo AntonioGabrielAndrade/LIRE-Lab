@@ -5,7 +5,7 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.search.SearchViewController;
+import br.com.antoniogabriel.lirelab.search.SearchController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -29,18 +29,18 @@ public class AppController {
     private AboutFXML aboutFXML;
     private DialogProvider dialogProvider;
     private HomeController homeController;
-    private SearchViewController searchViewController;
+    private SearchController searchController;
 
     @Inject
     public AppController(CreateCollectionFXML createCollectionFXML,
                          AboutFXML aboutFXML, DialogProvider dialogProvider,
-                         SearchViewController searchViewController,
+                         SearchController searchController,
                          HomeController homeController) {
 
         this.createCollectionFXML = createCollectionFXML;
         this.aboutFXML = aboutFXML;
         this.dialogProvider = dialogProvider;
-        this.searchViewController = searchViewController;
+        this.searchController = searchController;
         this.homeController = homeController;
     }
 
@@ -56,7 +56,7 @@ public class AppController {
 
         mainArea.setCenter(searchView);
         searchToolBar.setVisible(true);
-        searchViewController.startSearchSession(selectedCollection, feature);
+        searchController.startSearchSession(selectedCollection, feature);
     }
 
     @FXML
