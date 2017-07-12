@@ -27,4 +27,8 @@ public class ChooseFeatureDialogViewObject extends FxRobot {
             waitUntilIsVisible(feature.getFeatureName());
         }
     }
+
+    public void waitUntilFeatureIsVisible(Feature feature) throws TimeoutException {
+        waitUntilIsVisible(feature.getFeatureName());
+    }
 }

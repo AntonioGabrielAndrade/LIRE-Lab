@@ -15,8 +15,6 @@ import java.util.List;
 import static br.com.antoniogabriel.lirelab.lire.Feature.*;
 import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntil;
 import static java.util.Arrays.asList;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
 
@@ -54,10 +52,10 @@ public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldSelectFeature() throws Exception {
+        view.waitUntilFeatureIsVisible(TAMURA);
         view.selectFeature(TAMURA);
         view.ok();
-
-        assertThat(featureHolder.getFeature(), is(TAMURA));
+        waitUntil(() -> featureHolder.getFeature().equals(TAMURA));
     }
 
     @Test
