@@ -17,8 +17,8 @@
     </top>
 
     <center>
-        <TitledPane text="Collection" collapsible="false" prefHeight="Infinity">
-            <PaginatedCollectionGrid fx:id="collectionGrid" id="result"/>
+        <TitledPane text="Output" collapsible="false" prefHeight="Infinity">
+            <PaginatedCollectionGrid fx:id="outputGrid" id="output"/>
         </TitledPane>
     </center>
 

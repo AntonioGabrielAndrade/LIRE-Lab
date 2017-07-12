@@ -16,7 +16,7 @@ import javax.inject.Singleton;
 public class SearchController {
 
     @FXML private SingleImageGrid queryGrid;
-    @FXML private PaginatedCollectionGrid collectionGrid;
+    @FXML private PaginatedCollectionGrid outputGrid;
     @FXML private StatusBar statusBar;
 
     private CollectionService service;
@@ -28,7 +28,7 @@ public class SearchController {
 
     public void startSearchSession(Collection collection, Feature feature) {
         queryGrid.clear();
-        collectionGrid.setCollection(collection, new SetImageToGridClickHandler(queryGrid));
+        outputGrid.setCollection(collection, new SetImageToGridClickHandler(queryGrid));
         queryGrid.setOnChange(new ImageChangeListenerImpl(this, collection, feature));
         setStatusMessage(collection, feature);
     }
@@ -37,7 +37,7 @@ public class SearchController {
         RunQueryTask queryTask = createQueryTask(collection, feature, queryImage);
         statusBar.bindProgressTo(queryTask);
         queryTask.addValueListener((observable, oldValue, newValue) -> {
-            collectionGrid.setCollection(newValue, new SetImageToGridClickHandler(queryGrid));
+            outputGrid.setCollection(newValue, new SetImageToGridClickHandler(queryGrid));
         });
         new Thread(queryTask).start();
     }

@@ -46,6 +46,6 @@ public class SearchViewObject extends FxRobot {
     }
 
     public void waitUntilImagesAreOrderedLike(String... images) throws TimeoutException {
-        waitUntilElementsAreOrderedLike("#result", ".image-view", images);
+        waitUntilElementsAreOrderedLike("#output", ".image-view", images);
     }
 }

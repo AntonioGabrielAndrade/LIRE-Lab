@@ -34,7 +34,7 @@ public class SearchControllerTest {
     @InjectMocks private SearchController controller = new TestableSearchController();
 
     @Test
-    public void shouldShowCollectionAndAddImageToQueryPaneWhenClicked() throws Exception {
+    public void shouldShowCollectionInOutputGridWhenStartSearchSession() throws Exception {
         Collection collection = new Collection();
 
         controller.startSearchSession(collection, CEDD);
