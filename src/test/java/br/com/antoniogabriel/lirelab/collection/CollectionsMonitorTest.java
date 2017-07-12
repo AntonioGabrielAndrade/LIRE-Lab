@@ -17,14 +17,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
 
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doNothing;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionsMonitorTest {
@@ -47,14 +44,7 @@ public class CollectionsMonitorTest {
     @Before
     public void setUp() throws Exception {
         startJavaFXThread();
-        configStubs();
         createMonitor();
-    }
-
-    private void configStubs() throws IOException, JAXBException {
-        doNothing().when(indexCreator).create();
-        doNothing().when(thumbCreator).create();
-        doNothing().when(xmlCreator).create();
     }
 
     private void createMonitor() {
