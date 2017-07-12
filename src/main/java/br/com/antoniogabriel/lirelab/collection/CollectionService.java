@@ -67,7 +67,7 @@ public class CollectionService {
         collectionsMonitor.addListener(callback);
     }
 
-    public Collection runQuery(Collection collection, Feature feature, Image queryImage) throws IOException {
+    public List<Image> runQuery(Collection collection, Feature feature, Image queryImage) throws IOException {
         return queryRunnerFactory.createQueryRunner(resolver).runQuery(collection, feature, queryImage);
     }
 

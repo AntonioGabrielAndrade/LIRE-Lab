@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.custom.paginated_collection_grid;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
+import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.DisplayImageDialogHandler;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
@@ -11,6 +12,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class PaginatedCollectionGrid extends StackPane {
 
@@ -18,7 +20,6 @@ public class PaginatedCollectionGrid extends StackPane {
     private static final int DEFAULT_PAGE_SIZE = 120;
 
     private PageFactoryProvider pageFactoryProvider = new PageFactoryProvider();
-    private Collection collection;
 
     @FXML private Pagination pagination;
 
@@ -49,14 +50,16 @@ public class PaginatedCollectionGrid extends StackPane {
     }
 
     public void setCollection(Collection collection, ImageClickHandler handler) {
-        this.collection = collection;
-
-        calcPageCount(collection, pageSize);
-        setPageFactory(collection, pageSize, handler);
+        setCollection(collection.getImages(), handler);
     }
 
-    private void calcPageCount(Collection collection, int pageSize) {
-        int numberOfImages = collection.totalImages();
+    public void setCollection(List<Image> images, ImageClickHandler handler) {
+        calcPageCount(images, pageSize);
+        setPageFactory(images, pageSize, handler);
+    }
+
+    private void calcPageCount(List<Image> images, int pageSize) {
+        int numberOfImages = images.size();
         int pageCount = divideAndGetCeil(numberOfImages, pageSize);
 
         pagination.setPageCount(pageCount);
@@ -66,13 +69,9 @@ public class PaginatedCollectionGrid extends StackPane {
         return a / b + ((a % b == 0) ? 0 : 1);
     }
 
-    private void setPageFactory(Collection collection, int pageSize, ImageClickHandler handler) {
+    private void setPageFactory(List<Image> images, int pageSize, ImageClickHandler handler) {
         pagination.setPageFactory(
-                pageFactoryProvider.getPageFactory(collection, pageSize, handler)
+                pageFactoryProvider.getPageFactory(images, pageSize, handler)
         );
-    }
-
-    public Collection getCollection() {
-        return collection;
     }
 }

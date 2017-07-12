@@ -7,7 +7,9 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.value.ChangeListener;
 import javafx.concurrent.Task;
 
-class RunQueryTask extends Task<Collection> {
+import java.util.List;
+
+class RunQueryTask extends Task<List<Image>> {
 
     private final CollectionService service;
     private final Collection collection;
@@ -26,11 +28,11 @@ class RunQueryTask extends Task<Collection> {
     }
 
     @Override
-    protected Collection call() throws Exception {
+    protected List<Image> call() throws Exception {
         return service.runQuery(collection, feature, queryImage);
     }
 
-    public void addValueListener(ChangeListener<Collection> listener) {
+    public void addValueListener(ChangeListener<List<Image>> listener) {
         valueProperty().addListener(listener);
     }
 }
