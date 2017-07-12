@@ -7,7 +7,7 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.value.ChangeListener;
 import javafx.concurrent.Task;
 
-public class RunQueryTask extends Task<Collection> {
+class RunQueryTask extends Task<Collection> {
 
     private final CollectionService service;
     private final Collection collection;
