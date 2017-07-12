@@ -50,13 +50,12 @@ public class CreateCollectionControllerTest {
 
     @Mock private CollectionService service;
     @Mock private ProgressDialog progressDialog;
-    @Mock private FeatureUtils featureUtils;
 
     @Mock private TextField nameField;
     @Mock private TextField imagesDirectoryField;
     @Mock private FeatureTable featuresTable;
     @Mock private Button createButton;
-    @Mock private ObservableList<ViewableFeature> viewableFeatures;
+
     @Mock private StringProperty textProperty;
     @Mock private BooleanBinding noFeatureSelectedBinding;
     @Mock private BooleanBinding isEmptyBinding;
@@ -66,7 +65,7 @@ public class CreateCollectionControllerTest {
 
     @InjectMocks
     private CreateCollectionController controller =
-            new CreateCollectionController(dialogProvider, service, featureUtils);
+            new CreateCollectionController(dialogProvider, service);
 
     @Before
     public void setUp() throws Exception {
@@ -82,11 +81,9 @@ public class CreateCollectionControllerTest {
 
     @Test
     public void shouldPopulateTableWhenInitialize() throws Exception {
-        given(featureUtils.toViewable(Feature.values())).willReturn(viewableFeatures);
-
         controller.initialize(null, null);
 
-        verify(featuresTable).setItems(viewableFeatures);
+        verify(featuresTable).setFeatures(Feature.values());
     }
 
     @Test

@@ -29,16 +29,13 @@ public class CreateCollectionController implements Initializable {
 
     private DialogProvider dialogProvider;
     private CollectionService service;
-    private FeatureUtils featureUtils;
 
     @Inject
     public CreateCollectionController(DialogProvider dialogProvider,
-                                      CollectionService service,
-                                      FeatureUtils featureUtils) {
+                                      CollectionService service) {
 
         this.dialogProvider = dialogProvider;
         this.service = service;
-        this.featureUtils = featureUtils;
     }
 
     @Override
@@ -74,7 +71,7 @@ public class CreateCollectionController implements Initializable {
     }
 
     private void populateTable() {
-        featuresTable.setItems(featureUtils.toViewable(Feature.values()));
+        featuresTable.setFeatures(Feature.values());
     }
 
     private void bindCreateButton() {
