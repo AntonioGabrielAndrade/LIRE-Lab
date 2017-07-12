@@ -8,17 +8,19 @@ public class ThumbnailsCreator {
     private ThumbnailsCreatorCallback callback = new DumbThumbnailsCreatorCallback();
     private ThumbnailBuilder builder;
     private String thumbnailsDir;
-    private String imagesDir;
+    private List<String> images;
 
-    public ThumbnailsCreator(ThumbnailBuilder builder, String thumbnailsDir, String imagesDir) {
+    public ThumbnailsCreator(ThumbnailBuilder builder,
+                             String thumbnailsDir,
+                             List<String> paths) {
+
         this.builder = builder;
         this.thumbnailsDir = thumbnailsDir;
-        this.imagesDir = imagesDir;
+        this.images = paths;
     }
 
     public void create() throws IOException {
         builder.createDirectory(thumbnailsDir);
-        List<String> images = builder.getAllImagePaths(imagesDir);
 
         for (int i = 0; i < images.size(); i++) {
             String image = images.get(i);

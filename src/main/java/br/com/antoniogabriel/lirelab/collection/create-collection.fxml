@@ -9,7 +9,7 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="br.com.antoniogabriel.lirelab.collection.CreateCollectionController"
           prefHeight="600.0" prefWidth="600.0"
-          vgap="10"
+          vgap="25"
           gridLinesVisible="false">
 
     <columnConstraints>
@@ -27,27 +27,42 @@
         <Insets top="20" bottom="20" left="20" right="20"/>
     </padding>
 
-    <VBox spacing="3"
+    <HBox spacing="5"
+          alignment="BASELINE_CENTER"
           GridPane.rowIndex="0"
           GridPane.columnIndex="0">
-        <Label text="Collection name"/>
-        <TextField id="collection-name" fx:id="nameField"/>
-    </VBox>
+        <Label text="Collection name:"/>
+        <TextField id="collection-name" fx:id="nameField" HBox.hgrow="ALWAYS"/>
+    </HBox>
 
-    <VBox spacing="3"
-          GridPane.rowIndex="1"
-          GridPane.columnIndex="0">
-        <Label text="Images directory"/>
-        <HBox spacing="7">
-            <TextField id="images-directory" fx:id="imagesDirectoryField" HBox.hgrow="ALWAYS"/>
-            <Button text="Browse" onAction="#chooseImagesDirectory"/>
-        </HBox>
-    </VBox>
+    <TitledPane text="Images"
+                collapsible="false"
+                GridPane.rowIndex="1"
+                GridPane.columnIndex="0">
+        <VBox spacing="10">
+
+            <HBox spacing="4"
+                  alignment="BASELINE_CENTER">
+
+                <Label text="Images directory: "/>
+                <TextField id="images-directory" fx:id="imagesDirectoryField" HBox.hgrow="ALWAYS"/>
+                <Button text="Browse" onAction="#chooseImagesDirectory"/>
+
+            </HBox>
+
+            <HBox alignment="BASELINE_LEFT">
+                <CheckBox text="Scan subdirectorires"
+                          fx:id="scanSubdirectoriesCheckbox"
+                          selected="true"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
 
     <VBox spacing="3"
           GridPane.rowIndex="2"
           GridPane.columnIndex="0">
-        <Label text="Features for indexing"/>
+        <Label text="Features for indexing:"/>
         <FeatureTable fx:id="featuresTable"
                       editable="true"
                       GridPane.vgrow="ALWAYS"/>

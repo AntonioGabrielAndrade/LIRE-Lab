@@ -13,7 +13,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 
 import static java.util.Collections.EMPTY_LIST;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -27,6 +28,8 @@ public class CollectionServiceTest {
 
     @Mock private CollectionRepository collectionRepository;
     @Mock private CollectionsMonitor collectionsMonitor;
+    @Mock private CreateCollectionTaskFactory createCollectionTaskFactory;
+    @Mock private CreateCollectionTask task;
     @Mock private QueryRunnerFactory queryRunnerFactory;
     @Mock private PathResolver resolver;
     @Mock private QueryRunner queryRunner;
@@ -41,6 +44,7 @@ public class CollectionServiceTest {
         service = new CollectionService(resolver,
                                         collectionRepository,
                                         collectionsMonitor,
+                                        createCollectionTaskFactory,
                                         queryRunnerFactory);
     }
 
@@ -54,11 +58,15 @@ public class CollectionServiceTest {
         String name = ANY_NAME;
         String path = ANY_PATH;
         List<Feature> features = EMPTY_LIST;
+        boolean scanSubDirs = true;
 
-        CreateCollectionTask task = service.getTaskToCreateCollection(name, path, features);
+        given(createCollectionTaskFactory.createTask(name, features, path, scanSubDirs))
+            .willReturn(task);
 
-        assertNotNull(task);
-        verify(collectionsMonitor).bindListenersTo(task);
+        CreateCollectionTask retrievedTask = service.getTaskToCreateCollection(name, path, features, scanSubDirs);
+
+        assertThat(retrievedTask, is(task));
+        verify(collectionsMonitor).bindListenersTo(retrievedTask);
     }
 
     @Test

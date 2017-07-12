@@ -8,11 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.mockito.BDDMockito.given;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,7 +19,6 @@ public class ThumbnailsCreatorTest {
     private static final String IMG2 = "/other/img/path";
 
     private static final String THUMBNAILS_DIR = "/some/dir";
-    private static final String IMAGES_DIR = "/another/dir";
 
     private static final List<String> IMAGES = Arrays.asList(IMG1, IMG2);
 
@@ -36,20 +32,15 @@ public class ThumbnailsCreatorTest {
     public void setUp() throws Exception {
         setupThumbnailsCreator();
         setupInOrder();
-        setupBuilderExpectations();
     }
 
     private void setupThumbnailsCreator() {
-        creator = new ThumbnailsCreator(builder, THUMBNAILS_DIR, IMAGES_DIR);
+        creator = new ThumbnailsCreator(builder, THUMBNAILS_DIR, IMAGES);
         creator.setCallback(callback);
     }
 
     private void setupInOrder() {
         inOrder = Mockito.inOrder(builder, callback);
-    }
-
-    private void setupBuilderExpectations() throws IOException {
-        given(builder.getAllImagePaths(IMAGES_DIR)).willReturn(IMAGES);
     }
 
     @Test

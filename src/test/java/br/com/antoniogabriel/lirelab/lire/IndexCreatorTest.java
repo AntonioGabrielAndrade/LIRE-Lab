@@ -32,7 +32,6 @@ public class IndexCreatorTest {
     private static final List<String> PATHS = Arrays.asList(IMG1, IMG2);
 
     private static final String INDEX_DIR = "/some/index/dir";
-    private static final String IMAGES_DIR = "/some/images/dir";
 
     @Mock private LIRE lire;
     @Mock private IndexWriter indexWriter;
@@ -52,7 +51,7 @@ public class IndexCreatorTest {
     }
 
     private void setupIndexCreator() {
-        creator = new IndexCreator(lire, IMAGES_DIR, INDEX_DIR, FEATURES);
+        creator = new IndexCreator(lire, INDEX_DIR, FEATURES, PATHS);
         creator.setCallback(callback);
     }
 
@@ -63,7 +62,6 @@ public class IndexCreatorTest {
     private void setupExpectations() throws IOException {
         given(lire.createDocumentBuilder()).willReturn(docBuilder);
         given(lire.createIndexWriter(INDEX_DIR)).willReturn(indexWriter);
-        given(lire.getAllImagesPaths(IMAGES_DIR)).willReturn(PATHS);
 
         given(lire.getBufferedImage(IMG1)).willReturn(bufImg1);
         given(docBuilder.createDocument(bufImg1, IMG1)).willReturn(DOC1);

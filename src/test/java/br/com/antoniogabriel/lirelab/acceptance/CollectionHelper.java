@@ -64,14 +64,12 @@ public class CollectionHelper {
         List<Feature> collectionFeatures = getFeatures(collection);
 
         Runnable task =
-                new CreateCollectionTaskFactory()
+                new CreateCollectionTaskFactory(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils())
                         .createTaskAsRunnable(
                                 collection.getName(),
                                 collectionFeatures,
                                 collection.getImagesDirectory(),
-                                resolver.getCollectionPath(collection.getName()),
-                                resolver.getIndexDirectoryPath(collection.getName()),
-                                resolver.getThumbnailsDirectoryPath(collection.getName())
+                                true
                         );
 
         task.run();

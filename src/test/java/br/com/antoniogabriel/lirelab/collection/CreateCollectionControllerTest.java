@@ -1,17 +1,15 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.custom.feature_table.FeatureTable;
-import br.com.antoniogabriel.lirelab.custom.feature_table.ViewableFeature;
-import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import org.junit.Before;
@@ -27,8 +25,7 @@ import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.lire.Feature.TAMURA;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -53,6 +50,7 @@ public class CreateCollectionControllerTest {
 
     @Mock private TextField nameField;
     @Mock private TextField imagesDirectoryField;
+    @Mock private CheckBox scanSubdirectoriesCheckbox;
     @Mock private FeatureTable featuresTable;
     @Mock private Button createButton;
 
@@ -123,8 +121,9 @@ public class CreateCollectionControllerTest {
         given(nameField.getText()).willReturn(SOME_COLLECTION);
         given(imagesDirectoryField.getText()).willReturn(SOME_DIR);
         given(featuresTable.getSelectedFeatures()).willReturn(features);
+        given(scanSubdirectoriesCheckbox.isSelected()).willReturn(true);
 
-        given(service.getTaskToCreateCollection(anyString(), anyString(), anyList()))
+        given(service.getTaskToCreateCollection(anyString(), anyString(), anyList(), anyBoolean()))
                 .willReturn(task);
         given(dialogProvider.getProgressDialog(task, window))
                 .willReturn(progressDialog);

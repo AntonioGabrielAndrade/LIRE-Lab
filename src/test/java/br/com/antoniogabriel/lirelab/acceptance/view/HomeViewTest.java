@@ -95,7 +95,8 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         CreateCollectionTask creationTask = service.getTaskToCreateCollection(
                                                             COLLECTION_3.getName(),
                                                             TEST_IMAGES,
-                                                            FEATURES);
+                                                            FEATURES,
+                                                            true);
 
         new Thread(creationTask).start();
 

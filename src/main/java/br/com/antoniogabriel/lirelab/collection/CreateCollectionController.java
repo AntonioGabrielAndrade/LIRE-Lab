@@ -2,7 +2,6 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.custom.feature_table.FeatureTable;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ObservableBooleanValue;
@@ -10,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 
@@ -24,6 +24,7 @@ public class CreateCollectionController implements Initializable {
 
     @FXML private TextField nameField;
     @FXML private TextField imagesDirectoryField;
+    @FXML private CheckBox scanSubdirectoriesCheckbox;
     @FXML private FeatureTable featuresTable;
     @FXML private Button createButton;
 
@@ -63,8 +64,8 @@ public class CreateCollectionController implements Initializable {
         CreateCollectionTask task = service.getTaskToCreateCollection(
                 collectionName(),
                 imagesDirectory(),
-                collectionFeatures()
-        );
+                collectionFeatures(),
+                scanSubdirectories());
 
         ProgressDialog dialog = dialogProvider.getProgressDialog(task, getWindowFrom(event));
         dialog.showAndStart();
@@ -100,6 +101,10 @@ public class CreateCollectionController implements Initializable {
 
     private String imagesDirectory() {
         return imagesDirectoryField.getText();
+    }
+
+    private boolean scanSubdirectories() {
+        return scanSubdirectoriesCheckbox.isSelected();
     }
 
     private List<Feature> collectionFeatures() {

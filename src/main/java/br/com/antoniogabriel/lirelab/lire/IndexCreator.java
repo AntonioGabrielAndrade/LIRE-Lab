@@ -11,27 +11,26 @@ import java.util.List;
 public class IndexCreator {
 
     private IndexCreatorCallback callback = new DumbIndexCreatorCallback();
-    private String imagesDir;
     private List<Feature> features;
+    private List<String> paths;
     private String indexDir;
     private LIRE lire;
 
     public IndexCreator(LIRE lire,
-                        String imagesDir,
                         String indexDir,
-                        List<Feature> features) {
+                        List<Feature> features,
+                        List<String> paths) {
 
         this.lire = lire;
-        this.imagesDir = imagesDir;
         this.indexDir = indexDir;
         this.features = features;
+        this.paths = paths;
     }
 
     public void create() throws IOException {
         GlobalDocumentBuilder docBuilder = lire.createDocumentBuilder();
         addFeaturesToDocumentBuilder(features, docBuilder);
         IndexWriter indexWriter = lire.createIndexWriter(indexDir);
-        List<String> paths = lire.getAllImagesPaths(imagesDir);
 
         for (int i = 0; i < paths.size(); i++) {
             String path = paths.get(i);

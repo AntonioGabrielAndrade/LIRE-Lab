@@ -15,17 +15,19 @@ public class CollectionService {
     private PathResolver resolver;
     private CollectionRepository collectionRepository;
     private CollectionsMonitor collectionsMonitor;
+    private CreateCollectionTaskFactory createCollectionTaskFactory;
     private QueryRunnerFactory queryRunnerFactory;
 
     @Inject
     public CollectionService(PathResolver resolver,
                              CollectionRepository collectionRepository,
                              CollectionsMonitor collectionsMonitor,
-                             QueryRunnerFactory queryRunnerFactory) {
+                             CreateCollectionTaskFactory createCollectionTaskFactory, QueryRunnerFactory queryRunnerFactory) {
 
         this.resolver = resolver;
         this.collectionRepository = collectionRepository;
         this.collectionsMonitor = collectionsMonitor;
+        this.createCollectionTaskFactory = createCollectionTaskFactory;
         this.queryRunnerFactory = queryRunnerFactory;
 
         startMonitoringCollectionsDeleteAndUpdate();
@@ -41,18 +43,15 @@ public class CollectionService {
 
     public CreateCollectionTask getTaskToCreateCollection(String collectionName,
                                                           String imagesPath,
-                                                          List<Feature> collectionFeatures) {
+                                                          List<Feature> collectionFeatures,
+                                                          boolean scanSubdirectories) {
 
         CreateCollectionTask task =
-                new CreateCollectionTaskFactory()
-                                .createTask(
-                                        collectionName,
-                                        collectionFeatures,
-                                        imagesPath,
-                                        resolver.getCollectionPath(collectionName),
-                                        resolver.getIndexDirectoryPath(collectionName),
-                                        resolver.getThumbnailsDirectoryPath(collectionName)
-                                );
+                createCollectionTaskFactory.createTask(
+                                                collectionName,
+                                                collectionFeatures,
+                                                imagesPath,
+                                                scanSubdirectories);
 
         collectionsMonitor.bindListenersTo(task);
         return task;

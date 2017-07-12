@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBException;
 import java.util.List;
 
 public class XMLCreator {
+
     private final String collectionName;
     private final String imagesDir;
     private final List<Feature> features;
@@ -21,7 +22,6 @@ public class XMLCreator {
         this.imagesDir = imagesDir;
         this.features = features;
         this.xmlDAO = xmlDAO;
-        this.callback = callback;
     }
 
     public void create() throws JAXBException {
