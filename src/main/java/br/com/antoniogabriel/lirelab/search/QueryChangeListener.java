@@ -9,7 +9,7 @@ class QueryChangeListener implements ImageChangeListener {
 
     private final Collection collection;
     private final Feature feature;
-    private SearchController controller;
+    private final SearchController controller;
 
     public QueryChangeListener(SearchController controller,
                                Collection collection,
