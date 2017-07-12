@@ -39,20 +39,16 @@ public class CollectionRepositoryTest {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            COLLECTION_HELPER.createRealCollection(COLLECTION1);
-            COLLECTION_HELPER.createRealCollection(COLLECTION2);
-        });
+        COLLECTION_HELPER.createRealCollection(COLLECTION1);
+        COLLECTION_HELPER.createRealCollection(COLLECTION2);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            COLLECTION_HELPER.deleteCollection(COLLECTION1);
-            COLLECTION_HELPER.deleteCollection(COLLECTION2);
+        COLLECTION_HELPER.deleteCollection(COLLECTION1);
+        COLLECTION_HELPER.deleteCollection(COLLECTION2);
 
-            deleteWorkDirectory(RESOLVER);
-        });
+        deleteWorkDirectory(RESOLVER);
     }
 
     @Test
