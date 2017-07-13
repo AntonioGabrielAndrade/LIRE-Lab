@@ -63,12 +63,22 @@ public class CollectionRepositoryIntegrationTest {
     }
 
     @Test
-    public void shouldReturnCollectionsFromDisk() throws Exception {
+    public void shouldReturnAllCollectionsFromDisk() throws Exception {
         List<Collection> collections = repository.getCollections();
 
         assertThat(collections.size(), is(2));
         assertTrue(collections.contains(COLLECTION1));
         assertTrue(collections.contains(COLLECTION2));
+    }
+
+    @Test
+    public void shouldReturnSpecificCollectionFromDisk() throws Exception {
+
+        Collection collection = repository.getCollection(COLLECTION1.getName());
+
+        assertThat(collection.getName(), equalTo(COLLECTION1.getName()));
+        assertThat(collection.getImages().size(), is(10));
+        assertTrue(collection.getFeatures().contains(CEDD));
     }
 
     @Test
@@ -95,13 +105,4 @@ public class CollectionRepositoryIntegrationTest {
         images.contains(new Image(imagesDir + "26489383923_98d419eb0d_k.jpg", thumbnailsDir + "26489383923_98d419eb0d_k.thumbnail.jpg"));
     }
 
-    @Test
-    public void shouldReturnCollectionFromDisk() throws Exception {
-
-        Collection collection = repository.getCollection(COLLECTION1.getName());
-
-        assertThat(collection.getName(), equalTo(COLLECTION1.getName()));
-        assertThat(collection.getImages().size(), is(10));
-        assertTrue(collection.getFeatures().contains(CEDD));
-    }
 }
