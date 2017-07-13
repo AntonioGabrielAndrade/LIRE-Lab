@@ -41,7 +41,6 @@ public class HomeController implements Initializable {
     private ImageViewFactory viewFactory;
     private ImageViewConfig viewConfig;
 
-    @FXML private BorderPane leftPane;
     @FXML private BorderPane centerPane;
     @FXML private CollectionTree collectionTree;
     @FXML private StackPane welcomeView;

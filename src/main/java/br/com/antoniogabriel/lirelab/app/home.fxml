@@ -14,15 +14,11 @@
 
     <items>
 
-        <BorderPane id="left-pane" fx:id="leftPane">
-            <center>
-                <TitledPane text="Collections" collapsible="false" prefHeight="Infinity">
-                    <CollectionTree visible="false"
-                                    id="collection-tree"
-                                    fx:id="collectionTree"/>
-                </TitledPane>
-            </center>
-        </BorderPane>
+        <TitledPane text="Collections" collapsible="false" prefHeight="Infinity">
+            <CollectionTree visible="false"
+                            id="collection-tree"
+                            fx:id="collectionTree"/>
+        </TitledPane>
 
         <BorderPane id="center-pane" fx:id="centerPane">
             <center>
