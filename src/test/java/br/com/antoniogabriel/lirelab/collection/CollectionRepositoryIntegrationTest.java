@@ -105,4 +105,14 @@ public class CollectionRepositoryIntegrationTest {
         images.contains(new Image(imagesDir + "26489383923_98d419eb0d_k.jpg", thumbnailsDir + "26489383923_98d419eb0d_k.thumbnail.jpg"));
     }
 
+    @Test
+    public void shouldDeleteCollection() throws Exception {
+        String testCollection = "TestCollection";
+        COLLECTION_HELPER.createRealCollection(collection(testCollection, TEST_IMAGES, CEDD));
+        COLLECTION_HELPER.checkCollectionExists(testCollection);
+
+        repository.deleteCollection(testCollection);
+
+        COLLECTION_HELPER.checkCollectionDontExists(testCollection);
+    }
 }

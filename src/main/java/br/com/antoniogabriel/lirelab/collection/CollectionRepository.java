@@ -37,6 +37,14 @@ public class CollectionRepository {
         }
     }
 
+    public void deleteCollection(String collectionName) {
+        try {
+            lireLabUtils.deleteCollection(collectionName);
+        } catch (IOException e) {
+            throw new LireLabException("Could not delete collection", e);
+        }
+    }
+
     private List<Collection> emptyCollectionsList() {
         return Collections.EMPTY_LIST;
     }
@@ -52,7 +60,9 @@ public class CollectionRepository {
         try(Subfolders subfolders = getSubfoldersOf(collectionsFolder())) {
             for (Path folder : subfolders) {
                 try {
-                    collections.add(getCollectionIn(folder));
+                    if(isCollection(folder)) {
+                        collections.add(getCollectionIn(folder));
+                    }
                 } catch (UnmarshalException e) {
                     continue;
                 }
@@ -63,6 +73,10 @@ public class CollectionRepository {
         }
 
         return collections;
+    }
+
+    private boolean isCollection(Path folder) {
+        return lireLabUtils.isCollection(folder);
     }
 
     protected Subfolders getSubfoldersOf(Path dir) throws IOException {

@@ -115,17 +115,17 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
     }
 
-    @Test
-    public void shouldDeleteCollectionByContextMenu() throws Exception {
-        homeView.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
-
-        homeView.deleteCollection(COLLECTION_1);
-
-        homeView.waitUntilCollectionIsNotListed(COLLECTION_1);
-        homeView.waitUntilCollectionsAreListed(COLLECTION_2);
-
-        runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
-    }
+//    @Test
+//    public void shouldDeleteCollectionByContextMenu() throws Exception {
+//        homeView.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
+//
+//        homeView.deleteCollection(COLLECTION_1);
+//
+//        homeView.waitUntilCollectionIsNotListed(COLLECTION_1);
+//        homeView.waitUntilCollectionsAreListed(COLLECTION_2);
+//
+//        runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
+//    }
 
     @Test
     public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {

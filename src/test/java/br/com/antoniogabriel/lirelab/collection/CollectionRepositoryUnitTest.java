@@ -53,6 +53,9 @@ public class CollectionRepositoryUnitTest {
         given(subfoldersIterator.hasNext()).willReturn(true, true, false);
         given(subfoldersIterator.next()).willReturn(collectionPath1, collectionPath2);
 
+        given(lireLabUtils.isCollection(collectionPath1)).willReturn(true);
+        given(lireLabUtils.isCollection(collectionPath2)).willReturn(true);
+
         given(collectionAssembler.assembleCollectionFrom(collectionPath1)).willReturn(collection1);
         given(collectionAssembler.assembleCollectionFrom(collectionPath2)).willReturn(collection2);
 
