@@ -43,7 +43,7 @@ public class HomeControllerTest {
     @Mock private ImageViewConfig imageViewConfig;
 
     @InjectMocks
-    HomeController controller =
+    private HomeController controller =
             new HomeController(collectionService, imageViewFactory, imageViewConfig);
 
     private Collection collection;
