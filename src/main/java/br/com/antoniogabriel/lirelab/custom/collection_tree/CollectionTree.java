@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ public class CollectionTree extends StackPane {
 
     private TreeItemBuilder treeItemBuilder = new TreeItemBuilder();
     private List<CollectionSelectionListener> collectionListeners = new ArrayList<>();
+    private List<CollectionRightClickListener> collectionClickListeners = new ArrayList<>();
     private List<ImageSelectionListener> imageListeners = new ArrayList<>();
 
     private Map<TreeItem<String>, Collection> collectionMap = new HashMap<>();
@@ -30,9 +33,24 @@ public class CollectionTree extends StackPane {
     public CollectionTree() {
         loadFXML();
         listenToCollectionAndImageSelection();
+        listenToCollectionRightClick();
     }
 
-    protected void listenToCollectionAndImageSelection() {
+    private void loadFXML() {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("collection-tree.fxml"));
+
+        loader.setRoot(this);
+        loader.setController(this);
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void listenToCollectionAndImageSelection() {
         treeView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -48,18 +66,47 @@ public class CollectionTree extends StackPane {
                 });
     }
 
-    protected void loadFXML() {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("collection-tree.fxml"));
+    private void listenToCollectionRightClick() {
+        treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (event.getButton() == MouseButton.SECONDARY && getSelectedCollection() != null) {
+                for (CollectionRightClickListener listener : collectionClickListeners) {
+                    listener.clicked(getSelectedCollection(), event);
+                }
+            }
+        });
+    }
 
-        loader.setRoot(this);
-        loader.setController(this);
+    public void setCollections(List<Collection> collections) {
+        addCollectionsToTree(collections);
+    }
 
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public Collection getSelectedCollection() {
+        return getCollection(treeView.getSelectionModel().getSelectedItem());
+    }
+
+    public void selectImage(int collectionIndex, int imageIndex) {
+        TreeItem<String> item = treeView.getTreeItem(collectionIndex).getChildren().get(imageIndex);
+        treeView.getSelectionModel().select(item);
+    }
+
+    public void selectCollection(int index) {
+        treeView.getSelectionModel().select(index);
+    }
+
+    public void addCollectionSelectionListener(CollectionSelectionListener listener) {
+        collectionListeners.add(listener);
+    }
+
+    public void addCollectionRightClickListener(CollectionRightClickListener listener) {
+        collectionClickListeners.add(listener);
+    }
+
+    public void addImageSelectionListener(ImageSelectionListener listener) {
+        this.imageListeners.add(listener);
+    }
+
+    public void setItemBuilder(TreeItemBuilder itemBuilder) {
+        this.treeItemBuilder = itemBuilder;
     }
 
     private Collection getCollection(TreeItem<String> item) {
@@ -72,19 +119,6 @@ public class CollectionTree extends StackPane {
 
     private boolean isCollection(TreeItem<String> item) {
         return collectionMap.get(item) != null;
-    }
-
-    public void setCollections(List<Collection> collections) {
-        addCollectionsToTree(collections);
-    }
-
-    public void selectCollection(int index) {
-        treeView.getSelectionModel().select(index);
-    }
-
-    public void selectImage(int collectionIndex, int imageIndex) {
-        TreeItem<String> item = treeView.getTreeItem(collectionIndex).getChildren().get(imageIndex);
-        treeView.getSelectionModel().select(item);
     }
 
     private void addCollectionsToTree(List<Collection> collections) {
@@ -126,21 +160,5 @@ public class CollectionTree extends StackPane {
 
     private void clearTree() {
         rootItem.getChildren().clear();
-    }
-
-    public void addCollectionSelectionListener(CollectionSelectionListener listener) {
-        collectionListeners.add(listener);
-    }
-
-    public void setItemBuilder(TreeItemBuilder itemBuilder) {
-        this.treeItemBuilder = itemBuilder;
-    }
-
-    public void addImageSelectionListener(ImageSelectionListener listener) {
-        this.imageListeners.add(listener);
-    }
-
-    public Collection getSelectedCollection() {
-        return getCollection(treeView.getSelectionModel().getSelectedItem());
     }
 }

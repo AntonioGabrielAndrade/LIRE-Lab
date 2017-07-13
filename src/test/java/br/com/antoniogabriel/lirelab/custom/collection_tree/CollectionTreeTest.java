@@ -4,7 +4,10 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.Event;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -91,6 +94,26 @@ public class CollectionTreeTest {
         });
 
         realTree.selectCollection(0);
+
+        assertThat(collection1.getName(), equalTo("was selected"));
+    }
+
+    @Test
+    public void shouldAddListenerForCollectionRightClickEvent() throws Exception {
+        CollectionTree realTree = new CollectionTree();
+
+        realTree.setCollections(asList(collection1, collection2));
+
+        realTree.addCollectionRightClickListener((collection, event) -> {
+             collection.setName("was selected");
+        });
+
+        realTree.selectCollection(0);
+
+        Event.fireEvent(realTree.lookup(".tree-view"), new MouseEvent(MouseEvent.MOUSE_CLICKED,
+                0, 0, 0, 0, MouseButton.SECONDARY, 1,
+                false, false, false, false, false, false, false, true, false, true, null));
+
 
         assertThat(collection1.getName(), equalTo("was selected"));
     }

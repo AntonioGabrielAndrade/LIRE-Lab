@@ -3,14 +3,19 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
+import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionRightClickListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -30,6 +35,7 @@ public class HomeController implements Initializable {
     private ImageViewFactory viewFactory;
     private ImageViewConfig viewConfig;
 
+    @FXML private BorderPane leftPane;
     @FXML private BorderPane centerPane;
     @FXML private CollectionTree collectionTree;
     @FXML private StackPane welcomeView;
@@ -50,9 +56,13 @@ public class HomeController implements Initializable {
         listenToCollectionSelection();
         listenToImageSelection();
         listenToCollectionsChange();
+        listenToCollectionsRightClick();
         loadCollections();
     }
 
+    private void listenToCollectionsRightClick() {
+        collectionTree.addCollectionRightClickListener(new ShowContextMenuListener());
+    }
 
     private void listenToCollectionsChange() {
         collectionService.addCollectionsChangeListener(
@@ -79,6 +89,12 @@ public class HomeController implements Initializable {
             collectionTree.setVisible(true);
             collectionTree.selectCollection(0);
             welcomeView.setVisible(false);
+            leftPane.setVisible(true);
+        } else {
+            collectionTree.setCollections(collections);
+            welcomeView.setVisible(true);
+            centerPane.setCenter(welcomeView);
+            leftPane.setVisible(false);
         }
     }
 
@@ -127,4 +143,24 @@ public class HomeController implements Initializable {
         }
     }
 
+    public class ShowContextMenuListener implements CollectionRightClickListener {
+        @Override
+        public void clicked(Collection collection, MouseEvent event) {
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem deleteItem = new MenuItem("Delete collection");
+            deleteItem.setOnAction(ev -> {
+                Task<Void> deletion = new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        collectionService.deleteCollection(collection);
+                        return null;
+                    }
+                };
+                new Thread(deletion).start();
+            });
+
+            contextMenu.getItems().add(deleteItem);
+            contextMenu.show(collectionTree, event.getScreenX(), event.getScreenY());
+        }
+    }
 }

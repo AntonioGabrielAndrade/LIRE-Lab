@@ -34,6 +34,7 @@ public class HomeControllerTest {
 
     private static final String SOME_IMAGE_PATH = "some/image/path";
 
+    @Mock private BorderPane leftPane;
     @Mock private BorderPane centerPane;
     @Mock private CollectionService collectionService;
     @Mock private CollectionTree collectionTree;
@@ -92,6 +93,14 @@ public class HomeControllerTest {
 
         verify(collectionTree).addImageSelectionListener(
                 any(HomeController.ShowImageWhenImageIsSelectedListener.class));
+    }
+
+    @Test
+    public void shouldListenToCollectionRightClickToShowContextMenu() throws Exception {
+        controller.initialize(null, null);
+
+        verify(collectionTree).addCollectionRightClickListener(
+                any(HomeController.ShowContextMenuListener.class));
     }
 
     @Test

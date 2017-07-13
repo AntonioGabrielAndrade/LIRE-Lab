@@ -14,7 +14,7 @@
 
     <items>
 
-        <BorderPane>
+        <BorderPane id="left-pane" fx:id="leftPane">
             <center>
                 <TitledPane text="Collections" collapsible="false" prefHeight="Infinity">
                     <CollectionTree visible="false"
