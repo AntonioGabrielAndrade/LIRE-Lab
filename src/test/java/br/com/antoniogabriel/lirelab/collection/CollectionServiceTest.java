@@ -77,6 +77,14 @@ public class CollectionServiceTest {
     }
 
     @Test
+    public void shouldDeleteCollection() throws Exception {
+        Collection collection = new Collection("collection");
+        service.deleteCollection(collection);
+
+        verify(collectionRepository).deleteCollection("collection");
+    }
+
+    @Test
     public void shouldRegisterListenersForCollectionsChanges() throws Exception {
         service.addCollectionsChangeListener(SOME_CALLBACK);
 

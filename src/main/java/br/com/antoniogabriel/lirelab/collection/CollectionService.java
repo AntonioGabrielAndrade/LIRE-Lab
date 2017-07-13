@@ -70,4 +70,7 @@ public class CollectionService {
         return queryRunnerFactory.createQueryRunner(resolver).runQuery(collection, feature, queryImage);
     }
 
+    public void deleteCollection(Collection collection) {
+        collectionRepository.deleteCollection(collection.getName());
+    }
 }
