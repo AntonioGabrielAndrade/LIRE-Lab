@@ -43,4 +43,9 @@ public class HomeViewObject {
     public void selectImage(String imageName) {
         treeViewObject.selectImage(imageName);
     }
+
+    public void deleteCollection(Collection collection) {
+        treeViewObject.openContextMenu(collection);
+        treeViewObject.deleteCollection(collection);
+    }
 }

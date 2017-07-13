@@ -62,4 +62,12 @@ public class CollectionTreeViewObject extends FxRobot {
     public void selectImage(String image) {
         clickOn(image).interrupt();
     }
+
+    public void openContextMenu(Collection collection) {
+        rightClickOn(collection.getName()).interrupt();
+    }
+
+    public void deleteCollection(Collection collection) {
+        clickOn("Delete collection");
+    }
 }

@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CollectionHelper {
@@ -33,6 +34,13 @@ public class CollectionHelper {
         assertTrue(indexFolderExist(collection));
         assertTrue(thumbnailsFolderExist(collection));
         assertTrue(xmlFileExist(collection));
+    }
+
+    public void checkCollectionDontExists(String collection) {
+        assertFalse(rootFolderExist(collection));
+        assertFalse(indexFolderExist(collection));
+        assertFalse(thumbnailsFolderExist(collection));
+        assertFalse(xmlFileExist(collection));
     }
 
     public void deleteCollection(Collection collection) {
