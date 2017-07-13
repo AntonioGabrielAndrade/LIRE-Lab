@@ -80,7 +80,7 @@ public class CollectionsMonitor {
                             continue; //loop
                         } else if (ENTRY_DELETE == kind || ENTRY_MODIFY == kind) {
                             try {
-                                Thread.sleep(2000);
+                                Thread.sleep(500);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             } finally {
