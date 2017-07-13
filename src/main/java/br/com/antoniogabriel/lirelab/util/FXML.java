@@ -33,6 +33,7 @@ public abstract class FXML {
             Parent root = resetAndLoad();
             stage = setupStage(stage, root);
             stage.show();
+            stage.centerOnScreen();
 
         } catch (IOException e) {
             throw new LireLabException("Could not resetAndLoad fxml file", e);
@@ -48,7 +49,6 @@ public abstract class FXML {
         }
 
         stage.setTitle(getTitle());
-        stage.centerOnScreen();
         return stage;
     }
 
