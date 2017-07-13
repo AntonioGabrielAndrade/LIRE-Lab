@@ -9,6 +9,10 @@ import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +34,8 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable {
 
     public static final int DEFAULT_COLLECTION_PAGE_SIZE = 120;
+
+    private SimpleListProperty<Collection> collections = new SimpleListProperty<>();
 
     private CollectionService collectionService;
     private ImageViewFactory viewFactory;
@@ -57,7 +63,14 @@ public class HomeController implements Initializable {
         listenToImageSelection();
         listenToCollectionsChange();
         listenToCollectionsRightClick();
+        bindCollectionsListToUI();
         loadCollections();
+    }
+
+    private void listenToCollectionSelection() {
+        collectionTree.addCollectionSelectionListener(
+                new ShowImagesWhenCollectionIsSelectedListener()
+        );
     }
 
     private void listenToCollectionsRightClick() {
@@ -70,32 +83,33 @@ public class HomeController implements Initializable {
         );
     }
 
-    private void listenToCollectionSelection() {
-        collectionTree.addCollectionSelectionListener(
-                new ShowImagesWhenCollectionIsSelectedListener()
-        );
-    }
-
     private void listenToImageSelection() {
         collectionTree.addImageSelectionListener(
                 new ShowImageWhenImageIsSelectedListener()
         );
     }
 
+    private void bindCollectionsListToUI() {
+        collectionTree.bindCollectionsTo(this.collections);
+        collectionTree.bindVisibilityTo(this.collections.emptyProperty().not());
+        welcomeView.visibleProperty().bind(this.collections.emptyProperty());
+
+        this.collections.emptyProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean wasEmpty, Boolean isEmpty) {
+                if(isEmpty) {
+                    centerPane.setCenter(welcomeView);
+                } else {
+                    collectionTree.selectCollection(0);
+                }
+            }
+        });
+    }
+
     private void loadCollections() {
         List<Collection> collections = collectionService.getCollections();
-        if(!collections.isEmpty()) {
-            collectionTree.setCollections(collections);
-            collectionTree.setVisible(true);
-            collectionTree.selectCollection(0);
-            welcomeView.setVisible(false);
-            leftPane.setVisible(true);
-        } else {
-            collectionTree.setCollections(collections);
-            welcomeView.setVisible(true);
-            centerPane.setCenter(welcomeView);
-            leftPane.setVisible(false);
-        }
+        this.collections.setValue(FXCollections.observableArrayList(collections));
+        collectionTree.selectCollection(0);
     }
 
     public void showCollectionImages(Collection collection) {

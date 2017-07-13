@@ -3,6 +3,11 @@ package br.com.antoniogabriel.lirelab.custom.collection_tree;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
@@ -22,6 +27,8 @@ public class CollectionTree extends StackPane {
     @FXML private TreeView<String> treeView;
     @FXML private TreeItem<String> rootItem;
 
+    private SimpleListProperty<Collection> collections = new SimpleListProperty<>();
+
     private TreeItemBuilder treeItemBuilder = new TreeItemBuilder();
     private List<CollectionSelectionListener> collectionListeners = new ArrayList<>();
     private List<CollectionRightClickListener> collectionClickListeners = new ArrayList<>();
@@ -32,6 +39,7 @@ public class CollectionTree extends StackPane {
 
     public CollectionTree() {
         loadFXML();
+        listenToCollectionsListChange();
         listenToCollectionAndImageSelection();
         listenToCollectionRightClick();
     }
@@ -48,6 +56,10 @@ public class CollectionTree extends StackPane {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void listenToCollectionsListChange() {
+        collections.addListener((ListChangeListener<Collection>) c -> addCollectionsToTree(collections));
     }
 
     private void listenToCollectionAndImageSelection() {
@@ -77,7 +89,19 @@ public class CollectionTree extends StackPane {
     }
 
     public void setCollections(List<Collection> collections) {
-        addCollectionsToTree(collections);
+        this.collections.setValue(FXCollections.observableArrayList(collections));
+    }
+
+    public SimpleListProperty<Collection> collectionsProperty() {
+        return collections;
+    }
+
+    public void bindCollectionsTo(ListProperty<Collection> property) {
+        collectionsProperty().bind(property);
+    }
+
+    public void bindVisibilityTo(ObservableBooleanValue value) {
+        visibleProperty().bind(value);
     }
 
     public Collection getSelectedCollection() {
