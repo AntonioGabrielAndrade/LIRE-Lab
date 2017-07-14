@@ -3,6 +3,7 @@
 <?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
 <ToolBar id="toolbar"
          xmlns="http://javafx.com/javafx"
@@ -18,17 +19,6 @@
         </graphic>
     </Button>
 
-    <Button id="toolbar-search-collection" onAction="#searchCollection">
-        <tooltip>
-            <Tooltip text="Search Collection"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="actions:system-search"/>
-        </graphic>
-    </Button>
-
-    <Separator/>
-
     <Button id="toolbar-about" onAction="#openAboutDialog">
         <tooltip>
             <Tooltip text="About"/>
@@ -38,19 +28,27 @@
         </graphic>
     </Button>
 
-    <HBox visible="false" fx:id="searchToolBar">
-        <Separator orientation="VERTICAL"/>
+    <Pane HBox.hgrow="ALWAYS" />
 
-        <Button id="toolbar-back" onAction="#showHomeView">
-            <tooltip>
-                <Tooltip text="Back"/>
-            </tooltip>
-            <graphic>
-                <TangoIconWrapper description="actions:go-previous"/>
-            </graphic>
-        </Button>
-    </HBox>
+    <Separator/>
 
+    <Button id="toolbar-home" onAction="#showHomeView">
+        <tooltip>
+            <Tooltip text="Home"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="actions:go-home"/>
+        </graphic>
+    </Button>
+
+    <Button id="toolbar-search-collection" onAction="#searchCollection">
+        <tooltip>
+            <Tooltip text="Search Collection"/>
+        </tooltip>
+        <graphic>
+            <TangoIconWrapper description="actions:system-search"/>
+        </graphic>
+    </Button>
 
 
 </ToolBar>

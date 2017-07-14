@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Window;
 
 import javax.inject.Inject;
@@ -23,7 +22,6 @@ public class AppController {
     @FXML private BorderPane mainArea;
     @FXML private Node searchView;
     @FXML private Node homeView;
-    @FXML private HBox searchToolBar;
 
     private CreateCollectionFXML createCollectionFXML;
     private AboutFXML aboutFXML;
@@ -55,13 +53,11 @@ public class AppController {
         Feature feature = chooseFeature(selectedCollection, dialogProvider.getWindowFrom(event));
 
         mainArea.setCenter(searchView);
-        searchToolBar.setVisible(true);
         searchController.startSearchSession(selectedCollection, feature);
     }
 
     @FXML
     public void showHomeView(ActionEvent event) {
-        searchToolBar.setVisible(false);
         mainArea.setCenter(homeView);
     }
 
