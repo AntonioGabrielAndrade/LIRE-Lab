@@ -1,9 +1,11 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.custom.dialog_header.DialogHeader;
 import br.com.antoniogabriel.lirelab.custom.feature_table.FeatureTable;
 import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +24,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static javafx.beans.binding.Bindings.when;
+
 public class CreateCollectionController implements Initializable {
 
+    @FXML private DialogHeader dialogHeader;
     @FXML private TextField nameField;
     @FXML private TextField imagesDirectoryField;
     @FXML private CheckBox scanSubdirectoriesCheckbox;
@@ -50,6 +55,21 @@ public class CreateCollectionController implements Initializable {
         bindCreateButton();
         bindParallelIndexerCheckboxToNumberOfThreadsSpinner();
         bindParallelIndexerCheckboxToScanSubdirectoriesCheckBox();
+        bindHintMessagesToFields();
+    }
+
+    private void bindHintMessagesToFields() {
+        SimpleStringProperty nameHint = new SimpleStringProperty("Enter a collection name.");
+        SimpleStringProperty imagesDirectoryHint = new SimpleStringProperty("Enter a directory with images.");
+        SimpleStringProperty featuresHint = new SimpleStringProperty("Select at least one Feature for indexing.");
+        SimpleStringProperty empty = new SimpleStringProperty("");
+
+        dialogHeader.hintProperty().bind(
+                 when(nameIsEmpty()).then(nameHint)
+                    .otherwise(when(imagesDirectoryIsEmpty()).then(imagesDirectoryHint)
+                    .otherwise(when(noFeatureSelected()).then(featuresHint)
+                    .otherwise(empty)))
+        );
     }
 
     @FXML

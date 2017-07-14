@@ -1,0 +1,11 @@
+.dialog-header {
+    -fx-background-color: white
+}
+
+.dialog-header #dialog-header-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.dialog-header #dialog-header-hint {
+}

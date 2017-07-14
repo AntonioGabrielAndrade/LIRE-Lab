@@ -4,104 +4,116 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import br.com.antoniogabriel.lirelab.custom.feature_table.FeatureTable?>
+<?import br.com.antoniogabriel.lirelab.custom.dialog_header.DialogHeader?>
 
-<GridPane xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="br.com.antoniogabriel.lirelab.collection.CreateCollectionController"
-          prefHeight="600.0" prefWidth="600.0"
-          vgap="25"
-          gridLinesVisible="false">
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.antoniogabriel.lirelab.collection.CreateCollectionController"
+            prefHeight="600.0" prefWidth="600.0">
 
-    <columnConstraints>
-        <ColumnConstraints percentWidth="100" />
-    </columnConstraints>
+    <top>
+        <DialogHeader fx:id="dialogHeader" title="Create Collection" hint=""/>
+    </top>
 
-    <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints vgrow="ALWAYS"/>
-        <RowConstraints maxHeight="50" />
-    </rowConstraints>
+    <center>
+        <GridPane
+                vgap="25"
+                gridLinesVisible="false">
 
-    <padding>
-        <Insets top="20" bottom="20" left="20" right="20"/>
-    </padding>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="100"/>
+            </columnConstraints>
 
-    <HBox spacing="5"
-          alignment="BASELINE_CENTER"
-          GridPane.rowIndex="0"
-          GridPane.columnIndex="0">
-        <Label text="Collection name:"/>
-        <TextField id="collection-name" fx:id="nameField" HBox.hgrow="ALWAYS"/>
-    </HBox>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints maxHeight="50"/>
+            </rowConstraints>
 
-    <TitledPane text="Images"
-                collapsible="false"
-                GridPane.rowIndex="1"
-                GridPane.columnIndex="0">
-        <VBox spacing="10">
+            <padding>
+                <Insets top="20" bottom="20" left="20" right="20"/>
+            </padding>
 
-            <HBox spacing="4"
-                  alignment="BASELINE_CENTER">
-
-                <Label text="Images directory: "/>
-                <TextField id="images-directory" fx:id="imagesDirectoryField" HBox.hgrow="ALWAYS"/>
-                <Button text="Browse" onAction="#chooseImagesDirectory"/>
-
+            <HBox spacing="5"
+                  alignment="BASELINE_CENTER"
+                  GridPane.rowIndex="0"
+                  GridPane.columnIndex="0">
+                <Label text="Collection name:"/>
+                <TextField id="collection-name" fx:id="nameField" HBox.hgrow="ALWAYS"/>
             </HBox>
 
-            <HBox alignment="BASELINE_LEFT">
-                <CheckBox text="Scan subdirectories"
-                          fx:id="scanSubdirectoriesCheckbox"
-                          selected="true"/>
+            <TitledPane text="Images"
+                        collapsible="false"
+                        GridPane.rowIndex="1"
+                        GridPane.columnIndex="0">
+                <VBox spacing="10">
+
+                    <HBox spacing="4"
+                          alignment="BASELINE_CENTER">
+
+                        <Label text="Images directory: "/>
+                        <TextField id="images-directory" fx:id="imagesDirectoryField" HBox.hgrow="ALWAYS"/>
+                        <Button text="Browse" onAction="#chooseImagesDirectory"/>
+
+                    </HBox>
+
+                    <HBox alignment="BASELINE_LEFT">
+                        <CheckBox text="Scan subdirectories"
+                                  fx:id="scanSubdirectoriesCheckbox"
+                                  selected="true"/>
+                    </HBox>
+                </VBox>
+            </TitledPane>
+
+
+            <VBox spacing="5"
+                  GridPane.rowIndex="2"
+                  GridPane.columnIndex="0">
+                <Label text="Features for indexing:"/>
+                <FeatureTable fx:id="featuresTable"
+                              editable="true"
+                              GridPane.vgrow="ALWAYS"/>
+            </VBox>
+
+            <TitledPane text="Options"
+                        collapsible="false"
+                        GridPane.rowIndex="3"
+                        GridPane.columnIndex="0">
+                <HBox spacing="20"
+                      alignment="BASELINE_LEFT">
+
+                    <CheckBox text="Use Parallel Indexer"
+                              fx:id="useParallelIndexer"
+                              selected="false"/>
+
+                    <HBox fx:id="numberOfThreadsPane"
+                          spacing="10"
+                          HBox.hgrow="ALWAYS"
+                          alignment="BASELINE_RIGHT">
+
+                        <Label text="Number of threads:"></Label>
+
+                        <Spinner fx:id="numberOfThreads" initialValue="6" min="2" max="10" prefWidth="65"/>
+                    </HBox>
+
+
+                </HBox>
+            </TitledPane>
+
+            <Separator orientation="HORIZONTAL" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+
+            <HBox alignment="BOTTOM_RIGHT"
+                  spacing="7"
+                  GridPane.rowIndex="5"
+                  GridPane.columnIndex="0">
+                <Button text="Cancel" id="cancel" onAction="#close"/>
+                <Button text="Create" id="create" fx:id="createButton" onAction="#createCollection"/>
             </HBox>
-        </VBox>
-    </TitledPane>
 
+        </GridPane>
+    </center>
 
-    <VBox spacing="5"
-          GridPane.rowIndex="2"
-          GridPane.columnIndex="0">
-        <Label text="Features for indexing:"/>
-        <FeatureTable fx:id="featuresTable"
-                      editable="true"
-                      GridPane.vgrow="ALWAYS"/>
-    </VBox>
+</BorderPane>
 
-    <TitledPane text="Options"
-                collapsible="false"
-                GridPane.rowIndex="3"
-                GridPane.columnIndex="0">
-        <HBox spacing="20"
-              alignment="BASELINE_LEFT">
-
-            <CheckBox text="Use Parallel Indexer"
-                      fx:id="useParallelIndexer"
-                      selected="false"/>
-
-            <HBox fx:id="numberOfThreadsPane"
-                  spacing="10"
-                  HBox.hgrow="ALWAYS"
-                  alignment="BASELINE_RIGHT">
-
-                <Label text="Number of threads:"></Label>
-
-                <Spinner fx:id="numberOfThreads" initialValue="6" min="2" max="10" prefWidth="65"/>
-            </HBox>
-
-
-        </HBox>
-    </TitledPane>
-
-    <Separator orientation="HORIZONTAL"  GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-
-    <HBox alignment="BOTTOM_RIGHT"
-          spacing="7"
-          GridPane.rowIndex="5"
-          GridPane.columnIndex="0">
-        <Button text="Cancel" id="cancel" onAction="#close"/>
-        <Button text="Create" id="create" fx:id="createButton" onAction="#createCollection"/>
-    </HBox>
-
-</GridPane>
 
