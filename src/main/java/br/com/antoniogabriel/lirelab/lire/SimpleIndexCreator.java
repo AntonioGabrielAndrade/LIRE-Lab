@@ -59,18 +59,4 @@ public class SimpleIndexCreator implements IndexCreator {
     public void setCallback(IndexCreatorCallback callback) {
         this.callback = callback;
     }
-
-    private class DumbIndexCreatorCallback implements IndexCreatorCallback {
-        @Override
-        public void beforeIndexImages() {}
-
-        @Override
-        public void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {}
-
-        @Override
-        public void afterAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {}
-
-        @Override
-        public void afterIndexAllImages(int totalImages) {}
-    }
 }

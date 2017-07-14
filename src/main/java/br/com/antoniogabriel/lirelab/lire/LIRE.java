@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.lire;
 
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
+import net.semanticmetadata.lire.indexers.parallel.ParallelIndexer;
 import net.semanticmetadata.lire.searchers.GenericFastImageSearcher;
 import net.semanticmetadata.lire.utils.LuceneUtils;
 import org.apache.lucene.index.DirectoryReader;
@@ -35,6 +36,10 @@ public class LIRE {
 
     public IndexReader createIndexReader(String indexDir) throws IOException {
         return DirectoryReader.open(FSDirectory.open(Paths.get(indexDir)));
+    }
+
+    public ParallelIndexer createParallelIndexer(int numberOfThreads, String indexDir, String imagesDir) {
+        return new ParallelIndexer(numberOfThreads, indexDir, imagesDir);
     }
 
     public GenericFastImageSearcher createImageSearcher(int maxHits, Class<? extends GlobalFeature> globalFeature) {
