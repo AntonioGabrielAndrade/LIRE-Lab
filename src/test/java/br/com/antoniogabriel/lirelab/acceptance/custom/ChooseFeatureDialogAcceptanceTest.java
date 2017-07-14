@@ -2,7 +2,6 @@ package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import br.com.antoniogabriel.lirelab.custom.ChooseFeatureDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import com.sun.glass.ui.monocle.MonoclePlatformFactory;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.junit.After;
@@ -29,7 +28,6 @@ public class ChooseFeatureDialogAcceptanceTest extends ApplicationTest {
 
     @Before
     public void setUp() throws Exception {
-        Class<MonoclePlatformFactory> clazz = MonoclePlatformFactory.class;
         interact(() -> {
             features = asList(CEDD, TAMURA, FCTH, COLOR_HISTOGRAM);
             dialog = new ChooseFeatureDialog(features);
