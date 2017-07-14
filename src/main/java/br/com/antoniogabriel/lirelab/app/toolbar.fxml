@@ -34,7 +34,7 @@
             <Tooltip text="About"/>
         </tooltip>
         <graphic>
-            <TangoIconWrapper description="apps:system-users"/>
+            <TangoIconWrapper description="emblems:emblem-important"/>
         </graphic>
     </Button>
 
