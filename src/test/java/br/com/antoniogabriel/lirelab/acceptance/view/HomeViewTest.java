@@ -114,7 +114,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         homeView.waitUntilCollectionIsNotListed(COLLECTION_1);
         homeView.waitUntilCollectionsAreListed(COLLECTION_2);
 
-        runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
+        collectionHelper.createRealCollection(COLLECTION_1);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         homeView.waitUntilCollectionIsNotListed(COLLECTION_1);
         homeView.waitUntilCollectionsAreListed(COLLECTION_2);
 
-        runOnFxThreadAndWait(() -> collectionHelper.createRealCollection(COLLECTION_1));
+        collectionHelper.createRealCollection(COLLECTION_1);
     }
 
     @Test
