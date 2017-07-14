@@ -77,7 +77,9 @@ public class CollectionHelper {
                                 collection.getName(),
                                 collectionFeatures,
                                 collection.getImagesDirectory(),
-                                true
+                                true,
+                                false,
+                                1
                         );
 
         task.run();

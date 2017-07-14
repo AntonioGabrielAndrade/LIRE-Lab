@@ -96,7 +96,9 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
                                                             COLLECTION_3.getName(),
                                                             TEST_IMAGES,
                                                             FEATURES,
-                                                            true);
+                                                            true,
+                                                            false,
+                                                            1);
 
         new Thread(creationTask).start();
 

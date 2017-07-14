@@ -59,11 +59,19 @@ public class CollectionServiceTest {
         String path = ANY_PATH;
         List<Feature> features = EMPTY_LIST;
         boolean scanSubDirs = true;
+        boolean useParallelIndexer = false;
+        int numberOfThreads = 1;
 
-        given(createCollectionTaskFactory.createTask(name, features, path, scanSubDirs))
+        given(createCollectionTaskFactory.createTask(name, features, path, scanSubDirs, useParallelIndexer, numberOfThreads))
             .willReturn(task);
 
-        CreateCollectionTask retrievedTask = service.getTaskToCreateCollection(name, path, features, scanSubDirs);
+        CreateCollectionTask retrievedTask =
+                service.getTaskToCreateCollection(name,
+                                                    path,
+                                                    features,
+                                                    scanSubDirs,
+                                                    useParallelIndexer,
+                                                    numberOfThreads);
 
         assertThat(retrievedTask, is(task));
         verify(collectionsMonitor).bindListenersTo(retrievedTask);

@@ -44,14 +44,18 @@ public class CollectionService {
     public CreateCollectionTask getTaskToCreateCollection(String collectionName,
                                                           String imagesPath,
                                                           List<Feature> collectionFeatures,
-                                                          boolean scanSubdirectories) {
+                                                          boolean scanSubdirectories,
+                                                          boolean useParallelIndexer,
+                                                          int numberOfThreads) {
 
         CreateCollectionTask task =
                 createCollectionTaskFactory.createTask(
                                                 collectionName,
                                                 collectionFeatures,
                                                 imagesPath,
-                                                scanSubdirectories);
+                                                scanSubdirectories,
+                                                useParallelIndexer,
+                                                numberOfThreads);
 
         collectionsMonitor.bindListenersTo(task);
         return task;

@@ -2,7 +2,7 @@ package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.app.DirectoryStructure;
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
+import br.com.antoniogabriel.lirelab.lire.SimpleIndexCreator;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -34,7 +34,7 @@ public class CollectionsMonitorTest {
     private SimpleBooleanProperty listenerExecuted = new SimpleBooleanProperty(false);
     private Runnable SOME_LISTENER = () -> listenerExecuted.set(true);
 
-    @Mock private IndexCreator indexCreator;
+    @Mock private SimpleIndexCreator indexCreator;
     @Mock private ThumbnailsCreator thumbCreator;
     @Mock private XMLCreator xmlCreator;
 

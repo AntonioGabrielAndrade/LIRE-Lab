@@ -1,9 +1,7 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
-import br.com.antoniogabriel.lirelab.lire.Feature;
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
-import br.com.antoniogabriel.lirelab.lire.LIRE;
+import br.com.antoniogabriel.lirelab.lire.*;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 
 import javax.inject.Inject;
@@ -25,16 +23,20 @@ public class CreateCollectionTaskFactory {
     public CreateCollectionTask createTask(String collectionName,
                                            List<Feature> collectionFeatures,
                                            String imagesPath,
-                                           boolean scanSubdirectories) {
+                                           boolean scanSubdirectories,
+                                           boolean useParallelIndexer,
+                                           int numberOfThreads) {
 
-        return new CreateCollectionTask(createTaskAsRunnable(collectionName, collectionFeatures, imagesPath, scanSubdirectories));
+        return new CreateCollectionTask(createTaskAsRunnable(collectionName, collectionFeatures, imagesPath, scanSubdirectories, useParallelIndexer, numberOfThreads));
 
     }
 
     public CreateCollectionRunnable createTaskAsRunnable(String collectionName,
                                                          List<Feature> collectionFeatures,
                                                          String imagesPath,
-                                                         boolean scanSubdirectories) {
+                                                         boolean scanSubdirectories,
+                                                         boolean useParallelIndexer,
+                                                         int numberOfThreads) {
 
 
         String collectionPath = resolver.getCollectionPath(collectionName);
@@ -51,10 +53,13 @@ public class CreateCollectionTaskFactory {
             throw new LireLabException("Could not read paths", e);
         }
 
-        IndexCreator indexCreator = new IndexCreator(lire,
-                indexPath,
-                collectionFeatures,
-                paths);
+        IndexCreator indexCreator = getIndexCreator(lire,
+                                                    indexPath,
+                                                    imagesPath,
+                                                    paths,
+                                                    collectionFeatures,
+                                                    useParallelIndexer,
+                                                    numberOfThreads);
 
         ThumbnailBuilder thumbnailBuilder = new ThumbnailBuilder();
         ThumbnailsCreator thumbnailsCreator = new ThumbnailsCreator(thumbnailBuilder,
@@ -68,5 +73,27 @@ public class CreateCollectionTaskFactory {
                 xmlDAO);
 
         return new CreateCollectionRunnable(indexCreator, thumbnailsCreator, xmlCreator);
+    }
+
+    private IndexCreator getIndexCreator(LIRE lire,
+                                         String indexPath,
+                                         String imagesPath,
+                                         List<String> paths,
+                                         List<Feature> collectionFeatures,
+                                         boolean useParallelIndexer,
+                                         int numberOfThreads) {
+
+        if(useParallelIndexer) {
+            return new ParallelIndexCreator(lire,
+                                            indexPath,
+                                            collectionFeatures,
+                                            imagesPath,
+                                            numberOfThreads);
+        } else {
+            return new SimpleIndexCreator(lire,
+                                            indexPath,
+                                            collectionFeatures,
+                                            paths);
+        }
     }
 }

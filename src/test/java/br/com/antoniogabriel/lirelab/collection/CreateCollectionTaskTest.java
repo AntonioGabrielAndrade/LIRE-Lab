@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
+import br.com.antoniogabriel.lirelab.lire.SimpleIndexCreator;
 import javafx.embed.swing.JFXPanel;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class CreateCollectionTaskTest {
 
     private CreateCollectionTask task;
 
-    @Mock private IndexCreator indexCreator;
+    @Mock private SimpleIndexCreator indexCreator;
     @Mock private ThumbnailsCreator thumbnailsCreator;
     @Mock private XMLCreator xmlCreator;
 

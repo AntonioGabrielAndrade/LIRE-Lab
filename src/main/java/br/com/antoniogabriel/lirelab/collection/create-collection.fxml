@@ -59,7 +59,7 @@
     </TitledPane>
 
 
-    <VBox spacing="3"
+    <VBox spacing="5"
           GridPane.rowIndex="2"
           GridPane.columnIndex="0">
         <Label text="Features for indexing:"/>
@@ -68,9 +68,36 @@
                       GridPane.vgrow="ALWAYS"/>
     </VBox>
 
+    <TitledPane text="Options"
+                collapsible="false"
+                GridPane.rowIndex="3"
+                GridPane.columnIndex="0">
+        <HBox spacing="20"
+              alignment="BASELINE_LEFT">
+
+            <CheckBox text="Use Parallel Indexer"
+                      fx:id="useParallelIndexer"
+                      selected="false"/>
+
+            <HBox fx:id="numberOfThreadsPane"
+                  spacing="10"
+                  HBox.hgrow="ALWAYS"
+                  alignment="BASELINE_RIGHT">
+
+                <Label text="Number of threads:"></Label>
+
+                <Spinner fx:id="numberOfThreads" initialValue="6" min="2" max="10" prefWidth="65"/>
+            </HBox>
+
+
+        </HBox>
+    </TitledPane>
+
+    <Separator orientation="HORIZONTAL"  GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+
     <HBox alignment="BOTTOM_RIGHT"
           spacing="7"
-          GridPane.rowIndex="3"
+          GridPane.rowIndex="5"
           GridPane.columnIndex="0">
         <Button text="Cancel" id="cancel" onAction="#close"/>
         <Button text="Create" id="create" fx:id="createButton" onAction="#createCollection"/>

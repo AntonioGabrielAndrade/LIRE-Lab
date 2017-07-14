@@ -20,7 +20,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class IndexCreatorTest {
+public class SimpleIndexCreatorTest {
 
     private static final String IMG1 = "path1";
     private static final String IMG2 = "path2";
@@ -40,7 +40,7 @@ public class IndexCreatorTest {
     @Mock private BufferedImage bufImg2;
     @Mock private IndexCreatorCallback callback;
 
-    private IndexCreator creator;
+    private SimpleIndexCreator creator;
     private InOrder inOrder;
 
     @Before
@@ -51,7 +51,7 @@ public class IndexCreatorTest {
     }
 
     private void setupIndexCreator() {
-        creator = new IndexCreator(lire, INDEX_DIR, FEATURES, PATHS);
+        creator = new SimpleIndexCreator(lire, INDEX_DIR, FEATURES, PATHS);
         creator.setCallback(callback);
     }
 

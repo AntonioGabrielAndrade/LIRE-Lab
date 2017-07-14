@@ -10,7 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Window;
 
 import javax.inject.Inject;
@@ -26,6 +28,9 @@ public class CreateCollectionController implements Initializable {
     @FXML private TextField imagesDirectoryField;
     @FXML private CheckBox scanSubdirectoriesCheckbox;
     @FXML private FeatureTable featuresTable;
+    @FXML private CheckBox useParallelIndexer;
+    @FXML private Spinner<Integer> numberOfThreads;
+    @FXML private HBox numberOfThreadsPane;
     @FXML private Button createButton;
 
     private DialogProvider dialogProvider;
@@ -43,6 +48,7 @@ public class CreateCollectionController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         populateTable();
         bindCreateButton();
+        bindParallelIndexerCheckboxToNumberOfThreadsSpinner();
     }
 
     @FXML
@@ -65,7 +71,9 @@ public class CreateCollectionController implements Initializable {
                 collectionName(),
                 imagesDirectory(),
                 collectionFeatures(),
-                scanSubdirectories());
+                scanSubdirectories(),
+                useParallelIndexer(),
+                numberOfThreads());
 
         ProgressDialog dialog = dialogProvider.getProgressDialog(task, getWindowFrom(event));
         dialog.showAndStart();
@@ -77,6 +85,14 @@ public class CreateCollectionController implements Initializable {
 
     private void bindCreateButton() {
         createIsDisabledWhen(nameIsEmpty().or(imagesDirectoryIsEmpty().or(noFeatureSelected())));
+    }
+
+    private void bindParallelIndexerCheckboxToNumberOfThreadsSpinner() {
+        numberOfThreadsPane.disableProperty().bind(useParallelIndexer.selectedProperty().not());
+    }
+
+    private int numberOfThreads() {
+        return numberOfThreads.getValue();
     }
 
     private void createIsDisabledWhen(ObservableBooleanValue condition) {
@@ -105,6 +121,10 @@ public class CreateCollectionController implements Initializable {
 
     private boolean scanSubdirectories() {
         return scanSubdirectoriesCheckbox.isSelected();
+    }
+
+    private boolean useParallelIndexer() {
+        return useParallelIndexer.isSelected();
     }
 
     private List<Feature> collectionFeatures() {
