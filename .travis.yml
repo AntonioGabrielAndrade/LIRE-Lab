@@ -17,7 +17,7 @@ addons:
       - oracle-java8-installer
 
 script:
-  - ./mvn clean package -Dheadless=true
+  mvn clean test -Dheadless=true
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
