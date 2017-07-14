@@ -3,32 +3,16 @@ package br.com.antoniogabriel.lirelab.acceptance.view;
 import br.com.antoniogabriel.lirelab.acceptance.custom.CollectionGridViewObject;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import javafx.scene.Node;
 import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilElementsAreOrderedLike;
-import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
-import static org.testfx.api.FxAssert.verifyThat;
+import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.*;
 
 public class SearchViewObject extends FxRobot {
 
     public void checkImagesAreVisible(String... images) {
         new CollectionGridViewObject().checkImagesAreVisible(images);
-    }
-
-    public void selectImage(String image) {
-        new CollectionGridViewObject().selectImage(image);
-    }
-
-    public void checkQueryIs(String image) {
-        Node query = from(lookup("#query-pane")).lookup("#" + image).query();
-        verifyThat(query, Node::isVisible);
-    }
-
-    public void checkImagesAreSortedFor(String image) {
-        throw new UnsupportedOperationException();
     }
 
     public void waitUntilShowCollection(Collection collection) throws TimeoutException {
@@ -47,5 +31,22 @@ public class SearchViewObject extends FxRobot {
 
     public void waitUntilImagesAreOrderedLike(String... images) throws TimeoutException {
         waitUntilElementsAreOrderedLike("#output", ".image-view", images);
+    }
+
+    public void writeQueryPath(String path) {
+        clickOn("#query-image-field").write("").interrupt().write(path);
+    }
+
+    public void checkRunIsEnabled() throws TimeoutException {
+        waitUntil(() -> !lookup("#run-loaded-image").query().isDisabled());
+    }
+
+    public void checkRunIsDisabled() throws TimeoutException {
+        waitUntil(() -> lookup("#run-loaded-image").query().isDisabled());
+    }
+
+    public void run() throws TimeoutException {
+        checkRunIsEnabled();
+        clickOn("#run-loaded-image").interrupt();
     }
 }

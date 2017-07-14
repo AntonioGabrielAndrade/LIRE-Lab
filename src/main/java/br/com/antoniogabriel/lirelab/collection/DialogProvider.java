@@ -10,6 +10,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -25,6 +26,13 @@ public class DialogProvider {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Select the directory that contains the images");
         return chooser.showDialog(window);
+    }
+
+    public File chooseImageFile(Window window) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Select a image to query the collection");
+        chooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images", "jpg", "jpeg", "JPEG", "png"));
+        return chooser.showOpenDialog(window);
     }
 
     public Window getWindowFrom(Event event) {

@@ -69,7 +69,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldRunSearch() throws Exception {
+    public void shouldRunQueryBySelectingQueryFromCollection() throws Exception {
         interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
@@ -86,5 +86,40 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
                                             "17099294578_0ba4068bad_k",
                                             "25601366680_b57441bb52_k",
                                             "19774866363_757555901c_k");
+    }
+
+    @Test
+    public void shouldRunQueryByLoadingQueryFromDisk() throws Exception {
+        interact(() -> controller.startSearchSession(collection, CEDD));
+
+        view.waitUntilShowCollection(collection);
+
+        view.writeQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+        view.run();
+
+        view.waitUntilShowQuery("14474347006_99aa0fd981_k");
+
+        view.waitUntilImagesAreOrderedLike("14474347006_99aa0fd981_k",
+                                            "17338370170_1e620bfb18_h",
+                                            "26489383923_98d419eb0d_k",
+                                            "25601374660_78e6a9bba8_k",
+                                            "17525978165_86dc26e8cb_h",
+                                            "26487616294_b22b87133e_k",
+                                            "16903390174_1d670a5849_h",
+                                            "17099294578_0ba4068bad_k",
+                                            "25601366680_b57441bb52_k",
+                                            "19774866363_757555901c_k");
+    }
+
+    @Test
+    public void shouldEnableRunButtonWhenQueryPathIsAValidImage() throws Exception {
+        view.writeQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+        view.checkRunIsEnabled();
+    }
+
+    @Test
+    public void shouldDisableRunButtonWhenQueryPathIsNotAValidImage() throws Exception {
+        view.writeQueryPath(TEST_IMAGES + "invalid-image-name");
+        view.checkRunIsDisabled();
     }
 }

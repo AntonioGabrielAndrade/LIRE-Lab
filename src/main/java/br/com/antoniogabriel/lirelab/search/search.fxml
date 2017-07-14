@@ -5,6 +5,13 @@
 <?import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
+<?import javafx.scene.control.Tooltip?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -12,7 +19,35 @@
 
     <top>
         <TitledPane text="Query" collapsible="false" minHeight="200">
-            <SingleImageGrid fx:id="queryGrid" id="query"/>
+
+            <HBox>
+                <SingleImageGrid fx:id="queryGrid" id="query" HBox.hgrow="ALWAYS"/>
+
+                <HBox spacing="4" alignment="BASELINE_CENTER" prefWidth="500">
+
+                    <padding>
+                        <Insets top="10" bottom="10" left="10" right="10"/>
+                    </padding>
+
+                    <Label text="Query with: "/>
+
+                    <Button id="run-loaded-image" fx:id="runLoadedImage" onAction="#setLoadedQuery" disable="true">
+                        <tooltip>
+                            <Tooltip text="Run Query"/>
+                        </tooltip>
+                        <graphic>
+                            <TangoIconWrapper description="actions:media-playback-start"/>
+                        </graphic>
+                    </Button>
+
+                    <TextField id="query-image-field" fx:id="queryImageField" HBox.hgrow="ALWAYS"/>
+
+                    <Button text="Browse" onAction="#chooseQueryImage"/>
+
+                </HBox>
+            </HBox>
+
+
         </TitledPane>
     </top>
 

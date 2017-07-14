@@ -44,8 +44,14 @@ public class SingleImageGrid extends StackPane {
     public void setImage(Image image) {
         this.image = image;
         imageGrid.clear();
-        imageGrid.addImage(image.getThumbnailPath());
+        imageGrid.addImage(getBestPath(image));
         executeListeners(image);
+    }
+
+    private String getBestPath(Image image) {
+        return image.getThumbnailPath().isEmpty() ?
+                image.getImagePath() :
+                image.getThumbnailPath();
     }
 
     private void executeListeners(Image image) {
