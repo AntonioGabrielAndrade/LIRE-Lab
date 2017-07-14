@@ -51,7 +51,7 @@
             </HBox>
 
             <HBox alignment="BASELINE_LEFT">
-                <CheckBox text="Scan subdirectorires"
+                <CheckBox text="Scan subdirectories"
                           fx:id="scanSubdirectoriesCheckbox"
                           selected="true"/>
             </HBox>
