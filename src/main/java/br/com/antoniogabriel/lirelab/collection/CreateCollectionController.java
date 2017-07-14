@@ -1,8 +1,8 @@
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.custom.feature_table.FeatureTable;
-import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
+import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
@@ -49,6 +49,7 @@ public class CreateCollectionController implements Initializable {
         populateTable();
         bindCreateButton();
         bindParallelIndexerCheckboxToNumberOfThreadsSpinner();
+        bindParallelIndexerCheckboxToScanSubdirectoriesCheckBox();
     }
 
     @FXML
@@ -89,6 +90,14 @@ public class CreateCollectionController implements Initializable {
 
     private void bindParallelIndexerCheckboxToNumberOfThreadsSpinner() {
         numberOfThreadsPane.disableProperty().bind(useParallelIndexer.selectedProperty().not());
+    }
+
+    private void bindParallelIndexerCheckboxToScanSubdirectoriesCheckBox() {
+        useParallelIndexer.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
+            if(isSelected) {
+                scanSubdirectoriesCheckbox.setSelected(true);
+            }
+        });
     }
 
     private int numberOfThreads() {
