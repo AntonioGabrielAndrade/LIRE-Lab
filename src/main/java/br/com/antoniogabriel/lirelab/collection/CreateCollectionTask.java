@@ -47,6 +47,11 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     }
 
     @Override
+    public void updatePercentage(double percentageDone) {
+        updateProgress(percentageDone, 1.0);
+    }
+
+    @Override
     public void beforeCreateThumbnail(int currentImage, int totalImages, String imagePath) {
         updateTitle("Step 2: Create thumbnails");
         updateMessage("Creating thumbnail for  " + Paths.get(imagePath).getFileName().toString());

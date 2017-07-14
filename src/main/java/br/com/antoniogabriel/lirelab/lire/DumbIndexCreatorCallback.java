@@ -12,4 +12,7 @@ class DumbIndexCreatorCallback implements IndexCreatorCallback {
 
     @Override
     public void afterIndexAllImages(int totalImages) {}
+
+    @Override
+    public void updatePercentage(double percentageDone) {}
 }

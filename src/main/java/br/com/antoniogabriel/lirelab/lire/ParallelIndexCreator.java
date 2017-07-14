@@ -32,7 +32,19 @@ public class ParallelIndexCreator implements IndexCreator {
         ParallelIndexer indexer = lire.createParallelIndexer(numberOfThreads, indexDir, imagesDir);
         callback.beforeIndexImages();
         addFeaturesToIndexer(features, indexer);
-        indexer.run();
+
+        new Thread(() -> indexer.run()).start();
+
+        while(!indexer.hasEnded()) {
+            try {
+                Thread.sleep(2000);
+                callback.updatePercentage(indexer.getPercentageDone());
+            } catch (InterruptedException e) {
+                continue;
+            }
+        }
+
+        callback.updatePercentage(1.0);
     }
 
     private void addFeaturesToIndexer(List<Feature> features, ParallelIndexer indexer) {

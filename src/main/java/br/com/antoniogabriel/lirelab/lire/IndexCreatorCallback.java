@@ -8,4 +8,6 @@ public interface IndexCreatorCallback {
     void afterAddImageToIndex(int currentImage, int totalImages, String imageFilePath);
 
     void afterIndexAllImages(int totalImages);
+
+    void updatePercentage(double percentageDone);
 }
