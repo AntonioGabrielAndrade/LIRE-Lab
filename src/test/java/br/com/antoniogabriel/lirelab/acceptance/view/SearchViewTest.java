@@ -69,7 +69,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldShowCollection() throws Exception {
+    public void shouldRunSearch() throws Exception {
         interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
