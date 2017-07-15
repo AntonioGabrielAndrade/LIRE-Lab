@@ -12,6 +12,7 @@
 <?import javafx.geometry.Insets?>
 <?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -19,34 +20,41 @@
 
     <top>
         <TitledPane text="Query" collapsible="false" minHeight="200">
-
-            <HBox>
+            <HBox spacing="20">
                 <SingleImageGrid fx:id="queryGrid" id="query" HBox.hgrow="ALWAYS"/>
 
-                <HBox spacing="4" alignment="BASELINE_CENTER" prefWidth="500">
+                <VBox spacing="20">
 
-                    <padding>
-                        <Insets top="10" bottom="10" left="10" right="10"/>
-                    </padding>
+                    <HBox spacing="4" alignment="BASELINE_CENTER" prefWidth="500">
+                        <padding>
+                            <Insets top="10" bottom="10" left="10" right="10"/>
+                        </padding>
+                        <Label text="Image:"/>
 
-                    <Label text="Query with: "/>
+                        <TextField fx:id="currentQueryField" HBox.hgrow="ALWAYS"/>
+                    </HBox>
 
-                    <Button id="run-loaded-image" fx:id="runLoadedImage" onAction="#setLoadedQuery" disable="true">
-                        <tooltip>
-                            <Tooltip text="Run Query"/>
-                        </tooltip>
-                        <graphic>
-                            <TangoIconWrapper description="actions:media-playback-start"/>
-                        </graphic>
-                    </Button>
+                    <VBox spacing="3">
+                        <Label text="Choose from disk:"/>
+                        <HBox spacing="4" alignment="BASELINE_CENTER" prefWidth="500">
 
-                    <TextField id="query-image-field" fx:id="queryImageField" HBox.hgrow="ALWAYS"/>
+                            <Button id="run-loaded-image" fx:id="runLoadedImage" onAction="#setLoadedQuery"
+                                    disable="true">
+                                <tooltip>
+                                    <Tooltip text="Run Query"/>
+                                </tooltip>
+                                <graphic>
+                                    <TangoIconWrapper description="actions:media-playback-start"/>
+                                </graphic>
+                            </Button>
 
-                    <Button text="Browse" onAction="#chooseQueryImage"/>
+                            <TextField id="query-image-field" fx:id="queryPathField" HBox.hgrow="ALWAYS"/>
 
-                </HBox>
+                            <Button text="Browse" onAction="#chooseQueryImage"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
             </HBox>
-
 
         </TitledPane>
     </top>

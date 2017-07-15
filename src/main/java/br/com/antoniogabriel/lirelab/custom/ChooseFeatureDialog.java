@@ -50,6 +50,7 @@ public class ChooseFeatureDialog extends Dialog<Feature> {
     private void addFeatureRadio() {
         VBox root = new VBox();
         root.setSpacing(5);
+        dialogActions.setContent(root);
         final ToggleGroup group = new ToggleGroup();
         for (Feature feature : features) {
             nameToFeature.put(feature.getFeatureName(), feature);
@@ -67,7 +68,7 @@ public class ChooseFeatureDialog extends Dialog<Feature> {
             }
         });
 
-        dialogActions.setContent(root);
+//        dialogActions.setContent(root);
         dialogActions.setTitle("Select Feature");
         getDialogPane().setPrefWidth(300);
         getDialogPane().setHeaderText("Choose Feature to run query");
