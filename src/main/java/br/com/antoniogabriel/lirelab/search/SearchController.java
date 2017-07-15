@@ -71,16 +71,23 @@ public class SearchController implements Initializable {
 
     public void startSearchSession(Collection collection, Feature feature) {
         clear();
-
         mapImageNamesToImages(collection);
 
-        outputGrid.setCollection(collection, new UpdateCurrentQuery());
-        queryGrid.setOnChange(new QueryChangeListener(this, collection, feature));
-
-        setStatusMessage(collection, feature);
-        setQueryAutoCompletion(collection);
+        showCollectionInOutputGrid(collection);
 
         bindCurrentQueryFieldToQueryGrid();
+        bindQueryGridToQueryExecution(collection, feature);
+
+        setStatusMessage(collection, feature);
+        setupQueryAutoCompletion(collection);
+    }
+
+    private void bindQueryGridToQueryExecution(Collection collection, Feature feature) {
+        queryGrid.setOnChange(new QueryChangeListener(this, collection, feature));
+    }
+
+    private void showCollectionInOutputGrid(Collection collection) {
+        outputGrid.setCollection(collection, new UpdateCurrentQuery());
     }
 
     private void mapImageNamesToImages(Collection collection) {
@@ -98,7 +105,7 @@ public class SearchController implements Initializable {
         });
     }
 
-    private AutoCompletionBinding<Image> setQueryAutoCompletion(Collection collection) {
+    private AutoCompletionBinding<Image> setupQueryAutoCompletion(Collection collection) {
         return TextFields.bindAutoCompletion(currentQueryField, collection.getImages());
     }
 
