@@ -37,7 +37,7 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                Thread.sleep(3000);
+                Thread.sleep(2000);
                 return null;
             }
         };
