@@ -75,9 +75,11 @@ public class SearchController implements Initializable {
     public void runQuery(Collection collection, Feature feature, Image queryImage) {
         RunQueryTask queryTask = createQueryTask(collection, feature, queryImage);
         statusBar.bindProgressTo(queryTask);
+
         queryTask.addValueListener((observable, oldValue, images) -> {
             outputGrid.setCollection(images, new UpdateCurrentQuery());
         });
+
         new Thread(queryTask).start();
     }
 
