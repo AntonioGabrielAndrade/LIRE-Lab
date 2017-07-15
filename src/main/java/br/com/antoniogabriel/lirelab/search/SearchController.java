@@ -87,6 +87,21 @@ public class SearchController implements Initializable {
         return new RunQueryTask(service, collection, feature, queryImage);
     }
 
+    public void chooseQueryImage(ActionEvent event) {
+        Window owner = getWindowFrom(event);
+        File dir = dialogProvider.chooseImageFile(owner);
+        if (dir != null) {
+            queryPathField.setText(dir.getAbsolutePath());
+            setLoadedQuery();
+        }
+    }
+
+    public void setLoadedQuery() {
+        Image image = new Image(queryPathField.getText(), "");
+        currentQueryField.setText(image.getImageName());
+        queryGrid.setImage(image);
+    }
+
     private void bindQueryPathFieldToRunButton() {
         queryPathField.textProperty().addListener((observable, oldPath, newPath) -> {
             if(fileUtils.isImage(newPath)) {
@@ -133,21 +148,6 @@ public class SearchController implements Initializable {
 
     private void setStatusMessage(Collection collection, Feature feature) {
         statusBar.setSearchStatusInfo(collection, feature);
-    }
-
-    public void chooseQueryImage(ActionEvent event) {
-        Window owner = getWindowFrom(event);
-        File dir = dialogProvider.chooseImageFile(owner);
-        if (dir != null) {
-            queryPathField.setText(dir.getAbsolutePath());
-            setLoadedQuery();
-        }
-    }
-
-    public void setLoadedQuery() {
-        Image image = new Image(queryPathField.getText(), "");
-        currentQueryField.setText(image.getImageName());
-        queryGrid.setImage(image);
     }
 
     private Window getWindowFrom(ActionEvent event) {
