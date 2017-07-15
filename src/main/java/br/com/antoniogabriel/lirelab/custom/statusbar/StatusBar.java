@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.custom.statusbar;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StatusBar extends BorderPane {
@@ -20,6 +23,8 @@ public class StatusBar extends BorderPane {
     @FXML private Label statusMessage;
     @FXML private ProgressBar statusProgress;
     @FXML private ComboBox<Feature> featuresComboBox;
+
+    private List<ComboBoxListener> comboBoxListeners = new ArrayList<>();
 
     public StatusBar() {
         loadFXML();
@@ -41,11 +46,21 @@ public class StatusBar extends BorderPane {
         statusProgress.visibleProperty().bind(task.runningProperty());
     }
 
-    public void setFeatures(List<Feature> features, FeatureSelectionListener listener) {
+    public void setFeatures(List<Feature> features, Feature defaultFeature, FeatureSelectionListener listener) {
         featuresComboBox.setItems(FXCollections.observableList(features));
-        featuresComboBox.valueProperty().addListener((observable, oldFeature, newFeature) -> {
-            listener.selected(newFeature);
-        });
+        selectFeature(defaultFeature);
+
+        ComboBoxListener comboBoxListener = new ComboBoxListener(listener);
+        comboBoxListeners.add(comboBoxListener);
+
+        featuresComboBox.valueProperty().addListener(comboBoxListener);
+    }
+
+    public void clear() {
+        for (ComboBoxListener comboBoxListener : comboBoxListeners) {
+            featuresComboBox.valueProperty().removeListener(comboBoxListener);
+        }
+        comboBoxListeners.clear();
     }
 
     public void selectFeature(Feature feature) {
@@ -54,5 +69,18 @@ public class StatusBar extends BorderPane {
 
     public Feature getSelectedFeature() {
         return featuresComboBox.getValue();
+    }
+
+    private class ComboBoxListener implements ChangeListener<Feature> {
+        private FeatureSelectionListener listener;
+
+        public ComboBoxListener(FeatureSelectionListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        public void changed(ObservableValue<? extends Feature> observable, Feature oldValue, Feature newValue) {
+            listener.selected(newValue);
+        }
     }
 }

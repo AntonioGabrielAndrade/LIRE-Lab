@@ -151,13 +151,13 @@ public class SearchController implements Initializable {
         currentQueryField.clear();
         queryPathField.clear();
         nameToImage.clear();
+        statusBar.clear();
     }
 
     private void setStatusBar(Collection collection, Feature feature) {
-        statusBar.setFeatures(collection.getFeatures(), selectedFeature -> {
+        statusBar.setFeatures(collection.getFeatures(), feature, selectedFeature -> {
             rerunQuery(collection, selectedFeature);
         });
-        statusBar.selectFeature(feature);
     }
 
     private Window getWindowFrom(ActionEvent event) {

@@ -45,6 +45,10 @@ public class PaginatedCollectionGrid extends StackPane {
         this.pageSize = pageSize;
     }
 
+    public void clear() {
+        pagination.setPageFactory(null);
+    }
+
     public void setCollection(Collection collection) throws IOException {
         setCollection(collection, new DisplayImageDialogHandler(new DialogProvider(), new FileUtils()));
     }

@@ -37,12 +37,12 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
         FeatureSelectionListener listener = feature -> featuresArray[0] = feature;
 
         interact(() -> {
-            statusBar.setFeatures(features, listener);
-            statusBar.selectFeature(CEDD);
+            statusBar.setFeatures(features, CEDD, listener);
+            statusBar.selectFeature(TAMURA);
         });
 
         view.checkComboboxHasFeatures(features);
-        assertThat(featuresArray[0], is(CEDD));
+        assertThat(featuresArray[0], is(TAMURA));
     }
 
     @Test
