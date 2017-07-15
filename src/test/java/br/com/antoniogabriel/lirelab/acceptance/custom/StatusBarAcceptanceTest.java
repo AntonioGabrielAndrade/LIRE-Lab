@@ -1,14 +1,20 @@
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.custom.statusbar.FeatureSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
+
+import java.util.List;
+
+import static br.com.antoniogabriel.lirelab.lire.Feature.*;
+import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class StatusBarAcceptanceTest extends ApplicationTest {
 
@@ -24,12 +30,19 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldSetSearchStatusInfo() throws Exception {
-        Platform.runLater(() -> {
-            statusBar.setSearchStatusInfo(new Collection("testCollection"), Feature.CEDD);
+    public void shouldSetFeatures() throws Exception {
+        List<Feature> features = asList(CEDD, TAMURA, COLOR_HISTOGRAM);
+        Feature[] featuresArray = new Feature[1];
+
+        FeatureSelectionListener listener = feature -> featuresArray[0] = feature;
+
+        interact(() -> {
+            statusBar.setFeatures(features, listener);
+            statusBar.selectFeature(CEDD);
         });
 
-        view.waitUntilStatusMessageIs("Collection: testCollection  Feature: CEDD");
+        view.checkComboboxHasFeatures(features);
+        assertThat(featuresArray[0], is(CEDD));
     }
 
     @Test

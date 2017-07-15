@@ -68,7 +68,7 @@ public class SearchController implements Initializable {
         bindCurrentQueryFieldToQueryGrid();
         bindQueryGridToQueryExecution(collection, feature);
 
-        setStatusMessage(collection, feature);
+        setStatusBar(collection, feature);
         setupQueryAutoCompletion(collection);
     }
 
@@ -81,6 +81,11 @@ public class SearchController implements Initializable {
         });
 
         new Thread(queryTask).start();
+    }
+
+    public void rerunQuery(Collection collection, Feature feature) {
+        Image image = queryGrid.getImage();
+        runQuery(collection, feature, image);
     }
 
     protected RunQueryTask createQueryTask(Collection collection, Feature feature, Image queryImage) {
@@ -146,8 +151,11 @@ public class SearchController implements Initializable {
         nameToImage.clear();
     }
 
-    private void setStatusMessage(Collection collection, Feature feature) {
-        statusBar.setSearchStatusInfo(collection, feature);
+    private void setStatusBar(Collection collection, Feature feature) {
+        statusBar.setFeatures(collection.getFeatures(), selectedFeature -> {
+            rerunQuery(collection, selectedFeature);
+        });
+        statusBar.selectFeature(feature);
     }
 
     private Window getWindowFrom(ActionEvent event) {
