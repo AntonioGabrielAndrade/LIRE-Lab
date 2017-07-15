@@ -51,4 +51,8 @@ public class StatusBar extends BorderPane {
     public void selectFeature(Feature feature) {
         featuresComboBox.valueProperty().setValue(feature);
     }
+
+    public Feature getSelectedFeature() {
+        return featuresComboBox.getValue();
+    }
 }

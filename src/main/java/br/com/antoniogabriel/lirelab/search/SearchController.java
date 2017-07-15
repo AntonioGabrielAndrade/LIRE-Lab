@@ -66,7 +66,7 @@ public class SearchController implements Initializable {
         showCollectionInOutputGrid(collection);
 
         bindCurrentQueryFieldToQueryGrid();
-        bindQueryGridToQueryExecution(collection, feature);
+        bindQueryGridToQueryExecution(collection);
 
         setStatusBar(collection, feature);
         setupQueryAutoCompletion(collection);
@@ -117,8 +117,10 @@ public class SearchController implements Initializable {
         });
     }
 
-    private void bindQueryGridToQueryExecution(Collection collection, Feature feature) {
-        queryGrid.setOnChange(newImage -> runQuery(collection, feature, newImage));
+    private void bindQueryGridToQueryExecution(Collection collection) {
+        queryGrid.setOnChange(newImage -> {
+            runQuery(collection, statusBar.getSelectedFeature(), newImage);
+        });
     }
 
     private void showCollectionInOutputGrid(Collection collection) {
