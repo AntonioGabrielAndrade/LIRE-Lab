@@ -1,5 +1,7 @@
 package br.com.antoniogabriel.lirelab.acceptance.view;
 
+import br.com.antoniogabriel.lirelab.collection.Collection;
+import javafx.scene.control.ComboBox;
 import org.testfx.api.FxRobot;
 import org.testfx.util.WaitForAsyncUtils;
 
@@ -65,5 +67,16 @@ public class AppViewObject extends FxRobot {
     public void checkAboutDialog() throws TimeoutException {
         waitUntilIsVisible("#splash-image", ABOUT_ROOT);
         waitUntilIsVisible("#about-info", ABOUT_ROOT);
+    }
+
+    public void selectCollectionToRun(String collectionName) throws TimeoutException {
+        ComboBox<Collection> comboBox = lookup("#collections-combo-box").query();
+        clickOn(comboBox);
+
+        for (Collection collection : comboBox.getItems()) {
+            if(collection.getName().equals(collectionName)) {
+                interact(() -> comboBox.getSelectionModel().select(collection));
+            }
+        }
     }
 }

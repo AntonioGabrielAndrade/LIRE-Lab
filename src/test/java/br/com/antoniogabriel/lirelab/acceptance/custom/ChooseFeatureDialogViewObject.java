@@ -10,6 +10,7 @@ import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilI
 public class ChooseFeatureDialogViewObject extends FxRobot {
 
     public void selectFeature(Feature feature) throws TimeoutException {
+        waitUntilIsVisible(feature.getFeatureName());
         clickOn(feature.getFeatureName()).interrupt();
     }
 

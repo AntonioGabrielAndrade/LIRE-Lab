@@ -9,7 +9,7 @@
 
 <StackPane id="main-content"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="br.com.antoniogabriel.lirelab.app.AppController">
+           fx:controller="br.com.antoniogabriel.lirelab.app.WelcomeController">
 
     <GridPane id="welcome-view"
               vgap="10"

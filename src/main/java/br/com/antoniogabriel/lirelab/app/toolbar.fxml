@@ -32,23 +32,30 @@
 
     <Separator/>
 
-    <Button id="toolbar-home" onAction="#showHomeView">
-        <tooltip>
-            <Tooltip text="Home"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="actions:go-home"/>
-        </graphic>
-    </Button>
+    <HBox spacing="20">
+        <Button id="toolbar-home" onAction="#showHomeView">
+            <tooltip>
+                <Tooltip text="Home"/>
+            </tooltip>
+            <graphic>
+                <TangoIconWrapper description="actions:go-home"/>
+            </graphic>
+        </Button>
 
-    <Button id="toolbar-search-collection" onAction="#searchCollection">
-        <tooltip>
-            <Tooltip text="Search Collection"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="actions:system-search"/>
-        </graphic>
-    </Button>
+        <HBox spacing="5">
+            <ComboBox fx:id="collectionsComboBox" id="collections-combo-box"/>
+
+            <Button id="toolbar-search-collection" onAction="#searchCollection">
+                <tooltip>
+                    <Tooltip text="Search Collection"/>
+                </tooltip>
+                <graphic>
+                    <TangoIconWrapper description="actions:system-search"/>
+                </graphic>
+            </Button>
+        </HBox>
+
+    </HBox>
 
 
 </ToolBar>
