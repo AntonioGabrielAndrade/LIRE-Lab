@@ -59,16 +59,6 @@ public class SearchController implements Initializable {
         bindQueryPathFieldToRunButton();
     }
 
-    private void bindQueryPathFieldToRunButton() {
-        queryPathField.textProperty().addListener((observable, oldPath, newPath) -> {
-            if(fileUtils.isImage(newPath)) {
-                runLoadedImage.setDisable(false);
-            } else {
-                runLoadedImage.setDisable(true);
-            }
-        });
-    }
-
     public void startSearchSession(Collection collection, Feature feature) {
         clear();
         mapImageNamesToImages(collection);
@@ -80,6 +70,29 @@ public class SearchController implements Initializable {
 
         setStatusMessage(collection, feature);
         setupQueryAutoCompletion(collection);
+    }
+
+    public void runQuery(Collection collection, Feature feature, Image queryImage) {
+        RunQueryTask queryTask = createQueryTask(collection, feature, queryImage);
+        statusBar.bindProgressTo(queryTask);
+        queryTask.addValueListener((observable, oldValue, images) -> {
+            outputGrid.setCollection(images, new UpdateCurrentQuery());
+        });
+        new Thread(queryTask).start();
+    }
+
+    protected RunQueryTask createQueryTask(Collection collection, Feature feature, Image queryImage) {
+        return new RunQueryTask(service, collection, feature, queryImage);
+    }
+
+    private void bindQueryPathFieldToRunButton() {
+        queryPathField.textProperty().addListener((observable, oldPath, newPath) -> {
+            if(fileUtils.isImage(newPath)) {
+                runLoadedImage.setDisable(false);
+            } else {
+                runLoadedImage.setDisable(true);
+            }
+        });
     }
 
     private void bindQueryGridToQueryExecution(Collection collection, Feature feature) {
@@ -114,19 +127,6 @@ public class SearchController implements Initializable {
         currentQueryField.clear();
         queryPathField.clear();
         nameToImage.clear();
-    }
-
-    public void runQuery(Collection collection, Feature feature, Image queryImage) {
-        RunQueryTask queryTask = createQueryTask(collection, feature, queryImage);
-        statusBar.bindProgressTo(queryTask);
-        queryTask.addValueListener((observable, oldValue, images) -> {
-            outputGrid.setCollection(images, new UpdateCurrentQuery());
-        });
-        new Thread(queryTask).start();
-    }
-
-    protected RunQueryTask createQueryTask(Collection collection, Feature feature, Image queryImage) {
-        return new RunQueryTask(service, collection, feature, queryImage);
     }
 
     private void setStatusMessage(Collection collection, Feature feature) {
