@@ -96,7 +96,7 @@ public class SearchController implements Initializable {
     }
 
     private void bindQueryGridToQueryExecution(Collection collection, Feature feature) {
-        queryGrid.setOnChange(new QueryChangeListener(this, collection, feature));
+        queryGrid.setOnChange(newImage -> runQuery(collection, feature, newImage));
     }
 
     private void showCollectionInOutputGrid(Collection collection) {
