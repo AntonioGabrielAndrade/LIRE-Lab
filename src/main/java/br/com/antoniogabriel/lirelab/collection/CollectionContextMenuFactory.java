@@ -14,6 +14,13 @@ public class CollectionContextMenuFactory {
 
     public ContextMenu createContextMenu(Collection collection) {
         ContextMenu contextMenu = new ContextMenu();
+        MenuItem deleteItem = createDeleteItem(collection);
+
+        contextMenu.getItems().add(deleteItem);
+        return contextMenu;
+    }
+
+    private MenuItem createDeleteItem(Collection collection) {
         MenuItem deleteItem = new MenuItem("Delete collection");
         deleteItem.setOnAction(ev -> {
             Task<Void> deletion = new Task<Void>() {
@@ -25,9 +32,7 @@ public class CollectionContextMenuFactory {
             };
             new Thread(deletion).start();
         });
-
-        contextMenu.getItems().add(deleteItem);
-        return contextMenu;
+        return deleteItem;
     }
 
 }
