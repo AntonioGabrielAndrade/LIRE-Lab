@@ -94,14 +94,11 @@ public class HomeController implements Initializable {
         collectionTree.bindVisibilityTo(this.collections.emptyProperty().not());
         welcomeView.visibleProperty().bind(this.collections.emptyProperty());
 
-        this.collections.emptyProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean wasEmpty, Boolean isEmpty) {
-                if(isEmpty) {
-                    centerPane.setCenter(welcomeView);
-                } else {
-                    collectionTree.selectCollection(0);
-                }
+        this.collections.emptyProperty().addListener((observable, wasEmpty, isEmpty) -> {
+            if(isEmpty) {
+                centerPane.setCenter(welcomeView);
+            } else {
+                collectionTree.selectCollection(0);
             }
         });
     }
