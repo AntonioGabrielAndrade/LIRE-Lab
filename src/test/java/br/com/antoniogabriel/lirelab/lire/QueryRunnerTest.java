@@ -64,7 +64,7 @@ public class QueryRunnerTest {
     public void shouldRunQuery() throws Exception {
         List<Image> result = queryRunner.runQuery(collection, feature, queryImage);
 
-        verify(lireIndexSearcher).search(IMG_PATH, INDEX_DIR, feature.getLireClass(), 2);
+        verify(lireIndexSearcher).search(IMG_PATH, INDEX_DIR, -1, feature.getLireClass(), 2);
         assertThat(result, is(images));
     }
 

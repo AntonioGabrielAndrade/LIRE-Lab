@@ -53,7 +53,9 @@ public class CollectionAssembler {
                 Document d = ir.document(i);
                 String imagePath = d.getField(DocumentBuilder.FIELD_NAME_IDENTIFIER).stringValue();
                 String thumbnailPath = collectionUtils.getThumbnailPathFromImagePath(collection, imagePath);
-                results.add(new Image(imagePath, thumbnailPath));
+                Image image = new Image(imagePath, thumbnailPath);
+                image.setDocId(i);
+                results.add(image);
             }
             ir.close();
 

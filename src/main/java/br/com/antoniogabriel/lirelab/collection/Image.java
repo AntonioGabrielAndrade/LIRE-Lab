@@ -9,6 +9,7 @@ public class Image {
 
     private double score = -1;
     private int position = -1;
+    private int docId = -1;
 
     public Image(String imagePath, String thumbnailPath) {
         this.imagePath = imagePath;
@@ -43,6 +44,14 @@ public class Image {
         return position;
     }
 
+    public void setDocId(int docId) {
+        this.docId = docId;
+    }
+
+    public int getDocId() {
+        return docId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,4 +74,5 @@ public class Image {
     public String toString() {
         return getImageName();
     }
+
 }

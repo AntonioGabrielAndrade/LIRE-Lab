@@ -30,7 +30,7 @@ public class QueryRunner {
 
         ImagesSearchedCallback callback = createSearcherCallback(collection);
         LireIndexSearcher searcher = createIndexSearcher(callback);
-        searcher.search(queryPath, indexDir, globalFeature, maxHits);
+        searcher.search(queryPath, indexDir, queryImage.getDocId(), globalFeature, maxHits);
 
         return Collections.unmodifiableList(callback.getImages());
     }
