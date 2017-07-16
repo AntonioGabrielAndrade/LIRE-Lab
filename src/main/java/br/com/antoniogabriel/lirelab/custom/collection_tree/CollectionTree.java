@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseButton;
@@ -81,8 +83,16 @@ public class CollectionTree extends StackPane {
     private void listenToCollectionRightClick() {
         treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (event.getButton() == MouseButton.SECONDARY && getSelectedCollection() != null) {
+
+                Bounds boundsInScene = null;
+                Node itemNode = treeView.getSelectionModel().getSelectedItem().getGraphic().getParent();
+
+                if(itemNode != null) {
+                    boundsInScene = itemNode.localToScene(itemNode.getBoundsInLocal());
+                }
+
                 for (CollectionRightClickListener listener : collectionClickListeners) {
-                    listener.clicked(getSelectedCollection(), event);
+                    listener.clicked(getSelectedCollection(), event, boundsInScene);
                 }
             }
         });

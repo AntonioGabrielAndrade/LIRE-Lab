@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
+import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionRightClickListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionSelectionListener;
@@ -16,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
@@ -157,8 +159,10 @@ public class HomeController implements Initializable {
     }
 
     public class ShowContextMenuListener implements CollectionRightClickListener {
+        DialogProvider dialogProvider = new DialogProvider();
+
         @Override
-        public void clicked(Collection collection, MouseEvent event) {
+        public void clicked(Collection collection, MouseEvent event, Bounds itemBounds) {
             ContextMenu contextMenu = new ContextMenu();
             MenuItem deleteItem = new MenuItem("Delete collection");
             deleteItem.setOnAction(ev -> {
@@ -173,7 +177,11 @@ public class HomeController implements Initializable {
             });
 
             contextMenu.getItems().add(deleteItem);
-            contextMenu.show(collectionTree, event.getScreenX(), event.getScreenY());
+
+            double itemX = event.getX() + 60;
+            double itemY = itemBounds.getMaxY() + 20;
+
+            contextMenu.show(dialogProvider.getWindowFrom(event), itemX, itemY);
         }
     }
 }
