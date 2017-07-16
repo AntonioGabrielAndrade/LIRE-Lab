@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
@@ -14,12 +15,10 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -75,7 +74,7 @@ public class HomeController implements Initializable {
     }
 
     private void listenToCollectionsRightClick() {
-        collectionTree.addCollectionRightClickListener(new ShowContextMenuListener());
+        collectionTree.addCollectionRightClickListener(new ShowContextMenuListener(collectionService));
     }
 
     private void listenToCollectionsChange() {
@@ -160,23 +159,15 @@ public class HomeController implements Initializable {
 
     public class ShowContextMenuListener implements CollectionRightClickListener {
         DialogProvider dialogProvider = new DialogProvider();
+        CollectionContextMenuFactory factory;
+
+        public ShowContextMenuListener(CollectionService service) {
+            factory = new CollectionContextMenuFactory(service);
+        }
 
         @Override
         public void clicked(Collection collection, MouseEvent event, Bounds itemBounds) {
-            ContextMenu contextMenu = new ContextMenu();
-            MenuItem deleteItem = new MenuItem("Delete collection");
-            deleteItem.setOnAction(ev -> {
-                Task<Void> deletion = new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        collectionService.deleteCollection(collection);
-                        return null;
-                    }
-                };
-                new Thread(deletion).start();
-            });
-
-            contextMenu.getItems().add(deleteItem);
+            ContextMenu contextMenu = factory.createContextMenu(collection);
 
             double itemX = event.getX() + 60;
             double itemY = itemBounds.getMaxY() + 20;
