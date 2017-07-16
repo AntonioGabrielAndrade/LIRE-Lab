@@ -1,10 +1,7 @@
 package br.com.antoniogabriel.lirelab.app;
 
 
-import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
-import br.com.antoniogabriel.lirelab.collection.DialogProvider;
+import br.com.antoniogabriel.lirelab.collection.*;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.search.SearchController;
 import javafx.application.Platform;
@@ -21,8 +18,11 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static java.util.Collections.unmodifiableList;
 
 @Singleton
 public class AppController implements Initializable {
@@ -36,22 +36,19 @@ public class AppController implements Initializable {
     private CollectionService collectionService;
     private AboutFXML aboutFXML;
     private DialogProvider dialogProvider;
-    private HomeController homeController;
     private SearchController searchController;
 
     @Inject
     public AppController(CreateCollectionFXML createCollectionFXML,
                          CollectionService collectionService,
                          AboutFXML aboutFXML, DialogProvider dialogProvider,
-                         SearchController searchController,
-                         HomeController homeController) {
+                         SearchController searchController) {
 
         this.createCollectionFXML = createCollectionFXML;
         this.collectionService = collectionService;
         this.aboutFXML = aboutFXML;
         this.dialogProvider = dialogProvider;
         this.searchController = searchController;
-        this.homeController = homeController;
     }
 
     @Override
@@ -74,11 +71,14 @@ public class AppController implements Initializable {
 
     @FXML
     public void searchCollection(ActionEvent event) {
-        Collection selectedCollection = collectionsComboBox.getValue();
-        Feature feature = chooseFeature(selectedCollection, dialogProvider.getWindowFrom(mainArea));
+        searchCollection(collectionsComboBox.getValue());
+    }
+
+    private void searchCollection(Collection collection) {
+        Feature feature = chooseFeature(collection, dialogProvider.getWindowFrom(mainArea));
 
         mainArea.setCenter(searchView);
-        searchController.startSearchSession(selectedCollection, feature);
+        searchController.startSearchSession(collection, feature);
     }
 
     @FXML
@@ -105,4 +105,20 @@ public class AppController implements Initializable {
         return collection.getFeatures().size() > 1;
     }
 
+    public List<CollectionCommand> getCollectionCommands() {
+        List<CollectionCommand> commands = new ArrayList<>();
+
+        CollectionCommand delete = new CollectionCommand("Delete collection", collection -> {
+            collectionService.deleteCollection(collection);
+        });
+
+        CollectionCommand search = new CollectionCommand("Search...", collection -> {
+            searchCollection(collection);
+        });
+
+        commands.add(search);
+        commands.add(delete);
+
+        return unmodifiableList(commands);
+    }
 }

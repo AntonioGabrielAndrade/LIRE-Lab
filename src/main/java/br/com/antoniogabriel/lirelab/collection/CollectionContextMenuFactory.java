@@ -1,38 +1,31 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import javafx.concurrent.Task;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 
+import java.util.List;
+
 public class CollectionContextMenuFactory {
 
-    private CollectionService collectionService;
 
-    public CollectionContextMenuFactory(CollectionService collectionService) {
-        this.collectionService = collectionService;
+    private List<CollectionCommand> commands;
+
+    public CollectionContextMenuFactory(List<CollectionCommand> commands) {
+        this.commands = commands;
     }
 
     public ContextMenu createContextMenu(Collection collection) {
-        ContextMenu contextMenu = new ContextMenu();
-        MenuItem deleteItem = createDeleteItem(collection);
 
-        contextMenu.getItems().add(deleteItem);
+        ContextMenu contextMenu = new ContextMenu();
+
+        for (CollectionCommand command : commands) {
+            MenuItem item = new MenuItem(command.getLabel());
+
+            item.setOnAction(event -> command.execute(collection));
+
+            contextMenu.getItems().add(item);
+        }
+
         return contextMenu;
     }
-
-    private MenuItem createDeleteItem(Collection collection) {
-        MenuItem deleteItem = new MenuItem("Delete collection");
-        deleteItem.setOnAction(ev -> {
-            Task<Void> deletion = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    collectionService.deleteCollection(collection);
-                    return null;
-                }
-            };
-            new Thread(deletion).start();
-        });
-        return deleteItem;
-    }
-
 }
