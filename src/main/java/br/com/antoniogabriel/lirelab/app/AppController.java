@@ -76,6 +76,7 @@ public class AppController implements Initializable {
 
     private void searchCollection(Collection collection) {
         mainArea.setCenter(searchView);
+        collectionsComboBox.setValue(collection);
         searchController.startSearchSession(collection, collection.getFeatures().get(0));
     }
 
@@ -113,6 +114,7 @@ public class AppController implements Initializable {
         CollectionCommand search = new CollectionCommand("Search...", collection -> {
             searchCollection(collection);
         });
+        search.setIconDescription("actions:system-search");
 
         commands.add(search);
         commands.add(delete);
