@@ -50,7 +50,7 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 return null;
             }
         };
@@ -62,5 +62,29 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
 
         view.waitUntilProgressBarIsVisible();
         view.waitUntilProgressBarIsNotVisible();
+    }
+
+    @Test
+    public void shouldShowProgressIndicatorAndMessageWhileGivenTaskRun() throws Exception {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                Thread.sleep(1000);
+                return null;
+            }
+        };
+
+        String message = "Status message...";
+
+        statusBar.bindProgressTo(task, message);
+        view.checkProgressIndicatorIsNotVisible();
+
+        new Thread(task).start();
+
+        view.waitUntilProgressIndicatorIsVisible();
+        view.waitUntilStatusMessageIsVisible(message);
+
+        view.waitUntilProgressIndicatorIsNotVisible();
+        view.waitUntilStatusMessageIsNotVisible(message);
     }
 }

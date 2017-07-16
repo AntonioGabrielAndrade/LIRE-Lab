@@ -74,7 +74,7 @@ public class SearchController implements Initializable {
 
     public void runQuery(Collection collection, Feature feature, Image queryImage) {
         RunQueryTask queryTask = createQueryTask(collection, feature, queryImage);
-        statusBar.bindProgressTo(queryTask);
+        statusBar.bindProgressTo(queryTask, "Running query...");
 
         queryTask.addValueListener((observable, oldValue, images) -> {
             outputGrid.setCollection(images, new UpdateCurrentQuery());

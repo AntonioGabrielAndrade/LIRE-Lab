@@ -1,6 +1,7 @@
 package br.com.antoniogabriel.lirelab.custom.statusbar;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,11 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javafx.beans.binding.Bindings.when;
 
 public class StatusBar extends BorderPane {
 
@@ -22,6 +26,7 @@ public class StatusBar extends BorderPane {
 
     @FXML private Label statusMessage;
     @FXML private ProgressBar statusProgress;
+    @FXML private ProgressIndicator statusIndicator;
     @FXML private ComboBox<Feature> featuresComboBox;
 
     private List<ComboBoxListener> comboBoxListeners = new ArrayList<>();
@@ -44,6 +49,16 @@ public class StatusBar extends BorderPane {
 
     public void bindProgressTo(Task<?> task) {
         statusProgress.visibleProperty().bind(task.runningProperty());
+    }
+
+    public void bindProgressTo(Task<?> task, String message) {
+        SimpleStringProperty messageProperty = new SimpleStringProperty(message);
+        SimpleStringProperty empty = new SimpleStringProperty("");
+
+        statusProgress.visibleProperty().bind(task.runningProperty());
+        statusIndicator.visibleProperty().bind(task.runningProperty());
+        statusMessage.textProperty().bind(when(statusIndicator.visibleProperty())
+                                    .then(messageProperty).otherwise(empty));
     }
 
     public void setFeatures(List<Feature> features, Feature defaultFeature, FeatureSelectionListener listener) {

@@ -22,17 +22,37 @@ public class StatusBarViewObject extends FxRobot {
         waitUntilProgressBarIsNotVisible();
     }
 
+    public void checkProgressIndicatorIsNotVisible() throws TimeoutException {
+        waitUntilProgressIndicatorIsNotVisible();
+    }
+
     public void waitUntilProgressBarIsVisible() throws TimeoutException {
         waitUntilIsVisible("#status-progress");
+    }
+
+    public void waitUntilProgressIndicatorIsVisible() throws TimeoutException {
+        waitUntilIsVisible("#status-indicator");
     }
 
     public void waitUntilProgressBarIsNotVisible() throws TimeoutException {
         waitUntilIsNotVisible("#status-progress");
     }
 
+    public void waitUntilProgressIndicatorIsNotVisible() throws TimeoutException {
+        waitUntilIsNotVisible("#status-indicator");
+    }
+
     public void checkComboboxHasFeatures(List<Feature> features) {
         ComboBox<Feature> comboBox = lookup("#features-combo-box").query();
 
         assertThat(comboBox.getItems(), equalTo(features));
+    }
+
+    public void waitUntilStatusMessageIsVisible(String message) throws TimeoutException {
+        waitUntilIsVisible(message);
+    }
+
+    public void waitUntilStatusMessageIsNotVisible(String message) throws TimeoutException {
+        waitUntilIsNotVisible(message);
     }
 }
