@@ -75,10 +75,8 @@ public class AppController implements Initializable {
     }
 
     private void searchCollection(Collection collection) {
-        Feature feature = chooseFeature(collection, dialogProvider.getWindowFrom(mainArea));
-
         mainArea.setCenter(searchView);
-        searchController.startSearchSession(collection, feature);
+        searchController.startSearchSession(collection, collection.getFeatures().get(0));
     }
 
     @FXML

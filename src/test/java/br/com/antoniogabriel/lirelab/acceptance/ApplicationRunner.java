@@ -81,9 +81,6 @@ public class ApplicationRunner {
 
         SearchViewObject searchView = appView.search();
 
-        chooseView.selectFeature(CEDD);
-        chooseView.ok();
-
         searchView.checkImagesAreVisible( "14474347006_99aa0fd981_k",
                                             "16903390174_1d670a5849_h",
                                             "17099294578_0ba4068bad_k",
