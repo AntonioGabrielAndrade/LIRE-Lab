@@ -38,7 +38,6 @@ public class AppViewTest extends FXMLTest<AppFXML> {
     public void shouldShowBasicUIStructure() throws Exception {
         view.checkMenus();
         view.checkToolBar();
-        view.checkWelcomeView();
     }
 
     @Test

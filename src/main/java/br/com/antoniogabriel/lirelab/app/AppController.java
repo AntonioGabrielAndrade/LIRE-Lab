@@ -104,14 +104,14 @@ public class AppController implements Initializable {
         return collection.getFeatures().size() > 1;
     }
 
-    public List<CollectionCommand> getCollectionCommands() {
-        List<CollectionCommand> commands = new ArrayList<>();
+    public List<Command<Collection>> getCollectionCommands() {
+        List<Command<Collection>> commands = new ArrayList<>();
 
-        CollectionCommand delete = new CollectionCommand("Delete collection", collection -> {
+        Command<Collection> delete = new Command<>("Delete collection", collection -> {
             collectionService.deleteCollection(collection);
         });
 
-        CollectionCommand search = new CollectionCommand("Search...", collection -> {
+        Command<Collection> search = new Command<>("Search...", collection -> {
             searchCollection(collection);
         });
         search.setIconDescription("actions:system-search");

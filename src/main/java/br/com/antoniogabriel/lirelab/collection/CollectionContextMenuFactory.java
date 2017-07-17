@@ -9,9 +9,9 @@ import java.util.List;
 public class CollectionContextMenuFactory {
 
 
-    private List<CollectionCommand> commands;
+    private List<Command<Collection>> commands;
 
-    public CollectionContextMenuFactory(List<CollectionCommand> commands) {
+    public CollectionContextMenuFactory(List<Command<Collection>> commands) {
         this.commands = commands;
     }
 
@@ -19,7 +19,7 @@ public class CollectionContextMenuFactory {
 
         ContextMenu contextMenu = new ContextMenu();
 
-        for (CollectionCommand command : commands) {
+        for (Command<Collection> command : commands) {
             MenuItem item = new MenuItem(command.getLabel());
 
             if(!command.getIconDescription().isEmpty()) {

@@ -1,19 +1,19 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-public class CollectionCommand {
+public class Command<T> {
 
     private final String label;
-    private final CollectionCommandAction action;
+    private final CommandAction action;
 
     private String iconDescription = "";
 
-    public CollectionCommand(String label, CollectionCommandAction action) {
+    public Command(String label, CommandAction<T> action) {
         this.label = label;
         this.action = action;
     }
 
-    public void execute(Collection collection) {
-        action.execute(collection);
+    public void execute(T param) {
+        action.execute(param);
     }
 
     public String getLabel() {
