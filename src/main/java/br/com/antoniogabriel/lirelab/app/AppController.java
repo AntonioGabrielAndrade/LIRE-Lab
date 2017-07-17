@@ -1,8 +1,8 @@
 package br.com.antoniogabriel.lirelab.app;
 
 
+import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.*;
-import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.search.SearchController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -12,14 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Window;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static java.util.Collections.unmodifiableList;
 
@@ -36,6 +33,8 @@ public class AppController implements Initializable {
     private AboutFXML aboutFXML;
     private DialogProvider dialogProvider;
     private SearchController searchController;
+
+    private Map<CollectionCommand, Command<Collection>> collectionCommands = new HashMap<>();
 
     @Inject
     public AppController(CreateCollectionFXML createCollectionFXML,
@@ -54,6 +53,7 @@ public class AppController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setSearchComboBoxCollections();
         collectionService.addCollectionsChangeListener(() -> Platform.runLater(() -> setSearchComboBoxCollections()));
+        setupCollectionCommands();
     }
 
     private void setSearchComboBoxCollections() {
@@ -93,41 +93,36 @@ public class AppController implements Initializable {
         aboutFXML.loadOwnedBy(dialogProvider.getWindowFrom(mainArea));
     }
 
-    private Feature chooseFeature(Collection collection, Window window) {
-        return hasMoreThanOneFeature(collection) ?
-                dialogProvider.chooseFeatureFrom(collection, window) :
-                firstFeatureOf(collection);
-    }
+    private void setupCollectionCommands() {
 
-    private Feature firstFeatureOf(Collection collection) {
-        return collection.getFeatures().get(0);
-    }
+        Command<Collection> create = new Command<>("New collection",
+                                            "actions:folder-new",
+                                            collection -> openCreateCollectionDialog());
 
-    private boolean hasMoreThanOneFeature(Collection collection) {
-        return collection.getFeatures().size() > 1;
+        Command<Collection> delete = new Command<>("Delete collection",
+                                            "",
+                                            collection -> collectionService.deleteCollection(collection));
+
+        Command<Collection> search = new Command<>("Search...",
+                                            "actions:system-search",
+                                            collection -> searchCollection(collection));
+
+        collectionCommands.put(CollectionCommand.CREATE, create);
+        collectionCommands.put(CollectionCommand.DELETE, delete);
+        collectionCommands.put(CollectionCommand.SEARCH, search);
     }
 
     public List<Command<Collection>> getCollectionCommands() {
-        List<Command<Collection>> commands = new ArrayList<>();
+        return unmodifiableList(new ArrayList<>(collectionCommands.values()));
+    }
 
-        Command<Collection> create = new Command<>("New collection", collection -> {
-            openCreateCollectionDialog();
-        });
-        create.setIconDescription("actions:folder-new");
+    public Command<Collection> getCollectionCommand(CollectionCommand type) {
+        return collectionCommands.get(type);
+    }
 
-        Command<Collection> delete = new Command<>("Delete collection", collection -> {
-            collectionService.deleteCollection(collection);
-        });
-
-        Command<Collection> search = new Command<>("Search...", collection -> {
-            searchCollection(collection);
-        });
-        search.setIconDescription("actions:system-search");
-
-        commands.add(create);
-        commands.add(search);
-        commands.add(delete);
-
-        return unmodifiableList(commands);
+    public enum CollectionCommand {
+        SEARCH,
+        DELETE,
+        CREATE
     }
 }

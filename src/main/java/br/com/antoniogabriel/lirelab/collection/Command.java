@@ -4,11 +4,11 @@ public class Command<T> {
 
     private final String label;
     private final CommandAction action;
+    private final String iconDescription;
 
-    private String iconDescription = "";
-
-    public Command(String label, CommandAction<T> action) {
+    public Command(String label, String iconDescription, CommandAction<T> action) {
         this.label = label;
+        this.iconDescription = iconDescription;
         this.action = action;
     }
 
@@ -22,9 +22,5 @@ public class Command<T> {
 
     public String getIconDescription() {
         return iconDescription;
-    }
-
-    public void setIconDescription(String iconDescription) {
-        this.iconDescription = iconDescription;
     }
 }
