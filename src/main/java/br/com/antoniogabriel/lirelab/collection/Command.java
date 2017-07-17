@@ -1,5 +1,8 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper;
+import javafx.scene.Node;
+
 public class Command<T> {
 
     private final String label;
@@ -20,7 +23,9 @@ public class Command<T> {
         return label;
     }
 
-    public String getIconDescription() {
-        return iconDescription;
+    public Node getIcon() {
+        return iconDescription.isEmpty() ?
+                null :
+                new TangoIconWrapper(iconDescription);
     }
 }

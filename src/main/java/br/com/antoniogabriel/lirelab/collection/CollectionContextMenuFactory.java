@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 
@@ -22,10 +21,7 @@ public class CollectionContextMenuFactory {
         for (Command<Collection> command : commands) {
             MenuItem item = new MenuItem(command.getLabel());
 
-            if(!command.getIconDescription().isEmpty()) {
-                TangoIconWrapper icon = new TangoIconWrapper(command.getIconDescription());
-                item.setGraphic(icon);
-            }
+            item.setGraphic(command.getIcon());
 
             item.setOnAction(event -> command.execute(collection));
 

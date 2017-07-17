@@ -2,7 +2,9 @@ package br.com.antoniogabriel.lirelab.app;
 
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.*;
+import br.com.antoniogabriel.lirelab.collection.CollectionService;
+import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
+import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.search.SearchController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -16,9 +18,8 @@ import javafx.scene.layout.BorderPane;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.net.URL;
-import java.util.*;
-
-import static java.util.Collections.unmodifiableList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 @Singleton
 public class AppController implements Initializable {
@@ -32,9 +33,8 @@ public class AppController implements Initializable {
     private CollectionService collectionService;
     private AboutFXML aboutFXML;
     private DialogProvider dialogProvider;
+    private HomeController homeController;
     private SearchController searchController;
-
-    private Map<CollectionCommand, Command<Collection>> collectionCommands = new HashMap<>();
 
     @Inject
     public AppController(CreateCollectionFXML createCollectionFXML,
@@ -53,7 +53,6 @@ public class AppController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setSearchComboBoxCollections();
         collectionService.addCollectionsChangeListener(() -> Platform.runLater(() -> setSearchComboBoxCollections()));
-        setupCollectionCommands();
     }
 
     private void setSearchComboBoxCollections() {
@@ -68,7 +67,7 @@ public class AppController implements Initializable {
         openCreateCollectionDialog();
     }
 
-    private void openCreateCollectionDialog() {
+    public void openCreateCollectionDialog() {
         createCollectionFXML.loadOwnedBy(dialogProvider.getWindowFrom(mainArea));
     }
 
@@ -77,7 +76,7 @@ public class AppController implements Initializable {
         searchCollection(collectionsComboBox.getValue());
     }
 
-    private void searchCollection(Collection collection) {
+    public void searchCollection(Collection collection) {
         mainArea.setCenter(searchView);
         collectionsComboBox.setValue(collection);
         searchController.startSearchSession(collection, collection.getFeatures().get(0));
@@ -90,39 +89,14 @@ public class AppController implements Initializable {
 
     @FXML
     public void openAboutDialog(ActionEvent event) {
+        showAboutDialog();
+    }
+
+    public void showAboutDialog() {
         aboutFXML.loadOwnedBy(dialogProvider.getWindowFrom(mainArea));
     }
 
-    private void setupCollectionCommands() {
-
-        Command<Collection> create = new Command<>("New collection",
-                                            "actions:folder-new",
-                                            collection -> openCreateCollectionDialog());
-
-        Command<Collection> delete = new Command<>("Delete collection",
-                                            "",
-                                            collection -> collectionService.deleteCollection(collection));
-
-        Command<Collection> search = new Command<>("Search...",
-                                            "actions:system-search",
-                                            collection -> searchCollection(collection));
-
-        collectionCommands.put(CollectionCommand.CREATE, create);
-        collectionCommands.put(CollectionCommand.DELETE, delete);
-        collectionCommands.put(CollectionCommand.SEARCH, search);
-    }
-
-    public List<Command<Collection>> getCollectionCommands() {
-        return unmodifiableList(new ArrayList<>(collectionCommands.values()));
-    }
-
-    public Command<Collection> getCollectionCommand(CollectionCommand type) {
-        return collectionCommands.get(type);
-    }
-
-    public enum CollectionCommand {
-        SEARCH,
-        DELETE,
-        CREATE
+    public void deleteCollection(Collection collection) {
+        collectionService.deleteCollection(collection);
     }
 }

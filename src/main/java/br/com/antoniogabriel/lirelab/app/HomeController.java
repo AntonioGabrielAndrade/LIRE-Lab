@@ -39,7 +39,8 @@ public class HomeController implements Initializable {
     private SimpleListProperty<Collection> collections = new SimpleListProperty<>();
 
     private CollectionService collectionService;
-    private AppController appController;
+    private ApplicationCommands commands;
+
     private ImageViewFactory viewFactory;
     private ImageViewConfig viewConfig;
 
@@ -50,12 +51,14 @@ public class HomeController implements Initializable {
 
     @Inject
     public HomeController(CollectionService collectionService,
-                          AppController appController,
+//                          AppController appController,
+                          ApplicationCommands commands,
                           ImageViewFactory viewFactory,
                           ImageViewConfig viewConfig) {
 
         this.collectionService = collectionService;
-        this.appController = appController;
+//        this.appController = appController;
+        this.commands = commands;
         this.viewFactory = viewFactory;
         this.viewConfig = viewConfig;
     }
@@ -77,7 +80,7 @@ public class HomeController implements Initializable {
     }
 
     private void listenToCollectionsRightClick() {
-        CollectionContextMenuFactory factory = new CollectionContextMenuFactory(appController.getCollectionCommands());
+        CollectionContextMenuFactory factory = new CollectionContextMenuFactory(commands.getCollectionCommands());
         collectionTree.addCollectionRightClickListener(new ShowContextMenuListener(factory));
     }
 
