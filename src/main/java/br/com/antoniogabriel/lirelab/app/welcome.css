@@ -1,0 +1,17 @@
+#welcome-view {
+    -fx-background-color: white;
+    -fx-padding: 20 20 20 20;
+    -fx-font-family: "Arial"
+}
+
+.h1, .h2 {
+    -fx-font-weight: bold;
+}
+
+.h1 {
+    -fx-font-size: 25;
+}
+
+.h2 {
+    -fx-font-size: 15;
+}
