@@ -16,7 +16,6 @@ import javafx.stage.Window;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +64,11 @@ public class AppController implements Initializable {
     }
 
     @FXML
-    public void openCreateCollectionDialog(ActionEvent event) throws IOException {
+    public void openCreateCollectionDialog(ActionEvent event) {
+        openCreateCollectionDialog();
+    }
+
+    private void openCreateCollectionDialog() {
         createCollectionFXML.loadOwnedBy(dialogProvider.getWindowFrom(mainArea));
     }
 
@@ -107,6 +110,11 @@ public class AppController implements Initializable {
     public List<Command<Collection>> getCollectionCommands() {
         List<Command<Collection>> commands = new ArrayList<>();
 
+        Command<Collection> create = new Command<>("New collection", collection -> {
+            openCreateCollectionDialog();
+        });
+        create.setIconDescription("actions:folder-new");
+
         Command<Collection> delete = new Command<>("Delete collection", collection -> {
             collectionService.deleteCollection(collection);
         });
@@ -116,6 +124,7 @@ public class AppController implements Initializable {
         });
         search.setIconDescription("actions:system-search");
 
+        commands.add(create);
         commands.add(search);
         commands.add(delete);
 
