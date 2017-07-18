@@ -71,7 +71,7 @@ public class SearchCollectionComboBox extends HBox {
 
     class ButtonCommandFactory {
 
-        public Button createButton(Command<Collection> command, CommandProvider<Collection> provider) {
+        public Button createButton(Command<Collection> command, CommandArgProvider<Collection> provider) {
             Button button = new Button();
             button.setId("toolbar-search-collection");
 
@@ -83,7 +83,7 @@ public class SearchCollectionComboBox extends HBox {
         }
     }
 
-    interface CommandProvider<T> {
-        T provide();
+    interface CommandArgProvider<A> {
+        A provide();
     }
 }
