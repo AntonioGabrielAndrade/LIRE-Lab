@@ -51,13 +51,11 @@ public class HomeController implements Initializable {
 
     @Inject
     public HomeController(CollectionService collectionService,
-//                          AppController appController,
                           ApplicationCommands commands,
                           ImageViewFactory viewFactory,
                           ImageViewConfig viewConfig) {
 
         this.collectionService = collectionService;
-//        this.appController = appController;
         this.commands = commands;
         this.viewFactory = viewFactory;
         this.viewConfig = viewConfig;
