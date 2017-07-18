@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="HBox">
+
+    <ComboBox fx:id="collectionsComboBox" id="collections-combo-box"/>
+
+    <Button fx:id="searchButton" id="toolbar-search-collection"/>
+
+</fx:root>

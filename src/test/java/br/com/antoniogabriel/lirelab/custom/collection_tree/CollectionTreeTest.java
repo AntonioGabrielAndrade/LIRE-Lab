@@ -104,7 +104,7 @@ public class CollectionTreeTest {
 
         realTree.setCollections(asList(collection1, collection2));
 
-        realTree.addCollectionRightClickListener((collection, event, bounds) -> {
+        realTree.addCollectionRightClickListener((collection, event, bounds, itemNode) -> {
              collection.setName("was selected");
         });
 

@@ -1,6 +1,8 @@
 package br.com.antoniogabriel.lirelab.app;
 
-import br.com.antoniogabriel.lirelab.collection.*;
+import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
+import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionRightClickListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionSelectionListener;
@@ -9,12 +11,11 @@ import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedC
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,6 +39,7 @@ public class HomeController implements Initializable {
     private CollectionService collectionService;
 
     private ImageViewFactory viewFactory;
+    private ApplicationCommands applicationCommands;
     private ImageViewConfig viewConfig;
 
     @FXML private BorderPane centerPane;
@@ -48,10 +50,12 @@ public class HomeController implements Initializable {
     @Inject
     public HomeController(CollectionService collectionService,
                           ImageViewFactory viewFactory,
+                          ApplicationCommands applicationCommands,
                           ImageViewConfig viewConfig) {
 
         this.collectionService = collectionService;
         this.viewFactory = viewFactory;
+        this.applicationCommands = applicationCommands;
         this.viewConfig = viewConfig;
     }
 
@@ -62,6 +66,7 @@ public class HomeController implements Initializable {
         listenToCollectionsChange();
         bindCollectionsListToUI();
         loadCollections();
+        listenToCollectionsRightClick();
     }
 
     private void listenToCollectionSelection() {
@@ -70,8 +75,8 @@ public class HomeController implements Initializable {
         );
     }
 
-    public void listenToCollectionsRightClick(List<Command<Collection>> commands) {
-        CollectionContextMenuFactory factory = new CollectionContextMenuFactory(commands);
+    private void listenToCollectionsRightClick() {
+        CollectionContextMenuFactory factory = new CollectionContextMenuFactory(applicationCommands.getCollectionCommands());
         collectionTree.addCollectionRightClickListener(new ShowContextMenuListener(factory));
     }
 
@@ -153,7 +158,6 @@ public class HomeController implements Initializable {
     }
 
     public class ShowContextMenuListener implements CollectionRightClickListener {
-        DialogProvider dialogProvider = new DialogProvider();
         CollectionContextMenuFactory factory;
 
         public ShowContextMenuListener(CollectionContextMenuFactory factory) {
@@ -161,13 +165,13 @@ public class HomeController implements Initializable {
         }
 
         @Override
-        public void clicked(Collection collection, MouseEvent event, Bounds itemBounds) {
+        public void clicked(Collection collection, MouseEvent event, Bounds itemBounds, Node itemNode) {
             ContextMenu contextMenu = factory.createContextMenu(collection);
 
             double itemX = event.getX() + 60;
             double itemY = itemBounds.getMaxY() + 20;
 
-            contextMenu.show(dialogProvider.getWindowFrom(event), itemX, itemY);
+            contextMenu.show(itemNode, itemX, itemY);
         }
     }
 }

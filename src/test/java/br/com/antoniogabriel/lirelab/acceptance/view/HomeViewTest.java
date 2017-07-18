@@ -21,7 +21,7 @@ import java.util.List;
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.collection;
 
 public class HomeViewTest extends FXMLTest<HomeFXML>{
 

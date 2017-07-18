@@ -92,7 +92,7 @@ public class CollectionTree extends StackPane {
                 }
 
                 for (CollectionRightClickListener listener : collectionClickListeners) {
-                    listener.clicked(getSelectedCollection(), event, boundsInScene);
+                    listener.clicked(getSelectedCollection(), event, boundsInScene, itemNode);
                 }
             }
         });

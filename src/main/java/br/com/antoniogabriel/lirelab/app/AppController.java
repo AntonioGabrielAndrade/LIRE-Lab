@@ -7,7 +7,6 @@ import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.search.SearchController;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,12 +17,12 @@ import javafx.scene.layout.BorderPane;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 @Singleton
 public class AppController implements Initializable {
 
+    @FXML private SearchCollectionComboBox searchCollectionComboBox;
     @FXML private BorderPane mainArea;
     @FXML private Node searchView;
     @FXML private Node homeView;
@@ -35,6 +34,7 @@ public class AppController implements Initializable {
     private AboutFXML aboutFXML;
     private DialogProvider dialogProvider;
     private SearchController searchController;
+    private ApplicationCommands commands;
 
     @Inject
     public AppController(CreateCollectionFXML createCollectionFXML,
@@ -51,18 +51,14 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        commands = new ApplicationCommands(this);
         setSearchComboBoxCollections();
         collectionService.addCollectionsChangeListener(() -> Platform.runLater(() -> setSearchComboBoxCollections()));
-
-        ApplicationCommands commands = new ApplicationCommands(this);
-        homeViewController.listenToCollectionsRightClick(commands.getCollectionCommands());
     }
 
     private void setSearchComboBoxCollections() {
-        collectionsComboBox.getItems().clear();
-        List<Collection> collections = collectionService.getCollections();
-        collectionsComboBox.setItems(FXCollections.observableList(collections));
-        collectionsComboBox.getSelectionModel().selectFirst();
+        searchCollectionComboBox.setCollections(collectionService.getCollections());
+        searchCollectionComboBox.setCommand(commands.getCollectionCommand(ApplicationCommands.CollectionCommand.SEARCH));
     }
 
     @FXML
@@ -76,12 +72,12 @@ public class AppController implements Initializable {
 
     @FXML
     public void searchCollection(ActionEvent event) {
-        searchCollection(collectionsComboBox.getValue());
+        searchCollection(searchCollectionComboBox.getSelectedCollection());
     }
 
     public void searchCollection(Collection collection) {
         mainArea.setCenter(searchView);
-        collectionsComboBox.setValue(collection);
+        searchCollectionComboBox.setSelectedCollection(collection);
         searchController.startSearchSession(collection, collection.getFeatures().get(0));
     }
 

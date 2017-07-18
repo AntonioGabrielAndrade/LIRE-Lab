@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import br.com.antoniogabriel.lirelab.app.SearchCollectionComboBox?>
 
 <ToolBar id="toolbar"
          xmlns="http://javafx.com/javafx"
@@ -42,18 +43,7 @@
             </graphic>
         </Button>
 
-        <HBox spacing="5">
-            <ComboBox fx:id="collectionsComboBox" id="collections-combo-box"/>
-
-            <Button id="toolbar-search-collection" onAction="#searchCollection">
-                <tooltip>
-                    <Tooltip text="Search Collection"/>
-                </tooltip>
-                <graphic>
-                    <TangoIconWrapper description="actions:system-search"/>
-                </graphic>
-            </Button>
-        </HBox>
+        <SearchCollectionComboBox fx:id="searchCollectionComboBox" spacing="5"/>
 
     </HBox>
 
