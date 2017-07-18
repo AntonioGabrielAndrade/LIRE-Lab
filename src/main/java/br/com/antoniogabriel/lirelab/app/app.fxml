@@ -5,7 +5,16 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
             prefHeight="800.0" prefWidth="1100.0">
+
+    <fx:define>
+        <fx:include fx:id="homeView" source="home.fxml"/>
+    </fx:define>
+
+    <fx:define>
+        <fx:include fx:id="searchView" source="../search/search.fxml"/>
+    </fx:define>
 
     <top>
         <VBox>
@@ -15,7 +24,11 @@
     </top>
 
     <center>
-        <fx:include source="main-area.fxml"/>
+        <BorderPane fx:id="mainArea">
+            <center>
+                <fx:reference source="homeView"/>
+            </center>
+        </BorderPane>
     </center>
 
 </BorderPane>
