@@ -1,9 +1,6 @@
 package br.com.antoniogabriel.lirelab.app;
 
-import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
-import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.collection.DialogProvider;
+import br.com.antoniogabriel.lirelab.collection.*;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionRightClickListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionSelectionListener;
@@ -39,7 +36,6 @@ public class HomeController implements Initializable {
     private SimpleListProperty<Collection> collections = new SimpleListProperty<>();
 
     private CollectionService collectionService;
-    private ApplicationCommands commands;
 
     private ImageViewFactory viewFactory;
     private ImageViewConfig viewConfig;
@@ -51,12 +47,10 @@ public class HomeController implements Initializable {
 
     @Inject
     public HomeController(CollectionService collectionService,
-                          ApplicationCommands commands,
                           ImageViewFactory viewFactory,
                           ImageViewConfig viewConfig) {
 
         this.collectionService = collectionService;
-        this.commands = commands;
         this.viewFactory = viewFactory;
         this.viewConfig = viewConfig;
     }
@@ -66,7 +60,6 @@ public class HomeController implements Initializable {
         listenToCollectionSelection();
         listenToImageSelection();
         listenToCollectionsChange();
-        listenToCollectionsRightClick();
         bindCollectionsListToUI();
         loadCollections();
     }
@@ -77,8 +70,8 @@ public class HomeController implements Initializable {
         );
     }
 
-    private void listenToCollectionsRightClick() {
-        CollectionContextMenuFactory factory = new CollectionContextMenuFactory(commands.getCollectionCommands());
+    public void listenToCollectionsRightClick(List<Command<Collection>> commands) {
+        CollectionContextMenuFactory factory = new CollectionContextMenuFactory(commands);
         collectionTree.addCollectionRightClickListener(new ShowContextMenuListener(factory));
     }
 

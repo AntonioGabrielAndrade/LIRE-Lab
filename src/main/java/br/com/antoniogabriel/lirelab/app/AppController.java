@@ -28,12 +28,12 @@ public class AppController implements Initializable {
     @FXML private Node searchView;
     @FXML private Node homeView;
     @FXML private ComboBox<Collection> collectionsComboBox;
+    @FXML private HomeController homeViewController;
 
     private CreateCollectionFXML createCollectionFXML;
     private CollectionService collectionService;
     private AboutFXML aboutFXML;
     private DialogProvider dialogProvider;
-    private HomeController homeController;
     private SearchController searchController;
 
     @Inject
@@ -53,6 +53,9 @@ public class AppController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setSearchComboBoxCollections();
         collectionService.addCollectionsChangeListener(() -> Platform.runLater(() -> setSearchComboBoxCollections()));
+
+        ApplicationCommands commands = new ApplicationCommands(this);
+        homeViewController.listenToCollectionsRightClick(commands.getCollectionCommands());
     }
 
     private void setSearchComboBoxCollections() {
