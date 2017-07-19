@@ -1,54 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
-<?import javafx.scene.control.*?>
+<?import br.com.antoniogabriel.lirelab.app.CommandComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import br.com.antoniogabriel.lirelab.app.CommandComboBox?>
 
 <ToolBar id="toolbar"
          xmlns="http://javafx.com/javafx"
-         fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
+         fx:controller="br.com.antoniogabriel.lirelab.app.ToolBarController"
          xmlns:fx="http://javafx.com/fxml">
 
-    <HBox spacing="5">
-        <Button id="toolbar-create-collection" onAction="#openCreateCollectionDialog">
-            <tooltip>
-                <Tooltip text="Create Collection"/>
-            </tooltip>
-            <graphic>
-                <TangoIconWrapper description="actions:folder-new"/>
-            </graphic>
-        </Button>
-
-        <Button id="toolbar-about" onAction="#openAboutDialog">
-            <tooltip>
-                <Tooltip text="About"/>
-            </tooltip>
-            <graphic>
-                <TangoIconWrapper description="emblems:emblem-important"/>
-            </graphic>
-        </Button>
-    </HBox>
-
+    <HBox spacing="5" fx:id="leftToolBar"/>
 
     <Pane HBox.hgrow="ALWAYS" />
 
     <Separator/>
 
-    <HBox spacing="20">
-        <Button id="toolbar-home" onAction="#showHomeView">
-            <tooltip>
-                <Tooltip text="Home"/>
-            </tooltip>
-            <graphic>
-                <TangoIconWrapper description="actions:go-home"/>
-            </graphic>
-        </Button>
-
+    <HBox spacing="20" fx:id="rightToolBar">
         <CommandComboBox fx:id="searchCollectionComboBox" spacing="5"/>
-
     </HBox>
-
 
 </ToolBar>

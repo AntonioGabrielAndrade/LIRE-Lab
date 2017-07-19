@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.acceptance.view;
 import br.com.antoniogabriel.lirelab.acceptance.custom.CollectionGridViewObject;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
+import javafx.scene.control.TextField;
 import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
@@ -35,6 +36,11 @@ public class SearchViewObject extends FxRobot {
 
     public void writeQueryPath(String path) {
         clickOn("#query-image-field").write("").interrupt().write(path);
+    }
+
+    public void setQueryPath(String path) {
+        TextField field = lookup("#query-image-field").query();
+        field.setText(path);
     }
 
     public void checkRunIsEnabled() throws TimeoutException {

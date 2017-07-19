@@ -94,7 +94,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
         view.waitUntilShowCollection(collection);
 
-        view.writeQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+        view.setQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
         view.run();
 
         view.waitUntilShowQuery("14474347006_99aa0fd981_k");
@@ -113,13 +113,13 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @Test
     public void shouldEnableRunButtonWhenQueryPathIsAValidImage() throws Exception {
-        view.writeQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+        view.setQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
         view.checkRunIsEnabled();
     }
 
     @Test
     public void shouldDisableRunButtonWhenQueryPathIsNotAValidImage() throws Exception {
-        view.writeQueryPath(TEST_IMAGES + "invalid-image-name");
+        view.setQueryPath(TEST_IMAGES + "invalid-image-name");
         view.checkRunIsDisabled();
     }
 }

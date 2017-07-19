@@ -6,12 +6,18 @@ import javafx.scene.Node;
 public class Command<T> {
 
     private final String label;
+    private final String nodeId;
     private final CommandAction action;
     private final String iconDescription;
 
-    public Command(String label, String iconDescription, CommandAction<T> action) {
+    public Command(String label,
+                   String iconDescription,
+                   String nodeId,
+                   CommandAction<T> action) {
+
         this.label = label;
         this.iconDescription = iconDescription;
+        this.nodeId = nodeId;
         this.action = action;
     }
 
@@ -27,5 +33,9 @@ public class Command<T> {
         return iconDescription.isEmpty() ?
                 null :
                 new TangoIconWrapper(iconDescription);
+    }
+
+    public String getNodeId() {
+        return nodeId;
     }
 }

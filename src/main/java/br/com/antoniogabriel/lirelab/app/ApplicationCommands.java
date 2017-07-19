@@ -16,6 +16,11 @@ public class ApplicationCommands {
 
     private final Map<CollectionCommand, Command<Collection>> collectionCommandsMap = new HashMap<>();
     private final List<Command<Collection>> collectionCommandsList = new ArrayList<>();
+
+    private final List<Command<Void>> leftToolBarCommands = new ArrayList<>();
+    private final List<Command<Void>> rightToolBarCommands = new ArrayList<>();
+
+
     private final Map<GeneralCommand, Command<Void>> generalCommands = new HashMap<>();
 
     @Inject
@@ -24,20 +29,49 @@ public class ApplicationCommands {
 
         setupCollectionCommands();
         setupGeneralCommands();
+        setupLeftToolBarCommands();
+        setupRightToolBarCommands();
+    }
+
+    private void setupLeftToolBarCommands() {
+        Command<Void> create = new Command<>("New collection",
+                "actions:folder-new",
+                "create-collection",
+                collection -> appController.openCreateCollectionDialog());
+
+        Command<Void> about = new Command<>("About LIRE-Lab",
+                "emblems:emblem-important",
+                "about",
+                nullArg -> appController.showAboutDialog());
+
+        leftToolBarCommands.add(create);
+        leftToolBarCommands.add(about);
+    }
+
+    private void setupRightToolBarCommands() {
+        Command<Void> home = new Command<>("Show Home",
+                "actions:go-home",
+                "show-home",
+                nullArg -> appController.showHomeView());
+
+        rightToolBarCommands.add(home);
     }
 
     private void setupCollectionCommands() {
 
         Command<Collection> create = new Command<>("New collection",
                 "actions:folder-new",
+                "create-collection",
                 collection -> appController.openCreateCollectionDialog());
 
         Command<Collection> delete = new Command<>("Delete collection",
                 "",
+                "delete-collection",
                 collection -> appController.deleteCollection(collection));
 
         Command<Collection> search = new Command<>("Search...",
                 "actions:system-search",
+                "search-collection",
                 collection -> appController.searchCollection(collection));
 
         collectionCommandsMap.put(CollectionCommand.CREATE, create);
@@ -52,6 +86,7 @@ public class ApplicationCommands {
     private void setupGeneralCommands() {
         Command<Void> about = new Command<>("About LIRE-Lab",
                                     "emblems:emblem-important",
+                                    "about",
                                     nullArg -> appController.showAboutDialog());
 
         generalCommands.put(GeneralCommand.ABOUT, about);
@@ -68,6 +103,14 @@ public class ApplicationCommands {
 
     public Command getGeneralCommand(GeneralCommand type) {
         return generalCommands.get(type);
+    }
+
+    public List<Command<Void>> getLeftToolBarCommands() {
+        return leftToolBarCommands;
+    }
+
+    public List<Command<Void>> getRightToolBarCommands() {
+        return rightToolBarCommands;
     }
 
     public enum CollectionCommand {

@@ -18,8 +18,8 @@
 
     <top>
         <VBox>
-            <fx:include source="menubar.fxml"/>
-            <fx:include source="toolbar.fxml"/>
+            <fx:include fx:id="menuBar" source="menubar.fxml"/>
+            <fx:include fx:id="toolBar" source="toolbar.fxml"/>
         </VBox>
     </top>
 
