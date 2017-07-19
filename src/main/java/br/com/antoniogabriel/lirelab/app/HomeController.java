@@ -63,11 +63,13 @@ public class HomeController implements Initializable {
     }
 
     private void listenToCollectionSelection() {
-        collectionTree.addCollectionSelectionListener(collection -> showCollectionImages(collection));
-        collectionTree.addCollectionSelectionListener(collection -> {
+        collectionTree.selectedCollectionProperty().addListener((observable, oldValue, newValue) -> showCollectionImages(newValue));
+
+        collectionTree.selectedCollectionProperty().addListener((observable, oldValue, newValue) -> {
             CollectionContextMenuFactory factory = new CollectionContextMenuFactory(applicationCommands.getCollectionCommands());
-            collectionTree.setContextMenu(factory.createContextMenu(collection));
+            collectionTree.setContextMenu(factory.createContextMenu(newValue));
         });
+
         collectionTree.collectionsProperty().emptyProperty().addListener((observable, wasEmpty, isEmpty) -> {
             if(isEmpty) {
                 setCollectionTreeContextMenu();
@@ -76,8 +78,10 @@ public class HomeController implements Initializable {
     }
 
     private void setCollectionTreeContextMenu() {
-        CollectionTreeContextMenuFactory factory = new CollectionTreeContextMenuFactory(applicationCommands.getCollectionTreeContextMenuCommands());
-        collectionTree.setContextMenu(factory.createContextMenu());
+        if(collectionTree.getCollections().isEmpty()) {
+            CollectionTreeContextMenuFactory factory = new CollectionTreeContextMenuFactory(applicationCommands.getCollectionTreeContextMenuCommands());
+            collectionTree.setContextMenu(factory.createContextMenu());
+        }
     }
 
     private void listenToCollectionsChange() {
@@ -85,9 +89,10 @@ public class HomeController implements Initializable {
     }
 
     private void listenToImageSelection() {
-        collectionTree.addImageSelectionListener(imagePath -> {
-            if(imagePath != null)
-                showImage(imagePath);
+        collectionTree.selectedImageProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+                showImage(newValue);
+            }
         });
     }
 

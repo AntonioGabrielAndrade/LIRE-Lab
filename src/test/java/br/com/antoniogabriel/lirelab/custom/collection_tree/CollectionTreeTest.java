@@ -4,10 +4,7 @@ import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
-import javafx.event.Event;
 import javafx.scene.control.TreeItem;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,58 +78,6 @@ public class CollectionTreeTest {
         tree.setCollections(collections);
 
         verify(collectionChildren, times(6)).add(imageItem);
-    }
-
-    @Test
-    public void shouldAddListenerForCollectionSelection() throws Exception {
-        CollectionTree realTree = new CollectionTree();
-
-        realTree.setCollections(asList(collection1, collection2));
-
-        realTree.addCollectionSelectionListener(collection -> {
-             collection.setName("was selected");
-        });
-
-        realTree.selectCollection(0);
-
-        assertThat(collection1.getName(), equalTo("was selected"));
-    }
-
-    @Test
-    public void shouldAddListenerForCollectionRightClickEvent() throws Exception {
-        CollectionTree realTree = new CollectionTree();
-
-        realTree.setCollections(asList(collection1, collection2));
-
-        realTree.addCollectionRightClickListener((collection, event, bounds, itemNode) -> {
-             collection.setName("was selected");
-        });
-
-        realTree.selectCollection(0);
-
-        Event.fireEvent(realTree.lookup(".tree-view"), new MouseEvent(MouseEvent.MOUSE_CLICKED,
-                0, 0, 0, 0, MouseButton.SECONDARY, 1,
-                false, false, false, false, false, false, false, true, false, true, null));
-
-
-        assertThat(collection1.getName(), equalTo("was selected"));
-    }
-
-    @Test
-    public void shouldAddListenerForImageSelection() throws Exception {
-        final String[] selectedImage = new String[1];
-
-        CollectionTree realTree = new CollectionTree();
-
-        realTree.setCollections(asList(collection1, collection2));
-
-        realTree.addImageSelectionListener(imagePath -> {
-            selectedImage[0] = imagePath;
-        });
-
-        realTree.selectImage(0,0);
-
-        assertThat(selectedImage[0], equalTo("path/image1"));
     }
 
     @Test

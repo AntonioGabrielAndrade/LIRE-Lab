@@ -2,26 +2,21 @@ package br.com.antoniogabriel.lirelab.custom.collection_tree;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
-import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +31,6 @@ public class CollectionTree extends StackPane {
     private SimpleObjectProperty<String> selectedImageProperty = new SimpleObjectProperty<>();
 
     private TreeItemBuilder treeItemBuilder = new TreeItemBuilder();
-    private List<CollectionSelectionListener> collectionListeners = new ArrayList<>();
-    private List<CollectionRightClickListener> collectionClickListeners = new ArrayList<>();
-    private List<ImageSelectionListener> imageListeners = new ArrayList<>();
 
     private Map<TreeItem<String>, Collection> collectionMap = new HashMap<>();
     private Map<TreeItem<String>, String> imageMap = new HashMap<>();
@@ -47,7 +39,6 @@ public class CollectionTree extends StackPane {
         loadFXML();
         listenToCollectionsListChange();
         listenToCollectionAndImageSelection();
-        listenToCollectionRightClick();
     }
 
     public void setContextMenu(ContextMenu contextMenu) {
@@ -82,44 +73,34 @@ public class CollectionTree extends StackPane {
                         selectedImageProperty.set(getImage(newValue));
                     }
                 });
-
-        selectedCollectionProperty.addListener((observable, oldValue, newValue) -> {
-            for (CollectionSelectionListener listener : collectionListeners) {
-                listener.selected(selectedCollectionProperty.get());
-            }
-        });
-
-        selectedImageProperty.addListener((observable, oldValue, newValue) -> {
-            for (ImageSelectionListener listener : imageListeners) {
-                listener.selected(selectedImageProperty.get());
-            }
-        });
     }
 
-    private void listenToCollectionRightClick() {
-        treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getButton() == MouseButton.SECONDARY && getSelectedCollection() != null) {
-
-                Bounds boundsInScene = null;
-                Node itemNode = treeView.getSelectionModel().getSelectedItem().getGraphic().getParent();
-
-                if(itemNode != null) {
-                    boundsInScene = itemNode.localToScene(itemNode.getBoundsInLocal());
-                }
-
-                for (CollectionRightClickListener listener : collectionClickListeners) {
-                    listener.clicked(getSelectedCollection(), event, boundsInScene, itemNode);
-                }
-            }
-        });
+    public Collection getSelectedCollection() {
+        return selectedCollectionProperty.get();
     }
 
-    public void setCollections(List<Collection> collections) {
-        this.collectionsProperty.setValue(FXCollections.observableArrayList(collections));
+    public SimpleObjectProperty<Collection> selectedCollectionProperty() {
+        return selectedCollectionProperty;
+    }
+
+    public String getSelectedImage() {
+        return selectedImageProperty.get();
+    }
+
+    public SimpleObjectProperty<String> selectedImageProperty() {
+        return selectedImageProperty;
+    }
+
+    public ObservableList<Collection> getCollections() {
+        return collectionsProperty.get();
     }
 
     public SimpleListProperty<Collection> collectionsProperty() {
         return collectionsProperty;
+    }
+
+    public void setCollections(List<Collection> collections) {
+        this.collectionsProperty.setValue(FXCollections.observableArrayList(collections));
     }
 
     public void bindCollectionsTo(ListProperty<Collection> property) {
@@ -130,10 +111,6 @@ public class CollectionTree extends StackPane {
         visibleProperty().bind(value);
     }
 
-    public Collection getSelectedCollection() {
-        return getCollection(treeView.getSelectionModel().getSelectedItem());
-    }
-
     public void selectImage(int collectionIndex, int imageIndex) {
         TreeItem<String> item = treeView.getTreeItem(collectionIndex).getChildren().get(imageIndex);
         treeView.getSelectionModel().select(item);
@@ -141,18 +118,6 @@ public class CollectionTree extends StackPane {
 
     public void selectCollection(int index) {
         treeView.getSelectionModel().select(index);
-    }
-
-    public void addCollectionSelectionListener(CollectionSelectionListener listener) {
-        collectionListeners.add(listener);
-    }
-
-    public void addCollectionRightClickListener(CollectionRightClickListener listener) {
-        collectionClickListeners.add(listener);
-    }
-
-    public void addImageSelectionListener(ImageSelectionListener listener) {
-        this.imageListeners.add(listener);
     }
 
     public void setItemBuilder(TreeItemBuilder itemBuilder) {
