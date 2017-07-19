@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
@@ -69,19 +68,6 @@ public class CommandComboBox<T> extends HBox {
     public void setCommand(Command<T> command) {
         this.commandProperty.set(command);
         updateButton();
-    }
-
-    class CommandComponentFactory<E> {
-
-        public Button createButton(Command<E> command, CommandArgProvider<E> provider) {
-            Button button = new Button();
-
-            button.setGraphic(command.getIcon());
-            button.setTooltip(new Tooltip(command.getLabel()));
-            button.setOnAction(event -> command.execute(provider.provide()));
-
-            return button;
-        }
     }
 
 }
