@@ -43,8 +43,13 @@ public class CommandComboBox<T> extends HBox {
     private Node updateButton() {
         Button button = factory.createButton(commandProperty.getValue(), () -> comboBox.getValue());
         button.setId("toolbar-search-collection");
+        setupButtonDisableProperty(button);
 
         return getChildren().set(1, button);
+    }
+
+    private void setupButtonDisableProperty(Button button) {
+        button.disableProperty().bind(comboBox.getSelectionModel().selectedItemProperty().isNull());
     }
 
     public void setItems(List<T> items) {
