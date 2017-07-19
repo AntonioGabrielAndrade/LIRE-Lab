@@ -19,6 +19,8 @@ public class ApplicationCommands {
 
     private final List<Command<Void>> leftToolBarCommands = new ArrayList<>();
     private final List<Command<Void>> rightToolBarCommands = new ArrayList<>();
+    private final List<Command<Void>> fileMenuCommands = new ArrayList<>();
+    private final List<Command<Void>> helpMenuCommands = new ArrayList<>();
 
 
     private final Map<GeneralCommand, Command<Void>> generalCommands = new HashMap<>();
@@ -31,6 +33,26 @@ public class ApplicationCommands {
         setupGeneralCommands();
         setupLeftToolBarCommands();
         setupRightToolBarCommands();
+        setupFileMenuCommands();
+        setupHelpMenuCommands();
+    }
+
+    private void setupHelpMenuCommands() {
+        Command<Void> about = new Command<>("About LIRE-Lab",
+                "emblems:emblem-important",
+                "about",
+                nullArg -> appController.showAboutDialog());
+
+        helpMenuCommands.add(about);
+    }
+
+    private void setupFileMenuCommands() {
+        Command<Void> create = new Command<>("New collection",
+                "actions:folder-new",
+                "create-collection",
+                collection -> appController.openCreateCollectionDialog());
+
+        fileMenuCommands.add(create);
     }
 
     private void setupLeftToolBarCommands() {
@@ -111,6 +133,14 @@ public class ApplicationCommands {
 
     public List<Command<Void>> getRightToolBarCommands() {
         return rightToolBarCommands;
+    }
+
+    public List<Command<Void>> getFileMenuCommands() {
+        return fileMenuCommands;
+    }
+
+    public List<Command<Void>> getHelpMenuCommands() {
+        return helpMenuCommands;
     }
 
     public enum CollectionCommand {
