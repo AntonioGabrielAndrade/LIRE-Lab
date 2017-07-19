@@ -24,6 +24,7 @@ public class ApplicationCommands {
     private final List<Command<Void>> rightToolBarCommands = new ArrayList<>();
     private final List<Command<Void>> fileMenuCommands = new ArrayList<>();
     private final List<Command<Void>> helpMenuCommands = new ArrayList<>();
+    private final List<Command<Void>> collectionTreeContextMenuCommands = new ArrayList<>();
 
     @Inject
     public ApplicationCommands(AppController appController) {
@@ -73,6 +74,8 @@ public class ApplicationCommands {
         leftToolBarCommands.add(about);
 
         rightToolBarCommands.add(home);
+
+        collectionTreeContextMenuCommands.add(getAsVoid(create));
     }
 
     private Command<Void> getAsVoid(Command command) {
@@ -102,6 +105,10 @@ public class ApplicationCommands {
 
     public List<Command<Void>> getHelpMenuCommands() {
         return unmodifiableList(helpMenuCommands);
+    }
+
+    public List<Command<Void>> getCollectionTreeContextMenuCommands() {
+        return unmodifiableList(collectionTreeContextMenuCommands);
     }
 
     public enum CollectionCommand {

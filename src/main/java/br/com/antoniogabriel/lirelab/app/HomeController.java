@@ -3,7 +3,6 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionRightClickListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
@@ -12,11 +11,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -64,16 +59,25 @@ public class HomeController implements Initializable {
         listenToCollectionsChange();
         bindCollectionsListToUI();
         loadCollections();
-        listenToCollectionsRightClick();
+        setCollectionTreeContextMenu();
     }
 
     private void listenToCollectionSelection() {
         collectionTree.addCollectionSelectionListener(collection -> showCollectionImages(collection));
+        collectionTree.addCollectionSelectionListener(collection -> {
+            CollectionContextMenuFactory factory = new CollectionContextMenuFactory(applicationCommands.getCollectionCommands());
+            collectionTree.setContextMenu(factory.createContextMenu(collection));
+        });
+        collectionTree.collectionsProperty().emptyProperty().addListener((observable, wasEmpty, isEmpty) -> {
+            if(isEmpty) {
+                setCollectionTreeContextMenu();
+            }
+        });
     }
 
-    private void listenToCollectionsRightClick() {
-        CollectionContextMenuFactory factory = new CollectionContextMenuFactory(applicationCommands.getCollectionCommands());
-        collectionTree.addCollectionRightClickListener(new ShowContextMenuListener(factory));
+    private void setCollectionTreeContextMenu() {
+        CollectionTreeContextMenuFactory factory = new CollectionTreeContextMenuFactory(applicationCommands.getCollectionTreeContextMenuCommands());
+        collectionTree.setContextMenu(factory.createContextMenu());
     }
 
     private void listenToCollectionsChange() {
@@ -89,7 +93,6 @@ public class HomeController implements Initializable {
 
     private void bindCollectionsListToUI() {
         collectionTree.bindCollectionsTo(this.collections);
-        collectionTree.bindVisibilityTo(this.collections.emptyProperty().not());
         welcomeView.visibleProperty().bind(this.collections.emptyProperty());
 
         this.collections.emptyProperty().addListener((observable, wasEmpty, isEmpty) -> {
@@ -128,23 +131,5 @@ public class HomeController implements Initializable {
 
     public Collection getSelectedCollection() {
         return collectionTree.getSelectedCollection();
-    }
-
-    public class ShowContextMenuListener implements CollectionRightClickListener {
-        CollectionContextMenuFactory factory;
-
-        public ShowContextMenuListener(CollectionContextMenuFactory factory) {
-            this.factory = factory;
-        }
-
-        @Override
-        public void clicked(Collection collection, MouseEvent event, Bounds itemBounds, Node itemNode) {
-            ContextMenu contextMenu = factory.createContextMenu(collection);
-
-            double itemX = event.getX() + 60;
-            double itemY = itemBounds.getMaxY() + 20;
-
-            contextMenu.show(itemNode, itemX, itemY);
-        }
     }
 }

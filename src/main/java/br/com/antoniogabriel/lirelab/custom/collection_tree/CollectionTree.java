@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseButton;
@@ -44,6 +45,10 @@ public class CollectionTree extends StackPane {
         listenToCollectionsListChange();
         listenToCollectionAndImageSelection();
         listenToCollectionRightClick();
+    }
+
+    public void setContextMenu(ContextMenu contextMenu) {
+        treeView.setContextMenu(contextMenu);
     }
 
     private void loadFXML() {

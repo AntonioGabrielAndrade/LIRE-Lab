@@ -15,7 +15,7 @@
     <items>
 
         <TitledPane text="Collections" collapsible="false" prefHeight="Infinity">
-            <CollectionTree visible="false"
+            <CollectionTree visible="true"
                             id="collection-tree"
                             fx:id="collectionTree"/>
         </TitledPane>
