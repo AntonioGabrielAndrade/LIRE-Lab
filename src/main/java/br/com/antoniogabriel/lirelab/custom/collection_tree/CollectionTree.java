@@ -66,11 +66,11 @@ public class CollectionTree extends StackPane {
     private void listenToCollectionAndImageSelection() {
         treeView.getSelectionModel()
                 .selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if(isCollection(newValue)) {
-                        selectedCollectionProperty.set(getCollection(newValue));
+                .addListener((observable, oldItem, newItem) -> {
+                    if(isCollection(newItem)) {
+                        selectedCollectionProperty.set(getCollection(newItem));
                     } else {
-                        selectedImageProperty.set(getImage(newValue));
+                        selectedImageProperty.set(getImage(newItem));
                     }
                 });
     }

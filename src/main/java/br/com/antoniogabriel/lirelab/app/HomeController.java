@@ -63,11 +63,11 @@ public class HomeController implements Initializable {
     }
 
     private void listenToCollectionSelection() {
-        collectionTree.selectedCollectionProperty().addListener((observable, oldValue, newValue) -> showCollectionImages(newValue));
+        collectionTree.selectedCollectionProperty().addListener((observable, oldCollection, newCollection) -> showCollectionImages(newCollection));
 
-        collectionTree.selectedCollectionProperty().addListener((observable, oldValue, newValue) -> {
+        collectionTree.selectedCollectionProperty().addListener((observable, oldCollection, newCollection) -> {
             CollectionContextMenuFactory factory = new CollectionContextMenuFactory(applicationCommands.getCollectionCommands());
-            collectionTree.setContextMenu(factory.createContextMenu(newValue));
+            collectionTree.setContextMenu(factory.createContextMenu(newCollection));
         });
 
         collectionTree.collectionsProperty().emptyProperty().addListener((observable, wasEmpty, isEmpty) -> {
@@ -89,9 +89,9 @@ public class HomeController implements Initializable {
     }
 
     private void listenToImageSelection() {
-        collectionTree.selectedImageProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
-                showImage(newValue);
+        collectionTree.selectedImageProperty().addListener((observable, oldImage, newImage) -> {
+            if(newImage != null) {
+                showImage(newImage);
             }
         });
     }
