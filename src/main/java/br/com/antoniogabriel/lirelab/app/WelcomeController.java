@@ -10,6 +10,9 @@ import javax.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static br.com.antoniogabriel.lirelab.app.ApplicationCommands.CollectionCommand.CREATE;
+import static br.com.antoniogabriel.lirelab.app.ApplicationCommands.CollectionCommand.SEARCH;
+
 public class WelcomeController implements Initializable {
 
     @FXML private StackPane createCollectionButtonPane;
@@ -33,13 +36,13 @@ public class WelcomeController implements Initializable {
     }
 
     private void setupCreateCollectionButton() {
-        Command<Collection> createCommand = applicationCommands.getCollectionCommand(ApplicationCommands.CollectionCommand.CREATE);
+        Command<Collection> createCommand = applicationCommands.getCollectionCommand(CREATE);
         Button button = commandComponentFactory.createButton(createCommand, () -> null);
         createCollectionButtonPane.getChildren().add(button);
     }
 
     private void setupSearchCollectionButton() {
-        Command<Collection> createCommand = applicationCommands.getCollectionCommand(ApplicationCommands.CollectionCommand.SEARCH);
+        Command<Collection> createCommand = applicationCommands.getCollectionCommand(SEARCH);
         Button button = commandComponentFactory.createButton(createCommand, () -> null);
         button.setDisable(true);
         searchCollectionButtonPane.getChildren().add(button);

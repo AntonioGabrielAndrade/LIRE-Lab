@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static br.com.antoniogabriel.lirelab.app.ApplicationCommands.CollectionCommand.CREATE;
+import static br.com.antoniogabriel.lirelab.app.ApplicationCommands.CollectionCommand.DELETE;
+import static br.com.antoniogabriel.lirelab.app.ApplicationCommands.CollectionCommand.SEARCH;
 import static java.util.Collections.unmodifiableList;
 
 public class ApplicationCommands {
@@ -25,58 +28,10 @@ public class ApplicationCommands {
     @Inject
     public ApplicationCommands(AppController appController) {
         this.appController = appController;
-
-        setupCollectionCommands();
-        setupLeftToolBarCommands();
-        setupRightToolBarCommands();
-        setupFileMenuCommands();
-        setupHelpMenuCommands();
+        setupCommands();
     }
 
-    private void setupHelpMenuCommands() {
-        Command<Void> about = new Command<>("About LIRE-Lab",
-                "emblems:emblem-important",
-                "about",
-                nullArg -> appController.showAboutDialog());
-
-        helpMenuCommands.add(about);
-    }
-
-    private void setupFileMenuCommands() {
-        Command<Void> create = new Command<>("New collection",
-                "actions:folder-new",
-                "create-collection",
-                collection -> appController.openCreateCollectionDialog());
-
-        fileMenuCommands.add(create);
-    }
-
-    private void setupLeftToolBarCommands() {
-        Command<Void> create = new Command<>("New collection",
-                "actions:folder-new",
-                "create-collection",
-                collection -> appController.openCreateCollectionDialog());
-
-        Command<Void> about = new Command<>("About LIRE-Lab",
-                "emblems:emblem-important",
-                "about",
-                nullArg -> appController.showAboutDialog());
-
-        leftToolBarCommands.add(create);
-        leftToolBarCommands.add(about);
-    }
-
-    private void setupRightToolBarCommands() {
-        Command<Void> home = new Command<>("Show Home",
-                "actions:go-home",
-                "show-home",
-                nullArg -> appController.showHomeView());
-
-        rightToolBarCommands.add(home);
-    }
-
-    private void setupCollectionCommands() {
-
+    private void setupCommands() {
         Command<Collection> create = new Command<>("New collection",
                 "actions:folder-new",
                 "create-collection",
@@ -92,13 +47,37 @@ public class ApplicationCommands {
                 "search-collection",
                 collection -> appController.searchCollection(collection));
 
-        collectionCommandsMap.put(CollectionCommand.CREATE, create);
-        collectionCommandsMap.put(CollectionCommand.DELETE, delete);
-        collectionCommandsMap.put(CollectionCommand.SEARCH, search);
+        Command<Void> about = new Command<>("About LIRE-Lab",
+                "emblems:emblem-important",
+                "about",
+                nullArg -> appController.showAboutDialog());
+
+        Command<Void> home = new Command<>("Show Home",
+                "actions:go-home",
+                "show-home",
+                nullArg -> appController.showHomeView());
+
+        collectionCommandsMap.put(CREATE, create);
+        collectionCommandsMap.put(DELETE, delete);
+        collectionCommandsMap.put(SEARCH, search);
 
         collectionCommandsList.add(create);
         collectionCommandsList.add(search);
         collectionCommandsList.add(delete);
+
+        fileMenuCommands.add(getAsVoid(create));
+
+        helpMenuCommands.add(about);
+
+        leftToolBarCommands.add(getAsVoid(create));
+        leftToolBarCommands.add(about);
+
+        rightToolBarCommands.add(home);
+    }
+
+    private Command<Void> getAsVoid(Command command) {
+        Command<Void> result = command;
+        return result;
     }
 
     public List<Command<Collection>> getCollectionCommands() {

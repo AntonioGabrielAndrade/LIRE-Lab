@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static br.com.antoniogabriel.lirelab.app.ApplicationCommands.CollectionCommand.SEARCH;
+
 public class ToolBarController implements Initializable {
 
     @FXML private CommandComboBox<Collection> searchCollectionComboBox;
@@ -51,7 +53,7 @@ public class ToolBarController implements Initializable {
 
     private void setSearchComboBoxCollections() {
         searchCollectionComboBox.setItems(collectionService.getCollections());
-        searchCollectionComboBox.setCommand(applicationCommands.getCollectionCommand(ApplicationCommands.CollectionCommand.SEARCH));
+        searchCollectionComboBox.setCommand(applicationCommands.getCollectionCommand(SEARCH));
     }
 
     private void initLeftToolBar() {
