@@ -30,7 +30,7 @@ public class CollectionTree extends StackPane {
     @FXML private TreeView<String> treeView;
     @FXML private TreeItem<String> rootItem;
 
-    private SimpleListProperty<Collection> collections = new SimpleListProperty<>();
+    private SimpleListProperty<Collection> collectionsProperty = new SimpleListProperty<>();
 
     private TreeItemBuilder treeItemBuilder = new TreeItemBuilder();
     private List<CollectionSelectionListener> collectionListeners = new ArrayList<>();
@@ -66,7 +66,7 @@ public class CollectionTree extends StackPane {
     }
 
     private void listenToCollectionsListChange() {
-        collections.addListener((ListChangeListener<Collection>) c -> addCollectionsToTree(collections));
+        collectionsProperty.addListener((ListChangeListener<Collection>) c -> addCollectionsToTree(collectionsProperty));
     }
 
     private void listenToCollectionAndImageSelection() {
@@ -104,11 +104,11 @@ public class CollectionTree extends StackPane {
     }
 
     public void setCollections(List<Collection> collections) {
-        this.collections.setValue(FXCollections.observableArrayList(collections));
+        this.collectionsProperty.setValue(FXCollections.observableArrayList(collections));
     }
 
     public SimpleListProperty<Collection> collectionsProperty() {
-        return collections;
+        return collectionsProperty;
     }
 
     public void bindCollectionsTo(ListProperty<Collection> property) {
