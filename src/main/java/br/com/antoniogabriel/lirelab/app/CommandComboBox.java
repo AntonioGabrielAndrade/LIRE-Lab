@@ -28,13 +28,6 @@ public class CommandComboBox<T> extends HBox {
         loadFXML();
     }
 
-    private Node updateButton() {
-        Button button = factory.createButton(commandProperty.getValue(), () -> comboBox.getValue());
-        button.setId("toolbar-search-collection");
-
-        return getChildren().set(1, button);
-    }
-
     private void loadFXML() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(COMMAND_COMBOBOX_FXML));
         fxmlLoader.setRoot(this);
@@ -45,6 +38,13 @@ public class CommandComboBox<T> extends HBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    private Node updateButton() {
+        Button button = factory.createButton(commandProperty.getValue(), () -> comboBox.getValue());
+        button.setId("toolbar-search-collection");
+
+        return getChildren().set(1, button);
     }
 
     public void setItems(List<T> items) {
