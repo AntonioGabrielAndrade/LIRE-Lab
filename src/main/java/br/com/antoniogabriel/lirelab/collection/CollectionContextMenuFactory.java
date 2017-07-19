@@ -9,7 +9,7 @@ import java.util.List;
 public class CollectionContextMenuFactory {
 
     private List<Command<Collection>> commands;
-    private CommandTriggerFactory<Collection> componentFactory = new CommandTriggerFactory<>();
+    private CommandTriggerFactory<Collection> triggerFactory = new CommandTriggerFactory<>();
 
     public CollectionContextMenuFactory(List<Command<Collection>> commands) {
         this.commands = commands;
@@ -20,7 +20,7 @@ public class CollectionContextMenuFactory {
         ContextMenu contextMenu = new ContextMenu();
 
         for (Command<Collection> command : commands) {
-            contextMenu.getItems().add(componentFactory.createMenuItem(command, () -> collection));
+            contextMenu.getItems().add(triggerFactory.createMenuItem(command, () -> collection));
         }
 
         return contextMenu;
