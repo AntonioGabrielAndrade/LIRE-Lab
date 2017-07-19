@@ -18,7 +18,7 @@ public class CommandComboBox<T> extends HBox {
 
     private static final String COMMAND_COMBOBOX_FXML = "command-combobox.fxml";
 
-    private ButtonCommandFactory<T> factory = new ButtonCommandFactory();
+    private CommandComponentFactory<T> factory = new CommandComponentFactory();
 
     @FXML private ComboBox<T> comboBox;
     @FXML private Button actionButton;
@@ -30,7 +30,10 @@ public class CommandComboBox<T> extends HBox {
     }
 
     private Node updateButton() {
-        return getChildren().set(1, factory.createButton(commandProperty.getValue(), () -> comboBox.getValue()));
+        Button button = factory.createButton(commandProperty.getValue(), () -> comboBox.getValue());
+        button.setId("toolbar-search-collection");
+
+        return getChildren().set(1, button);
     }
 
     private void loadFXML() {
@@ -68,11 +71,10 @@ public class CommandComboBox<T> extends HBox {
         updateButton();
     }
 
-    class ButtonCommandFactory<E> {
+    class CommandComponentFactory<E> {
 
         public Button createButton(Command<E> command, CommandArgProvider<E> provider) {
             Button button = new Button();
-            button.setId("toolbar-search-collection");
 
             button.setGraphic(command.getIcon());
             button.setTooltip(new Tooltip(command.getLabel()));
