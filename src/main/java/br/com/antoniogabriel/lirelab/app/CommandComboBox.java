@@ -84,7 +84,4 @@ public class CommandComboBox<T> extends HBox {
         }
     }
 
-    interface CommandArgProvider<A> {
-        A provide();
-    }
 }
