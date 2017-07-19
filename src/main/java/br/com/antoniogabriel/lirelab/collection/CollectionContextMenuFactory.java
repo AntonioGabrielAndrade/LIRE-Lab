@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
+import br.com.antoniogabriel.lirelab.app.Command;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 

@@ -1,7 +1,6 @@
 package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.Command;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

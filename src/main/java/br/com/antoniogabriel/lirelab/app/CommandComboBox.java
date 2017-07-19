@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.app;
 
-import br.com.antoniogabriel.lirelab.collection.Command;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

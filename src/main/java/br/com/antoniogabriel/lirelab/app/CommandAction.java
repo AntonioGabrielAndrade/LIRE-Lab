@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.app;
 
 @FunctionalInterface
 public interface CommandAction<T> {

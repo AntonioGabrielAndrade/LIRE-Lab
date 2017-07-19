@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.collection;
+package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper;
 import javafx.scene.Node;
