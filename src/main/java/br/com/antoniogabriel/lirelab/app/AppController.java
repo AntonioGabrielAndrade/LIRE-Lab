@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 @Singleton
 public class AppController implements Initializable {
 
-    @FXML private SearchCollectionComboBox searchCollectionComboBox;
+    @FXML private CommandComboBox<Collection> searchCollectionComboBox;
     @FXML private BorderPane mainArea;
     @FXML private Node searchView;
     @FXML private Node homeView;
@@ -57,7 +57,7 @@ public class AppController implements Initializable {
     }
 
     private void setSearchComboBoxCollections() {
-        searchCollectionComboBox.setCollections(collectionService.getCollections());
+        searchCollectionComboBox.setItems(collectionService.getCollections());
         searchCollectionComboBox.setCommand(commands.getCollectionCommand(ApplicationCommands.CollectionCommand.SEARCH));
     }
 
@@ -72,12 +72,12 @@ public class AppController implements Initializable {
 
     @FXML
     public void searchCollection(ActionEvent event) {
-        searchCollection(searchCollectionComboBox.getSelectedCollection());
+        searchCollection(searchCollectionComboBox.getSelectedItem());
     }
 
     public void searchCollection(Collection collection) {
         mainArea.setCenter(searchView);
-        searchCollectionComboBox.setSelectedCollection(collection);
+        searchCollectionComboBox.setSelectedItem(collection);
         searchController.startSearchSession(collection, collection.getFeatures().get(0));
     }
 

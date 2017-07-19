@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import br.com.antoniogabriel.lirelab.app.SearchCollectionComboBox?>
+<?import br.com.antoniogabriel.lirelab.app.CommandComboBox?>
 
 <ToolBar id="toolbar"
          xmlns="http://javafx.com/javafx"
@@ -43,7 +43,7 @@
             </graphic>
         </Button>
 
-        <SearchCollectionComboBox fx:id="searchCollectionComboBox" spacing="5"/>
+        <CommandComboBox fx:id="searchCollectionComboBox" spacing="5"/>
 
     </HBox>
 
