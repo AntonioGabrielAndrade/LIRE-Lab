@@ -11,23 +11,26 @@
          fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
          xmlns:fx="http://javafx.com/fxml">
 
-    <Button id="toolbar-create-collection" onAction="#openCreateCollectionDialog">
-        <tooltip>
-            <Tooltip text="Create Collection"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="actions:folder-new"/>
-        </graphic>
-    </Button>
+    <HBox spacing="5">
+        <Button id="toolbar-create-collection" onAction="#openCreateCollectionDialog">
+            <tooltip>
+                <Tooltip text="Create Collection"/>
+            </tooltip>
+            <graphic>
+                <TangoIconWrapper description="actions:folder-new"/>
+            </graphic>
+        </Button>
 
-    <Button id="toolbar-about" onAction="#openAboutDialog">
-        <tooltip>
-            <Tooltip text="About"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="emblems:emblem-important"/>
-        </graphic>
-    </Button>
+        <Button id="toolbar-about" onAction="#openAboutDialog">
+            <tooltip>
+                <Tooltip text="About"/>
+            </tooltip>
+            <graphic>
+                <TangoIconWrapper description="emblems:emblem-important"/>
+            </graphic>
+        </Button>
+    </HBox>
+
 
     <Pane HBox.hgrow="ALWAYS" />
 
