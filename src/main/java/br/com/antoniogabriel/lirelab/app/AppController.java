@@ -6,7 +6,6 @@ import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.search.SearchController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -39,11 +38,6 @@ public class AppController {
         this.aboutFXML = aboutFXML;
         this.dialogProvider = dialogProvider;
         this.searchController = searchController;
-    }
-
-    @FXML
-    public void openCreateCollectionDialog(ActionEvent event) {
-        openCreateCollectionDialog();
     }
 
     public void openCreateCollectionDialog() {
