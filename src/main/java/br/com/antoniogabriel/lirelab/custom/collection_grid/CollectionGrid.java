@@ -63,9 +63,13 @@ public class CollectionGrid extends StackPane {
                 continue;
 
             toolTipProvider.setToolTip(imageView, image);
+//            toolTipProvider.setPopOver(imageView, image);
+
             imageView.setOnMouseClicked(eventHandlerFactory.createFrom(image, handler));
+
             imageView.setOnMouseEntered(event -> getScene().setCursor(Cursor.HAND));
             imageView.setOnMouseExited(event -> getScene().setCursor(Cursor.DEFAULT));
+
         }
     }
 
