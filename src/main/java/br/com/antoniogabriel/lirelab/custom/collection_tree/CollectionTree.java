@@ -5,6 +5,7 @@ import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -31,6 +32,8 @@ public class CollectionTree extends StackPane {
     @FXML private TreeItem<String> rootItem;
 
     private SimpleListProperty<Collection> collectionsProperty = new SimpleListProperty<>();
+    private SimpleObjectProperty<Collection> selectedCollectionProperty = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<String> selectedImageProperty = new SimpleObjectProperty<>();
 
     private TreeItemBuilder treeItemBuilder = new TreeItemBuilder();
     private List<CollectionSelectionListener> collectionListeners = new ArrayList<>();
@@ -74,15 +77,23 @@ public class CollectionTree extends StackPane {
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if(isCollection(newValue)) {
-                        for (CollectionSelectionListener listener : collectionListeners) {
-                            listener.selected(getCollection(newValue));
-                        }
+                        selectedCollectionProperty.set(getCollection(newValue));
                     } else {
-                        for (ImageSelectionListener listener : imageListeners) {
-                            listener.selected(getImage(newValue));
-                        }
+                        selectedImageProperty.set(getImage(newValue));
                     }
                 });
+
+        selectedCollectionProperty.addListener((observable, oldValue, newValue) -> {
+            for (CollectionSelectionListener listener : collectionListeners) {
+                listener.selected(selectedCollectionProperty.get());
+            }
+        });
+
+        selectedImageProperty.addListener((observable, oldValue, newValue) -> {
+            for (ImageSelectionListener listener : imageListeners) {
+                listener.selected(selectedImageProperty.get());
+            }
+        });
     }
 
     private void listenToCollectionRightClick() {
