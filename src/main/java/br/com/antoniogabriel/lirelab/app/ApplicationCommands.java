@@ -22,15 +22,11 @@ public class ApplicationCommands {
     private final List<Command<Void>> fileMenuCommands = new ArrayList<>();
     private final List<Command<Void>> helpMenuCommands = new ArrayList<>();
 
-
-    private final Map<GeneralCommand, Command<Void>> generalCommands = new HashMap<>();
-
     @Inject
     public ApplicationCommands(AppController appController) {
         this.appController = appController;
 
         setupCollectionCommands();
-        setupGeneralCommands();
         setupLeftToolBarCommands();
         setupRightToolBarCommands();
         setupFileMenuCommands();
@@ -105,26 +101,12 @@ public class ApplicationCommands {
         collectionCommandsList.add(delete);
     }
 
-    private void setupGeneralCommands() {
-        Command<Void> about = new Command<>("About LIRE-Lab",
-                                    "emblems:emblem-important",
-                                    "about",
-                                    nullArg -> appController.showAboutDialog());
-
-        generalCommands.put(GeneralCommand.ABOUT, about);
-
-    }
-
     public List<Command<Collection>> getCollectionCommands() {
         return unmodifiableList(collectionCommandsList);
     }
 
     public Command<Collection> getCollectionCommand(CollectionCommand type) {
         return collectionCommandsMap.get(type);
-    }
-
-    public Command getGeneralCommand(GeneralCommand type) {
-        return generalCommands.get(type);
     }
 
     public List<Command<Void>> getLeftToolBarCommands() {
@@ -147,9 +129,5 @@ public class ApplicationCommands {
         SEARCH,
         DELETE,
         CREATE
-    }
-
-    public enum GeneralCommand {
-        ABOUT
     }
 }
