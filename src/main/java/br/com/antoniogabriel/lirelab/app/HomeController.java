@@ -3,9 +3,7 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionRightClickListener;
-import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import br.com.antoniogabriel.lirelab.exception.LireLabException;
@@ -70,9 +68,7 @@ public class HomeController implements Initializable {
     }
 
     private void listenToCollectionSelection() {
-        collectionTree.addCollectionSelectionListener(
-                new ShowImagesWhenCollectionIsSelectedListener()
-        );
+        collectionTree.addCollectionSelectionListener(collection -> showCollectionImages(collection));
     }
 
     private void listenToCollectionsRightClick() {
@@ -81,15 +77,14 @@ public class HomeController implements Initializable {
     }
 
     private void listenToCollectionsChange() {
-        collectionService.addCollectionsChangeListener(
-                new LoadCollectionsWhenAnyCollectionChangeListener()
-        );
+        collectionService.addCollectionsChangeListener(() -> Platform.runLater(() -> loadCollections()));
     }
 
     private void listenToImageSelection() {
-        collectionTree.addImageSelectionListener(
-                new ShowImageWhenImageIsSelectedListener()
-        );
+        collectionTree.addImageSelectionListener(imagePath -> {
+            if(imagePath != null)
+                showImage(imagePath);
+        });
     }
 
     private void bindCollectionsListToUI() {
@@ -133,28 +128,6 @@ public class HomeController implements Initializable {
 
     public Collection getSelectedCollection() {
         return collectionTree.getSelectedCollection();
-    }
-
-    class ShowImagesWhenCollectionIsSelectedListener implements CollectionSelectionListener {
-        @Override
-        public void selected(Collection collection) {
-            HomeController.this.showCollectionImages(collection);
-        }
-    }
-
-    class ShowImageWhenImageIsSelectedListener implements ImageSelectionListener {
-        @Override
-        public void selected(String imagePath) {
-            if(imagePath != null)
-                showImage(imagePath);
-        }
-    }
-
-    class LoadCollectionsWhenAnyCollectionChangeListener implements Runnable {
-        @Override
-        public void run() {
-            Platform.runLater(() -> HomeController.this.loadCollections());
-        }
     }
 
     public class ShowContextMenuListener implements CollectionRightClickListener {
