@@ -12,11 +12,11 @@ import static java.util.Collections.unmodifiableList;
 
 public class ApplicationCommands {
 
-    private AppController appController;
+    private final AppController appController;
 
     private final Map<CollectionCommand, Command<Collection>> collectionCommandsMap = new HashMap<>();
-    private final List<Command<Collection>> collectionCommandsList = new ArrayList<>();
 
+    private final List<Command<Collection>> collectionCommandsList = new ArrayList<>();
     private final List<Command<Void>> leftToolBarCommands = new ArrayList<>();
     private final List<Command<Void>> rightToolBarCommands = new ArrayList<>();
     private final List<Command<Void>> fileMenuCommands = new ArrayList<>();
@@ -110,19 +110,19 @@ public class ApplicationCommands {
     }
 
     public List<Command<Void>> getLeftToolBarCommands() {
-        return leftToolBarCommands;
+        return unmodifiableList(leftToolBarCommands);
     }
 
     public List<Command<Void>> getRightToolBarCommands() {
-        return rightToolBarCommands;
+        return unmodifiableList(rightToolBarCommands);
     }
 
     public List<Command<Void>> getFileMenuCommands() {
-        return fileMenuCommands;
+        return unmodifiableList(fileMenuCommands);
     }
 
     public List<Command<Void>> getHelpMenuCommands() {
-        return helpMenuCommands;
+        return unmodifiableList(helpMenuCommands);
     }
 
     public enum CollectionCommand {
