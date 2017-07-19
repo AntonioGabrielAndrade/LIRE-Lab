@@ -19,14 +19,14 @@ public class WelcomeController implements Initializable {
     @FXML private StackPane searchCollectionButtonPane;
 
     private ApplicationCommands applicationCommands;
-    private CommandComponentFactory commandComponentFactory;
+    private CommandTriggerFactory commandTriggerFactory;
 
     @Inject
     public WelcomeController(ApplicationCommands applicationCommands,
-                             CommandComponentFactory commandComponentFactory) {
+                             CommandTriggerFactory commandTriggerFactory) {
 
         this.applicationCommands = applicationCommands;
-        this.commandComponentFactory = commandComponentFactory;
+        this.commandTriggerFactory = commandTriggerFactory;
     }
 
     @Override
@@ -37,13 +37,13 @@ public class WelcomeController implements Initializable {
 
     private void setupCreateCollectionButton() {
         Command<Collection> createCommand = applicationCommands.getCollectionCommand(CREATE);
-        Button button = commandComponentFactory.createButton(createCommand, () -> null);
+        Button button = commandTriggerFactory.createButton(createCommand, () -> null);
         createCollectionButtonPane.getChildren().add(button);
     }
 
     private void setupSearchCollectionButton() {
         Command<Collection> createCommand = applicationCommands.getCollectionCommand(SEARCH);
-        Button button = commandComponentFactory.createButton(createCommand, () -> null);
+        Button button = commandTriggerFactory.createButton(createCommand, () -> null);
         button.setDisable(true);
         searchCollectionButtonPane.getChildren().add(button);
     }

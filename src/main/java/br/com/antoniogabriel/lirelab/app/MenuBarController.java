@@ -16,12 +16,12 @@ public class MenuBarController implements Initializable {
     @FXML private Menu helpMenu;
 
     private ApplicationCommands applicationCommands;
-    private CommandComponentFactory commandComponentFactory;
+    private CommandTriggerFactory commandTriggerFactory;
 
     @Inject
-    public MenuBarController(ApplicationCommands applicationCommands, CommandComponentFactory commandComponentFactory) {
+    public MenuBarController(ApplicationCommands applicationCommands, CommandTriggerFactory commandTriggerFactory) {
         this.applicationCommands = applicationCommands;
-        this.commandComponentFactory = commandComponentFactory;
+        this.commandTriggerFactory = commandTriggerFactory;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MenuBarController implements Initializable {
     private void setupFileMenu() {
         List<Command<Void>> commands = applicationCommands.getFileMenuCommands();
         for (Command<Void> command : commands) {
-            MenuItem menuItem = commandComponentFactory.createMenuItem(command, () -> null);
+            MenuItem menuItem = commandTriggerFactory.createMenuItem(command, () -> null);
             menuItem.setId(command.getNodeId());
             fileMenu.getItems().add(menuItem);
         }
@@ -42,7 +42,7 @@ public class MenuBarController implements Initializable {
     private void setupHelpMenu() {
         List<Command<Void>> commands = applicationCommands.getHelpMenuCommands();
         for (Command<Void> command : commands) {
-            MenuItem menuItem = commandComponentFactory.createMenuItem(command, () -> null);
+            MenuItem menuItem = commandTriggerFactory.createMenuItem(command, () -> null);
             menuItem.setId(command.getNodeId());
             helpMenu.getItems().add(menuItem);
         }

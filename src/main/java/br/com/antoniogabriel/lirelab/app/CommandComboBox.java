@@ -17,7 +17,7 @@ public class CommandComboBox<T> extends HBox {
 
     private static final String COMMAND_COMBOBOX_FXML = "command-combobox.fxml";
 
-    private CommandComponentFactory<T> factory = new CommandComponentFactory();
+    private CommandTriggerFactory<T> factory = new CommandTriggerFactory();
 
     @FXML private ComboBox<T> comboBox;
     @FXML private Button actionButton;

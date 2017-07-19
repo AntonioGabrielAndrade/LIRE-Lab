@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 
-public class CommandComponentFactory<E> {
+public class CommandTriggerFactory<E> {
 
     public Button createButton(Command<E> command, CommandArgProvider<E> provider) {
         Button button = new Button();

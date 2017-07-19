@@ -22,16 +22,16 @@ public class ToolBarController implements Initializable {
     @FXML private HBox rightToolBar;
 
     private ApplicationCommands applicationCommands;
-    private CommandComponentFactory<Void> commandComponentFactory;
+    private CommandTriggerFactory<Void> commandTriggerFactory;
     private CollectionService collectionService;
 
     @Inject
     public ToolBarController(ApplicationCommands applicationCommands,
-                             CommandComponentFactory commandComponentFactory,
+                             CommandTriggerFactory commandTriggerFactory,
                              CollectionService collectionService) {
 
         this.applicationCommands = applicationCommands;
-        this.commandComponentFactory = commandComponentFactory;
+        this.commandTriggerFactory = commandTriggerFactory;
         this.collectionService = collectionService;
     }
 
@@ -60,7 +60,7 @@ public class ToolBarController implements Initializable {
         leftToolBar.getChildren().clear();
         List<Command<Void>> leftToolBarCommands = applicationCommands.getLeftToolBarCommands();
         for (Command<Void> command : leftToolBarCommands) {
-            Button button = commandComponentFactory.createButton(command, () -> null);
+            Button button = commandTriggerFactory.createButton(command, () -> null);
             button.setId("toolbar-" + command.getNodeId());
             leftToolBar.getChildren().add(button);
         }
@@ -71,7 +71,7 @@ public class ToolBarController implements Initializable {
         rightToolBar.getChildren().clear();
         List<Command<Void>> commands = applicationCommands.getRightToolBarCommands();
         for (Command<Void> command : commands) {
-            Button button = commandComponentFactory.createButton(command, () -> null);
+            Button button = commandTriggerFactory.createButton(command, () -> null);
             button.setId("toolbar-" + command.getNodeId());
             rightToolBar.getChildren().add(button);
         }
