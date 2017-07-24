@@ -67,7 +67,7 @@ public abstract class FXML {
         this.loader.setController(null);
     }
 
-    public <C> C getController() throws IOException {
+    public <C> C getController() {
         return (C) controller;
     }
 

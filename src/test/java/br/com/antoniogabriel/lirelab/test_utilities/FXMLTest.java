@@ -9,13 +9,14 @@ public abstract class FXMLTest<T extends FXML> extends InjectableViewTest<T> {
 
     @Override
     public void start(Stage stage) throws Exception {
-        super.start(stage);
-        stage.setMaximized(false);
         configStage(stage);
         fxml.loadIn(stage);
     }
 
-    protected void configStage(Stage stage) { /* to be overridden by subclasses */ }
+    /* to be overridden by subclasses */
+    protected void configStage(Stage stage) {
+        stage.setMaximized(false);
+    }
 
     @After
     public void tearDown() throws Exception {
