@@ -10,7 +10,8 @@ public class PathResolver {
     public static final String COLLECTION_XML = "collection.xml";
 
     public static final String HOME_DIRECTORY_PATH = System.getProperty("user.home");
-    private String applicationBasePath = "";
+
+    private final String applicationBasePath;
 
     public PathResolver() {
         this.applicationBasePath = HOME_DIRECTORY_PATH;

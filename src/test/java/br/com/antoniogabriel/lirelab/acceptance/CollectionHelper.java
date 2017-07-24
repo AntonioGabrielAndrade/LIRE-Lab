@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 public class CollectionHelper {
 
-    private PathResolver resolver;
+    private final PathResolver resolver;
 
     @Inject
     public CollectionHelper(PathResolver resolver) {

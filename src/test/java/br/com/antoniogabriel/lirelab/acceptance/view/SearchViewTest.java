@@ -3,7 +3,6 @@ package br.com.antoniogabriel.lirelab.acceptance.view;
 import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
-import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.search.SearchFXML;
 import br.com.antoniogabriel.lirelab.search.SearchController;
 import br.com.antoniogabriel.lirelab.test_utilities.FXMLTest;
@@ -13,9 +12,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
@@ -23,12 +19,10 @@ import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 
 public class SearchViewTest extends FXMLTest<SearchFXML> {
 
-    private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES, CEDD);
+    private static final Collection COLLECTION1 = collection("Collection1", TEST_IMAGES, CEDD);
 
-    private static final PathResolver resolver = new PathResolver(TEST_ROOT);
-    private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
-
-    private static final List<Feature> FEATURES = Arrays.asList(CEDD);
+    private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
+    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
 
     private static Collection collection;
 
@@ -40,21 +34,21 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
         return new AbstractModule() {
             @Override
             protected void configure() {
-                bind(PathResolver.class).toInstance(resolver);
+                bind(PathResolver.class).toInstance(RESOLVER);
             }
         };
     }
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        collectionHelper.createRealCollection(COLLECTION_1);
-        collection = collectionHelper.readCollection(COLLECTION_1.getName());
+        COLLECTION_HELPER.createRealCollection(COLLECTION1);
+        collection = COLLECTION_HELPER.readCollection(COLLECTION1.getName());
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        collectionHelper.deleteCollection(COLLECTION_1);
-        deleteWorkDirectory(resolver);
+        COLLECTION_HELPER.deleteCollection(COLLECTION1);
+        deleteWorkDirectory(RESOLVER);
     }
 
     @Override
