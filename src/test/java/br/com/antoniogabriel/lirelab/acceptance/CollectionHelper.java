@@ -23,10 +23,20 @@ import static org.junit.Assert.assertTrue;
 public class CollectionHelper {
 
     private final PathResolver resolver;
+    private final br.com.antoniogabriel.lirelab.util.FileUtils fileUtils;
+    private final CollectionUtils collectionUtils;
+    private final CollectionAssembler collectionAssembler;
+    private final LireLabUtils lireLabUtils;
+    private final CollectionRepository collectionRepository;
 
     @Inject
     public CollectionHelper(PathResolver resolver) {
         this.resolver = resolver;
+        this.fileUtils = new br.com.antoniogabriel.lirelab.util.FileUtils();
+        this.lireLabUtils = new LireLabUtils(resolver, fileUtils);
+        this.collectionUtils = new CollectionUtils(resolver);
+        this.collectionAssembler = new CollectionAssembler(resolver, collectionUtils);
+        this.collectionRepository = new CollectionRepository(lireLabUtils, collectionAssembler);
     }
 
     public void checkCollectionExists(String collection) {
@@ -86,8 +96,7 @@ public class CollectionHelper {
     }
 
     public Collection readCollection(String name) {
-        CollectionUtils collectionUtils = new CollectionUtils(resolver);
-        return new CollectionRepository(new LireLabUtils(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils()), new CollectionAssembler(resolver, collectionUtils)).getCollection(name);
+        return collectionRepository.getCollection(name);
     }
 
     private boolean xmlFileExist(String collection) {
