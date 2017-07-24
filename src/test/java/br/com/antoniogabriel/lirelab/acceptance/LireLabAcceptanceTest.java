@@ -18,7 +18,7 @@ public class LireLabAcceptanceTest extends FXMLTest<AppFXML> {
     private static final String ACCEPTANCE_TEST_COLLECTION = "Acceptance_Test_Collection";
 
     private PathResolver resolver = new PathResolver(TEST_ROOT);
-    private CollectionHelper collectionHelper = new CollectionHelper(resolver);
+    private CollectionTestHelper collectionHelper = new CollectionTestHelper(resolver);
     private ApplicationRunner app = new ApplicationRunner(collectionHelper);
 
     @Override

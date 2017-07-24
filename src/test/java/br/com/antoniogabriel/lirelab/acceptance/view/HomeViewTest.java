@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.view;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.app.HomeFXML;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
@@ -29,7 +29,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
     private static final String COLLECTION3_NAME = "Collection3";
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
-    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
+    private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
 
     private static final List<Feature> FEATURES = Arrays.asList(CEDD);
 

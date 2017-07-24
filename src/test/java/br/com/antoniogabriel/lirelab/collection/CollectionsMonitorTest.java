@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.app.DirectoryStructure;
 import br.com.antoniogabriel.lirelab.lire.SimpleIndexCreator;
 import javafx.application.Platform;
@@ -39,7 +39,7 @@ public class CollectionsMonitorTest {
     @Mock private XMLCreator xmlCreator;
 
     private final PathResolver resolver = new PathResolver(TEST_ROOT);
-    private CollectionHelper helper = new CollectionHelper(resolver);
+    private CollectionTestHelper helper = new CollectionTestHelper(resolver);
 
     @Before
     public void setUp() throws Exception {

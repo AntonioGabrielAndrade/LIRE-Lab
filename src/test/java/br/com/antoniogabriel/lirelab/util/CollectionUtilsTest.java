@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.util;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import org.junit.AfterClass;
@@ -24,7 +24,7 @@ public class CollectionUtilsTest {
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final String THUMBNAILS_DIRECTORY_PATH = RESOLVER.getThumbnailsDirectoryPath(COLLECTION_NAME) + "/";
-    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
+    private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
 
     private static Collection collection;
 

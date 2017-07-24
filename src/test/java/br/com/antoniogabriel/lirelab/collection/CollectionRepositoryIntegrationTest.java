@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import br.com.antoniogabriel.lirelab.util.LireLabUtils;
@@ -27,7 +27,7 @@ public class CollectionRepositoryIntegrationTest {
 
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
-    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
+    private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
     private static final CollectionUtils COLLECTION_UTILS = new CollectionUtils(RESOLVER);
     private static final FileUtils FILE_UTILS = new FileUtils();
     private static final CollectionAssembler COLLECTION_ASSEMBLER = new CollectionAssembler(RESOLVER, COLLECTION_UTILS);

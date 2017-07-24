@@ -20,7 +20,7 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class CollectionHelper {
+public class CollectionTestHelper {
 
     private final PathResolver resolver;
     private final br.com.antoniogabriel.lirelab.util.FileUtils fileUtils;
@@ -30,7 +30,7 @@ public class CollectionHelper {
     private final CollectionRepository collectionRepository;
 
     @Inject
-    public CollectionHelper(PathResolver resolver) {
+    public CollectionTestHelper(PathResolver resolver) {
         this.resolver = resolver;
         this.fileUtils = new br.com.antoniogabriel.lirelab.util.FileUtils();
         this.lireLabUtils = new LireLabUtils(resolver, fileUtils);

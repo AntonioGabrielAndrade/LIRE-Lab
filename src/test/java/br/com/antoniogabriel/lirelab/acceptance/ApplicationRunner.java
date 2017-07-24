@@ -8,14 +8,12 @@ import br.com.antoniogabriel.lirelab.lire.Feature;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-
 
 public class ApplicationRunner {
 
-    private CollectionHelper collectionHelper;
+    private CollectionTestHelper collectionHelper;
 
-    public ApplicationRunner(CollectionHelper collectionHelper) {
+    public ApplicationRunner(CollectionTestHelper collectionHelper) {
         this.collectionHelper = collectionHelper;
     }
 

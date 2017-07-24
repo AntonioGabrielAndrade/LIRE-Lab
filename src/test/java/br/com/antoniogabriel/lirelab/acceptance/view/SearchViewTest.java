@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.acceptance.view;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.search.SearchFXML;
@@ -20,7 +20,7 @@ import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
-    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
+    private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
 
     private static final String COLLECTION_NAME = "Collection";
 
