@@ -41,11 +41,10 @@ public class CollectionService {
         }
     }
 
-    public CreateCollectionTask getTaskToCreateCollection(CreateCollectionInfo createInfo) {
-        CreateCollectionTask task = createCollectionTaskFactory.createTask(createInfo);
-
-        collectionsMonitor.bindListenersTo(task);
-        return task;
+    public CreateCollectionRunnable getCreateCollectionRunnable(CreateCollectionInfo createInfo) {
+        CreateCollectionRunnable runnable = createCollectionTaskFactory.getCreationRunnable(createInfo);
+        runnable.setOnFinish(() -> collectionsMonitor.executeListeners());
+        return runnable;
     }
 
     public List<Collection> getCollections() {

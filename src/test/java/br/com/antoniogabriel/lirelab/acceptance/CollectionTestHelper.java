@@ -83,14 +83,15 @@ public class CollectionTestHelper {
 
         Runnable task =
                 new CreateCollectionTaskFactory(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils())
-                        .createTaskAsRunnable(
+                        .getCreationRunnable(
+                                new CreateCollectionInfo(
                                 name,
-                                collectionFeatures,
                                 imagesPath,
+                                collectionFeatures,
                                 true,
                                 false,
                                 1
-                        );
+                        ));
 
         task.run();
     }

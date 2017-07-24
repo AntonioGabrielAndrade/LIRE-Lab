@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback, XMLCreatorCallback {
 
-    private CreateCollectionRunnable runnable;
+    private Runnable runnable;
 
     public CreateCollectionTask(CreateCollectionRunnable runnable) {
         this.runnable = runnable;

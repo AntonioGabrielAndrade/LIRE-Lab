@@ -13,6 +13,8 @@ public class CreateCollectionRunnable implements Runnable {
     private final ThumbnailsCreator thumbnailsCreator;
     private final XMLCreator xmlCreator;
 
+    private Runnable finish = () -> {};
+
     public CreateCollectionRunnable(IndexCreator indexCreator,
                                     ThumbnailsCreator thumbnailsCreator,
                                     XMLCreator xmlCreator) {
@@ -34,12 +36,17 @@ public class CreateCollectionRunnable implements Runnable {
         xmlCreator.setCallback(callback);
     }
 
+    public void setOnFinish(Runnable finish) {
+        if(finish != null) this.finish = finish;
+    }
+
     @Override
     public void run() {
         try {
             indexCreator.create();
             thumbnailsCreator.create();
             xmlCreator.create();
+            finish.run();
         } catch (IOException | JAXBException e) {
             throw new LireLabException("Could not create collection", e);
         }

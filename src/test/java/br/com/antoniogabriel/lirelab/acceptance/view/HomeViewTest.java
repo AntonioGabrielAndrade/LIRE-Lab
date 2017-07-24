@@ -94,15 +94,14 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
 
     @Test
     public void shouldUpdateCollectionsListWhenNewCollectionIsCreated() throws Exception {
-        CreateCollectionTask creationTask = service.getTaskToCreateCollection(
+        CreateCollectionRunnable creationTask = service.getCreateCollectionRunnable(
                                                         new CreateCollectionInfo(
                                                                 COLLECTION3_NAME,
                                                                 TEST_IMAGES,
                                                                 FEATURES,
                                                                 true,
                                                                 false,
-                                                                1
-                                                        ));
+                                                                1));
 
         new Thread(creationTask).start();
 
