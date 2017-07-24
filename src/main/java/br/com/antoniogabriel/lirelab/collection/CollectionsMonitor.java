@@ -34,7 +34,7 @@ public class CollectionsMonitor {
         task.setOnSucceeded(event -> executeListeners());
     }
 
-    private void executeListeners() {
+    public void executeListeners() {
         for (Runnable listener : listeners) {
             listener.run();
         }
@@ -80,7 +80,7 @@ public class CollectionsMonitor {
                             continue; //loop
                         } else if (ENTRY_DELETE == kind || ENTRY_MODIFY == kind) {
                             try {
-                                Thread.sleep(500);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             } finally {
