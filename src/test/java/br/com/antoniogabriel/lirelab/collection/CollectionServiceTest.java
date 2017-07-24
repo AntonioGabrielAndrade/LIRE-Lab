@@ -10,11 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
-
-import static java.util.Collections.EMPTY_LIST;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -23,13 +18,9 @@ public class CollectionServiceTest {
 
     private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
-    public static final String ANY_NAME = "";
-    public static final String ANY_PATH = "";
-
     @Mock private CollectionRepository collectionRepository;
     @Mock private CollectionsMonitor collectionsMonitor;
-    @Mock private CreateCollectionTaskFactory createCollectionTaskFactory;
-    @Mock private CreateCollectionTask task;
+    @Mock private CreateCollectionRunnableFactory createCollectionRunnableFactory;
     @Mock private QueryRunnerFactory queryRunnerFactory;
     @Mock private PathResolver resolver;
     @Mock private QueryRunner queryRunner;
@@ -44,7 +35,7 @@ public class CollectionServiceTest {
         service = new CollectionService(resolver,
                                         collectionRepository,
                                         collectionsMonitor,
-                                        createCollectionTaskFactory,
+                                        createCollectionRunnableFactory,
                                         queryRunnerFactory);
     }
 
@@ -52,31 +43,6 @@ public class CollectionServiceTest {
     public void shouldStartMonitoringCollections() throws Exception {
         verify(collectionsMonitor).startMonitoringCollectionsDeleteAndUpdate();
     }
-
-//    @Test
-//    public void shouldBuildTaskToCreateCollectionAndMonitorItsCompletion() throws Exception {
-//        String name = ANY_NAME;
-//        String path = ANY_PATH;
-//        List<Feature> features = EMPTY_LIST;
-//        boolean scanSubDirs = true;
-//        boolean useParallelIndexer = false;
-//        int numberOfThreads = 1;
-//
-//        given(createCollectionTaskFactory.createTask(name, features, path, scanSubDirs, useParallelIndexer, numberOfThreads))
-//            .willReturn(task);
-//
-//        CreateCollectionTask retrievedTask =
-//                service.getTaskToCreateCollection(
-//                        new CreateCollectionInfo(name,
-//                                                path,
-//                                                features,
-//                                                scanSubDirs,
-//                                                useParallelIndexer,
-//                                                numberOfThreads));
-//
-//        assertThat(retrievedTask, is(task));
-//        verify(collectionsMonitor).bindListenersTo(retrievedTask);
-//    }
 
     @Test
     public void shouldGetCollections() throws Exception {

@@ -9,13 +9,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class CreateCollectionTaskFactory {
+public class CreateCollectionRunnableFactory {
 
     private PathResolver resolver;
     private FileUtils fileUtils;
 
     @Inject
-    public CreateCollectionTaskFactory(PathResolver resolver, FileUtils fileUtils) {
+    public CreateCollectionRunnableFactory(PathResolver resolver, FileUtils fileUtils) {
         this.resolver = resolver;
         this.fileUtils = fileUtils;
     }

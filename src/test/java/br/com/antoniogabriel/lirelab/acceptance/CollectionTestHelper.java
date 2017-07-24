@@ -82,7 +82,7 @@ public class CollectionTestHelper {
         List<Feature> collectionFeatures = features.length > 0 ? asList(features) : asList(CEDD);
 
         Runnable task =
-                new CreateCollectionTaskFactory(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils())
+                new CreateCollectionRunnableFactory(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils())
                         .getCreationRunnable(
                                 new CreateCollectionInfo(
                                 name,

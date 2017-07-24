@@ -15,19 +15,19 @@ public class CollectionService {
     private PathResolver resolver;
     private CollectionRepository collectionRepository;
     private CollectionsMonitor collectionsMonitor;
-    private CreateCollectionTaskFactory createCollectionTaskFactory;
+    private CreateCollectionRunnableFactory createCollectionRunnableFactory;
     private QueryRunnerFactory queryRunnerFactory;
 
     @Inject
     public CollectionService(PathResolver resolver,
                              CollectionRepository collectionRepository,
                              CollectionsMonitor collectionsMonitor,
-                             CreateCollectionTaskFactory createCollectionTaskFactory, QueryRunnerFactory queryRunnerFactory) {
+                             CreateCollectionRunnableFactory createCollectionRunnableFactory, QueryRunnerFactory queryRunnerFactory) {
 
         this.resolver = resolver;
         this.collectionRepository = collectionRepository;
         this.collectionsMonitor = collectionsMonitor;
-        this.createCollectionTaskFactory = createCollectionTaskFactory;
+        this.createCollectionRunnableFactory = createCollectionRunnableFactory;
         this.queryRunnerFactory = queryRunnerFactory;
 
         startMonitoringCollectionsDeleteAndUpdate();
@@ -42,7 +42,7 @@ public class CollectionService {
     }
 
     public CreateCollectionRunnable getCreateCollectionRunnable(CreateCollectionInfo createInfo) {
-        CreateCollectionRunnable runnable = createCollectionTaskFactory.getCreationRunnable(createInfo);
+        CreateCollectionRunnable runnable = createCollectionRunnableFactory.getCreationRunnable(createInfo);
         runnable.setOnFinish(() -> collectionsMonitor.executeListeners());
         return runnable;
     }
