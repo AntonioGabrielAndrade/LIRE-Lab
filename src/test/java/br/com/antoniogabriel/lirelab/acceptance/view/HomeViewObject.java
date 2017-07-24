@@ -20,6 +20,10 @@ public class HomeViewObject {
         treeViewObject.waitUntilCollectionIsListed(collection);
     }
 
+    public void waitUntilCollectionIsListed(String collection) throws TimeoutException {
+        treeViewObject.waitUntilCollectionIsListed(collection);
+    }
+
     public void expandCollection(Collection collection) throws TimeoutException {
         treeViewObject.expandCollection(collection);
     }

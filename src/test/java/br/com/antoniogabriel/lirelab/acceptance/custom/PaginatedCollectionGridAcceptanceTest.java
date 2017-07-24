@@ -25,22 +25,24 @@ public class PaginatedCollectionGridAcceptanceTest extends ApplicationTest {
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
-    public static final int PAGE_SIZE = 3;
+    private static final int PAGE_SIZE = 3;
 
-    private static Collection collection = collection("Collection", TEST_IMAGES, CEDD);
+    private static final String COLLECTION_NAME = "Collection";
+
+    private static Collection collection;
 
     private PaginatedCollectionGrid collectionGrid;
     private PaginatedGridViewObject view = new PaginatedGridViewObject();
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        COLLECTION_HELPER.createRealCollection(collection);
-        collection = COLLECTION_HELPER.readCollection(collection.getName());
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD);
+        collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        COLLECTION_HELPER.deleteCollection(collection);
+        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME);
         deleteWorkDirectory(RESOLVER);
     }
 

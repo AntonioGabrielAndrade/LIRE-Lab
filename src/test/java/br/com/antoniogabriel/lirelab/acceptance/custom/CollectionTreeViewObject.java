@@ -31,6 +31,10 @@ public class CollectionTreeViewObject extends FxRobot {
         waitUntilIsVisible(collection.getName(), COLLECTION_TREE);
     }
 
+    public void waitUntilCollectionIsListed(String collection) throws TimeoutException {
+        waitUntilIsVisible(collection, COLLECTION_TREE);
+    }
+
     public void waitUntilCollectionIsNotListed(Collection collection) throws TimeoutException {
         waitUntilIsNotVisible(collection.getName(), COLLECTION_TREE);
     }

@@ -19,10 +19,10 @@ import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 
 public class SearchViewTest extends FXMLTest<SearchFXML> {
 
-    private static final Collection COLLECTION1 = collection("Collection1", TEST_IMAGES, CEDD);
-
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
+
+    private static final String COLLECTION_NAME = "Collection";
 
     private static Collection collection;
 
@@ -41,13 +41,13 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        COLLECTION_HELPER.createRealCollection(COLLECTION1);
-        collection = COLLECTION_HELPER.readCollection(COLLECTION1.getName());
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD);
+        collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        COLLECTION_HELPER.deleteCollection(COLLECTION1);
+        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME);
         deleteWorkDirectory(RESOLVER);
     }
 

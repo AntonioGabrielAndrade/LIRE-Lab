@@ -25,28 +25,35 @@ import static org.junit.Assert.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionRepositoryIntegrationTest {
 
-    private static final Collection COLLECTION1 = collection("Collection1", TEST_IMAGES, CEDD);
-    private static final Collection COLLECTION2 = collection("Collection2", TEST_IMAGES, CEDD);
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
     private static final CollectionUtils COLLECTION_UTILS = new CollectionUtils(RESOLVER);
-    private static final FileUtils fileUtils = new FileUtils();
-    private static final CollectionAssembler collectionAssembler = new CollectionAssembler(RESOLVER, COLLECTION_UTILS);
-    private static final LireLabUtils lireLabUtils = new LireLabUtils(RESOLVER, fileUtils);
+    private static final FileUtils FILE_UTILS = new FileUtils();
+    private static final CollectionAssembler COLLECTION_ASSEMBLER = new CollectionAssembler(RESOLVER, COLLECTION_UTILS);
+    private static final LireLabUtils LIRE_LAB_UTILS = new LireLabUtils(RESOLVER, FILE_UTILS);
 
-    private CollectionRepository repository = new CollectionRepository(lireLabUtils, collectionAssembler);
+    private static final String COLLECTION1_NAME = "Collection1";
+    private static final String COLLECTION2_NAME = "Collection2";
+
+    private static Collection collection1;
+    private static Collection collection2;
+
+    private CollectionRepository repository = new CollectionRepository(LIRE_LAB_UTILS, COLLECTION_ASSEMBLER);
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        COLLECTION_HELPER.createRealCollection(COLLECTION1);
-        COLLECTION_HELPER.createRealCollection(COLLECTION2);
+        COLLECTION_HELPER.createRealCollection(COLLECTION1_NAME, TEST_IMAGES, CEDD);
+        COLLECTION_HELPER.createRealCollection(COLLECTION2_NAME, TEST_IMAGES, CEDD);
+
+        collection1 = COLLECTION_HELPER.readCollection(COLLECTION1_NAME);
+        collection2 = COLLECTION_HELPER.readCollection(COLLECTION2_NAME);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        COLLECTION_HELPER.deleteCollection(COLLECTION1);
-        COLLECTION_HELPER.deleteCollection(COLLECTION2);
+        COLLECTION_HELPER.deleteCollection(COLLECTION1_NAME);
+        COLLECTION_HELPER.deleteCollection(COLLECTION2_NAME);
 
         deleteWorkDirectory(RESOLVER);
     }
@@ -67,16 +74,15 @@ public class CollectionRepositoryIntegrationTest {
         List<Collection> collections = repository.getCollections();
 
         assertThat(collections.size(), is(2));
-        assertTrue(collections.contains(COLLECTION1));
-        assertTrue(collections.contains(COLLECTION2));
+        assertTrue(collections.contains(collection1));
+        assertTrue(collections.contains(collection2));
     }
 
     @Test
     public void shouldReturnSpecificCollectionFromDisk() throws Exception {
+        Collection collection = repository.getCollection(COLLECTION1_NAME);
 
-        Collection collection = repository.getCollection(COLLECTION1.getName());
-
-        assertThat(collection.getName(), equalTo(COLLECTION1.getName()));
+        assertThat(collection.getName(), equalTo(COLLECTION1_NAME));
         assertThat(collection.getImages().size(), is(10));
         assertTrue(collection.getFeatures().contains(CEDD));
     }
@@ -108,7 +114,7 @@ public class CollectionRepositoryIntegrationTest {
     @Test
     public void shouldDeleteCollection() throws Exception {
         String testCollection = "TestCollection";
-        COLLECTION_HELPER.createRealCollection(collection(testCollection, TEST_IMAGES, CEDD));
+        COLLECTION_HELPER.createRealCollection(testCollection, TEST_IMAGES, CEDD);
         COLLECTION_HELPER.checkCollectionExists(testCollection);
 
         repository.deleteCollection(testCollection);

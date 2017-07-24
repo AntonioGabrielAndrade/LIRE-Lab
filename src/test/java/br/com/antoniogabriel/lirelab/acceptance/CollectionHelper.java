@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -68,15 +68,15 @@ public class CollectionHelper {
         createXMLFile(collection);
     }
 
-    public void createRealCollection(Collection collection) {
-        List<Feature> collectionFeatures = getFeatures(collection);
+    public void createRealCollection(String name, String imagesPath, Feature... features) {
+        List<Feature> collectionFeatures = features.length > 0 ? asList(features) : asList(CEDD);
 
         Runnable task =
                 new CreateCollectionTaskFactory(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils())
                         .createTaskAsRunnable(
-                                collection.getName(),
+                                name,
                                 collectionFeatures,
-                                collection.getImagesDirectory(),
+                                imagesPath,
                                 true,
                                 false,
                                 1
@@ -88,12 +88,6 @@ public class CollectionHelper {
     public Collection readCollection(String name) {
         CollectionUtils collectionUtils = new CollectionUtils(resolver);
         return new CollectionRepository(new LireLabUtils(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils()), new CollectionAssembler(resolver, collectionUtils)).getCollection(name);
-    }
-
-    private List<Feature> getFeatures(Collection collection) {
-        return (collection.getFeatures() == null || collection.getFeatures().isEmpty()) ?
-                                                                    Arrays.asList(CEDD) :
-                                                                    collection.getFeatures();
     }
 
     private boolean xmlFileExist(String collection) {

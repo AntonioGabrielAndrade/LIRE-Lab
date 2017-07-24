@@ -21,18 +21,20 @@ import java.util.List;
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.collection;
 
-public class HomeViewTest extends FXMLTest<HomeFXML>{
+public class HomeViewTest extends FXMLTest<HomeFXML> {
 
-    private static final Collection COLLECTION_1 = collection("Collection1", TEST_IMAGES, CEDD);
-    private static final Collection COLLECTION_2 = collection("Collection2", TEST_IMAGES, CEDD);
-    private static final Collection COLLECTION_3 = collection("Collection3", TEST_IMAGES, CEDD);
+    private static final String COLLECTION1_NAME = "Collection1";
+    private static final String COLLECTION2_NAME = "Collection2";
+    private static final String COLLECTION3_NAME = "Collection3";
 
-    private static final PathResolver resolver = new PathResolver(TEST_ROOT);
-    private static final CollectionHelper collectionHelper = new CollectionHelper(resolver);
+    private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
+    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
 
     private static final List<Feature> FEATURES = Arrays.asList(CEDD);
+
+    private static Collection collection1;
+    private static Collection collection2;
 
     private HomeViewObject homeView = new HomeViewObject();
 
@@ -41,15 +43,18 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        collectionHelper.createRealCollection(COLLECTION_1);
-        collectionHelper.createRealCollection(COLLECTION_2);
+        COLLECTION_HELPER.createRealCollection(COLLECTION1_NAME, TEST_IMAGES, CEDD);
+        COLLECTION_HELPER.createRealCollection(COLLECTION2_NAME, TEST_IMAGES, CEDD);
+
+        collection1 = COLLECTION_HELPER.readCollection(COLLECTION1_NAME);
+        collection2 = COLLECTION_HELPER.readCollection(COLLECTION2_NAME);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        collectionHelper.deleteCollection(COLLECTION_1);
-        collectionHelper.deleteCollection(COLLECTION_2);
-        collectionHelper.deleteCollection(COLLECTION_3);
+        COLLECTION_HELPER.deleteCollection(COLLECTION1_NAME);
+        COLLECTION_HELPER.deleteCollection(COLLECTION2_NAME);
+        COLLECTION_HELPER.deleteCollection(COLLECTION3_NAME);
     }
 
 
@@ -58,7 +63,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
         return new AbstractModule() {
             @Override
             protected void configure() {
-                bind(PathResolver.class).toInstance(resolver);
+                bind(PathResolver.class).toInstance(RESOLVER);
             }
         };
     }
@@ -70,13 +75,13 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @Test
     public void shouldListCollections() throws Exception {
-        homeView.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
+        homeView.waitUntilCollectionsAreListed(collection1, collection2);
     }
 
     @Test
     public void shouldListImagesInCollection() throws Exception {
-        homeView.waitUntilCollectionIsListed(COLLECTION_1);
-        homeView.expandCollection(COLLECTION_1);
+        homeView.waitUntilCollectionIsListed(collection1);
+        homeView.expandCollection(collection1);
 
         homeView.waitUntilImageIsListed("14474347006_99aa0fd981_k.jpg");
         homeView.waitUntilImageIsListed("16903390174_1d670a5849_h.jpg");
@@ -93,7 +98,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
     @Test
     public void shouldUpdateCollectionsListWhenNewCollectionIsCreated() throws Exception {
         CreateCollectionTask creationTask = service.getTaskToCreateCollection(
-                                                            COLLECTION_3.getName(),
+                                                            COLLECTION3_NAME,
                                                             TEST_IMAGES,
                                                             FEATURES,
                                                             true,
@@ -102,37 +107,37 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
         new Thread(creationTask).start();
 
-        homeView.waitUntilCollectionIsListed(COLLECTION_3);
+        homeView.waitUntilCollectionIsListed(COLLECTION3_NAME);
     }
 
     @Test
     public void shouldUpdateCollectionsListWhenCollectionIsDeleted() throws Exception {
-        homeView.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
+        homeView.waitUntilCollectionsAreListed(collection1, collection2);
 
-        collectionHelper.deleteCollection(COLLECTION_1);
+        COLLECTION_HELPER.deleteCollection(collection1);
 
-        homeView.waitUntilCollectionIsNotListed(COLLECTION_1);
-        homeView.waitUntilCollectionsAreListed(COLLECTION_2);
+        homeView.waitUntilCollectionIsNotListed(collection1);
+        homeView.waitUntilCollectionsAreListed(collection2);
 
-        collectionHelper.createRealCollection(COLLECTION_1);
+        COLLECTION_HELPER.createRealCollection(COLLECTION1_NAME, TEST_IMAGES, CEDD);
     }
 
     @Test
     public void shouldDeleteCollectionByContextMenu() throws Exception {
-        homeView.waitUntilCollectionsAreListed(COLLECTION_1, COLLECTION_2);
+        homeView.waitUntilCollectionsAreListed(collection1, collection2);
 
-        homeView.deleteCollection(COLLECTION_1);
+        homeView.deleteCollection(collection1);
 
-        homeView.waitUntilCollectionIsNotListed(COLLECTION_1);
-        homeView.waitUntilCollectionsAreListed(COLLECTION_2);
+        homeView.waitUntilCollectionIsNotListed(collection1);
+        homeView.waitUntilCollectionsAreListed(collection2);
 
-        collectionHelper.createRealCollection(COLLECTION_1);
+        COLLECTION_HELPER.createRealCollection(COLLECTION1_NAME, TEST_IMAGES, CEDD);
     }
 
     @Test
     public void shouldShowCollectionImagesWhenCollectionIsSelected() throws Exception {
-        homeView.waitUntilCollectionIsListed(COLLECTION_1);
-        homeView.selectCollection(COLLECTION_1);
+        homeView.waitUntilCollectionIsListed(collection1);
+        homeView.selectCollection(collection1);
 
         homeView.waitUntilImageIsVisible("14474347006_99aa0fd981_k");
         homeView.waitUntilImageIsVisible("16903390174_1d670a5849_h");
@@ -148,8 +153,8 @@ public class HomeViewTest extends FXMLTest<HomeFXML>{
 
     @Test
     public void shouldShowImageWhenImageIsSelected() throws Exception {
-        homeView.waitUntilCollectionIsListed(COLLECTION_1);
-        homeView.expandCollection(COLLECTION_1);
+        homeView.waitUntilCollectionIsListed(collection1);
+        homeView.expandCollection(collection1);
         homeView.selectImage("14474347006_99aa0fd981_k.jpg");
         homeView.waitUntilImageIsVisible("14474347006_99aa0fd981_k");
     }
