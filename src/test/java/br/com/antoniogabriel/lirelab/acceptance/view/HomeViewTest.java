@@ -2,10 +2,7 @@ package br.com.antoniogabriel.lirelab.acceptance.view;
 
 import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.app.HomeFXML;
-import br.com.antoniogabriel.lirelab.collection.Collection;
-import br.com.antoniogabriel.lirelab.collection.CollectionService;
-import br.com.antoniogabriel.lirelab.collection.CreateCollectionTask;
-import br.com.antoniogabriel.lirelab.collection.PathResolver;
+import br.com.antoniogabriel.lirelab.collection.*;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.test_utilities.FXMLTest;
 import com.google.inject.AbstractModule;
@@ -98,12 +95,14 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
     @Test
     public void shouldUpdateCollectionsListWhenNewCollectionIsCreated() throws Exception {
         CreateCollectionTask creationTask = service.getTaskToCreateCollection(
-                                                            COLLECTION3_NAME,
-                                                            TEST_IMAGES,
-                                                            FEATURES,
-                                                            true,
-                                                            false,
-                                                            1);
+                                                        new CreateCollectionInfo(
+                                                                COLLECTION3_NAME,
+                                                                TEST_IMAGES,
+                                                                FEATURES,
+                                                                true,
+                                                                false,
+                                                                1
+                                                        ));
 
         new Thread(creationTask).start();
 

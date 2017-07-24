@@ -88,13 +88,14 @@ public class CreateCollectionController implements Initializable {
 
     @FXML
     void createCollection(ActionEvent event) {
-        CreateCollectionTask task = service.getTaskToCreateCollection(
-                collectionName(),
-                imagesDirectory(),
-                collectionFeatures(),
-                scanSubdirectories(),
-                useParallelIndexer(),
-                numberOfThreads());
+        CreateCollectionInfo createInfo = new CreateCollectionInfo(collectionName(),
+                                                        imagesDirectory(),
+                                                        collectionFeatures(),
+                                                        scanSubdirectories(),
+                                                        useParallelIndexer(),
+                                                        numberOfThreads());
+
+        CreateCollectionTask task = service.getTaskToCreateCollection(createInfo);
 
         ProgressDialog dialog = dialogProvider.getProgressDialog(task, getWindowFrom(event));
         dialog.showAndStart();

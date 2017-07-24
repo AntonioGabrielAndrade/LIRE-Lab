@@ -96,4 +96,41 @@ public class CreateCollectionTaskFactory {
                                             paths);
         }
     }
+
+    public CreateCollectionTask createTask(CreateCollectionInfo createInfo) {
+        String collectionPath = resolver.getCollectionPath(createInfo.getCollectionName());
+        String indexPath = resolver.getIndexDirectoryPath(createInfo.getCollectionName());
+        String thumbnailsPath = resolver.getThumbnailsDirectoryPath(createInfo.getCollectionName());
+
+
+        LIRE lire = new LIRE();
+        List<String> paths;
+
+        try {
+            paths = fileUtils.getAllImagesPaths(createInfo.getImagesDirectory(), createInfo.isScanSubdirectories());
+        } catch (IOException e) {
+            throw new LireLabException("Could not read paths", e);
+        }
+
+        IndexCreator indexCreator = getIndexCreator(lire,
+                indexPath,
+                createInfo.getImagesDirectory(),
+                paths,
+                createInfo.getFeatures(),
+                createInfo.isUseParallelIndexer(),
+                createInfo.getNumberOfThreads());
+
+        ThumbnailBuilder thumbnailBuilder = new ThumbnailBuilder();
+        ThumbnailsCreator thumbnailsCreator = new ThumbnailsCreator(thumbnailBuilder,
+                thumbnailsPath,
+                paths);
+
+        CollectionXMLDAO xmlDAO = new CollectionXMLDAO(new File(collectionPath));
+        XMLCreator xmlCreator = new XMLCreator(createInfo.getCollectionName(),
+                createInfo.getImagesDirectory(),
+                createInfo.getFeatures(),
+                xmlDAO);
+
+        return new CreateCollectionTask(new CreateCollectionRunnable(indexCreator, thumbnailsCreator, xmlCreator));
+    }
 }
