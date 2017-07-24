@@ -35,7 +35,7 @@ public class CollectionService {
 
     private void startMonitoringCollectionsDeleteAndUpdate() {
         try {
-            this.collectionsMonitor.startMonitoringCollectionsDeleteAndUpdate();
+            collectionsMonitor.startMonitoringCollectionsDeleteAndUpdate();
         } catch (IOException e) {
             throw new LireLabException("Error monitoring collections", e);
         }

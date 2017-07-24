@@ -73,7 +73,7 @@ public class CreateCollectionController implements Initializable {
     }
 
     @FXML
-    void chooseImagesDirectory(ActionEvent event) {
+    private void chooseImagesDirectory(ActionEvent event) {
         Window owner = getWindowFrom(event);
         File dir = dialogProvider.chooseImagesDirectory(owner);
         if (dir != null) {
@@ -82,18 +82,18 @@ public class CreateCollectionController implements Initializable {
     }
 
     @FXML
-    void close(ActionEvent event) {
+    private void close(ActionEvent event) {
         getWindowFrom(event).hide();
     }
 
     @FXML
-    void createCollection(ActionEvent event) {
+    private void createCollection(ActionEvent event) {
         CreateCollectionInfo createInfo = new CreateCollectionInfo(collectionName(),
-                                                        imagesDirectory(),
-                                                        collectionFeatures(),
-                                                        scanSubdirectories(),
-                                                        useParallelIndexer(),
-                                                        numberOfThreads());
+                                                                    imagesDirectory(),
+                                                                    collectionFeatures(),
+                                                                    scanSubdirectories(),
+                                                                    useParallelIndexer(),
+                                                                    numberOfThreads());
 
         CreateCollectionRunnable runnable = service.getCreateCollectionRunnable(createInfo);
         CreateCollectionTask task = new CreateCollectionTask(runnable);
