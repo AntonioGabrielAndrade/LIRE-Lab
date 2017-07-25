@@ -58,7 +58,7 @@ public class StatusBar extends BorderPane {
         statusProgress.visibleProperty().bind(task.runningProperty());
         statusIndicator.visibleProperty().bind(task.runningProperty());
         statusMessage.textProperty().bind(when(statusIndicator.visibleProperty())
-                                    .then(messageProperty).otherwise(empty));
+                                            .then(messageProperty).otherwise(empty));
     }
 
     public void setFeatures(List<Feature> features, Feature defaultFeature, FeatureSelectionListener listener) {
