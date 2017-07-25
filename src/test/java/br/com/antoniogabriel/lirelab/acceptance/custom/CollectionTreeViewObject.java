@@ -67,11 +67,13 @@ public class CollectionTreeViewObject extends FxRobot {
         clickOn(image).interrupt();
     }
 
-    public void openContextMenu(Collection collection) {
+    public void openContextMenu(Collection collection) throws TimeoutException {
         rightClickOn(collection.getName()).interrupt();
+        waitUntilIsVisible("#collection-context-menu");
     }
 
     public void deleteCollection(Collection collection) {
-        clickOn("Delete collection");
+        Node deleteCollection = from(lookup("#collection-context-menu")).lookup("Delete collection").query();
+        clickOn(deleteCollection);
     }
 }

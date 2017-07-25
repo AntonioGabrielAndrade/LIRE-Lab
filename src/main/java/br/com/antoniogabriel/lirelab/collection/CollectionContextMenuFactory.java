@@ -18,6 +18,7 @@ public class CollectionContextMenuFactory {
     public ContextMenu createContextMenu(Collection collection) {
 
         ContextMenu contextMenu = new ContextMenu();
+        contextMenu.setId("collection-context-menu");
 
         for (Command<Collection> command : commands) {
             contextMenu.getItems().add(triggerFactory.createMenuItem(command, () -> collection));

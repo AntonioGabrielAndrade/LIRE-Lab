@@ -48,7 +48,7 @@ public class HomeViewObject {
         treeViewObject.selectImage(imageName);
     }
 
-    public void deleteCollection(Collection collection) {
+    public void deleteCollection(Collection collection) throws TimeoutException {
         treeViewObject.openContextMenu(collection);
         treeViewObject.deleteCollection(collection);
     }
