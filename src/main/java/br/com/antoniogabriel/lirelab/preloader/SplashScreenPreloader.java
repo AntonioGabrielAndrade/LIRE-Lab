@@ -1,13 +1,11 @@
 package br.com.antoniogabriel.lirelab.preloader;
 
+import br.com.antoniogabriel.lirelab.app.AboutFXML;
 import javafx.animation.FadeTransition;
 import javafx.application.Preloader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -21,11 +19,8 @@ public class SplashScreenPreloader extends Preloader {
         this.stage = stage;
         this.stage.initStyle(StageStyle.UNDECORATED);
 
-        Image splashImage = new Image(getClass().getResourceAsStream("splash-screen.jpg"));
-        ImageView splashImageView = new ImageView(splashImage);
-        StackPane root = new StackPane(splashImageView);
-        stage.setScene(new Scene(root));
-        stage.show();
+        AboutFXML aboutFXML = new AboutFXML(new FXMLLoader());
+        aboutFXML.loadIn(stage);
     }
 
     @Override
