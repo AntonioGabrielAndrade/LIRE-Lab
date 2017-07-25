@@ -23,7 +23,6 @@ import javafx.stage.Window;
 import javax.inject.Inject;
 import java.io.File;
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -143,13 +142,17 @@ public class CreateCollectionController implements Initializable {
     }
 
     private BooleanBinding nameAlreadyExists() {
-        BooleanBinding binding = new SimpleBooleanProperty(true).not();
+        BooleanBinding binding = bindFalse();
 
         for (String name : service.getCollectionNames()) {
             binding = binding.or(nameField.textProperty().isEqualTo(name));
         }
 
         return binding;
+    }
+
+    private BooleanBinding bindFalse() {
+        return new SimpleBooleanProperty(true).not();
     }
 
     private BooleanBinding imagesDirectoryIsEmpty() {
