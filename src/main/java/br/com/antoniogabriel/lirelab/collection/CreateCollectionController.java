@@ -27,9 +27,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static java.util.Collections.unmodifiableList;
 import static javafx.beans.binding.Bindings.when;
 
 public class CreateCollectionController implements Initializable {
+
+    public static final SimpleStringProperty NAME_HINT = new SimpleStringProperty("Enter a collection name.");
+    public static final SimpleStringProperty IMAGES_DIRECTORY_HINT = new SimpleStringProperty("Enter a directory with images.");
+    public static final SimpleStringProperty FEATURES_HINT = new SimpleStringProperty("Select at least one Feature for indexing.");
+    public static final SimpleStringProperty NAME_ALREADY_EXISTS_HINT = new SimpleStringProperty("A collection with this name already exists.");
+    public static final SimpleStringProperty EMPTY = new SimpleStringProperty("");
+
+    public static final SimpleObjectProperty RED = new SimpleObjectProperty(Paint.valueOf("red"));
+    public static final SimpleObjectProperty BLACK = new SimpleObjectProperty(Paint.valueOf("black"));
 
     @FXML private DialogHeader dialogHeader;
     @FXML private TextField nameField;
@@ -62,22 +72,13 @@ public class CreateCollectionController implements Initializable {
     }
 
     private void bindHintMessagesToFields() {
-        SimpleStringProperty nameHint = new SimpleStringProperty("Enter a collection name.");
-        SimpleStringProperty imagesDirectoryHint = new SimpleStringProperty("Enter a directory with images.");
-        SimpleStringProperty featuresHint = new SimpleStringProperty("Select at least one Feature for indexing.");
-        SimpleStringProperty nameAlreadyExistsHint = new SimpleStringProperty("A collection with this name already exists.");
-        SimpleStringProperty empty = new SimpleStringProperty("");
+        dialogHeader.hintProperty().bind(when(nameIsEmpty()).then(NAME_HINT)
+                                        .otherwise(when(nameAlreadyExists()).then(NAME_ALREADY_EXISTS_HINT)
+                                        .otherwise(when(imagesDirectoryIsEmpty()).then(IMAGES_DIRECTORY_HINT)
+                                        .otherwise(when(noFeatureSelected()).then(FEATURES_HINT)
+                                        .otherwise(EMPTY)))));
 
-        SimpleObjectProperty red = new SimpleObjectProperty(Paint.valueOf("red"));
-        SimpleObjectProperty black = new SimpleObjectProperty(Paint.valueOf("black"));
-
-        dialogHeader.hintProperty().bind(when(nameIsEmpty()).then(nameHint)
-                                        .otherwise(when(nameAlreadyExists()).then(nameAlreadyExistsHint)
-                                        .otherwise(when(imagesDirectoryIsEmpty()).then(imagesDirectoryHint)
-                                        .otherwise(when(noFeatureSelected()).then(featuresHint)
-                                        .otherwise(empty)))));
-
-        dialogHeader.hintColor().bind(when(nameAlreadyExists()).then(red).otherwise(black));
+        dialogHeader.hintColor().bind(when(nameAlreadyExists()).then(RED).otherwise(BLACK));
     }
 
     @FXML
@@ -176,7 +177,7 @@ public class CreateCollectionController implements Initializable {
     }
 
     private List<Feature> collectionFeatures() {
-        return Collections.unmodifiableList(featuresTable.getSelectedFeatures());
+        return unmodifiableList(featuresTable.getSelectedFeatures());
     }
 
     private String collectionName() {
