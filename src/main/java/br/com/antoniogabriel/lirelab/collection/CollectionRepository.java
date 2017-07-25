@@ -8,9 +8,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class CollectionRepository {
 
@@ -91,4 +89,20 @@ public class CollectionRepository {
         return collectionAssembler.assembleCollectionFrom(path);
     }
 
+    public Set<String> getCollectionNames() {
+        Set<String> names = new HashSet<>();
+
+        try (Subfolders subfolders = getSubfoldersOf(collectionsFolder())) {
+            for (Path folder : subfolders) {
+                if (isCollection(folder)) {
+                    names.add(folder.getFileName().toString());
+                }
+            }
+
+        } catch (IOException e) {
+            throw new LireLabException("Could not read collections names", e);
+        }
+
+        return names;
+    }
 }

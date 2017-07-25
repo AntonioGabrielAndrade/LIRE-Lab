@@ -52,6 +52,13 @@ public class CollectionServiceTest {
     }
 
     @Test
+    public void shouldGetCollectionNames() throws Exception {
+        service.getCollectionNames();
+
+        verify(collectionRepository).getCollectionNames();
+    }
+
+    @Test
     public void shouldDeleteCollection() throws Exception {
         Collection collection = new Collection("collection");
         service.deleteCollection(collection);

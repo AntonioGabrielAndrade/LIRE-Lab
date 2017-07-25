@@ -5,6 +5,8 @@ import br.com.antoniogabriel.lirelab.custom.feature_table.FeatureTable;
 import br.com.antoniogabriel.lirelab.custom.progress_dialog.ProgressDialog;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Window;
 
 import javax.inject.Inject;
@@ -62,14 +65,19 @@ public class CreateCollectionController implements Initializable {
         SimpleStringProperty nameHint = new SimpleStringProperty("Enter a collection name.");
         SimpleStringProperty imagesDirectoryHint = new SimpleStringProperty("Enter a directory with images.");
         SimpleStringProperty featuresHint = new SimpleStringProperty("Select at least one Feature for indexing.");
+        SimpleStringProperty nameAlreadyExistsHint = new SimpleStringProperty("A collection with this name already exists.");
         SimpleStringProperty empty = new SimpleStringProperty("");
 
-        dialogHeader.hintProperty().bind(
-                 when(nameIsEmpty()).then(nameHint)
-                    .otherwise(when(imagesDirectoryIsEmpty()).then(imagesDirectoryHint)
-                    .otherwise(when(noFeatureSelected()).then(featuresHint)
-                    .otherwise(empty)))
-        );
+        SimpleObjectProperty red = new SimpleObjectProperty(Paint.valueOf("red"));
+        SimpleObjectProperty black = new SimpleObjectProperty(Paint.valueOf("black"));
+
+        dialogHeader.hintProperty().bind(when(nameIsEmpty()).then(nameHint)
+                                        .otherwise(when(nameAlreadyExists()).then(nameAlreadyExistsHint)
+                                        .otherwise(when(imagesDirectoryIsEmpty()).then(imagesDirectoryHint)
+                                        .otherwise(when(noFeatureSelected()).then(featuresHint)
+                                        .otherwise(empty)))));
+
+        dialogHeader.hintColor().bind(when(nameAlreadyExists()).then(red).otherwise(black));
     }
 
     @FXML
@@ -106,7 +114,7 @@ public class CreateCollectionController implements Initializable {
     }
 
     private void bindCreateButton() {
-        createIsDisabledWhen(nameIsEmpty().or(imagesDirectoryIsEmpty().or(noFeatureSelected())));
+        createIsDisabledWhen(nameIsEmpty().or(imagesDirectoryIsEmpty().or(noFeatureSelected().or(nameAlreadyExists()))));
     }
 
     private void bindParallelIndexerCheckboxToNumberOfThreadsSpinner() {
@@ -131,6 +139,16 @@ public class CreateCollectionController implements Initializable {
 
     private BooleanBinding nameIsEmpty() {
         return nameField.textProperty().isEmpty();
+    }
+
+    private BooleanBinding nameAlreadyExists() {
+        BooleanBinding binding = new SimpleBooleanProperty(true).not();
+
+        for (String name : service.getCollectionNames()) {
+            binding = binding.or(nameField.textProperty().isEqualTo(name));
+        }
+
+        return binding;
     }
 
     private BooleanBinding imagesDirectoryIsEmpty() {

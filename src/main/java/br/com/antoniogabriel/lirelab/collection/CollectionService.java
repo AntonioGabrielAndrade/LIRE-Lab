@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 @Singleton
 public class CollectionService {
@@ -63,5 +64,9 @@ public class CollectionService {
     public void deleteCollection(Collection collection) {
         collectionRepository.deleteCollection(collection.getName());
         collectionsMonitor.executeListeners();
+    }
+
+    public Set<String> getCollectionNames() {
+        return collectionRepository.getCollectionNames();
     }
 }

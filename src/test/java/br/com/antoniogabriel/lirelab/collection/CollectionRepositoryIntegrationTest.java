@@ -11,11 +11,12 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
+import java.util.Set;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.deleteWorkDirectory;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -120,5 +121,14 @@ public class CollectionRepositoryIntegrationTest {
         repository.deleteCollection(testCollection);
 
         COLLECTION_HELPER.checkCollectionDontExists(testCollection);
+    }
+
+    @Test
+    public void shouldReturnCollectionNames() throws Exception {
+        Set<String> names = repository.getCollectionNames();
+
+        assertThat(names.size(), is(2));
+        assertTrue(names.contains(COLLECTION1_NAME));
+        assertTrue(names.contains(COLLECTION2_NAME));
     }
 }

@@ -1,10 +1,12 @@
 package br.com.antoniogabriel.lirelab.custom.dialog_header;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -50,6 +52,10 @@ public class DialogHeader extends BorderPane {
 
     public StringProperty hintProperty() {
         return hint.textProperty();
+    }
+
+    public ObjectProperty<Paint> hintColor() {
+        return hint.fillProperty();
     }
 
     public void setHint(String hint) {
