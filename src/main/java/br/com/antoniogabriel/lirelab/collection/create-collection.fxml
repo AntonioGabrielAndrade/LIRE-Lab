@@ -9,7 +9,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="br.com.antoniogabriel.lirelab.collection.CreateCollectionController"
-            prefHeight="600.0" prefWidth="600.0">
+            prefHeight="700.0" prefWidth="600.0">
 
     <top>
         <DialogHeader fx:id="dialogHeader" title="Create Collection" hint=""/>
@@ -32,7 +32,7 @@
             </rowConstraints>
 
             <padding>
-                <Insets top="20" bottom="20" left="20" right="20"/>
+                <Insets top="20" bottom="30" left="20" right="20"/>
             </padding>
 
             <HBox spacing="5"
@@ -101,18 +101,24 @@
                 </HBox>
             </TitledPane>
 
-            <Separator orientation="HORIZONTAL" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        </GridPane>
+    </center>
+    <bottom>
+        <VBox prefHeight="50">
 
-            <HBox alignment="BOTTOM_RIGHT"
-                  spacing="7"
-                  GridPane.rowIndex="5"
-                  GridPane.columnIndex="0">
+            <Separator valignment="TOP" prefWidth="Infinity"/>
+
+            <HBox alignment="BOTTOM_RIGHT" spacing="7">
+                <padding>
+                    <Insets top="20" bottom="20" left="20" right="20"/>
+                </padding>
                 <Button text="Cancel" id="cancel" onAction="#close"/>
                 <Button text="Create" id="create" fx:id="createButton" onAction="#createCollection"/>
             </HBox>
 
-        </GridPane>
-    </center>
+        </VBox>
+    </bottom>
+
 
 </BorderPane>
 
