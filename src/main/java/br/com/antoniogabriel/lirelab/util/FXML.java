@@ -31,7 +31,9 @@ public abstract class FXML {
         try {
 
             Parent root = resetAndLoad();
-            stage = setupStage(stage, root);
+            Scene scene = createScene(root);
+            stage.setScene(scene);
+            setupStage(stage);
             stage.show();
             stage.centerOnScreen();
 
@@ -40,16 +42,12 @@ public abstract class FXML {
         }
     }
 
-    private Stage setupStage(Stage stage, Parent root) {
-        Scene scene = createScene(root);
-        stage.setScene(scene);
-
+    protected void setupStage(Stage stage) {
         if(stage.getOwner() != null) {
             stage.initModality(Modality.WINDOW_MODAL);
         }
 
         stage.setTitle(getTitle());
-        return stage;
     }
 
     private Parent resetAndLoad() throws IOException {

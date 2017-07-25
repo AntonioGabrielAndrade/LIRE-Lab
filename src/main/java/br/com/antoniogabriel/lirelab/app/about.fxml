@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import br.com.antoniogabriel.lirelab.app.Version?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -22,14 +25,26 @@
     </center>
 
     <bottom>
-        <StackPane id="about-info">
+        <VBox id="about-info" style="-fx-background-color: white">
             <padding>
                 <Insets top="10" bottom="10" right="10" left="10"/>
             </padding>
-            <TextArea editable="false"
-                      prefHeight="20"
-                      text="LIRE-Lab created by Antonio Gabriel"/>
-        </StackPane>
+            <HBox>
+                <Label text="LIRE-Lab created by: "/>
+                <Label text="Antonio Gabriel Pereira de Andrade"/>
+            </HBox>
+            <HBox>
+                <Label text="Version: "/>
+                <Label>
+                    <text>
+                        <Version fx:constant="VERSION"/>
+                    </text>
+                </Label>
+            </HBox>
+            <HBox>
+                <Label text="Background splash image designed by: Kjparteger / Freepik"/>
+            </HBox>
+        </VBox>
     </bottom>
 
 </BorderPane>
