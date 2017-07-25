@@ -59,13 +59,13 @@ public class CollectionGridTest {
     }
 
     @Test
-    public void shouldAddToolTipToImage() throws Exception {
+    public void shouldAddPopOverToImage() throws Exception {
         given(eventHandlerFactory.createFrom(any(Image.class), any(DisplayImageDialogHandler.class)))
                 .willReturn(eventHandler);
 
         collectionGrid.setCollection(collection);
 
-        verify(toolTipProvider, times(3)).setToolTip(imageView, IMAGE);
+        verify(toolTipProvider, times(3)).setPopOver(imageView, IMAGE);
     }
 
     @Test

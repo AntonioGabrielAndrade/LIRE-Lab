@@ -35,6 +35,7 @@ public class ToolTipProvider {
 
     public void setPopOver(ImageView imageView, Image image) {
         PopOver popOver = new PopOver();
+        popOver.setAnimated(false);
 
         VBox root = new VBox();
         root.setSpacing(3);
