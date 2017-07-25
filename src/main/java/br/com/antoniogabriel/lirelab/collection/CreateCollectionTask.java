@@ -7,20 +7,20 @@ import java.nio.file.Paths;
 
 public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback, XMLCreatorCallback {
 
-    private Runnable runnable;
+    private CreateCollectionRunner runner;
 
-    public CreateCollectionTask(CreateCollectionRunnable runnable) {
-        this.runnable = runnable;
+    public CreateCollectionTask(CreateCollectionRunner runner) {
+        this.runner = runner;
 
         updateTitle("Create Collection...");
-        runnable.setIndexCreatorCallback(this);
-        runnable.setThumbnailsCreatorCallback(this);
-        runnable.setXmlCreatorCallback(this);
+        runner.setIndexCreatorCallback(this);
+        runner.setThumbnailsCreatorCallback(this);
+        runner.setXmlCreatorCallback(this);
     }
 
     @Override
     protected Void call() throws Exception {
-        runnable.run();
+        runner.run();
         return null;
     }
 

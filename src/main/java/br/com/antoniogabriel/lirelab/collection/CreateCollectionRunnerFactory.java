@@ -9,18 +9,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class CreateCollectionRunnableFactory {
+public class CreateCollectionRunnerFactory {
 
     private PathResolver resolver;
     private FileUtils fileUtils;
 
     @Inject
-    public CreateCollectionRunnableFactory(PathResolver resolver, FileUtils fileUtils) {
+    public CreateCollectionRunnerFactory(PathResolver resolver, FileUtils fileUtils) {
         this.resolver = resolver;
         this.fileUtils = fileUtils;
     }
 
-    public CreateCollectionRunnable getCreationRunnable(CreateCollectionInfo createInfo) {
+    public CreateCollectionRunner getCreateRunner(CreateCollectionInfo createInfo) {
         String collectionPath = resolver.getCollectionPath(createInfo.getCollectionName());
         String indexPath = resolver.getIndexDirectoryPath(createInfo.getCollectionName());
         String thumbnailsPath = resolver.getThumbnailsDirectoryPath(createInfo.getCollectionName());
@@ -54,7 +54,7 @@ public class CreateCollectionRunnableFactory {
                 createInfo.getFeatures(),
                 xmlDAO);
 
-        return new CreateCollectionRunnable(indexCreator, thumbnailsCreator, xmlCreator);
+        return new CreateCollectionRunner(indexCreator, thumbnailsCreator, xmlCreator);
     }
 
     private IndexCreator getIndexCreator(LIRE lire,

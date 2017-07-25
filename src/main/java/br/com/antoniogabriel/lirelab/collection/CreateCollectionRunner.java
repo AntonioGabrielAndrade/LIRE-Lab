@@ -7,7 +7,7 @@ import br.com.antoniogabriel.lirelab.lire.IndexCreatorCallback;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-public class CreateCollectionRunnable implements Runnable {
+public class CreateCollectionRunner implements Runnable {
 
     private final IndexCreator indexCreator;
     private final ThumbnailsCreator thumbnailsCreator;
@@ -15,9 +15,9 @@ public class CreateCollectionRunnable implements Runnable {
 
     private Runnable finish = () -> {};
 
-    public CreateCollectionRunnable(IndexCreator indexCreator,
-                                    ThumbnailsCreator thumbnailsCreator,
-                                    XMLCreator xmlCreator) {
+    public CreateCollectionRunner(IndexCreator indexCreator,
+                                  ThumbnailsCreator thumbnailsCreator,
+                                  XMLCreator xmlCreator) {
 
         this.indexCreator = indexCreator;
         this.thumbnailsCreator = thumbnailsCreator;

@@ -23,7 +23,7 @@ public class CreateCollectionTaskTest {
 
     @Before
     public void setUp() throws Exception {
-        task = new CreateCollectionTask(new CreateCollectionRunnable(indexCreator, thumbnailsCreator, xmlCreator));
+        task = new CreateCollectionTask(new CreateCollectionRunner(indexCreator, thumbnailsCreator, xmlCreator));
     }
 
     @Test

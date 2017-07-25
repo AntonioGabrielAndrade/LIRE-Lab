@@ -95,7 +95,7 @@ public class CreateCollectionController implements Initializable {
                                                                     useParallelIndexer(),
                                                                     numberOfThreads());
 
-        CreateCollectionRunnable runnable = service.getCreateCollectionRunnable(createInfo);
+        CreateCollectionRunner runnable = service.getCreateCollectionRunner(createInfo);
         CreateCollectionTask task = new CreateCollectionTask(runnable);
         ProgressDialog dialog = dialogProvider.getProgressDialog(task, getWindowFrom(event));
         dialog.showAndStart();

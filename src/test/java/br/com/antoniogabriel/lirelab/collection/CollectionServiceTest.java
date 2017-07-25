@@ -20,7 +20,7 @@ public class CollectionServiceTest {
 
     @Mock private CollectionRepository collectionRepository;
     @Mock private CollectionsMonitor collectionsMonitor;
-    @Mock private CreateCollectionRunnableFactory createCollectionRunnableFactory;
+    @Mock private CreateCollectionRunnerFactory createCollectionRunnerFactory;
     @Mock private QueryRunnerFactory queryRunnerFactory;
     @Mock private PathResolver resolver;
     @Mock private QueryRunner queryRunner;
@@ -35,7 +35,7 @@ public class CollectionServiceTest {
         service = new CollectionService(resolver,
                                         collectionRepository,
                                         collectionsMonitor,
-                                        createCollectionRunnableFactory,
+                                        createCollectionRunnerFactory,
                                         queryRunnerFactory);
     }
 

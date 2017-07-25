@@ -81,19 +81,16 @@ public class CollectionTestHelper {
     public void createRealCollection(String name, String imagesPath, Feature... features) {
         List<Feature> collectionFeatures = features.length > 0 ? asList(features) : asList(CEDD);
 
-        Runnable task =
-                new CreateCollectionRunnableFactory(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils())
-                        .getCreationRunnable(
-                                new CreateCollectionInfo(
-                                name,
-                                imagesPath,
-                                collectionFeatures,
-                                true,
-                                false,
-                                1
-                        ));
+        CreateCollectionRunner runner =
+                new CreateCollectionRunnerFactory(resolver, new br.com.antoniogabriel.lirelab.util.FileUtils())
+                        .getCreateRunner(new CreateCollectionInfo(name,
+                                                                imagesPath,
+                                                                collectionFeatures,
+                                                                true,
+                                                                false,
+                                                                1));
 
-        task.run();
+        runner.run();
     }
 
     public Collection readCollection(String name) {

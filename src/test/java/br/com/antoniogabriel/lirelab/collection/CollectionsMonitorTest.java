@@ -109,7 +109,7 @@ public class CollectionsMonitorTest {
     }
 
     private CreateCollectionTask getTask() {
-        return new CreateCollectionTask(new CreateCollectionRunnable(indexCreator, thumbCreator, xmlCreator));
+        return new CreateCollectionTask(new CreateCollectionRunner(indexCreator, thumbCreator, xmlCreator));
     }
 
 }

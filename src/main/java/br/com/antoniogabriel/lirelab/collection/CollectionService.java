@@ -15,19 +15,20 @@ public class CollectionService {
     private PathResolver resolver;
     private CollectionRepository collectionRepository;
     private CollectionsMonitor collectionsMonitor;
-    private CreateCollectionRunnableFactory createCollectionRunnableFactory;
+    private CreateCollectionRunnerFactory createCollectionRunnerFactory;
     private QueryRunnerFactory queryRunnerFactory;
 
     @Inject
     public CollectionService(PathResolver resolver,
                              CollectionRepository collectionRepository,
                              CollectionsMonitor collectionsMonitor,
-                             CreateCollectionRunnableFactory createCollectionRunnableFactory, QueryRunnerFactory queryRunnerFactory) {
+                             CreateCollectionRunnerFactory createCollectionRunnerFactory,
+                             QueryRunnerFactory queryRunnerFactory) {
 
         this.resolver = resolver;
         this.collectionRepository = collectionRepository;
         this.collectionsMonitor = collectionsMonitor;
-        this.createCollectionRunnableFactory = createCollectionRunnableFactory;
+        this.createCollectionRunnerFactory = createCollectionRunnerFactory;
         this.queryRunnerFactory = queryRunnerFactory;
 
         startMonitoringCollectionsDeleteAndUpdate();
@@ -41,10 +42,10 @@ public class CollectionService {
         }
     }
 
-    public CreateCollectionRunnable getCreateCollectionRunnable(CreateCollectionInfo createInfo) {
-        CreateCollectionRunnable runnable = createCollectionRunnableFactory.getCreationRunnable(createInfo);
-        runnable.setOnFinish(() -> collectionsMonitor.executeListeners());
-        return runnable;
+    public CreateCollectionRunner getCreateCollectionRunner(CreateCollectionInfo createInfo) {
+        CreateCollectionRunner runner = createCollectionRunnerFactory.getCreateRunner(createInfo);
+        runner.setOnFinish(() -> collectionsMonitor.executeListeners());
+        return runner;
     }
 
     public List<Collection> getCollections() {
