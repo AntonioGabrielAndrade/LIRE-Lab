@@ -21,6 +21,7 @@ public class CommandTriggerFactory<E> {
 
         item.setGraphic(command.getIcon());
         item.setOnAction(event -> command.execute(provider.provide()));
+        item.setId(command.getNodeId());
 
         return item;
     }

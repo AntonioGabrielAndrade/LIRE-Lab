@@ -58,4 +58,16 @@ public class TestUtils {
         }
     }
 
+    public static boolean isHeadless() {
+        return getProperty("testfx.robot").equals("glass")
+                && getProperty("testfx.headless").equals("true")
+                && getProperty("glass.platform").equals("Monocle")
+                && getProperty("monocle.platform").equals("Headless")
+                && getProperty("java.awt.headless").equals("true");
+    }
+
+    private static String getProperty(String property) {
+        return System.getProperty(property) != null ?
+                System.getProperty(property) : "";
+    }
 }
