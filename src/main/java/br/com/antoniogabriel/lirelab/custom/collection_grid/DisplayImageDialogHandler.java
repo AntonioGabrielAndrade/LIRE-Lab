@@ -3,7 +3,7 @@ package br.com.antoniogabriel.lirelab.custom.collection_grid;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.image_dialog.ImageDialog;
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
+import br.com.antoniogabriel.lirelab.app.LireLabException;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;

@@ -1,4 +1,4 @@
-package br.com.antoniogabriel.lirelab.exception;
+package br.com.antoniogabriel.lirelab.app;
 
 public class LireLabException extends RuntimeException {
     public LireLabException(String message) {

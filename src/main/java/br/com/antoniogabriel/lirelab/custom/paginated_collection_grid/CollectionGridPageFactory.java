@@ -3,7 +3,7 @@ package br.com.antoniogabriel.lirelab.custom.paginated_collection_grid;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
+import br.com.antoniogabriel.lirelab.app.LireLabException;
 import javafx.scene.Node;
 import javafx.util.Callback;
 

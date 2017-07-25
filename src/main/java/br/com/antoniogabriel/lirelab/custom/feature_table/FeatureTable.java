@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.custom.feature_table;
 
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
+import br.com.antoniogabriel.lirelab.app.LireLabException;
 import br.com.antoniogabriel.lirelab.lire.Feature;
 import br.com.antoniogabriel.lirelab.util.FeatureUtils;
 import javafx.beans.binding.BooleanBinding;

@@ -5,7 +5,6 @@ import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
 import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;

@@ -1,6 +1,6 @@
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
+import br.com.antoniogabriel.lirelab.app.LireLabException;
 import br.com.antoniogabriel.lirelab.util.CollectionUtils;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import org.apache.lucene.document.Document;
