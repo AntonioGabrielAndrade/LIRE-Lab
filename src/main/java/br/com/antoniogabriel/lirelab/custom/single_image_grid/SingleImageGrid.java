@@ -71,6 +71,7 @@ public class SingleImageGrid extends StackPane {
     public void clear() {
         imageGrid.clear();
         listeners.clear();
+        image = null;
     }
 
     public void removeAllListenersButFirst() {
