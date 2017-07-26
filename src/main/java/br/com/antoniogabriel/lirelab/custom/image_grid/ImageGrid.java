@@ -2,6 +2,7 @@ package br.com.antoniogabriel.lirelab.custom.image_grid;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
+import javafx.beans.property.DoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +48,12 @@ public class ImageGrid extends StackPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+    }
+
+    public void bindGapsTo(DoubleProperty property) {
+        flowPane.hgapProperty().bind(property);
+        flowPane.vgapProperty().bind(property);
     }
 
 

@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Separator?>
 
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
@@ -14,15 +16,29 @@
     <top>
         <ToolBar fx:id="toolbar">
 
-            <HBox alignment="BASELINE_LEFT">
-                <Label text="Page size: "/>
-                <Spinner fx:id="pageSizeSpinner"
-                         editable="true"
-                         initialValue="120"
-                         min="1"
-                         max="300"
-                         prefWidth="80"/>
+            <HBox spacing="20">
+                <HBox alignment="BASELINE_LEFT">
+                    <Label text="Page size: "/>
+                    <Spinner fx:id="pageSizeSpinner"
+                             editable="true"
+                             initialValue="120"
+                             min="1"
+                             max="300"
+                             prefWidth="80"/>
+                </HBox>
+
+                <Separator orientation="VERTICAL"/>
+
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Grid gap: "/>
+                    <Slider fx:id="gridGapSlider"
+                            min="5"
+                            max="100"
+                            showTickMarks="false"
+                            blockIncrement="10"/>
+                </HBox>
             </HBox>
+
 
         </ToolBar>
     </top>

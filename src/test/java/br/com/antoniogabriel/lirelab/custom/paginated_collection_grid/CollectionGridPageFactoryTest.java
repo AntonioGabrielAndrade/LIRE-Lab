@@ -1,6 +1,5 @@
 package br.com.antoniogabriel.lirelab.custom.paginated_collection_grid;
 
-import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
@@ -70,7 +69,7 @@ public class CollectionGridPageFactoryTest {
     private class TestableCollectionGridPageFactory extends CollectionGridPageFactory {
 
         public TestableCollectionGridPageFactory(List<Image> images, int pageSize, ImageClickHandler handler) {
-            super(images, pageSize, handler);
+            super(images, pageSize, handler, null);
         }
 
         @Override

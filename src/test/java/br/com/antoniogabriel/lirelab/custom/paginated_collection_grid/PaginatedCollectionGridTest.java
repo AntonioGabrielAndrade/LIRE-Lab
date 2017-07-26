@@ -6,6 +6,7 @@ import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.Slider;
 import javafx.util.Callback;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ public class PaginatedCollectionGridTest {
     @Mock private ImageClickHandler handler;
     @Mock private Callback<Integer, Node> pageFactory;
     @Mock private PageFactoryProvider pageFactoryProvider;
+    @Mock private Slider gridGapSlider;
 
     @InjectMocks private PaginatedCollectionGrid grid = new PaginatedCollectionGrid();
 
@@ -55,7 +57,7 @@ public class PaginatedCollectionGridTest {
         int minPageSize = 1;
         List<Image> images = new ArrayList<>();
 
-        given(pageFactoryProvider.getPageFactory(images, minPageSize, handler))
+        given(pageFactoryProvider.getPageFactory(images, minPageSize, handler, null))
                 .willReturn(pageFactory);
 
         grid.setCollection(images, handler);

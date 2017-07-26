@@ -1,9 +1,10 @@
 package br.com.antoniogabriel.lirelab.custom.paginated_collection_grid;
 
+import br.com.antoniogabriel.lirelab.app.LireLabException;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.CollectionGrid;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
-import br.com.antoniogabriel.lirelab.app.LireLabException;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.Node;
 import javafx.util.Callback;
 
@@ -15,14 +16,17 @@ class CollectionGridPageFactory implements Callback<Integer, Node> {
     private final List<Image> images;
     private final int pageSize;
     private final ImageClickHandler clickHandler;
+    private DoubleProperty gridGap;
 
     public CollectionGridPageFactory(List<Image> images,
                                      int pageSize,
-                                     ImageClickHandler clickHandler) {
+                                     ImageClickHandler clickHandler,
+                                     DoubleProperty gridGap) {
 
         this.images = images;
         this.pageSize = pageSize;
         this.clickHandler = clickHandler;
+        this.gridGap = gridGap;
     }
 
     @Override
@@ -34,6 +38,7 @@ class CollectionGridPageFactory implements Callback<Integer, Node> {
         try {
 
             CollectionGrid page = createCollectionGrid();
+            page.bindGapsTo(gridGap);
 
             int fromIndex = indexOfFirstImageInPage(pageIndex);
             int toIndex = indexOfLastImageInPage(pageIndex) + 1;

@@ -5,6 +5,7 @@ import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.image_grid.ImageGrid;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -77,4 +78,7 @@ public class CollectionGrid extends StackPane {
         return collection;
     }
 
+    public void bindGapsTo(DoubleProperty property) {
+        grid.bindGapsTo(property);
+    }
 }

@@ -6,9 +6,11 @@ import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.DisplayImageDialogHandler;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +28,7 @@ public class PaginatedCollectionGrid extends BorderPane {
 
     @FXML private Pagination pagination;
     @FXML private Spinner<Integer> pageSizeSpinner;
+    @FXML private Slider gridGapSlider;
 
     private List<Image> images = new ArrayList<>();
     private ImageClickHandler handler = (image, event) -> {};
@@ -83,7 +86,7 @@ public class PaginatedCollectionGrid extends BorderPane {
         setupMaxPageSize(images);
 
         calcPageCount(images, getPageSize());
-        setPageFactory(images, getPageSize(), handler);
+        setPageFactory(images, getPageSize(), handler, gridGapSlider.valueProperty());
     }
 
     private void setupMaxPageSize(List<Image> images) {
@@ -101,9 +104,9 @@ public class PaginatedCollectionGrid extends BorderPane {
         return a / b + ((a % b == 0) ? 0 : 1);
     }
 
-    private void setPageFactory(List<Image> images, int pageSize, ImageClickHandler handler) {
+    private void setPageFactory(List<Image> images, int pageSize, ImageClickHandler handler, DoubleProperty gridGap) {
         pagination.setPageFactory(
-                pageFactoryProvider.getPageFactory(images, pageSize, handler)
+                pageFactoryProvider.getPageFactory(images, pageSize, handler, gridGap)
         );
     }
 }
