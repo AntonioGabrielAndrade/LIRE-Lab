@@ -63,8 +63,10 @@ public class SearchController implements Initializable {
     public void startSearchSession(Collection collection, Feature feature) {
         clear();
         mapImageNamesToImages(collection);
-
         bindCurrentQueryFieldToQueryGrid();
+        bindQueryGridToQueryExecution(collection);
+        setupQueryAutoCompletion(collection);
+
         setupFirstOutput(collection, feature);
     }
 
@@ -108,14 +110,9 @@ public class SearchController implements Initializable {
 
     private void setupSearchMechanism(Collection collection, Feature feature, SearchOutput searchOutput) {
         showCollectionInOutputGrid(collection, searchOutput);
-
-        bindQueryGridToQueryExecution(collection);
-
         setStatusBar(collection, feature, searchOutput);
-        setupQueryAutoCompletion(collection);
 
         outputs.add(searchOutput);
-
         HBox.setHgrow(searchOutput, Priority.ALWAYS);
         centerBox.getChildren().add(searchOutput);
     }
