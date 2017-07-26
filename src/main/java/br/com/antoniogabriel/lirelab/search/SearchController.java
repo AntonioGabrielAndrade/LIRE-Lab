@@ -86,7 +86,6 @@ public class SearchController implements Initializable {
             }
         });
 
-
         new Thread(queryTask).start();
     }
 
