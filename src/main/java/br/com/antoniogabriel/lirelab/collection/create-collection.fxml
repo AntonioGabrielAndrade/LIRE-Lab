@@ -68,7 +68,7 @@
                               HBox.hgrow="ALWAYS"
                               alignment="BASELINE_RIGHT">
 
-                            <Label text="thumbnails height (80-300)px:"/>
+                            <Label text="thumbnails height:"/>
 
                             <Spinner fx:id="thumbnailHeight"
                                      initialValue="300"
