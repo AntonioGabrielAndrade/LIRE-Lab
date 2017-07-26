@@ -9,14 +9,17 @@ public class ThumbnailsCreator {
     private ThumbnailBuilder builder;
     private String thumbnailsDir;
     private List<String> images;
+    private int thumbnailHeight;
 
     public ThumbnailsCreator(ThumbnailBuilder builder,
                              String thumbnailsDir,
-                             List<String> paths) {
+                             List<String> paths,
+                             int thumbnailHeight) {
 
         this.builder = builder;
         this.thumbnailsDir = thumbnailsDir;
         this.images = paths;
+        this.thumbnailHeight = thumbnailHeight;
     }
 
     public void create() throws IOException {
@@ -25,7 +28,7 @@ public class ThumbnailsCreator {
         for (int i = 0; i < images.size(); i++) {
             String image = images.get(i);
             callback.beforeCreateThumbnail(i+1, images.size(), image);
-            builder.createThumbnail(image, thumbnailsDir);
+            builder.createThumbnail(image, thumbnailsDir, thumbnailHeight);
             callback.afterCreateThumbnail(i+1, images.size(), image);
         }
 

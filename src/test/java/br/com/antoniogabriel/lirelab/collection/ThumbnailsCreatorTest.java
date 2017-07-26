@@ -21,6 +21,7 @@ public class ThumbnailsCreatorTest {
     private static final String THUMBNAILS_DIR = "/some/dir";
 
     private static final List<String> IMAGES = Arrays.asList(IMG1, IMG2);
+    private static final int THUMBNAILS_HEIGHT = 100;
 
     @Mock private ThumbnailBuilder builder;
     @Mock private ThumbnailsCreatorCallback callback;
@@ -35,7 +36,7 @@ public class ThumbnailsCreatorTest {
     }
 
     private void setupThumbnailsCreator() {
-        creator = new ThumbnailsCreator(builder, THUMBNAILS_DIR, IMAGES);
+        creator = new ThumbnailsCreator(builder, THUMBNAILS_DIR, IMAGES, THUMBNAILS_HEIGHT);
         creator.setCallback(callback);
     }
 
@@ -50,7 +51,7 @@ public class ThumbnailsCreatorTest {
         inOrder.verify(builder).createDirectory(THUMBNAILS_DIR);
 
         inOrder.verify(callback).beforeCreateThumbnail(1, IMAGES.size(), IMG1);
-        inOrder.verify(builder).createThumbnail(IMG1, THUMBNAILS_DIR);
+        inOrder.verify(builder).createThumbnail(IMG1, THUMBNAILS_DIR, THUMBNAILS_HEIGHT);
         inOrder.verify(callback).afterCreateThumbnail(1, IMAGES.size(), IMG1);
 
         inOrder.verify(callback).afterCreateAllThumbnails(IMAGES.size());

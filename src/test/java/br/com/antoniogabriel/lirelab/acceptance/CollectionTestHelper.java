@@ -87,6 +87,7 @@ public class CollectionTestHelper {
                                                                 imagesPath,
                                                                 collectionFeatures,
                                                                 true,
+                                                                100,
                                                                 false,
                                                                 1));
 

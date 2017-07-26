@@ -23,9 +23,9 @@ public class ThumbnailBuilder {
         return FileUtils.getAllImages(new File(imagesDir), true);
     }
 
-    public void createThumbnail(String srcImagePath, String thumbnailsDir) throws IOException {
+    public void createThumbnail(String srcImagePath, String thumbnailsDir, int thumbnailHeight) throws IOException {
         Thumbnails.of(srcImagePath)
-                .height(100)
+                .height(thumbnailHeight)
                 .toFiles(new File(thumbnailsDir), Rename.SUFFIX_DOT_THUMBNAIL);
     }
 }

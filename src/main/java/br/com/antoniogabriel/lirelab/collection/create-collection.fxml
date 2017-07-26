@@ -62,6 +62,21 @@
                         <CheckBox text="Scan subdirectories"
                                   fx:id="scanSubdirectoriesCheckbox"
                                   selected="true"/>
+
+                        <HBox fx:id="thumbnailHeightPane"
+                              spacing="10"
+                              HBox.hgrow="ALWAYS"
+                              alignment="BASELINE_RIGHT">
+
+                            <Label text="thumbnails height (80-200)px:"></Label>
+
+                            <Spinner fx:id="thumbnailHeight"
+                                     initialValue="100"
+                                     min="80"
+                                     max="200"
+                                     prefWidth="80"
+                                     editable="true"/>
+                        </HBox>
                     </HBox>
                 </VBox>
             </TitledPane>

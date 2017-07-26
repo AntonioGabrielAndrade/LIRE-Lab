@@ -45,14 +45,15 @@ public class CreateCollectionRunnerFactory {
 
         ThumbnailBuilder thumbnailBuilder = new ThumbnailBuilder();
         ThumbnailsCreator thumbnailsCreator = new ThumbnailsCreator(thumbnailBuilder,
-                thumbnailsPath,
-                paths);
+                                                                    thumbnailsPath,
+                                                                    paths,
+                                                                    createInfo.getThumbnailsHeight());
 
         CollectionXMLDAO xmlDAO = new CollectionXMLDAO(new File(collectionPath));
         XMLCreator xmlCreator = new XMLCreator(createInfo.getCollectionName(),
-                createInfo.getImagesDirectory(),
-                createInfo.getFeatures(),
-                xmlDAO);
+                                                            createInfo.getImagesDirectory(),
+                                                            createInfo.getFeatures(),
+                                                            xmlDAO);
 
         return new CreateCollectionRunner(indexCreator, thumbnailsCreator, xmlCreator);
     }

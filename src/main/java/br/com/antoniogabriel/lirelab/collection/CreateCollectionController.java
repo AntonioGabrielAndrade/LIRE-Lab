@@ -44,6 +44,7 @@ public class CreateCollectionController implements Initializable {
     @FXML private TextField nameField;
     @FXML private TextField imagesDirectoryField;
     @FXML private CheckBox scanSubdirectoriesCheckbox;
+    @FXML private Spinner<Integer> thumbnailHeight;
     @FXML private FeatureTable featuresTable;
     @FXML private CheckBox useParallelIndexer;
     @FXML private Spinner<Integer> numberOfThreads;
@@ -100,6 +101,7 @@ public class CreateCollectionController implements Initializable {
                                                                     imagesDirectory(),
                                                                     collectionFeatures(),
                                                                     scanSubdirectories(),
+                                                                    thumbnailsHeight(),
                                                                     useParallelIndexer(),
                                                                     numberOfThreads());
 
@@ -107,6 +109,10 @@ public class CreateCollectionController implements Initializable {
         CreateCollectionTask task = new CreateCollectionTask(runner);
         ProgressDialog dialog = dialogProvider.getProgressDialog(task, getWindowFrom(event));
         dialog.showAndStart();
+    }
+
+    private int thumbnailsHeight() {
+        return thumbnailHeight.getValue();
     }
 
     private void populateTable() {

@@ -9,6 +9,7 @@ public class CreateCollectionInfo {
     private final String imagesDirectory;
     private final List<Feature> features;
     private final boolean scanSubdirectories;
+    private final int thumbnailsHeight;
     private final boolean useParallelIndexer;
     private final int numberOfThreads;
 
@@ -16,6 +17,7 @@ public class CreateCollectionInfo {
                                 String imagesDirectory,
                                 List<Feature> features,
                                 boolean scanSubdirectories,
+                                int thumbnailsHeight,
                                 boolean useParallelIndexer,
                                 int numberOfThreads) {
 
@@ -23,6 +25,7 @@ public class CreateCollectionInfo {
         this.imagesDirectory = imagesDirectory;
         this.features = features;
         this.scanSubdirectories = scanSubdirectories;
+        this.thumbnailsHeight = thumbnailsHeight;
         this.useParallelIndexer = useParallelIndexer;
         this.numberOfThreads = numberOfThreads;
     }
@@ -41,6 +44,10 @@ public class CreateCollectionInfo {
 
     public boolean isScanSubdirectories() {
         return scanSubdirectories;
+    }
+
+    public int getThumbnailsHeight() {
+        return thumbnailsHeight;
     }
 
     public boolean isUseParallelIndexer() {

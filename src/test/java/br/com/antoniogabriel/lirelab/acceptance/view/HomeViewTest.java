@@ -101,6 +101,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
                                                                 TEST_IMAGES,
                                                                 FEATURES,
                                                                 true,
+                                                                100,
                                                                 false,
                                                                 1));
 
