@@ -164,6 +164,7 @@ public class SearchController implements Initializable {
         statusBar.setFeatures(collection.getFeatures(), feature, selectedFeature -> {
             rerunQuery(collection, selectedFeature);
         });
+        statusBar.setMessage("Click an image to query with it");
     }
 
     private Window getWindowFrom(ActionEvent event) {
