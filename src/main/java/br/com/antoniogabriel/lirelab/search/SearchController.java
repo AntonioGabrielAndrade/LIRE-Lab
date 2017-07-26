@@ -80,6 +80,13 @@ public class SearchController implements Initializable {
             outputGrid.setCollection(images, new UpdateCurrentQuery());
         });
 
+        queryTask.runningProperty().addListener((observable, wasRunning, isRunning) -> {
+            if(!isRunning && queryTask.isDone()) {
+                statusBar.setMessage("Search completed in: " + queryTask.getElapsedTime());
+            }
+        });
+
+
         new Thread(queryTask).start();
     }
 

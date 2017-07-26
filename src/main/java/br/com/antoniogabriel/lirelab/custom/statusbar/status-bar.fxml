@@ -19,7 +19,7 @@
     </padding>
 
     <left>
-        <HBox spacing="5" alignment="BASELINE_CENTER">
+        <HBox spacing="5" alignment="BASELINE_CENTER" prefWidth="300">
             <Label text="Feature:"/>
             <ComboBox fx:id="featuresComboBox" id="features-combo-box" prefWidth="200"/>
         </HBox>
@@ -37,10 +37,13 @@
     </center>
 
     <right>
-        <ProgressBar fx:id="statusProgress"
-                     id="status-progress"
-                     visible="false"
-                     prefWidth="200"/>
+        <HBox prefWidth="300" alignment="BASELINE_RIGHT">
+            <ProgressBar fx:id="statusProgress"
+                         id="status-progress"
+                         visible="false"
+                         prefWidth="200"/>
+        </HBox>
+
     </right>
 
 </fx:root>

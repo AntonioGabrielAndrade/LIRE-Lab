@@ -61,6 +61,11 @@ public class StatusBar extends BorderPane {
                                             .then(messageProperty).otherwise(empty));
     }
 
+    public void setMessage(String message) {
+        statusMessage.textProperty().unbind();
+        statusMessage.setText(message);
+    }
+
     public void setFeatures(List<Feature> features, Feature defaultFeature, FeatureSelectionListener listener) {
         featuresComboBox.setItems(FXCollections.observableList(features));
         selectFeature(defaultFeature);
