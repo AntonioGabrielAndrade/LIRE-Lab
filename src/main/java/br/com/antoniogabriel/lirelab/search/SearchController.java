@@ -64,15 +64,15 @@ public class SearchController implements Initializable {
         clear();
         mapImageNamesToImages(collection);
 
-        setupAddableSearchOutput(collection, feature);
+        setupFirstOutput(collection, feature);
     }
 
-    private void setupAddableSearchOutput(Collection collection, Feature feature) {
+    private void setupFirstOutput(Collection collection, Feature feature) {
         SearchOutput searchOutput = createAddableSearchOutput(collection, feature);
         setupSearchMechanism(collection, feature, searchOutput);
     }
 
-    private void setupRemovableSearchOutput(Collection collection, Feature feature) {
+    private void setupSecondOutput(Collection collection, Feature feature) {
         SearchOutput searchOutput = createRemovableSearchOutput();
         setupSearchMechanism(collection, feature, searchOutput);
     }
@@ -82,7 +82,7 @@ public class SearchController implements Initializable {
         Button addButton = new Button();
         addButton.setGraphic(new TangoIconWrapper("actions:list-add"));
         addButton.setOnAction(event -> {
-            setupRemovableSearchOutput(collection, feature);
+            setupSecondOutput(collection, feature);
         });
         output.addTitleGraphics(addButton);
 
@@ -106,7 +106,7 @@ public class SearchController implements Initializable {
         showCollectionInOutputGrid(collection, searchOutput);
 
         bindCurrentQueryFieldToQueryGrid();
-        bindQueryGridToQueryExecution(collection, searchOutput);
+        bindQueryGridToQueryExecution(collection);
 
         setStatusBar(collection, feature, searchOutput);
         setupQueryAutoCompletion(collection);
@@ -135,7 +135,7 @@ public class SearchController implements Initializable {
         new Thread(queryTask).start();
     }
 
-    public void rerunQuery(Collection collection, SearchOutput searchOutput, Feature feature) {
+    public void rerunQuery(Collection collection, SearchOutput searchOutput) {
         Image image = queryGrid.getImage();
         runQuery(collection, searchOutput, image);
     }
@@ -169,7 +169,7 @@ public class SearchController implements Initializable {
         });
     }
 
-    private void bindQueryGridToQueryExecution(Collection collection, SearchOutput searchOutput) {
+    private void bindQueryGridToQueryExecution(Collection collection) {
         queryGrid.setOnChange(newImage -> {
             for (SearchOutput output : outputs) {
                 runQuery(collection, output, newImage);
@@ -211,7 +211,7 @@ public class SearchController implements Initializable {
 
     private void setStatusBar(Collection collection, Feature feature, SearchOutput searchOutput) {
         searchOutput.setFeatures(collection.getFeatures(), feature, selectedFeature -> {
-            rerunQuery(collection, searchOutput, selectedFeature);
+            rerunQuery(collection, searchOutput);
         });
         searchOutput.setMessage("Click an image to query with it");
     }
