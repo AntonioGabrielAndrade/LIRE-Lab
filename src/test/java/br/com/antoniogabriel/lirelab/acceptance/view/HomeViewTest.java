@@ -128,7 +128,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
         if(!isHeadless()) {
             homeView.waitUntilCollectionsAreListed(collection1, collection2);
 
-            homeView.deleteCollection(collection1);
+            homeView.deleteByContextMenu(collection1).ok();
 
             homeView.waitUntilCollectionIsNotListed(collection1);
             homeView.waitUntilCollectionsAreListed(collection2);

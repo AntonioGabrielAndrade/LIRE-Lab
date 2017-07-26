@@ -2,12 +2,13 @@ package br.com.antoniogabriel.lirelab.acceptance.view;
 
 import br.com.antoniogabriel.lirelab.acceptance.custom.CollectionTreeViewObject;
 import br.com.antoniogabriel.lirelab.collection.Collection;
+import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
 
 import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilIsVisible;
 
-public class HomeViewObject {
+public class HomeViewObject extends FxRobot {
 
     private CollectionTreeViewObject treeViewObject = new CollectionTreeViewObject();
 
@@ -48,8 +49,13 @@ public class HomeViewObject {
         treeViewObject.selectImage(imageName);
     }
 
-    public void deleteCollection(Collection collection) throws TimeoutException {
+    public HomeViewObject deleteByContextMenu(Collection collection) throws TimeoutException {
         treeViewObject.openContextMenu(collection);
         treeViewObject.deleteCollection(collection);
+        return this;
+    }
+
+    public void ok() {
+        clickOn("OK").interrupt();
     }
 }

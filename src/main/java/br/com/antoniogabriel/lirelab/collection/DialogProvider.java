@@ -9,6 +9,7 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.Event;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -19,6 +20,8 @@ import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.*;
 import static java.util.Arrays.asList;
+import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
+import static javafx.scene.control.ButtonType.OK;
 
 public class DialogProvider {
 
@@ -71,5 +74,14 @@ public class DialogProvider {
             System.out.println("selected feature: " + feature);
         });
 
+    }
+
+    public boolean confirmDeleteCollection() {
+        Alert alert = new Alert(CONFIRMATION);
+        alert.setTitle("Delete Collection");
+        alert.setHeaderText("Are you sure you want to delete collection?");
+        alert.setContentText("This operation cannot be undone");
+
+        return alert.showAndWait().get() == OK;
     }
 }

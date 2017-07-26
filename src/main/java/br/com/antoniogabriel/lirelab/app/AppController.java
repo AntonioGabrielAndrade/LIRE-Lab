@@ -59,6 +59,8 @@ public class AppController {
     }
 
     public void deleteCollection(Collection collection) {
-        collectionService.deleteCollection(collection);
+        if(dialogProvider.confirmDeleteCollection()) {
+            collectionService.deleteCollection(collection);
+        }
     }
 }
