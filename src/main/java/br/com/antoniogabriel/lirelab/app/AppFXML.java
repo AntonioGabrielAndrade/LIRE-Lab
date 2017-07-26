@@ -16,4 +16,9 @@ public class AppFXML extends FXML {
     public String getFXMLResourceName() {
         return "app.fxml";
     }
+
+    @Override
+    public String getTitle() {
+        return Version.ARTIFACT_ID + " " + Version.VERSION;
+    }
 }
