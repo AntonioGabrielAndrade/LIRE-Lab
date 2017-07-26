@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid?>
 <?import br.com.antoniogabriel.lirelab.custom.single_image_grid.SingleImageGrid?>
-<?import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.geometry.Insets?>
 <?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -60,13 +52,7 @@
     </top>
 
     <center>
-        <TitledPane text="Output" collapsible="false" prefHeight="Infinity">
-            <PaginatedCollectionGrid fx:id="outputGrid" id="output"/>
-        </TitledPane>
+        <HBox fx:id="centerBox"/>
     </center>
-
-    <bottom>
-        <StatusBar fx:id="statusBar"/>
-    </bottom>
 
 </BorderPane>

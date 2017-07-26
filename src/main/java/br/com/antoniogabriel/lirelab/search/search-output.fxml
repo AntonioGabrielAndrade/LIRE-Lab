@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid?>
+<?import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="BorderPane">
+
+        <center>
+            <TitledPane text="Output" collapsible="false" prefHeight="Infinity" contentDisplay="RIGHT">
+                <graphic>
+                    <HBox spacing="5" fx:id="titleGraphics"/>
+                </graphic>
+                <PaginatedCollectionGrid fx:id="outputGrid" id="output"/>
+            </TitledPane>
+        </center>
+        <bottom>
+            <StatusBar fx:id="statusBar"/>
+        </bottom>
+
+</fx:root>
