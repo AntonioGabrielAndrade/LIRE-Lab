@@ -32,12 +32,12 @@ public class CollectionService {
         this.createCollectionRunnerFactory = createCollectionRunnerFactory;
         this.queryRunnerFactory = queryRunnerFactory;
 
-        startMonitoringCollectionsDeleteAndUpdate();
+        startMonitoringCollectionsInFileSystem();
     }
 
-    private void startMonitoringCollectionsDeleteAndUpdate() {
+    private void startMonitoringCollectionsInFileSystem() {
         try {
-            collectionsMonitor.startMonitoringCollectionsDeleteAndUpdate();
+            collectionsMonitor.startMonitoringCollectionsModificationsInFileSystem();
         } catch (IOException e) {
             throw new LireLabException("Error monitoring collections", e);
         }

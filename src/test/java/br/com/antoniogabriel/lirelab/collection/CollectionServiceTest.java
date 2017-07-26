@@ -41,7 +41,7 @@ public class CollectionServiceTest {
 
     @Test
     public void shouldStartMonitoringCollections() throws Exception {
-        verify(collectionsMonitor).startMonitoringCollectionsDeleteAndUpdate();
+        verify(collectionsMonitor).startMonitoringCollectionsModificationsInFileSystem();
     }
 
     @Test

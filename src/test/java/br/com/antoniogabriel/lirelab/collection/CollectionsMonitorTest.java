@@ -84,7 +84,7 @@ public class CollectionsMonitorTest {
         helper.createStubCollection(COLLECTION_2);
 
         monitor.addListener(SOME_LISTENER);
-        monitor.startMonitoringCollectionsDeleteAndUpdate();
+        monitor.startMonitoringCollectionsModificationsInFileSystem();
 
         helper.deleteCollection(COLLECTION_1);
 

@@ -44,7 +44,7 @@ public class CollectionsMonitor {
         return listeners.contains(aListener);
     }
 
-    public void startMonitoringCollectionsDeleteAndUpdate() throws IOException {
+    public void startMonitoringCollectionsModificationsInFileSystem() throws IOException {
         Path path = Paths.get(resolver.getCollectionsPath());
 
         if(!Files.exists(path)) {
@@ -57,7 +57,7 @@ public class CollectionsMonitor {
         WatchService watcher = fs.newWatchService();
 
         // We register the path to the watcher
-        path.register(watcher, ENTRY_DELETE, ENTRY_MODIFY);
+        path.register(watcher, ENTRY_DELETE, ENTRY_MODIFY, ENTRY_CREATE);
 
         Runnable loop = () -> {
 
@@ -78,7 +78,7 @@ public class CollectionsMonitor {
                         kind = watchEvent.kind();
                         if (OVERFLOW == kind) {
                             continue; //loop
-                        } else if (ENTRY_DELETE == kind || ENTRY_MODIFY == kind) {
+                        } else if (ENTRY_DELETE == kind || ENTRY_MODIFY == kind || ENTRY_CREATE == kind) {
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {
