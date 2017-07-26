@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Pagination?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
-         type="StackPane">
+         type="BorderPane">
 
-    <Pagination fx:id="pagination"/>
+    <top>
+        <ToolBar fx:id="toolbar">
+
+            <HBox alignment="BASELINE_LEFT">
+                <Label text="Page size: "/>
+                <Spinner fx:id="pageSizeSpinner"
+                         editable="true"
+                         initialValue="120"
+                         min="1"
+                         max="300"
+                         prefWidth="80"/>
+            </HBox>
+
+        </ToolBar>
+    </top>
+
+    <center>
+        <Pagination fx:id="pagination"/>
+    </center>
+
 
 </fx:root>

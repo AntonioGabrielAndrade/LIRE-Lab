@@ -9,12 +9,14 @@ import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Spinner;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class PaginatedCollectionGrid extends StackPane {
+public class PaginatedCollectionGrid extends BorderPane {
 
     private static final String PAGINATED_COLLECTION_GRID_FXML = "paginated-collection-grid.fxml";
     private static final int DEFAULT_PAGE_SIZE = 120;
@@ -22,8 +24,10 @@ public class PaginatedCollectionGrid extends StackPane {
     private PageFactoryProvider pageFactoryProvider = new PageFactoryProvider();
 
     @FXML private Pagination pagination;
+    @FXML private Spinner<Integer> pageSizeSpinner;
 
-    private int pageSize = DEFAULT_PAGE_SIZE;
+    private List<Image> images = new ArrayList<>();
+    private ImageClickHandler handler = (image, event) -> {};
 
     public PaginatedCollectionGrid() {
         loadFXML();
@@ -39,10 +43,25 @@ public class PaginatedCollectionGrid extends StackPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        setupPageSizeSpinner();
+    }
+
+    private void setupPageSizeSpinner() {
+        pageSizeSpinner.getValueFactory().setValue(DEFAULT_PAGE_SIZE);
+
+        pageSizeSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(!images.isEmpty())
+                setCollection(images, handler);
+        });
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        pageSizeSpinner.getValueFactory().setValue(pageSize);
+    }
+
+    public int getPageSize() {
+        return pageSizeSpinner.getValue();
     }
 
     public void clear() {
@@ -58,8 +77,11 @@ public class PaginatedCollectionGrid extends StackPane {
     }
 
     public void setCollection(List<Image> images, ImageClickHandler handler) {
-        calcPageCount(images, pageSize);
-        setPageFactory(images, pageSize, handler);
+        this.images = images;
+        this.handler = handler;
+
+        calcPageCount(images, getPageSize());
+        setPageFactory(images, getPageSize(), handler);
     }
 
     private void calcPageCount(List<Image> images, int pageSize) {

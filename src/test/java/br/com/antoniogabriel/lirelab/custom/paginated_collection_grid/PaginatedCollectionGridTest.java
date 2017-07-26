@@ -35,20 +35,18 @@ public class PaginatedCollectionGridTest {
 
     @Test
     public void shouldCalcPageCountToAccommodateAllImages() throws Exception {
-        grid.setPageSize(3);
-        grid.setCollection(withAmountOfImages(10));
+        grid.setCollection(withAmountOfImages(100));
+
+        grid.setPageSize(30);
         verify(pagination).setPageCount(4);
 
         grid.setPageSize(10);
-        grid.setCollection(withAmountOfImages(100));
         verify(pagination).setPageCount(10);
 
         grid.setPageSize(15);
-        grid.setCollection(withAmountOfImages(14));
-        verify(pagination).setPageCount(1);
+        verify(pagination).setPageCount(7);
 
-        grid.setPageSize(12);
-        grid.setCollection(withAmountOfImages(13));
+        grid.setPageSize(90);
         verify(pagination).setPageCount(2);
     }
 
