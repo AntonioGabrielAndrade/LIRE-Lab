@@ -30,7 +30,7 @@
                 <Separator orientation="VERTICAL"/>
 
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Grid gap: "/>
+                    <Label text="Spacing: "/>
                     <Slider fx:id="gridGapSlider"
                             min="5"
                             max="100"
@@ -42,7 +42,7 @@
                 <Separator orientation="VERTICAL"/>
 
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Image height: "/>
+                    <Label text="Height: "/>
                     <Slider fx:id="imageHeightSlider"
                             min="80"
                             max="300"
