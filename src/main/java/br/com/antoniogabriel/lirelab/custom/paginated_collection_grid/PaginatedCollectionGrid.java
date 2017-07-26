@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -79,9 +80,14 @@ public class PaginatedCollectionGrid extends BorderPane {
     public void setCollection(List<Image> images, ImageClickHandler handler) {
         this.images = images;
         this.handler = handler;
+        setupMaxPageSize(images);
 
         calcPageCount(images, getPageSize());
         setPageFactory(images, getPageSize(), handler);
+    }
+
+    private void setupMaxPageSize(List<Image> images) {
+        ((SpinnerValueFactory.IntegerSpinnerValueFactory)pageSizeSpinner.getValueFactory()).setMax(images.size());
     }
 
     private void calcPageCount(List<Image> images, int pageSize) {
