@@ -32,6 +32,7 @@ public class PaginatedCollectionGridTest {
     @Mock private Callback<Integer, Node> pageFactory;
     @Mock private PageFactoryProvider pageFactoryProvider;
     @Mock private Slider gridGapSlider;
+    @Mock private Slider imageHeightSlider;
 
     @InjectMocks private PaginatedCollectionGrid grid = new PaginatedCollectionGrid();
 
@@ -57,7 +58,7 @@ public class PaginatedCollectionGridTest {
         int minPageSize = 1;
         List<Image> images = new ArrayList<>();
 
-        given(pageFactoryProvider.getPageFactory(images, minPageSize, handler, null))
+        given(pageFactoryProvider.getPageFactory(images, minPageSize, handler, null, null))
                 .willReturn(pageFactory);
 
         grid.setCollection(images, handler);

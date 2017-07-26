@@ -13,8 +13,9 @@ class PageFactoryProvider {
     public Callback<Integer, Node> getPageFactory(List<Image> images,
                                                   int pageSize,
                                                   ImageClickHandler imageClickHandler,
-                                                  DoubleProperty gridGap) {
+                                                  DoubleProperty gridGap,
+                                                  DoubleProperty imageHeight) {
 
-        return new CollectionGridPageFactory(images, pageSize, imageClickHandler, gridGap);
+        return new CollectionGridPageFactory(images, pageSize, imageClickHandler, gridGap, imageHeight);
     }
 }

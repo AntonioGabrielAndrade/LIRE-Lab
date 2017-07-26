@@ -69,7 +69,7 @@ public class CollectionGridPageFactoryTest {
     private class TestableCollectionGridPageFactory extends CollectionGridPageFactory {
 
         public TestableCollectionGridPageFactory(List<Image> images, int pageSize, ImageClickHandler handler) {
-            super(images, pageSize, handler, null);
+            super(images, pageSize, handler, null, null);
         }
 
         @Override

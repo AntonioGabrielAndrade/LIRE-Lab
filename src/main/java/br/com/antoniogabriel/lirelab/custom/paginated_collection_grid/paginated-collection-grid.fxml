@@ -34,6 +34,20 @@
                     <Slider fx:id="gridGapSlider"
                             min="5"
                             max="100"
+                            showTickLabels="false"
+                            showTickMarks="false"
+                            blockIncrement="10"/>
+                </HBox>
+
+                <Separator orientation="VERTICAL"/>
+
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Image height: "/>
+                    <Slider fx:id="imageHeightSlider"
+                            min="80"
+                            max="300"
+                            value="100"
+                            showTickLabels="false"
                             showTickMarks="false"
                             blockIncrement="10"/>
                 </HBox>

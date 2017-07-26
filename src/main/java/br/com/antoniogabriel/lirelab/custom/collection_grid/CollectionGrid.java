@@ -81,4 +81,8 @@ public class CollectionGrid extends StackPane {
     public void bindGapsTo(DoubleProperty property) {
         grid.bindGapsTo(property);
     }
+
+    public void bindImageHeightTo(DoubleProperty property) {
+        grid.bindImagesHeightTo(property);
+    }
 }

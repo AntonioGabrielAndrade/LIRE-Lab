@@ -29,6 +29,7 @@ public class PaginatedCollectionGrid extends BorderPane {
     @FXML private Pagination pagination;
     @FXML private Spinner<Integer> pageSizeSpinner;
     @FXML private Slider gridGapSlider;
+    @FXML private Slider imageHeightSlider;
 
     private List<Image> images = new ArrayList<>();
     private ImageClickHandler handler = (image, event) -> {};
@@ -86,7 +87,7 @@ public class PaginatedCollectionGrid extends BorderPane {
         setupMaxPageSize(images);
 
         calcPageCount(images, getPageSize());
-        setPageFactory(images, getPageSize(), handler, gridGapSlider.valueProperty());
+        setPageFactory(images, getPageSize(), handler, gridGapSlider.valueProperty(), imageHeightSlider.valueProperty());
     }
 
     private void setupMaxPageSize(List<Image> images) {
@@ -104,9 +105,9 @@ public class PaginatedCollectionGrid extends BorderPane {
         return a / b + ((a % b == 0) ? 0 : 1);
     }
 
-    private void setPageFactory(List<Image> images, int pageSize, ImageClickHandler handler, DoubleProperty gridGap) {
+    private void setPageFactory(List<Image> images, int pageSize, ImageClickHandler handler, DoubleProperty gridGap, DoubleProperty imageHeight) {
         pagination.setPageFactory(
-                pageFactoryProvider.getPageFactory(images, pageSize, handler, gridGap)
+                pageFactoryProvider.getPageFactory(images, pageSize, handler, gridGap, imageHeight)
         );
     }
 }

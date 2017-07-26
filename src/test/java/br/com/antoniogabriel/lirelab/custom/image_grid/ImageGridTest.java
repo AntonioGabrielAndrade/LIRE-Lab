@@ -2,6 +2,8 @@ package br.com.antoniogabriel.lirelab.custom.image_grid;
 
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
@@ -32,6 +34,8 @@ public class ImageGridTest {
     @Mock private FileUtils fileUtils;
     @Mock private ObservableList<Node> children;
     @Mock private FlowPane flowPane;
+    @Mock private SimpleIntegerProperty imagesHeight;
+    @Mock private DoubleProperty fitHeightProperty;
 
     @InjectMocks private ImageGrid grid = new ImageGrid(imageViewFactory, fileUtils);
 
@@ -39,6 +43,7 @@ public class ImageGridTest {
     public void setUp() throws Exception {
         doReturn(children).when(flowPane).getChildren();
         doReturn(imageView).when(imageViewFactory).create(anyString()) ;
+        doReturn(fitHeightProperty).when(imageView).fitHeightProperty() ;
     }
 
     @Test
@@ -74,6 +79,6 @@ public class ImageGridTest {
         grid.setImagesHeight(height);
         grid.setPaths(asList(PATH1, PATH2, PATH3));
 
-        verify(imageView, times(3)).setFitHeight(height);
+        verify(fitHeightProperty, times(3)).bind(imagesHeight);
     }
 }

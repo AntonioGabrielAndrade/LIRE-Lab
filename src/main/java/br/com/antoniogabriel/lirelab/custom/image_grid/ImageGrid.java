@@ -3,6 +3,7 @@ package br.com.antoniogabriel.lirelab.custom.image_grid;
 import br.com.antoniogabriel.lirelab.app.ImageViewFactory;
 import br.com.antoniogabriel.lirelab.util.FileUtils;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +25,7 @@ public class ImageGrid extends StackPane {
 
     @FXML private FlowPane flowPane;
 
-    private int imagesHeight = 100;
+    private SimpleIntegerProperty imagesHeight = new SimpleIntegerProperty(100);
 
     public ImageGrid() {
         this(new ImageViewFactory(), new FileUtils());
@@ -72,7 +73,7 @@ public class ImageGrid extends StackPane {
 
     private ImageView addImageToGrid(String path) {
         ImageView imageView = imageViewFactory.create(path);
-        imageView.setFitHeight(imagesHeight);
+        imageView.fitHeightProperty().bind(imagesHeight);
         imageView.setPreserveRatio(true);
         images().add(imageView);
         return imageView;
@@ -83,10 +84,14 @@ public class ImageGrid extends StackPane {
     }
 
     public void setImagesHeight(int imagesHeight) {
-        this.imagesHeight = imagesHeight;
+        this.imagesHeight.set(imagesHeight);
     }
 
     public void clear() {
         images().clear();
+    }
+
+    public void bindImagesHeightTo(DoubleProperty property) {
+        imagesHeight.bind(property);
     }
 }

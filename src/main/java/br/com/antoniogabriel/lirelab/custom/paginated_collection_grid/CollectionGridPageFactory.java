@@ -17,16 +17,19 @@ class CollectionGridPageFactory implements Callback<Integer, Node> {
     private final int pageSize;
     private final ImageClickHandler clickHandler;
     private DoubleProperty gridGap;
+    private DoubleProperty imageHeight;
 
     public CollectionGridPageFactory(List<Image> images,
                                      int pageSize,
                                      ImageClickHandler clickHandler,
-                                     DoubleProperty gridGap) {
+                                     DoubleProperty gridGap,
+                                     DoubleProperty imageHeight) {
 
         this.images = images;
         this.pageSize = pageSize;
         this.clickHandler = clickHandler;
         this.gridGap = gridGap;
+        this.imageHeight = imageHeight;
     }
 
     @Override
@@ -39,6 +42,7 @@ class CollectionGridPageFactory implements Callback<Integer, Node> {
 
             CollectionGrid page = createCollectionGrid();
             page.bindGapsTo(gridGap);
+            page.bindImageHeightTo(imageHeight);
 
             int fromIndex = indexOfFirstImageInPage(pageIndex);
             int toIndex = indexOfLastImageInPage(pageIndex) + 1;
