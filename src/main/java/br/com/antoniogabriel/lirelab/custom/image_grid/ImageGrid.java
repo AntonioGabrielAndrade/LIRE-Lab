@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -15,6 +16,8 @@ import javafx.scene.layout.StackPane;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
+
+import static javafx.beans.binding.Bindings.createObjectBinding;
 
 public class ImageGrid extends StackPane {
 
@@ -55,6 +58,7 @@ public class ImageGrid extends StackPane {
     public void bindGapsTo(DoubleProperty property) {
         flowPane.hgapProperty().bind(property);
         flowPane.vgapProperty().bind(property);
+        flowPane.paddingProperty().bind(createObjectBinding(() -> new Insets(property.doubleValue()), property));
     }
 
 
