@@ -52,13 +52,12 @@ public class PaginatedCollectionGridTest {
 
     @Test
     public void shouldSetPageFactory() throws Exception {
-        int pageSize = 12;
+        int minPageSize = 1;
         List<Image> images = new ArrayList<>();
 
-        given(pageFactoryProvider.getPageFactory(images, pageSize, handler))
+        given(pageFactoryProvider.getPageFactory(images, minPageSize, handler))
                 .willReturn(pageFactory);
 
-        grid.setPageSize(pageSize);
         grid.setCollection(images, handler);
 
         verify(pagination).setPageFactory(pageFactory);
