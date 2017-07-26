@@ -77,4 +77,11 @@ public class SearchOutput extends BorderPane {
         statusBar.setFeatures(features, defaultFeature, listener);
     }
 
+    public void disableTitleGraphics() {
+        titleGraphics.setDisable(true);
+    }
+
+    public void enableTitleGraphics() {
+        titleGraphics.setDisable(false);
+    }
 }

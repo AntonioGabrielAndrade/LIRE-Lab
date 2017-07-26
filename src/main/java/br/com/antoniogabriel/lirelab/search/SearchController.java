@@ -64,6 +64,7 @@ public class SearchController implements Initializable {
         clear();
         mapImageNamesToImages(collection);
 
+        bindCurrentQueryFieldToQueryGrid();
         setupFirstOutput(collection, feature);
     }
 
@@ -83,6 +84,7 @@ public class SearchController implements Initializable {
         addButton.setGraphic(new TangoIconWrapper("actions:list-add"));
         addButton.setOnAction(event -> {
             setupSecondOutput(collection, feature);
+            output.disableTitleGraphics();
         });
         output.addTitleGraphics(addButton);
 
@@ -96,6 +98,8 @@ public class SearchController implements Initializable {
         removeButton.setOnAction(event -> {
             Node removedOutput = centerBox.getChildren().remove(centerBox.getChildren().size()-1);
             outputs.remove(removedOutput);
+            queryGrid.removeAllListenersButFirst();
+            outputs.get(0).enableTitleGraphics();
         });
         output.addTitleGraphics(removeButton);
 
@@ -105,7 +109,6 @@ public class SearchController implements Initializable {
     private void setupSearchMechanism(Collection collection, Feature feature, SearchOutput searchOutput) {
         showCollectionInOutputGrid(collection, searchOutput);
 
-        bindCurrentQueryFieldToQueryGrid();
         bindQueryGridToQueryExecution(collection);
 
         setStatusBar(collection, feature, searchOutput);
