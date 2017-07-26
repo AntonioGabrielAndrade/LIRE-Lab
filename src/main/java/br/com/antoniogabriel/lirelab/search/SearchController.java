@@ -81,7 +81,7 @@ public class SearchController implements Initializable {
         });
 
         queryTask.runningProperty().addListener((observable, wasRunning, isRunning) -> {
-            if(!isRunning && queryTask.isDone()) {
+            if(!isRunning && queryTask.isDone() && queryTask.hasElapsedTime()) {
                 statusBar.setMessage("Search completed in: " + queryTask.getElapsedTime());
             }
         });

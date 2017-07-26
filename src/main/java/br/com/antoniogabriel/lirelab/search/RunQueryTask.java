@@ -42,6 +42,10 @@ class RunQueryTask extends Task<List<Image>> {
         valueProperty().addListener(listener);
     }
 
+    public boolean hasElapsedTime() {
+        return stop != null;
+    }
+
     public String getElapsedTime() {
         return stop.toString();
     }
