@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -84,6 +85,7 @@ public class SearchController implements Initializable {
         SearchOutput output = new SearchOutput();
         Button addButton = new Button();
         addButton.setGraphic(new TangoIconWrapper("actions:list-add"));
+        addButton.setTooltip(new Tooltip("split output"));
         addButton.setOnAction(event -> {
             setupSecondOutput(collection, feature);
             output.disableTitleGraphics();
@@ -97,6 +99,7 @@ public class SearchController implements Initializable {
         SearchOutput output = new SearchOutput();
         Button removeButton = new Button();
         removeButton.setGraphic(new TangoIconWrapper("actions:list-remove"));
+        removeButton.setTooltip(new Tooltip("unsplit output"));
         removeButton.setOnAction(event -> {
             Node removedOutput = centerBox.getChildren().remove(centerBox.getChildren().size()-1);
             outputs.remove(removedOutput);
