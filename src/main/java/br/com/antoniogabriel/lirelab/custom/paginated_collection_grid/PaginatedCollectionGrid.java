@@ -24,6 +24,8 @@ public class PaginatedCollectionGrid extends BorderPane {
     private static final String PAGINATED_COLLECTION_GRID_FXML = "paginated-collection-grid.fxml";
     private static final int DEFAULT_PAGE_SIZE = 120;
 
+    public static final String PAGINATION_HIDDEN = "pagination-hidden";
+
     private PageFactoryProvider pageFactoryProvider = new PageFactoryProvider();
 
     @FXML private Pagination pagination;
@@ -99,10 +101,19 @@ public class PaginatedCollectionGrid extends BorderPane {
         int pageCount = divideAndGetCeil(numberOfImages, pageSize);
 
         pagination.setPageCount(pageCount);
+        setControlVisibility(pageCount);
     }
 
     private int divideAndGetCeil(int a, int b) {
         return a / b + ((a % b == 0) ? 0 : 1);
+    }
+
+    private void setControlVisibility(int pageCount) {
+        if(pageCount == 1 && !pagination.getStyleClass().contains(PAGINATION_HIDDEN)) {
+            pagination.getStyleClass().add(PAGINATION_HIDDEN);
+        } else if (pageCount > 1) {
+            pagination.getStyleClass().remove(PAGINATION_HIDDEN);
+        }
     }
 
     private void setPageFactory(List<Image> images, int pageSize, ImageClickHandler handler, DoubleProperty gridGap, DoubleProperty imageHeight) {

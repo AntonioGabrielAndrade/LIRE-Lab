@@ -3,11 +3,13 @@ package br.com.antoniogabriel.lirelab.custom.paginated_collection_grid;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.ImageClickHandler;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.Slider;
 import javafx.util.Callback;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,6 +19,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid.PAGINATION_HIDDEN;
+import static javafx.collections.FXCollections.observableArrayList;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -34,7 +39,14 @@ public class PaginatedCollectionGridTest {
     @Mock private Slider gridGapSlider;
     @Mock private Slider imageHeightSlider;
 
+    private ObservableList<String> paginationStyleClass = observableArrayList();
+
     @InjectMocks private PaginatedCollectionGrid grid = new PaginatedCollectionGrid();
+
+    @Before
+    public void setUp() throws Exception {
+        given(pagination.getStyleClass()).willReturn(paginationStyleClass);
+    }
 
     @Test
     public void shouldCalcPageCountToAccommodateAllImages() throws Exception {
@@ -51,6 +63,14 @@ public class PaginatedCollectionGridTest {
 
         grid.setPageSize(90);
         verify(pagination).setPageCount(2);
+    }
+
+    @Test
+    public void shouldHidePaginationControlWhenHasOnlyOnePage() throws Exception {
+        grid.setCollection(withAmountOfImages(10));
+        grid.setPageSize(10);
+
+        assertTrue(paginationStyleClass.contains(PAGINATION_HIDDEN));
     }
 
     @Test
