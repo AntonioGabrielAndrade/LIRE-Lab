@@ -4,12 +4,12 @@
 }
 
 #status-progress > .track{
-    -fx-border-color: darkgray;
+    /*-fx-border-color: darkgray;*/
 }
 
 #status-progress > .bar {
     -fx-background-color: linear-gradient(
-        from 0px .175em to .175em 0px,
+        from 0px .250em to .250em 0px,
         repeat,
         -fx-accent 0%,
         -fx-accent 49%,
@@ -18,4 +18,5 @@
     );
     -fx-background-insets: 1 1 1 1;
     -fx-padding: 0.50em;
+    -fx-border-color: darkgray;
 }
