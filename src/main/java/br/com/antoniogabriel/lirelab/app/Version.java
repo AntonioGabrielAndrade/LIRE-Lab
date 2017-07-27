@@ -28,6 +28,7 @@ public class Version {
             final Properties properties = new Properties();
             properties.load(Version.class.getClassLoader().getResourceAsStream("project.properties"));
             VERSION = properties.getProperty("version");
+            LIRE_VERSION = properties.getProperty("lire.version");
             ARTIFACT_ID = properties.getProperty("artifactId");
         } catch (IOException e) {
             throw new RuntimeException("Could not read project.properties", e);
@@ -35,5 +36,6 @@ public class Version {
     }
 
     public static final String VERSION;
+    public static final String LIRE_VERSION;
     public static final String ARTIFACT_ID;
 }

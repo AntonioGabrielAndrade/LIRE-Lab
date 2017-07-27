@@ -10,6 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lire.version>1.0_b04</lire.version>
     </properties>
 
     <repositories>
@@ -169,7 +170,7 @@
         <dependency>
             <groupId>net.semanticmetadata</groupId>
             <artifactId>LIRE</artifactId>
-            <version>1.0_b04</version>
+            <version>${lire.version}</version>
         </dependency>
         <dependency>
             <groupId>net.coobird</groupId>
@@ -261,11 +262,11 @@
                 <configuration>
                     <groupId>net.semanticmetadata</groupId>
                     <artifactId>LIRE</artifactId>
-                    <version>1.0_b04</version>
+                    <version>${lire.version}</version>
                     <packaging>jar</packaging>
-                    <file>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04.jar</file>
+                    <file>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}.jar</file>
                     <sources>
-                        src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04-sources.jar
+                        src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}-sources.jar
                     </sources>
                 </configuration>
                 <executions>
