@@ -13,6 +13,8 @@ addons:
     packages:
       - oracle-java8-installer
 
-before_script: sudo cp /home/travis/.m2/repository/org/testfx/openjfx-monocle/8u76-b04/openjfx-monocle-8u76-b04.jar $JAVA_HOME/jre/lib/ext/openjfx-monocle-8u76-b04.jar
+before_script: sudo cp
+                $HOME/.m2/repository/org/testfx/openjfx-monocle/8u76-b04/openjfx-monocle-8u76-b04.jar
+                $JAVA_HOME/jre/lib/ext/openjfx-monocle-8u76-b04.jar
 
 script: mvn clean test -Dheadless=true
