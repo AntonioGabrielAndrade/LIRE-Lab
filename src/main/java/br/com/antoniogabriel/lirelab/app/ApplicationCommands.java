@@ -49,7 +49,7 @@ public class ApplicationCommands {
                 collection -> appController.searchCollection(collection));
 
         Command<Void> about = new Command<>("About LIRE-Lab",
-                "emblems:emblem-important",
+                "status:dialog-information",
                 "about",
                 nullArg -> appController.showAboutDialog());
 
