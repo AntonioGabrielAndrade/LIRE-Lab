@@ -3,8 +3,8 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
+import br.com.antoniogabriel.lirelab.custom.collection_detail.CollectionDetail;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
-import br.com.antoniogabriel.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -16,10 +16,12 @@ import javafx.scene.layout.StackPane;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static br.com.antoniogabriel.lirelab.app.ApplicationCommands.CollectionCommand.SEARCH;
+import static java.util.Arrays.asList;
 
 @Singleton
 public class HomeController implements Initializable {
@@ -115,16 +117,7 @@ public class HomeController implements Initializable {
     }
 
     public void showCollectionImages(Collection collection) {
-        try {
-
-            PaginatedCollectionGrid grid = new PaginatedCollectionGrid();
-            grid.setPageSize(DEFAULT_COLLECTION_PAGE_SIZE);
-            centerPane.setCenter(grid);
-            grid.setCollection(collection);
-
-        } catch (IOException e) {
-            throw new LireLabException("Could not show collections", e);
-        }
+        centerPane.setCenter(new CollectionDetail(collection, asList(applicationCommands.getCollectionCommand(SEARCH))));
     }
 
     public void showImage(String imagePath) {
