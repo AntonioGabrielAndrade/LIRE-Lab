@@ -8,10 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -64,6 +61,7 @@ public class StatusBar extends BorderPane {
     public void setMessage(String message) {
         statusMessage.textProperty().unbind();
         statusMessage.setText(message);
+        statusMessage.setTooltip(new Tooltip(message));
     }
 
     public void setFeatures(List<Feature> features, Feature defaultFeature, FeatureSelectionListener listener) {
