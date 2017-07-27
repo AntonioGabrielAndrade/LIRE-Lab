@@ -1,13 +1,10 @@
 # Build setup for Travis CI
 
-language:
-  - java
+language: java
 
-jdk:
-  - oraclejdk8
+jdk: oraclejdk8
 
-os:
-  - linux
+os: linux
 
 sudo: required
 
