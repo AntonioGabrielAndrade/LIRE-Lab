@@ -68,14 +68,14 @@
             <url>http://jcenter.bintray.com</url>
         </repository>
         <repository>
-            <id>local-maven-repo</id>
-            <url>file:///${project.basedir}/src/main/resources/local-maven-repo</url>
+            <id>project.local</id>
+            <url>file:${project.basedir}/repo</url>
         </repository>
     </repositories>
 
     <profiles>
         <profile>
-            <id>testfx.headless</id>
+            <id>headless</id>
             <activation>
                 <property>
                     <name>headless</name>
@@ -267,12 +267,12 @@
                     <artifactId>LIRE</artifactId>
                     <version>${lire.version}</version>
                     <packaging>jar</packaging>
-                    <file>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}.jar</file>
-                    <sources>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}-sources.jar</sources>
+                    <file>repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}.jar</file>
+                    <sources>repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}-sources.jar</sources>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>install-jar-libs</id>
+                        <id>install-lire</id>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
