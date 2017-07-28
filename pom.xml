@@ -289,13 +289,24 @@
                     <mainClass>br.com.antoniogabriel.lirelab.app.App</mainClass>
                     <jfxMainAppJarName>lirelab.jar</jfxMainAppJarName>
                     <preLoader>br.com.antoniogabriel.lirelab.preloader.SplashScreenPreloader</preLoader>
+                    <vendor>antoniogabriel</vendor>
+                    <needShortcut>true</needShortcut>
+                    <needMenu>true</needMenu>
                 </configuration>
                 <executions>
                     <execution>
+                        <!-- required before build-native -->
                         <id>create-jfxjar</id>
                         <phase>package</phase>
                         <goals>
                             <goal>build-jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-native</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-native</goal>
                         </goals>
                     </execution>
                 </executions>
