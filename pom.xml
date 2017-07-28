@@ -48,6 +48,7 @@
         <controlsfx.version>8.40.12</controlsfx.version>
         <ignite-guice.version>1.0.0</ignite-guice.version>
         <thumbnailator.version>[0.4, 0.5)</thumbnailator.version>
+        <griffon-tangoicons-javafx.version>2.0.0</griffon-tangoicons-javafx.version>
 
         <junit.version>4.12</junit.version>
         <mockito.version>2.8.47</mockito.version>
@@ -58,7 +59,6 @@
         <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
         <javafx-maven-plugin.version>8.6.0</javafx-maven-plugin.version>
-        <griffon-tangoicons-javafx.version>2.0.0</griffon-tangoicons-javafx.version>
     </properties>
 
     <repositories>
@@ -74,7 +74,6 @@
     </repositories>
 
     <profiles>
-
         <profile>
             <id>testfx.headless</id>
             <activation>
@@ -104,34 +103,71 @@
                 </plugins>
             </build>
         </profile>
-
-        <profile>
-            <id>testfx.no.headless</id>
-            <activation>
-                <property>
-                    <name>headless</name>
-                    <value>false</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${maven-surefire-plugin.version}</version>
-                        <configuration>
-                            <systemPropertyVariables>
-                                <testfx.headless>false</testfx.headless>
-                                <java.awt.headless>false</java.awt.headless>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 
     <dependencies>
+        <dependency>
+            <groupId>net.semanticmetadata</groupId>
+            <artifactId>LIRE</artifactId>
+            <version>${lire.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sangupta</groupId>
+            <artifactId>jopensurf</artifactId>
+            <version>${jopensurf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>${commons-math3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>${controlsfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>ignite-guice</artifactId>
+            <version>${ignite-guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.griffon.plugins</groupId>
+            <artifactId>griffon-tangoicons-javafx</artifactId>
+            <version>${griffon-tangoicons-javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -162,69 +198,6 @@
             <version>${monocle.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>net.semanticmetadata</groupId>
-            <artifactId>LIRE</artifactId>
-            <version>${lire.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-queryparser</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>${commons-codec.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>${commons-math3.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sangupta</groupId>
-            <artifactId>jopensurf</artifactId>
-            <version>${jopensurf.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>${controlsfx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>ignite-guice</artifactId>
-            <version>${ignite-guice.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.griffon.plugins</groupId>
-            <artifactId>griffon-tangoicons-javafx</artifactId>
-            <version>${griffon-tangoicons-javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.coobird</groupId>
-            <artifactId>thumbnailator</artifactId>
-            <version>${thumbnailator.version}</version>
-        </dependency>
-
     </dependencies>
 
 
