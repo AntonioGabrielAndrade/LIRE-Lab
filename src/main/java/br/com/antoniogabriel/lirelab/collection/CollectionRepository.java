@@ -29,6 +29,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableSet;
+
 public class CollectionRepository {
 
     private LireLabUtils lireLabUtils;
@@ -89,7 +92,7 @@ public class CollectionRepository {
             throw new LireLabException("Could not read collections directories", e);
         }
 
-        return collections;
+        return unmodifiableList(collections);
     }
 
     private boolean isCollection(Path folder) {
@@ -122,6 +125,6 @@ public class CollectionRepository {
             throw new LireLabException("Could not read collections names", e);
         }
 
-        return names;
+        return unmodifiableSet(names);
     }
 }

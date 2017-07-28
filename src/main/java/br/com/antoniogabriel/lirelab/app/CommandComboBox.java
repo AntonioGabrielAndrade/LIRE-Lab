@@ -72,7 +72,6 @@ public class CommandComboBox<T> extends HBox {
     }
 
     public void setItems(List<T> items) {
-        comboBox.getItems().clear();
         comboBox.setItems(observableList(items));
         comboBox.getSelectionModel().select(0);
     }
