@@ -43,7 +43,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CollectionRepositoryIntegrationTest {
+public class CollectionRepositoryTest {
 
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
