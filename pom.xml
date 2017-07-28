@@ -58,6 +58,7 @@
         <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
         <javafx-maven-plugin.version>8.6.0</javafx-maven-plugin.version>
+        <griffon-tangoicons-javafx.version>2.0.0</griffon-tangoicons-javafx.version>
     </properties>
 
     <repositories>
@@ -216,7 +217,7 @@
         <dependency>
             <groupId>org.codehaus.griffon.plugins</groupId>
             <artifactId>griffon-tangoicons-javafx</artifactId>
-            <version>2.0.0</version>
+            <version>${griffon-tangoicons-javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>net.coobird</groupId>
@@ -232,7 +233,7 @@
             <dependency>
                 <groupId>org.codehaus.griffon.plugins</groupId>
                 <artifactId>griffon-tangoicons-plugin</artifactId>
-                <version>2.0.0</version>
+                <version>${griffon-tangoicons-javafx.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
