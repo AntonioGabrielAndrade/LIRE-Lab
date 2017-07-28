@@ -79,7 +79,7 @@ public class CollectionRepositoryTest {
     }
 
     @Test
-    public void shouldReturnEmptyCollectionListWhenCollectionsDirectoryDonExist() throws Exception {
+    public void shouldReturnEmptyCollectionListWhenCollectionsDirectoryDontExist() throws Exception {
         deleteWorkDirectory(RESOLVER);
 
         assertTrue(repository.getCollections().isEmpty());
