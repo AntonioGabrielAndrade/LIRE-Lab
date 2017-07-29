@@ -34,7 +34,7 @@ public class SplashScreenPreloader extends Preloader {
 
     private Stage stage;
 
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         this.stage = stage;
         this.stage.initStyle(StageStyle.UNDECORATED);
 
