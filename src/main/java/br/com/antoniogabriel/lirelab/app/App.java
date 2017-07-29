@@ -29,6 +29,10 @@ public class App extends Application {
 
     @Inject private AppFXML appFXML;
 
+    public static void main(String[] args) {
+        launch(App.class);
+    }
+
     @Override
     public void init() throws Exception {
         DependencyInjection.init(this);
