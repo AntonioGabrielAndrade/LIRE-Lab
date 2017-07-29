@@ -21,26 +21,59 @@ package br.com.antoniogabriel.lirelab.app;
 
 import br.com.antoniogabriel.lirelab.util.DependencyInjection;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
 
+import static br.com.antoniogabriel.lirelab.util.FxUtils.runOnFxThreadAndWait;
+
 public class App extends Application {
 
+    private Image appIcon;
+
     @Inject private AppFXML appFXML;
+    @Inject private AboutFXML splash;
 
     public static void main(String[] args) {
         launch(App.class);
     }
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         DependencyInjection.init(this);
+        initAppIcon();
+        showSplashScreen();
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        stage.setMaximized(true);
-        appFXML.loadIn(stage);
+    public void start(Stage stage) {
+        setIconsTo(stage);
+        showApplication(stage);
+    }
+
+    private void initAppIcon() {
+        runOnFxThreadAndWait(() -> {
+            appIcon = new Image(getClass().getClassLoader().getResource("lirelab.png").toString());
+        });
+    }
+
+    private void showSplashScreen() {
+        runOnFxThreadAndWait(() -> {
+            Stage splashStage = new Stage();
+            setIconsTo(splashStage);
+            splash.loadIn(splashStage);
+        });
+    }
+
+    private void showApplication(Stage stage) {
+        runOnFxThreadAndWait(() -> {
+            stage.setMaximized(true);
+            appFXML.loadIn(stage);
+        });
+    }
+
+    private void setIconsTo(Stage stage) {
+        runOnFxThreadAndWait(() -> stage.getIcons().add(appIcon));
     }
 }

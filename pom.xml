@@ -25,7 +25,7 @@
 
     <groupId>br.com.antoniogabriel</groupId>
     <artifactId>lirelab</artifactId>
-    <version>1.0.0-alpha</version>
+    <version>${project.version.number}-alpha</version>
 
     <name>LIRE-Lab</name>
     <description>Desktop Image Retrieval tool based on the LIRE library</description>
@@ -35,6 +35,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.version.number>1.0.0</project.version.number>
 
         <java.version>1.8</java.version>
 
@@ -184,7 +185,6 @@
             <groupId>org.testfx</groupId>
             <artifactId>testfx-core</artifactId>
             <version>${testfx.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testfx</groupId>
@@ -288,14 +288,14 @@
                 <configuration>
                     <mainClass>br.com.antoniogabriel.lirelab.app.App</mainClass>
                     <jfxMainAppJarName>lirelab.jar</jfxMainAppJarName>
-                    <preLoader>br.com.antoniogabriel.lirelab.preloader.SplashScreenPreloader</preLoader>
                     <vendor>antoniogabriel</vendor>
+                    <nativeReleaseVersion>${project.version.number}</nativeReleaseVersion>
                     <needShortcut>true</needShortcut>
                     <needMenu>true</needMenu>
+                    <appName>lirelab</appName>
                 </configuration>
                 <executions>
                     <execution>
-                        <!-- required before build-native -->
                         <id>create-jfxjar</id>
                         <phase>package</phase>
                         <goals>

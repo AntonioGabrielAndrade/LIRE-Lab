@@ -17,36 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.com.antoniogabriel.lirelab.app;
+package br.com.antoniogabriel.lirelab.util;
 
-import javafx.stage.Stage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.testfx.api.FxRobot;
 
-import static org.mockito.Mockito.verify;
+public class FxUtils {
 
-@RunWith(MockitoJUnitRunner.class)
-public class AppTest {
-
-    @Mock private Stage stage;
-    @Mock private AppFXML appFxml;
-
-    @InjectMocks private App app = new App();
-
-    @Test
-    public void shouldMaximizeStage() throws Exception {
-        app.start(stage);
-
-        verify(stage).setMaximized(true);
-    }
-
-    @Test
-    public void shouldLoadAppFXML() throws Exception {
-        app.start(stage);
-
-        verify(appFxml).loadIn(stage);
+    public static void runOnFxThreadAndWait(Runnable runnable) {
+        FxRobot robot = new FxRobot();
+        robot.interact(runnable);
     }
 }
