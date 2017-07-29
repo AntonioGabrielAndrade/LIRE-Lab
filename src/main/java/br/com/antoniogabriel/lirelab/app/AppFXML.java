@@ -38,6 +38,6 @@ public class AppFXML extends FXML {
 
     @Override
     public String getTitle() {
-        return Version.ARTIFACT_ID + " " + Version.VERSION;
+        return ProjectProperties.PROJECT_NAME + " " + ProjectProperties.PROJECT_VERSION;
     }
 }

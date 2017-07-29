@@ -22,20 +22,22 @@ package br.com.antoniogabriel.lirelab.app;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Version {
+public class ProjectProperties {
     static {
         try {
             final Properties properties = new Properties();
-            properties.load(Version.class.getClassLoader().getResourceAsStream("project.properties"));
-            VERSION = properties.getProperty("version");
+            properties.load(ProjectProperties.class.getClassLoader().getResourceAsStream("project.properties"));
+            PROJECT_NAME = properties.getProperty("project.name");
+            PROJECT_VERSION = properties.getProperty("project.version");
             LIRE_VERSION = properties.getProperty("lire.version");
-            ARTIFACT_ID = properties.getProperty("artifactId");
+            ARTIFACT_ID = properties.getProperty("project.artifactId");
         } catch (IOException e) {
             throw new RuntimeException("Could not read project.properties", e);
         }
     }
 
-    public static final String VERSION;
+    public static final String PROJECT_NAME;
+    public static final String PROJECT_VERSION;
     public static final String LIRE_VERSION;
     public static final String ARTIFACT_ID;
 }

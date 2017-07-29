@@ -19,7 +19,7 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<?import br.com.antoniogabriel.lirelab.app.Version?>
+<?import br.com.antoniogabriel.lirelab.app.ProjectProperties?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
@@ -60,7 +60,7 @@
                 <Label text="Version: "/>
                 <Label>
                     <text>
-                        <Version fx:constant="VERSION"/>
+                        <ProjectProperties fx:constant="PROJECT_VERSION"/>
                     </text>
                 </Label>
             </HBox>
@@ -68,7 +68,7 @@
                 <Label text="LIRE Version: "/>
                 <Label>
                     <text>
-                        <Version fx:constant="LIRE_VERSION"/>
+                        <ProjectProperties fx:constant="LIRE_VERSION"/>
                     </text>
                 </Label>
             </HBox>

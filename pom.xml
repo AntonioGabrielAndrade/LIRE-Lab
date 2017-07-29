@@ -291,7 +291,7 @@
                     <nativeReleaseVersion>${project.version}</nativeReleaseVersion>
                     <needShortcut>true</needShortcut>
                     <needMenu>true</needMenu>
-                    <appName>lirelab</appName>
+                    <appName>${project.name}</appName>
                 </configuration>
                 <executions>
                     <execution>
