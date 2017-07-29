@@ -25,7 +25,7 @@
 
     <groupId>br.com.antoniogabriel</groupId>
     <artifactId>lirelab</artifactId>
-    <version>${project.version.number}-alpha</version>
+    <version>0.9.1</version>
 
     <name>LIRE-Lab</name>
     <description>Desktop Image Retrieval tool based on the LIRE library</description>
@@ -35,7 +35,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project.version.number>1.0.0</project.version.number>
 
         <java.version>1.8</java.version>
 
@@ -289,7 +288,7 @@
                     <mainClass>br.com.antoniogabriel.lirelab.app.App</mainClass>
                     <jfxMainAppJarName>lirelab.jar</jfxMainAppJarName>
                     <vendor>antoniogabriel</vendor>
-                    <nativeReleaseVersion>${project.version.number}</nativeReleaseVersion>
+                    <nativeReleaseVersion>${project.version}</nativeReleaseVersion>
                     <needShortcut>true</needShortcut>
                     <needMenu>true</needMenu>
                     <appName>lirelab</appName>
