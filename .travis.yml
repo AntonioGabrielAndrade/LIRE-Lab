@@ -18,3 +18,14 @@ before_script: sudo cp
                 $JAVA_HOME/jre/lib/ext/openjfx-monocle-8u76-b04.jar
 
 script: mvn clean package -Dheadless=true
+
+deploy:
+  provider: releases
+  api_key:
+    secure: 0b69d8c7ac30acbd2ceee4e5ab74bef85e0b2a1d
+  file:
+    - "target/lirelab-${TRAVIS_TAG}-zip.zip"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: AntonioGabrielAndrade/LIRE-Lab
