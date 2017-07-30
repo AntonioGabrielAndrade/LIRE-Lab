@@ -30,7 +30,14 @@ import static br.com.antoniogabriel.lirelab.util.FxUtils.runOnFxThreadAndWait;
 
 public class App extends Application {
 
-    private Image appIcon;
+    private static Image lirelab_16;
+    private static Image lirelab_24;
+    private static Image lirelab_32;
+    private static Image lirelab_48;
+    private static Image lirelab_64;
+    private static Image lirelab_72;
+    private static Image lirelab_96;
+    private static Image lirelab_128;
 
     @Inject private AppFXML appFXML;
     @Inject private AboutFXML splash;
@@ -41,8 +48,8 @@ public class App extends Application {
 
     @Override
     public void init() {
+        initAppIcons();
         DependencyInjection.init(this);
-        initAppIcon();
         showSplashScreen();
     }
 
@@ -52,9 +59,16 @@ public class App extends Application {
         showApplication(stage);
     }
 
-    private void initAppIcon() {
+    private void initAppIcons() {
         runOnFxThreadAndWait(() -> {
-            appIcon = new Image(getClass().getClassLoader().getResource("lirelab.png").toString());
+            lirelab_16 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_16.png"));
+            lirelab_24 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_24.png"));
+            lirelab_32 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_32.png"));
+            lirelab_48 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_48.png"));
+            lirelab_64 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_64.png"));
+            lirelab_72 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_72.png"));
+            lirelab_96 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_96.png"));
+            lirelab_128 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_128.png"));
         });
     }
 
@@ -74,6 +88,15 @@ public class App extends Application {
     }
 
     private void setIconsTo(Stage stage) {
-        runOnFxThreadAndWait(() -> stage.getIcons().add(appIcon));
+        runOnFxThreadAndWait(() -> {
+            stage.getIcons().addAll(lirelab_16,
+                                        lirelab_24,
+                                        lirelab_32,
+                                        lirelab_48,
+                                        lirelab_64,
+                                        lirelab_72,
+                                        lirelab_96,
+                                        lirelab_128);
+        });
     }
 }
