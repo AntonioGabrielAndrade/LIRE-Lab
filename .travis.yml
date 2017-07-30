@@ -17,15 +17,15 @@ before_script: sudo cp
                 $HOME/.m2/repository/org/testfx/openjfx-monocle/8u76-b04/openjfx-monocle-8u76-b04.jar
                 $JAVA_HOME/jre/lib/ext/openjfx-monocle-8u76-b04.jar
 
-script: mvn clean package -Dheadless=true
+script: mvn clean package -Dheadless=true -Dmaven.test.skip=true
 
 deploy:
   provider: releases
   api_key:
-    secure: 0b69d8c7ac30acbd2ceee4e5ab74bef85e0b2a1d
-  file:
-    - "target/lirelab-${TRAVIS_TAG}-zip.zip"
+    secure: "Tkjgx/vNy4dV72ve4znlfICOHs0x3+AZqikqpsn/daveMvy0HAzMpibg1JyKNpYBYf082ZNp7X4xBI7LH9AsDecBYTe3sav2KWg/23duumABAdJzSV7bRQmGR9lnhJ2TEarCpPRmliA3m/Kg0bJSC0iLQ3F8sJdhCSljk7vvgVGxSnUvVd1YhVI2Otixz1yKTLc3LjG7ULEjoLIMeBzZzhGs/H8TBQcRk3bso1AJ6OwpsBW3tWWvmwloCYacZg+41dYugdGK4hMZImxmcIU6og75qYotv62QxGSM/6CPP5ubaUAUI7cqXDDl3FtCLtBbPKWl3DNO+IVsIaVMJ3t7IDtsIujM9eHHHCNDm95wkOmZbDC5b/tVhEcCeEf1EFEVlvthNp6Wl9XedjVXGgq7hhKJewqMkEbHsy0YSWjlGXIaYrMRG9oHDsyvlPypY2bhyeBGmXhL4WXBRX434zC2pH6UJxFT3a7SXChV3s99ASiWfFnFtyMRzzIuUK8dwkHU1qc4f3RriEtw1t2FlJGdx5w/X+vIv+8BOtHMAQylUxp52wuihqL3OLQOJDljSoAFsTF8TZbRWoJuRJ5JH4pZ/Ub4oFHpT8Cm4bGGYgd57Bs3nuNNxLt15ggcwIQEvD+1VDsVZEUCpbjgnES40sC7qz4eEX7K5/7eGe1RGLzefn8="
+  file: "target/lirelab-${TRAVIS_TAG}-zip.zip"
   skip_cleanup: true
+  overwrite: true
   on:
     tags: true
     repo: AntonioGabrielAndrade/LIRE-Lab
