@@ -52,6 +52,10 @@ public class CommandTriggerFactory<E> {
         argProvider.addListener((observable, oldValue, newValue) -> {
             if(newValue != null) {
                 item.setText(command.getLabel() + " [" + argProvider.getValue() + "]");
+                item.setDisable(false);
+            } else {
+                item.setText(command.getLabel());
+                item.setDisable(true);
             }
         });
 
