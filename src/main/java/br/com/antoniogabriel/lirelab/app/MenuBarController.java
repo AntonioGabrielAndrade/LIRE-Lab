@@ -19,6 +19,9 @@
 
 package br.com.antoniogabriel.lirelab.app;
 
+import br.com.antoniogabriel.lirelab.collection.Collection;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
@@ -32,10 +35,13 @@ import java.util.ResourceBundle;
 public class MenuBarController implements Initializable {
 
     @FXML private Menu fileMenu;
+    @FXML private Menu searchMenu;
     @FXML private Menu helpMenu;
 
     private ApplicationCommands applicationCommands;
     private CommandTriggerFactory commandTriggerFactory;
+
+    private SimpleObjectProperty<Collection> selectedCollection = new SimpleObjectProperty<>(null);
 
     @Inject
     public MenuBarController(ApplicationCommands applicationCommands, CommandTriggerFactory commandTriggerFactory) {
@@ -46,7 +52,12 @@ public class MenuBarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupFileMenu();
+        setupSearchMenu();
         setupHelpMenu();
+    }
+
+    public void bindSelectedCollectionTo(ObservableValue<Collection> value) {
+        selectedCollection.bind(value);
     }
 
     private void setupFileMenu() {
@@ -55,6 +66,15 @@ public class MenuBarController implements Initializable {
             MenuItem menuItem = commandTriggerFactory.createMenuItem(command, () -> null);
             menuItem.setId(command.getNodeId());
             fileMenu.getItems().add(menuItem);
+        }
+    }
+
+    private void setupSearchMenu() {
+        List<Command<Collection>> commands = applicationCommands.getSearchMenuCommands();
+        for (Command<Collection> command : commands) {
+            MenuItem menuItem = commandTriggerFactory.createMenuItem(command, selectedCollection);
+            menuItem.setId(command.getNodeId());
+            searchMenu.getItems().add(menuItem);
         }
     }
 

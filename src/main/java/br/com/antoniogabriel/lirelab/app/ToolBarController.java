@@ -22,6 +22,7 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -68,6 +69,10 @@ public class ToolBarController implements Initializable {
 
     public void setSelectedCollection(Collection collection) {
         searchCollectionComboBox.setSelectedItem(collection);
+    }
+
+    public ObservableValue<Collection> selectedCollectionProperty() {
+        return searchCollectionComboBox.valueProperty();
     }
 
     private void setSearchComboBoxCollections() {

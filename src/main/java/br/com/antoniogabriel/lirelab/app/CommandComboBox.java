@@ -20,6 +20,7 @@
 package br.com.antoniogabriel.lirelab.app;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -82,6 +83,10 @@ public class CommandComboBox<T> extends HBox {
 
     public T getSelectedItem() {
         return comboBox.getValue();
+    }
+
+    public ObservableValue<T> valueProperty() {
+        return comboBox.valueProperty();
     }
 
     public Command<T> getCommand() {

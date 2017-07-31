@@ -19,6 +19,7 @@
 
 package br.com.antoniogabriel.lirelab.app;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
@@ -35,11 +36,27 @@ public class CommandTriggerFactory<E> {
         return button;
     }
 
-    public MenuItem createMenuItem(Command<E> command, CommandArgProvider<E> provider) {
+    public MenuItem createMenuItem(Command<E> command, CommandArgProvider<E> argProvider) {
         MenuItem item = new MenuItem(command.getLabel());
 
         item.setGraphic(command.getIcon());
-        item.setOnAction(event -> command.execute(provider.provide()));
+        item.setOnAction(event -> command.execute(argProvider.provide()));
+        item.setId(command.getNodeId());
+
+        return item;
+    }
+
+    public MenuItem createMenuItem(Command<E> command, SimpleObjectProperty<E> argProvider) {
+        MenuItem item = new MenuItem(command.getLabel());
+
+        argProvider.addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+                item.setText(command.getLabel() + " [" + argProvider.getValue() + "]");
+            }
+        });
+
+        item.setGraphic(command.getIcon());
+        item.setOnAction(event -> command.execute(argProvider.getValue()));
         item.setId(command.getNodeId());
 
         return item;

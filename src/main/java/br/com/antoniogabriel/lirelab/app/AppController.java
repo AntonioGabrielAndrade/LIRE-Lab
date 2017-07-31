@@ -26,19 +26,23 @@ import br.com.antoniogabriel.lirelab.collection.CreateCollectionFXML;
 import br.com.antoniogabriel.lirelab.collection.DialogProvider;
 import br.com.antoniogabriel.lirelab.search.SearchController;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @Singleton
-public class AppController {
+public class AppController implements Initializable {
 
     @FXML private BorderPane mainArea;
     @FXML private Node searchView;
     @FXML private Node homeView;
     @FXML private ToolBarController toolBarController;
+    @FXML private MenuBarController menuBarController;
 
     private CreateCollectionFXML createCollectionFXML;
     private CollectionService collectionService;
@@ -57,6 +61,11 @@ public class AppController {
         this.aboutFXML = aboutFXML;
         this.dialogProvider = dialogProvider;
         this.searchController = searchController;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        menuBarController.bindSelectedCollectionTo(toolBarController.selectedCollectionProperty());
     }
 
     public void openCreateCollectionDialog() {

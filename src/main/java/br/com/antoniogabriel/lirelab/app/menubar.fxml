@@ -29,6 +29,8 @@
 
     <Menu fx:id="fileMenu" id="file-menu" text="File"/>
 
+    <Menu fx:id="searchMenu" id="search-menu" text="Search"/>
+
     <Menu fx:id="helpMenu" id="help-menu" text="Help"/>
 
 </MenuBar>
