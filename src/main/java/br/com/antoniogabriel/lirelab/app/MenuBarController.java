@@ -52,7 +52,6 @@ public class MenuBarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupFileMenu();
-        setupSearchMenu();
         setupHelpMenu();
     }
 
@@ -66,15 +65,6 @@ public class MenuBarController implements Initializable {
             MenuItem menuItem = commandTriggerFactory.createMenuItem(command, () -> null);
             menuItem.setId(command.getNodeId());
             fileMenu.getItems().add(menuItem);
-        }
-    }
-
-    private void setupSearchMenu() {
-        List<Command<Collection>> commands = applicationCommands.getSearchMenuCommands();
-        for (Command<Collection> command : commands) {
-            MenuItem menuItem = commandTriggerFactory.createMenuItem(command, selectedCollection);
-            menuItem.setId(command.getNodeId());
-            searchMenu.getItems().add(menuItem);
         }
     }
 

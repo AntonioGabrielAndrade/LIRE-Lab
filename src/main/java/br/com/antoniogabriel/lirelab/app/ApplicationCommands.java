@@ -42,7 +42,6 @@ public class ApplicationCommands {
     private final List<Command<Void>> leftToolBarCommands = new ArrayList<>();
     private final List<Command<Void>> rightToolBarCommands = new ArrayList<>();
     private final List<Command<Void>> fileMenuCommands = new ArrayList<>();
-    private final List<Command<Collection>> searchMenuCommands = new ArrayList<>();
     private final List<Command<Void>> helpMenuCommands = new ArrayList<>();
     private final List<Command<Void>> collectionTreeContextMenuCommands = new ArrayList<>();
 
@@ -88,8 +87,6 @@ public class ApplicationCommands {
 
         fileMenuCommands.add(getAsVoid(create));
 
-        searchMenuCommands.add(search);
-
         helpMenuCommands.add(about);
 
         leftToolBarCommands.add(getAsVoid(create));
@@ -123,10 +120,6 @@ public class ApplicationCommands {
 
     public List<Command<Void>> getFileMenuCommands() {
         return unmodifiableList(fileMenuCommands);
-    }
-
-    public List<Command<Collection>> getSearchMenuCommands() {
-        return unmodifiableList(searchMenuCommands);
     }
 
     public List<Command<Void>> getHelpMenuCommands() {
