@@ -1,6 +1,25 @@
+/*
+ * This file is part of the LIRE-Lab project, a desktop image retrieval tool
+ * made on top of the LIRE image retrieval Java library.
+ * Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.com.antoniogabriel.lirelab.util;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import org.junit.AfterClass;
@@ -20,30 +39,31 @@ import static org.junit.Assert.assertTrue;
 public class CollectionUtilsTest {
 
 
-    private static final Collection COLLECTION = collection("COLLECTION", TEST_IMAGES, CEDD);
+    private static final String COLLECTION_NAME = "Collection";
+
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
-    private static final String THUMBNAILS_DIRECTORY_PATH = RESOLVER.getThumbnailsDirectoryPath(COLLECTION.getName()) + "/";
-    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
+    private static final String THUMBNAILS_DIRECTORY_PATH = RESOLVER.getThumbnailsDirectoryPath(COLLECTION_NAME) + "/";
+    private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
+
+    private static Collection collection;
 
     private CollectionUtils utils = new CollectionUtils(RESOLVER);
 
     @BeforeClass
     public static void setUp() throws Exception {
-        runOnFxThreadAndWait(() -> COLLECTION_HELPER.createRealCollection(COLLECTION));
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD);
+        collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
-        runOnFxThreadAndWait(() -> {
-            COLLECTION_HELPER.deleteCollection(COLLECTION);
-            deleteWorkDirectory(RESOLVER);
-        });
+        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME);
+        deleteWorkDirectory(RESOLVER);
     }
 
     @Test
     public void shouldGetCollectionThumbnailsPaths() throws Exception {
-
-        List<String> paths = utils.getThumbnailsPaths(COLLECTION);
+        List<String> paths = utils.getThumbnailsPaths(collection);
 
         assertTrue(paths.contains(THUMBNAILS_DIRECTORY_PATH + "14474347006_99aa0fd981_k.thumbnail.jpg"));
         assertTrue(paths.contains(THUMBNAILS_DIRECTORY_PATH + "16903390174_1d670a5849_h.thumbnail.jpg"));
@@ -59,7 +79,7 @@ public class CollectionUtilsTest {
 
     @Test
     public void shouldGetThumbnailPathFromImagePath() throws Exception {
-        String thumbnailPath = utils.getThumbnailPathFromImagePath(COLLECTION, TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+        String thumbnailPath = utils.getThumbnailPathFromImagePath(collection, TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
 
         assertThat(thumbnailPath, equalTo(THUMBNAILS_DIRECTORY_PATH + "14474347006_99aa0fd981_k.thumbnail.jpg"));
     }

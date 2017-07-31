@@ -1,6 +1,4 @@
 /.idea/
 /target/
 /.gradle/
-lirelab.iml
-LireLab.iml
-src/main/resources/local-maven-repo/.index/
+/*.iml

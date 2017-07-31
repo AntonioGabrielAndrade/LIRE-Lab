@@ -1,3 +1,22 @@
+/*
+ * This file is part of the LIRE-Lab project, a desktop image retrieval tool
+ * made on top of the LIRE image retrieval Java library.
+ * Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.Feature;
@@ -10,10 +29,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
-
-import static java.util.Collections.EMPTY_LIST;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -22,11 +37,9 @@ public class CollectionServiceTest {
 
     private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
-    public static final String ANY_NAME = "";
-    public static final String ANY_PATH = "";
-
     @Mock private CollectionRepository collectionRepository;
     @Mock private CollectionsMonitor collectionsMonitor;
+    @Mock private CreateCollectionRunnerFactory createCollectionRunnerFactory;
     @Mock private QueryRunnerFactory queryRunnerFactory;
     @Mock private PathResolver resolver;
     @Mock private QueryRunner queryRunner;
@@ -41,24 +54,13 @@ public class CollectionServiceTest {
         service = new CollectionService(resolver,
                                         collectionRepository,
                                         collectionsMonitor,
+                                        createCollectionRunnerFactory,
                                         queryRunnerFactory);
     }
 
     @Test
     public void shouldStartMonitoringCollections() throws Exception {
-        verify(collectionsMonitor).startMonitoringCollectionsDeleteAndUpdate();
-    }
-
-    @Test
-    public void shouldBuildTaskToCreateCollectionAndMonitorItsCompletion() throws Exception {
-        String name = ANY_NAME;
-        String path = ANY_PATH;
-        List<Feature> features = EMPTY_LIST;
-
-        CreateCollectionTask task = service.getTaskToCreateCollection(name, path, features);
-
-        assertNotNull(task);
-        verify(collectionsMonitor).bindListenersTo(task);
+        verify(collectionsMonitor).startMonitoringCollectionsModificationsInFileSystem();
     }
 
     @Test
@@ -66,6 +68,21 @@ public class CollectionServiceTest {
         service.getCollections();
 
         verify(collectionRepository).getCollections();
+    }
+
+    @Test
+    public void shouldGetCollectionNames() throws Exception {
+        service.getCollectionNames();
+
+        verify(collectionRepository).getCollectionNames();
+    }
+
+    @Test
+    public void shouldDeleteCollection() throws Exception {
+        Collection collection = new Collection("collection");
+        service.deleteCollection(collection);
+
+        verify(collectionRepository).deleteCollection("collection");
     }
 
     @Test

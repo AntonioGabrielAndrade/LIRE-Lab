@@ -1,3 +1,22 @@
+/*
+ * This file is part of the LIRE-Lab project, a desktop image retrieval tool
+ * made on top of the LIRE image retrieval Java library.
+ * Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.com.antoniogabriel.lirelab.collection;
 
 import br.com.antoniogabriel.lirelab.lire.IndexCreatorCallback;
@@ -7,21 +26,27 @@ import java.nio.file.Paths;
 
 public class CreateCollectionTask extends Task<Void> implements IndexCreatorCallback, ThumbnailsCreatorCallback, XMLCreatorCallback {
 
-    private CreateCollectionRunnable runnable;
+    private CreateCollectionRunner runner;
 
-    public CreateCollectionTask(CreateCollectionRunnable runnable) {
-        this.runnable = runnable;
+    public CreateCollectionTask(CreateCollectionRunner runner) {
+        this.runner = runner;
 
         updateTitle("Create Collection...");
-        runnable.setIndexCreatorCallback(this);
-        runnable.setThumbnailsCreatorCallback(this);
-        runnable.setXmlCreatorCallback(this);
+        runner.setIndexCreatorCallback(this);
+        runner.setThumbnailsCreatorCallback(this);
+        runner.setXmlCreatorCallback(this);
     }
 
     @Override
     protected Void call() throws Exception {
-        runnable.run();
+        runner.run();
         return null;
+    }
+
+    @Override
+    public void beforeIndexImages() {
+        updateTitle("Step 1: Create index");
+        updateMessage("Indexing all images...");
     }
 
     @Override
@@ -38,6 +63,11 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     @Override
     public void afterIndexAllImages(int totalImages) {
         updateMessage("Indexing complete!");
+    }
+
+    @Override
+    public void updatePercentage(double percentageDone) {
+        updateProgress(percentageDone, 1.0);
     }
 
     @Override

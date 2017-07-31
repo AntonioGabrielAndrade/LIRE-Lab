@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+  ~ This file is part of the LIRE-Lab project, a desktop image retrieval tool
+  ~ made on top of the LIRE image retrieval Java library.
+  ~ Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="BorderPane">
+
+    <center>
+        <SplitPane orientation="VERTICAL" dividerPositions="0.0">
+            <items>
+                <VBox spacing="10" fx:id="info">
+                    <padding>
+                        <Insets top="20" bottom="20" left="20" right="20"/>
+                    </padding>
+
+                    <HBox spacing="20" fx:id="topLine">
+                        <HBox spacing="3" alignment="CENTER_LEFT">
+                            <Label text="Name:"/>
+                            <TextField fx:id="nameField" editable="false"/>
+                        </HBox>
+
+                        <HBox spacing="3" alignment="CENTER_LEFT">
+                            <Label text="Total images:"/>
+                            <TextField fx:id="totalField" editable="false"/>
+                        </HBox>
+                    </HBox>
+
+                    <VBox spacing="3" alignment="CENTER_LEFT">
+                        <Label text="Available Features: "/>
+                        <ListView fx:id="featuresField" minHeight="80" />
+                    </VBox>
+
+                </VBox>
+                <BorderPane fx:id="center"/>
+            </items>
+        </SplitPane>
+    </center>
+
+
+</fx:root>

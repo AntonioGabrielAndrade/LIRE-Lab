@@ -1,8 +1,27 @@
+/*
+ * This file is part of the LIRE-Lab project, a desktop image retrieval tool
+ * made on top of the LIRE image retrieval Java library.
+ * Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.com.antoniogabriel.lirelab.collection;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.app.DirectoryStructure;
-import br.com.antoniogabriel.lirelab.lire.IndexCreator;
+import br.com.antoniogabriel.lirelab.lire.SimpleIndexCreator;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -34,12 +53,12 @@ public class CollectionsMonitorTest {
     private SimpleBooleanProperty listenerExecuted = new SimpleBooleanProperty(false);
     private Runnable SOME_LISTENER = () -> listenerExecuted.set(true);
 
-    @Mock private IndexCreator indexCreator;
+    @Mock private SimpleIndexCreator indexCreator;
     @Mock private ThumbnailsCreator thumbCreator;
     @Mock private XMLCreator xmlCreator;
 
     private final PathResolver resolver = new PathResolver(TEST_ROOT);
-    private CollectionHelper helper = new CollectionHelper(resolver);
+    private CollectionTestHelper helper = new CollectionTestHelper(resolver);
 
     @Before
     public void setUp() throws Exception {
@@ -84,7 +103,7 @@ public class CollectionsMonitorTest {
         helper.createStubCollection(COLLECTION_2);
 
         monitor.addListener(SOME_LISTENER);
-        monitor.startMonitoringCollectionsDeleteAndUpdate();
+        monitor.startMonitoringCollectionsModificationsInFileSystem();
 
         helper.deleteCollection(COLLECTION_1);
 
@@ -109,7 +128,7 @@ public class CollectionsMonitorTest {
     }
 
     private CreateCollectionTask getTask() {
-        return new CreateCollectionTask(new CreateCollectionRunnable(indexCreator, thumbCreator, xmlCreator));
+        return new CreateCollectionTask(new CreateCollectionRunner(indexCreator, thumbCreator, xmlCreator));
     }
 
 }

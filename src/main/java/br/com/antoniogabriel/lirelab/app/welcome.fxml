@@ -1,45 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<!--
+  ~ This file is part of the LIRE-Lab project, a desktop image retrieval tool
+  ~ made on top of the LIRE image retrieval Java library.
+  ~ Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
 
 <StackPane id="main-content"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="br.com.antoniogabriel.lirelab.app.AppController">
+           prefWidth="500"
+           fx:controller="br.com.antoniogabriel.lirelab.app.WelcomeController">
 
-    <GridPane id="welcome-view"
-              vgap="10"
-              alignment="CENTER"
-              gridLinesVisible="false">
+    <stylesheets>
+        <URL value="@welcome.css" />
+    </stylesheets>
 
-        <columnConstraints>
-            <ColumnConstraints halignment="CENTER"/>
-        </columnConstraints>
+    <VBox id="welcome-view" spacing="20">
 
-        <Text id="welcome-title"
-              text="Welcome to LIRE Lab!"
-              GridPane.rowIndex="0"
-              GridPane.columnIndex="0">
-            <font>
-                <Font size="60"/>
-            </font>
-        </Text>
+        <Text styleClass="h1" text="Welcome to LIRE-Lab" />
 
-        <Text id="welcome-text"
-              text="With LIRE Lab you can test LIRE Features in an easy way"
-              GridPane.rowIndex="1"
-              GridPane.columnIndex="0"/>
+        <VBox spacing="10">
+            <Label styleClass="h2" text="What is LIRE-Lab?" wrapText="true"/>
+            <Label wrapText="true">
+                <text>
+                    LIRE-Lab is a tool that provides a visual way to test
+                    the LIRE Image Retrieval Library. With LIRE-Lab you can
+                    test LIRE visual features in a fast and easy way.
+                </text>
+            </Label>
+        </VBox>
 
-        <Button id="welcome-create-collection-button"
-                fx:id="createCollectionButton"
-                text="Create Collection"
-                onAction="#openCreateCollectionDialog"
-                GridPane.rowIndex="2"
-                GridPane.columnIndex="0"/>
+        <VBox spacing="10">
+            <Label styleClass="h2" text="How to quickstart?"/>
 
-    </GridPane>
+            <Label text="To start using LIRE-Lab immediately: "/>
+
+            <HBox alignment="BASELINE_LEFT" spacing="5">
+                <Label text="1: Create a Collection"/>
+                <StackPane fx:id="createCollectionButtonPane"/>
+            </HBox>
+
+            <HBox alignment="BASELINE_LEFT" spacing="5">
+                <Label text="2: Search the Collection"/>
+                <StackPane fx:id="searchCollectionButtonPane"/>
+            </HBox>
+        </VBox>
+
+        <VBox spacing="10">
+            <Label styleClass="h2" text="What is a Collection?"/>
+            <Label wrapText="true">
+                <text>
+                    A Collection is a set of images that you can run queries onto.
+                    In practice, a Collection is composed by a LIRE/Lucene
+                    index, a set of thumbnails for fast GUI search,
+                    and some metadata in a collection.xml file.
+                </text>
+            </Label>
+        </VBox>
+
+        <VBox spacing="10">
+            <Label styleClass="h2" text="Who should use LIRE-Lab?"/>
+            <Label wrapText="true">
+                <text>
+                    Any researcher or developer who wants to incorporate the
+                    LIRE capabilities into his work will benefit from using LIRE-Lab.
+                    With LIRE-Lab you cant test and determine which visual
+                    features fits better in your specific requirements.
+                </text>
+            </Label>
+        </VBox>
+
+    </VBox>
 </StackPane>

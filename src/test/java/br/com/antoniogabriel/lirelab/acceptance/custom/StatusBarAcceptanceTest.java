@@ -1,14 +1,39 @@
+/*
+ * This file is part of the LIRE-Lab project, a desktop image retrieval tool
+ * made on top of the LIRE image retrieval Java library.
+ * Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.collection.Collection;
+import br.com.antoniogabriel.lirelab.custom.statusbar.FeatureSelectionListener;
 import br.com.antoniogabriel.lirelab.custom.statusbar.StatusBar;
 import br.com.antoniogabriel.lirelab.lire.Feature;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
+
+import java.util.List;
+
+import static br.com.antoniogabriel.lirelab.lire.Feature.*;
+import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class StatusBarAcceptanceTest extends ApplicationTest {
 
@@ -24,12 +49,19 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
     }
 
     @Test
-    public void shouldSetSearchStatusInfo() throws Exception {
-        Platform.runLater(() -> {
-            statusBar.setSearchStatusInfo(new Collection("testCollection"), Feature.CEDD);
+    public void shouldSetFeatures() throws Exception {
+        List<Feature> features = asList(CEDD, TAMURA, COLOR_HISTOGRAM);
+        Feature[] featuresArray = new Feature[1];
+
+        FeatureSelectionListener listener = feature -> featuresArray[0] = feature;
+
+        interact(() -> {
+            statusBar.setFeatures(features, CEDD, listener);
+            statusBar.selectFeature(TAMURA);
         });
 
-        view.waitUntilStatusMessageIs("Collection: testCollection  Feature: CEDD");
+        view.checkComboboxHasFeatures(features);
+        assertThat(featuresArray[0], is(TAMURA));
     }
 
     @Test
@@ -37,7 +69,7 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
                 return null;
             }
         };
@@ -49,5 +81,29 @@ public class StatusBarAcceptanceTest extends ApplicationTest {
 
         view.waitUntilProgressBarIsVisible();
         view.waitUntilProgressBarIsNotVisible();
+    }
+
+    @Test
+    public void shouldShowProgressIndicatorAndMessageWhileGivenTaskRun() throws Exception {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                Thread.sleep(1000);
+                return null;
+            }
+        };
+
+        String message = "Status message...";
+
+        statusBar.bindProgressTo(task, message);
+        view.checkProgressIndicatorIsNotVisible();
+
+        new Thread(task).start();
+
+        view.waitUntilProgressIndicatorIsVisible();
+        view.waitUntilStatusMessageIsVisible(message);
+
+        view.waitUntilProgressIndicatorIsNotVisible();
+        view.waitUntilStatusMessageIsNotVisible(message);
     }
 }

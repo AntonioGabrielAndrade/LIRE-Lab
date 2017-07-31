@@ -1,6 +1,25 @@
+/*
+ * This file is part of the LIRE-Lab project, a desktop image retrieval tool
+ * made on top of the LIRE image retrieval Java library.
+ * Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.com.antoniogabriel.lirelab.acceptance.custom;
 
-import br.com.antoniogabriel.lirelab.acceptance.CollectionHelper;
+import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
@@ -24,23 +43,25 @@ import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 public class PaginatedCollectionGridAcceptanceTest extends ApplicationTest {
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
-    private static final CollectionHelper COLLECTION_HELPER = new CollectionHelper(RESOLVER);
-    public static final int PAGE_SIZE = 3;
+    private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
+    private static final int PAGE_SIZE = 3;
 
-    private static Collection collection = collection("Collection", TEST_IMAGES, CEDD);
+    private static final String COLLECTION_NAME = "Collection";
+
+    private static Collection collection;
 
     private PaginatedCollectionGrid collectionGrid;
     private PaginatedGridViewObject view = new PaginatedGridViewObject();
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        COLLECTION_HELPER.createRealCollection(collection);
-        collection = COLLECTION_HELPER.readCollection(collection.getName());
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD);
+        collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        COLLECTION_HELPER.deleteCollection(collection);
+        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME);
         deleteWorkDirectory(RESOLVER);
     }
 

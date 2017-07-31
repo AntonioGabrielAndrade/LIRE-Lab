@@ -1,56 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper?>
-<?import javafx.scene.control.*?>
+<?import br.com.antoniogabriel.lirelab.app.CommandComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<!--
+  ~ This file is part of the LIRE-Lab project, a desktop image retrieval tool
+  ~ made on top of the LIRE image retrieval Java library.
+  ~ Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
 
 <ToolBar id="toolbar"
          xmlns="http://javafx.com/javafx"
-         fx:controller="br.com.antoniogabriel.lirelab.app.AppController"
+         fx:controller="br.com.antoniogabriel.lirelab.app.ToolBarController"
          xmlns:fx="http://javafx.com/fxml">
 
-    <Button id="toolbar-create-collection" onAction="#openCreateCollectionDialog">
-        <tooltip>
-            <Tooltip text="Create Collection"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="actions:folder-new"/>
-        </graphic>
-    </Button>
+    <HBox spacing="5" fx:id="leftToolBar"/>
 
-    <Button id="toolbar-search-collection" onAction="#searchCollection">
-        <tooltip>
-            <Tooltip text="Search Collection"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="actions:system-search"/>
-        </graphic>
-    </Button>
+    <Pane HBox.hgrow="ALWAYS" />
 
     <Separator/>
 
-    <Button id="toolbar-about" onAction="#openAboutDialog">
-        <tooltip>
-            <Tooltip text="About"/>
-        </tooltip>
-        <graphic>
-            <TangoIconWrapper description="apps:system-users"/>
-        </graphic>
-    </Button>
-
-    <HBox visible="false" fx:id="searchToolBar">
-        <Separator orientation="VERTICAL"/>
-
-        <Button id="toolbar-back" onAction="#showHomeView">
-            <tooltip>
-                <Tooltip text="Back"/>
-            </tooltip>
-            <graphic>
-                <TangoIconWrapper description="actions:go-previous"/>
-            </graphic>
-        </Button>
+    <HBox spacing="20" fx:id="rightToolBar">
+        <CommandComboBox fx:id="searchCollectionComboBox" spacing="5"/>
     </HBox>
-
-
 
 </ToolBar>

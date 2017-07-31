@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of the LIRE-Lab project, a desktop image retrieval tool
+  ~ made on top of the LIRE image retrieval Java library.
+  ~ Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,10 +25,44 @@
 
     <groupId>br.com.antoniogabriel</groupId>
     <artifactId>lirelab</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.9.1</version>
+
+    <name>LIRE-Lab</name>
+    <description>Desktop Image Retrieval tool based on the LIRE library</description>
+    <url>https://github.com/AntonioGabrielAndrade/LIRE-Lab</url>
+    <inceptionYear>2017</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <java.version>1.8</java.version>
+
+        <lire.version>1.0_b04</lire.version>
+        <lucene.version>6.4.0</lucene.version>
+        <jopensurf.version>1.0.0</jopensurf.version>
+        <commons-codec.version>1.10</commons-codec.version>
+        <commons-io.version>2.5</commons-io.version>
+        <commons-math3.version>3.6.1</commons-math3.version>
+
+        <controlsfx.version>8.40.12</controlsfx.version>
+        <ignite-guice.version>1.0.0</ignite-guice.version>
+        <thumbnailator.version>[0.4, 0.5)</thumbnailator.version>
+        <griffon-tangoicons-javafx.version>2.0.0</griffon-tangoicons-javafx.version>
+
+        <junit.version>4.12</junit.version>
+        <mockito.version>2.8.47</mockito.version>
+        <testfx.version>4.0.6-alpha</testfx.version>
+        <monocle.version>8u76-b04</monocle.version>
+
+        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+        <maven-dependency-plugin.version>3.0.1</maven-dependency-plugin.version>
+        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+        <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
+
+        <app.main.class>br.com.antoniogabriel.lirelab.app.App</app.main.class>
     </properties>
 
     <repositories>
@@ -19,15 +72,14 @@
             <url>http://jcenter.bintray.com</url>
         </repository>
         <repository>
-            <id>local-maven-repo</id>
-            <url>file:///${project.basedir}/src/main/resources/local-maven-repo</url>
+            <id>project.local</id>
+            <url>file:${project.basedir}/repo</url>
         </repository>
     </repositories>
 
     <profiles>
-
         <profile>
-            <id>testfx.headless</id>
+            <id>headless</id>
             <activation>
                 <property>
                     <name>headless</name>
@@ -39,7 +91,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.20</version>
+                        <version>${maven-surefire-plugin.version}</version>
                         <configuration>
                             <systemPropertyVariables>
                                 <testfx.robot>glass</testfx.robot>
@@ -55,139 +107,100 @@
                 </plugins>
             </build>
         </profile>
-
-        <profile>
-            <id>testfx.no.headless</id>
-            <activation>
-                <property>
-                    <name>headless</name>
-                    <value>false</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.20</version>
-                        <configuration>
-                            <systemPropertyVariables>
-                                <testfx.headless>false</testfx.headless>
-                                <java.awt.headless>false</java.awt.headless>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 
     <dependencies>
         <dependency>
+            <groupId>net.semanticmetadata</groupId>
+            <artifactId>LIRE</artifactId>
+            <version>${lire.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sangupta</groupId>
+            <artifactId>jopensurf</artifactId>
+            <version>${jopensurf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>${commons-math3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>${controlsfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>ignite-guice</artifactId>
+            <version>${ignite-guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.griffon.plugins</groupId>
+            <artifactId>griffon-tangoicons-javafx</artifactId>
+            <version>${griffon-tangoicons-javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.8.47</version>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testfx</groupId>
             <artifactId>testfx-core</artifactId>
-            <version>4.0.6-alpha</version>
-            <scope>test</scope>
+            <version>${testfx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testfx</groupId>
             <artifactId>testfx-junit</artifactId>
-            <version>4.0.6-alpha</version>
+            <version>${testfx.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testfx</groupId>
             <artifactId>openjfx-monocle</artifactId>
-            <version>8u76-b04</version>
+            <version>${monocle.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-javafx</artifactId>
-            <version>1.9.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-fontawesome-pack</artifactId>
-            <version>1.9.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>6.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-queryparser</artifactId>
-            <version>6.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
-            <version>6.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sangupta</groupId>
-            <artifactId>jopensurf</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.semanticmetadata</groupId>
-            <artifactId>LIRE</artifactId>
-            <version>1.0_b04</version>
-        </dependency>
-        <dependency>
-            <groupId>net.coobird</groupId>
-            <artifactId>thumbnailator</artifactId>
-            <version>[0.4, 0.5)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>ignite-guice</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.griffon.plugins</groupId>
-            <artifactId>griffon-tangoicons-javafx</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-
     </dependencies>
 
 
@@ -196,7 +209,7 @@
             <dependency>
                 <groupId>org.codehaus.griffon.plugins</groupId>
                 <artifactId>griffon-tangoicons-plugin</artifactId>
-                <version>2.0.0</version>
+                <version>${griffon-tangoicons-javafx.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -214,28 +227,63 @@
                 </includes>
             </resource>
             <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
                 <directory>src/test/java</directory>
                 <includes>
                     <include>**/*.fxml</include>
                 </includes>
-            </resource>
-        </resources>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </testResource>
+        </testResources>
 
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven-install-plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <groupId>net.semanticmetadata</groupId>
+                    <artifactId>LIRE</artifactId>
+                    <version>${lire.version}</version>
+                    <packaging>jar</packaging>
+                    <file>repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}.jar</file>
+                    <sources>repo/net/semanticmetadata/LIRE/${lire.version}/LIRE-${lire.version}-sources.jar</sources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install-lire</id>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <reuseForks>false</reuseForks>
                     <additionalClasspathElements>
@@ -246,44 +294,53 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
-                <configuration>
-                    <groupId>net.semanticmetadata</groupId>
-                    <artifactId>LIRE</artifactId>
-                    <version>1.0_b04</version>
-                    <packaging>jar</packaging>
-                    <file>src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04.jar</file>
-                    <sources>
-                        src/main/resources/local-maven-repo/net/semanticmetadata/LIRE/1.0_b04/LIRE-1.0_b04-sources.jar
-                    </sources>
-                </configuration>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>install-jar-libs</id>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>install-file</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
-                        <phase>validate</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>compile</includeScope>
+                            <excludeScope>test</excludeScope>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
 
             <plugin>
-                <groupId>com.zenjava</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>8.6.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
                 <configuration>
-                    <mainClass>br.com.antoniogabriel.lirelab.app.App</mainClass>
-                    <jfxMainAppJarName>lirelab.jar</jfxMainAppJarName>
-                    <preLoader>br.com.antoniogabriel.lirelab.preloader.SplashScreenPreloader</preLoader>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>${app.main.class}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <configuration>
+                    <descriptor>src/assembly/zip.xml</descriptor>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>create-jfxjar</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>build-jar</goal>
+                            <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>

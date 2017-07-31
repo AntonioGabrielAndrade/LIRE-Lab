@@ -1,6 +1,25 @@
+/*
+ * This file is part of the LIRE-Lab project, a desktop image retrieval tool
+ * made on top of the LIRE image retrieval Java library.
+ * Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.com.antoniogabriel.lirelab.util;
 
-import br.com.antoniogabriel.lirelab.exception.LireLabException;
+import br.com.antoniogabriel.lirelab.app.LireLabException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,25 +50,23 @@ public abstract class FXML {
         try {
 
             Parent root = resetAndLoad();
-            stage = setupStage(stage, root);
+            Scene scene = createScene(root);
+            stage.setScene(scene);
+            setupStage(stage);
             stage.show();
+            stage.centerOnScreen();
 
         } catch (IOException e) {
             throw new LireLabException("Could not resetAndLoad fxml file", e);
         }
     }
 
-    private Stage setupStage(Stage stage, Parent root) {
-        Scene scene = createScene(root);
-        stage.setScene(scene);
-
+    protected void setupStage(Stage stage) {
         if(stage.getOwner() != null) {
             stage.initModality(Modality.WINDOW_MODAL);
         }
 
         stage.setTitle(getTitle());
-        stage.centerOnScreen();
-        return stage;
     }
 
     private Parent resetAndLoad() throws IOException {
@@ -67,7 +84,7 @@ public abstract class FXML {
         this.loader.setController(null);
     }
 
-    public <C> C getController() throws IOException {
+    public <C> C getController() {
         return (C) controller;
     }
 
