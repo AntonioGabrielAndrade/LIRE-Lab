@@ -78,4 +78,12 @@ public class DialogProvider {
 
         return alert.showAndWait().get() == OK;
     }
+
+    public boolean confirmAbortCreateCollectionTask() {
+        Alert alert = new Alert(CONFIRMATION);
+        alert.setTitle("Abort collection creation");
+        alert.setHeaderText("Are you sure you want to abort?");
+
+        return alert.showAndWait().get() == OK;
+    }
 }

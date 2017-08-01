@@ -19,18 +19,24 @@
 
 package br.com.antoniogabriel.lirelab.custom.progress_dialog;
 
+import br.com.antoniogabriel.lirelab.custom.TangoIconWrapper;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -40,6 +46,7 @@ public class ProgressDialog extends Dialog<Void> {
     private Task<Void> task;
     private ProgressBar progressBar;
     private Text message;
+    private Button cancelButton;
 
     public ProgressDialog(Task<Void> task) {
         this.task = task;
@@ -47,6 +54,7 @@ public class ProgressDialog extends Dialog<Void> {
         setupMessageText();
         setupHeaderText();
         setupOkButton();
+        setupCancelButton();
         setupWindowBehavior();
         setupExceptionHandling();
         setupDialogContent();
@@ -62,6 +70,7 @@ public class ProgressDialog extends Dialog<Void> {
         progressBar.setId("progress-bar");
         progressBar.setPrefWidth(500);
         progressBar.setMaxHeight(10);
+        progressBar.requestFocus();
         bindProgressBarTo(taskProgress());
     }
 
@@ -88,6 +97,25 @@ public class ProgressDialog extends Dialog<Void> {
         );
     }
 
+//    private void setupCancelButton() {
+//        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+//        getDialogPane().getButtonTypes().add(cancelButtonType);
+//        Node cancelButton = getDialogPane().lookupButton(cancelButtonType);
+////        cancelButton.setDisable(true);
+//        cancelButton.setId("cancel-button");
+//    }
+    private void setupCancelButton() {
+//        cancelButton = new Button("Cancel");
+        cancelButton = new Button("");
+        cancelButton.setTooltip(new Tooltip("Cancel"));
+        cancelButton.setOnAction(event -> close());
+        cancelButton.setGraphic(new TangoIconWrapper("actions:process-stop"));
+    }
+
+    public void setOnCancel(EventHandler<ActionEvent> eventHandler) {
+        cancelButton.setOnAction(eventHandler);
+    }
+
     private void setupWindowBehavior() {
         hideOwnerOnClose();
 
@@ -98,14 +126,20 @@ public class ProgressDialog extends Dialog<Void> {
     private void resizeStageWhenDialogExpandOrCollapse() {
         getDialogPane().expandedProperty().addListener((l) -> {
             Platform.runLater(() -> {
-                Stage stage = (Stage) getDialogPane().getScene().getWindow();
-                stage.sizeToScene();
+                if(isShowing()) {
+                    Stage stage = (Stage) getDialogPane().getScene().getWindow();
+                    stage.sizeToScene();
+                }
             });
         });
     }
 
     private void hideOwnerOnClose() {
         setOnCloseRequest(event -> {
+            if(task.isRunning()) {
+                task.cancel();
+            }
+
             if (getOwner() != null) {
                 getOwner().hide();
             }
@@ -164,12 +198,20 @@ public class ProgressDialog extends Dialog<Void> {
 
     private void setupDialogContent() {
         getDialogPane().setId("progress-dialog-pane");
-        setTitle("Creating collection");
 
         VBox vbox = new VBox();
         vbox.setSpacing(2);
-        vbox.getChildren().addAll(message, progressBar);
+        vbox.getChildren().addAll(message, progressBox());
         getDialogPane().setContent(vbox);
+        initStyle(StageStyle.UNDECORATED);
+    }
+
+    private HBox progressBox() {
+        HBox box = new HBox();
+        box.setSpacing(5);
+        box.setAlignment(Pos.CENTER);
+        box.getChildren().addAll(progressBar, cancelButton);
+        return box;
     }
 
     private void bindProgressBarTo(ReadOnlyDoubleProperty property) {

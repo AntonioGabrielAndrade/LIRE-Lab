@@ -62,7 +62,7 @@ public class LireLabUtils {
         Path dirPath = getCollectionPath(collectionName);
         Path xmlPath = getCollectionXMLPath(collectionName);
 
-        Files.delete(xmlPath);
+        Files.deleteIfExists(xmlPath);
         org.apache.commons.io.FileUtils.deleteDirectory(dirPath.toFile());
     }
 }

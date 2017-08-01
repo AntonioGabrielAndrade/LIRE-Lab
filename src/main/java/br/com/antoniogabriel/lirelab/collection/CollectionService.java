@@ -81,7 +81,11 @@ public class CollectionService {
     }
 
     public void deleteCollection(Collection collection) {
-        collectionRepository.deleteCollection(collection.getName());
+        deleteCollection(collection.getName());
+    }
+
+    public void deleteCollection(String collectionName) {
+        collectionRepository.deleteCollection(collectionName);
         collectionsMonitor.executeListeners();
     }
 
