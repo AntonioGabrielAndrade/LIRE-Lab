@@ -54,7 +54,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     public void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {
         checkCancel();
         updateTitle("Step 1: Create index");
-        updateMessage("Indexing " + Paths.get(imageFilePath).getFileName().toString());
+        updateMessage("Indexing " + Paths.get(imageFilePath).getFileName().toString() + "...");
     }
 
     @Override
