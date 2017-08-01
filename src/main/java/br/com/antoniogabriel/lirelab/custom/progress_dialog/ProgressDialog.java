@@ -97,19 +97,13 @@ public class ProgressDialog extends Dialog<Void> {
         );
     }
 
-//    private void setupCancelButton() {
-//        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//        getDialogPane().getButtonTypes().add(cancelButtonType);
-//        Node cancelButton = getDialogPane().lookupButton(cancelButtonType);
-////        cancelButton.setDisable(true);
-//        cancelButton.setId("cancel-button");
-//    }
     private void setupCancelButton() {
-//        cancelButton = new Button("Cancel");
         cancelButton = new Button("");
         cancelButton.setTooltip(new Tooltip("Cancel"));
         cancelButton.setOnAction(event -> close());
         cancelButton.setGraphic(new TangoIconWrapper("actions:process-stop"));
+        cancelButton.setFocusTraversable(false);
+        cancelButton.disableProperty().bind(taskCompleted());
     }
 
     public void setOnCancel(EventHandler<ActionEvent> eventHandler) {
@@ -252,6 +246,10 @@ public class ProgressDialog extends Dialog<Void> {
 
     private BooleanBinding taskNotCompleted() {
         return taskProgress().isEqualTo(1.0, 0.0).not();
+    }
+
+    private BooleanBinding taskCompleted() {
+        return taskProgress().isEqualTo(1.0, 0.0);
     }
 
     private BooleanBinding noTaskException() {
