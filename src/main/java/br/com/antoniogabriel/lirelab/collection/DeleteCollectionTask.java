@@ -17,31 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.com.antoniogabriel.lirelab.app;
+package br.com.antoniogabriel.lirelab.collection;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tooltip;
+import javafx.concurrent.Task;
 
-public class CommandTriggerFactory<E> {
+public class DeleteCollectionTask extends Task<Void> {
 
-    public Button createButton(Command<E> command, CommandArgProvider<E> provider) {
-        Button button = new Button();
+    private final String collectionName;
+    private final CollectionService collectionService;
 
-        button.setGraphic(command.getIcon());
-        button.setTooltip(new Tooltip(command.getLabel()));
-        button.setOnAction(event -> command.execute(provider.provide()));
-
-        return button;
+    public DeleteCollectionTask(String collectionName, CollectionService collectionService) {
+        this.collectionName = collectionName;
+        this.collectionService = collectionService;
     }
 
-    public MenuItem createMenuItem(Command<E> command, CommandArgProvider<E> argProvider) {
-        MenuItem item = new MenuItem(command.getLabel());
-
-        item.setGraphic(command.getIcon());
-        item.setOnAction(event -> command.execute(argProvider.provide()));
-        item.setId(command.getNodeId());
-
-        return item;
+    @Override
+    protected Void call() throws Exception {
+        updateProgress(-1, 1);
+        updateMessage("Removing collection " + collectionName + "...");
+        collectionService.deleteCollection(collectionName);
+        updateProgress(1, 1);
+        updateMessage("Collection " + collectionName + " removed.");
+        return null;
     }
 }

@@ -126,8 +126,24 @@ public class CreateCollectionController implements Initializable {
 
         CreateCollectionRunner runner = service.getCreateCollectionRunner(createInfo);
         CreateCollectionTask task = new CreateCollectionTask(runner);
-        ProgressDialog dialog = dialogProvider.getProgressDialog(task, getWindowFrom(event));
+
+        Window window = getWindowFrom(event);
+        ProgressDialog dialog = dialogProvider.getProgressDialog(task, window);
+        setupCancelBehaviour(dialog);
+
         dialog.showAndStart();
+    }
+
+    private void setupCancelBehaviour(ProgressDialog dialog) {
+        DeleteCollectionTask cancelTask = new DeleteCollectionTask(collectionName(), service);
+        dialog.setOnCancel(event -> {
+            if(dialogProvider.confirmAbortCreateCollectionTask()) {
+                ProgressDialog cancelDialog = dialogProvider.getProgressDialog(cancelTask, dialog.getDialogPane().getScene().getWindow());
+                cancelTask.setOnSucceeded(e -> cancelDialog.close());
+                cancelDialog.showAndStart();
+                dialog.close();
+            }
+        });
     }
 
     private int thumbnailsHeight() {
