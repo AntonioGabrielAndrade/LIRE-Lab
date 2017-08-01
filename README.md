@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/AntonioGabrielAndrade/LIRE-Lab.svg)](https://travis-ci.org/AntonioGabrielAndrade/LIRE-Lab)
 [![Latest Release](https://img.shields.io/github/release/AntonioGabrielAndrade/LIRE-Lab.svg)](https://github.com/AntonioGabrielAndrade/LIRE-Lab/releases/latest)
 
-LIRE-Lab is an image retrieval desktop tool developed on top of the [LIRE](http://www.lire-project.net/) Java library.
+LIRE-Lab is a desktop image retrieval tool developed on top of the [LIRE](http://www.lire-project.net/) Java library.
 LIRE-Lab provides an easy way to index collections of images and run queries using the LIRE features.
 
 # Prerequisites
