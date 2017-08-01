@@ -12,10 +12,10 @@ You will need Java 8u40 or higher to build and run LIRE-Lab.  You can download i
 
 # How To Run LIRE-Lab
 
-LIRE-Lab is currently distributed only in jar format. You can download the latest release [here](https://github.com/AntonioGabrielAndrade/LIRE-Lab/releases/latest) in a .zip file.
-After extract the .zip file you can run the system with a double click on the .jar file or typing the following command in terminal:
+LIRE-Lab is currently distributed in jar format only . You can download the latest release [here](https://github.com/AntonioGabrielAndrade/LIRE-Lab/releases/latest) in a zip file.
+After extract the zip file you can run the system double-clicking the jar file or typing the following command in terminal:
 ~~~
-$ java -jar <jar-file-name>
+$ java -jar lirelab-<version>.jar
 ~~~
 
 # How To Build LIRE-Lab
