@@ -6,7 +6,10 @@
 LIRE-Lab is a desktop image retrieval tool developed on top of the [LIRE](http://www.lire-project.net/) Java library.
 LIRE-Lab provides an easy way to index collections of images and run queries using the LIRE features.
 
-For a quick tutorial about how to use LIRE-Lab, go to the project website: [https://antoniogabrielandrade.github.io/LIRE-Lab/](https://antoniogabrielandrade.github.io/LIRE-Lab/)
+For a quick tutorial on how to use LIRE-Lab, go to the project website: [https://antoniogabrielandrade.github.io/LIRE-Lab/](https://antoniogabrielandrade.github.io/LIRE-Lab/)
+
+**Notice:** LIRE-Lab version 1.0.0 is still in active development, hence great changes are
+still expected to happen frequently.
 
 ![Two Features](docs/images/two-results-small.png)
 
@@ -31,7 +34,7 @@ $ mvn clean package
 
 # How To Run The GUI Tests
 
-By default the GUI tests runs as part of the standard Maven build, in no-headless mode (showing the TestFX robot acting in the GUI):
+By default the GUI tests runs as part of the standard Maven build, in no-headless mode (showing the TestFX robot acting on the GUI):
 ~~~
 $ mvn clean test
 ~~~
