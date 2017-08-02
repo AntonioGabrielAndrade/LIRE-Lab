@@ -47,12 +47,12 @@ public class CollectionTree extends StackPane {
 
     private SimpleListProperty<Collection> collectionsProperty = new SimpleListProperty<>();
     private SimpleObjectProperty<Collection> selectedCollectionProperty = new SimpleObjectProperty<>();
-    private SimpleObjectProperty<String> selectedImageProperty = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<Image> selectedImageProperty = new SimpleObjectProperty<>();
 
     private TreeItemBuilder treeItemBuilder = new TreeItemBuilder();
 
     private Map<TreeItem<String>, Collection> collectionMap = new HashMap<>();
-    private Map<TreeItem<String>, String> imageMap = new HashMap<>();
+    private Map<TreeItem<String>, Image> imageMap = new HashMap<>();
 
     public CollectionTree() {
         loadFXML();
@@ -87,8 +87,10 @@ public class CollectionTree extends StackPane {
                 .selectedItemProperty()
                 .addListener((observable, oldItem, newItem) -> {
                     if(isCollection(newItem)) {
+                        selectedImageProperty.set(null);
                         selectedCollectionProperty.set(getCollection(newItem));
-                    } else {
+                    } else if(isImage(newItem)) {
+                        selectedCollectionProperty.set(null);
                         selectedImageProperty.set(getImage(newItem));
                     }
                 });
@@ -102,11 +104,11 @@ public class CollectionTree extends StackPane {
         return selectedCollectionProperty;
     }
 
-    public String getSelectedImage() {
+    public Image getSelectedImage() {
         return selectedImageProperty.get();
     }
 
-    public SimpleObjectProperty<String> selectedImageProperty() {
+    public SimpleObjectProperty<Image> selectedImageProperty() {
         return selectedImageProperty;
     }
 
@@ -147,12 +149,16 @@ public class CollectionTree extends StackPane {
         return collectionMap.get(item);
     }
 
-    private String getImage(TreeItem<String> item) {
+    private Image getImage(TreeItem<String> item) {
         return imageMap.get(item);
     }
 
     private boolean isCollection(TreeItem<String> item) {
         return collectionMap.get(item) != null;
+    }
+
+    private boolean isImage(TreeItem<String> item) {
+        return imageMap.get(item) != null;
     }
 
     private void addCollectionsToTree(List<Collection> collections) {
@@ -173,7 +179,7 @@ public class CollectionTree extends StackPane {
 
         for (Image image : collection.getImages()) {
             TreeItem<String> imageItem = createImageItem(image.getImagePath());
-            imageMap.put(imageItem, image.getImagePath());
+            imageMap.put(imageItem, image);
             addImageItemToCollectionItem(collectionItem, imageItem);
         }
 

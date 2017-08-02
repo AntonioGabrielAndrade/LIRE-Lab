@@ -22,14 +22,15 @@ package br.com.antoniogabriel.lirelab.app;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.CollectionContextMenuFactory;
 import br.com.antoniogabriel.lirelab.collection.CollectionService;
+import br.com.antoniogabriel.lirelab.collection.Image;
 import br.com.antoniogabriel.lirelab.custom.collection_detail.CollectionDetail;
 import br.com.antoniogabriel.lirelab.custom.collection_tree.CollectionTree;
+import br.com.antoniogabriel.lirelab.custom.image_viewer.ImageViewer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -83,9 +84,9 @@ public class HomeController implements Initializable {
     }
 
     private void listenToCollectionSelection() {
-        collectionTree.selectedCollectionProperty().addListener((observable, oldCollection, newCollection) -> showCollectionImages(newCollection));
-
         collectionTree.selectedCollectionProperty().addListener((observable, oldCollection, newCollection) -> {
+            showCollectionImages(newCollection);
+
             CollectionContextMenuFactory factory = new CollectionContextMenuFactory(applicationCommands.getCollectionCommands());
             collectionTree.setContextMenu(factory.createContextMenu(newCollection));
         });
@@ -139,10 +140,8 @@ public class HomeController implements Initializable {
         centerPane.setCenter(new CollectionDetail(collection, asList(applicationCommands.getCollectionCommand(SEARCH))));
     }
 
-    public void showImage(String imagePath) {
-        ImageView image = viewFactory.create(imagePath);
-        viewConfig.bindImageHeight(image, centerPane, 0.8);
-        centerPane.setCenter(image);
+    public void showImage(Image image) {
+        centerPane.setCenter(new ImageViewer(image));
     }
 
     public Collection getSelectedCollection() {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the LIRE-Lab project, a desktop image retrieval tool
+  ~ made on top of the LIRE image retrieval Java library.
+  ~ Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:id="root"
+         type="BorderPane">
+
+
+    <top>
+        <ToolBar fx:id="toolbar">
+
+            <HBox spacing="20">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Zoom: "/>
+                    <Slider fx:id="imageHeightSlider"
+                            min="300"
+                            max="1000"
+                            value="300"
+                            showTickLabels="false"
+                            showTickMarks="false"
+                            blockIncrement="10"/>
+                </HBox>
+            </HBox>
+
+        </ToolBar>
+    </top>
+
+
+</fx:root>
+

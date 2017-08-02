@@ -82,6 +82,8 @@ public class CollectionDetail extends BorderPane {
     }
 
     private void show(Collection collection) {
+        if(collection == null) return;
+
         showInfoOnTop(collection);
         showGridOnCenter(collection);
     }
