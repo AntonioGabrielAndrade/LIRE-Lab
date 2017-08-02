@@ -54,7 +54,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     public void beforeAddImageToIndex(int currentImage, int totalImages, String imageFilePath) {
         checkCancel();
         updateTitle("Step 1: Create index");
-        updateMessage("Indexing " + Paths.get(imageFilePath).getFileName().toString());
+        updateMessage("Indexing image: " + Paths.get(imageFilePath).getFileName().toString() + "...");
     }
 
     @Override
@@ -79,7 +79,7 @@ public class CreateCollectionTask extends Task<Void> implements IndexCreatorCall
     public void beforeCreateThumbnail(int currentImage, int totalImages, String imagePath) {
         checkCancel();
         updateTitle("Step 2: Create thumbnails");
-        updateMessage("Creating thumbnail for  " + Paths.get(imagePath).getFileName().toString());
+        updateMessage("Creating thumbnail for: " + Paths.get(imagePath).getFileName().toString());
     }
 
     @Override

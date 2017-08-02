@@ -29,10 +29,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -40,12 +37,15 @@ import javafx.stage.StageStyle;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class ProgressDialog extends Dialog<Void> {
 
     private Task<Void> task;
     private ProgressBar progressBar;
     private Text message;
+    private Label percentageLabel;
     private Button cancelButton;
 
     public ProgressDialog(Task<Void> task) {
@@ -72,6 +72,22 @@ public class ProgressDialog extends Dialog<Void> {
         progressBar.setMaxHeight(10);
         progressBar.requestFocus();
         bindProgressBarTo(taskProgress());
+
+        percentageLabel = new Label("");
+        taskProgress().addListener((observable, oldValue, newValue) -> {
+            percentageLabel.setText(getPercentage(newValue.doubleValue()));
+        });
+    }
+
+    private String getPercentage(double decimal) {
+        if(decimal < 0)
+            return "";
+
+        Double percent = new Double(decimal);
+        NumberFormat percentFormatter;
+
+        percentFormatter = NumberFormat.getPercentInstance(Locale.getDefault());
+        return percentFormatter.format(percent);
     }
 
     private void setupMessageText() {
@@ -97,19 +113,13 @@ public class ProgressDialog extends Dialog<Void> {
         );
     }
 
-//    private void setupCancelButton() {
-//        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//        getDialogPane().getButtonTypes().add(cancelButtonType);
-//        Node cancelButton = getDialogPane().lookupButton(cancelButtonType);
-////        cancelButton.setDisable(true);
-//        cancelButton.setId("cancel-button");
-//    }
     private void setupCancelButton() {
-//        cancelButton = new Button("Cancel");
         cancelButton = new Button("");
         cancelButton.setTooltip(new Tooltip("Cancel"));
         cancelButton.setOnAction(event -> close());
         cancelButton.setGraphic(new TangoIconWrapper("actions:process-stop"));
+        cancelButton.setFocusTraversable(false);
+        cancelButton.disableProperty().bind(taskCompleted());
     }
 
     public void setOnCancel(EventHandler<ActionEvent> eventHandler) {
@@ -207,10 +217,12 @@ public class ProgressDialog extends Dialog<Void> {
     }
 
     private HBox progressBox() {
+        StackPane progressPane = new StackPane(progressBar, percentageLabel);
+
         HBox box = new HBox();
         box.setSpacing(5);
         box.setAlignment(Pos.CENTER);
-        box.getChildren().addAll(progressBar, cancelButton);
+        box.getChildren().addAll(progressPane, cancelButton);
         return box;
     }
 
@@ -252,6 +264,10 @@ public class ProgressDialog extends Dialog<Void> {
 
     private BooleanBinding taskNotCompleted() {
         return taskProgress().isEqualTo(1.0, 0.0).not();
+    }
+
+    private BooleanBinding taskCompleted() {
+        return taskProgress().isEqualTo(1.0, 0.0);
     }
 
     private BooleanBinding noTaskException() {
