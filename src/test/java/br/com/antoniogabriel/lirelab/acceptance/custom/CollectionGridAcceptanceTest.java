@@ -23,19 +23,19 @@ import br.com.antoniogabriel.lirelab.acceptance.CollectionTestHelper;
 import br.com.antoniogabriel.lirelab.collection.Collection;
 import br.com.antoniogabriel.lirelab.collection.PathResolver;
 import br.com.antoniogabriel.lirelab.custom.collection_grid.CollectionGrid;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_ROOT;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.util.NodeQueryUtils.isVisible;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.deleteWorkDirectory;
 
 public class CollectionGridAcceptanceTest extends ApplicationTest {
 
@@ -47,6 +47,7 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
     private static Collection collection;
 
     private CollectionGrid collectionGrid;
+    private CollectionGridViewObject view = new CollectionGridViewObject();
 
     @BeforeClass
     public static void createCollections() throws Exception {
@@ -77,23 +78,21 @@ public class CollectionGridAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldShowImages() throws Exception {
-        verifyThat("#14474347006_99aa0fd981_k", isVisible());
-        verifyThat("#16903390174_1d670a5849_h", isVisible());
-        verifyThat("#17099294578_0ba4068bad_k", isVisible());
-        verifyThat("#17338370170_1e620bfb18_h", isVisible());
-        verifyThat("#17525978165_86dc26e8cb_h", isVisible());
-        verifyThat("#19774866363_757555901c_k", isVisible());
-        verifyThat("#25601366680_b57441bb52_k", isVisible());
-        verifyThat("#25601374660_78e6a9bba8_k", isVisible());
-        verifyThat("#26487616294_b22b87133e_k", isVisible());
-        verifyThat("#26489383923_98d419eb0d_k", isVisible());
+        view.checkImagesAreVisible( "14474347006_99aa0fd981_k",
+                                        "16903390174_1d670a5849_h",
+                                        "17099294578_0ba4068bad_k",
+                                        "17338370170_1e620bfb18_h",
+                                        "17525978165_86dc26e8cb_h",
+                                        "19774866363_757555901c_k",
+                                        "25601366680_b57441bb52_k",
+                                        "25601374660_78e6a9bba8_k",
+                                        "26487616294_b22b87133e_k",
+                                        "26489383923_98d419eb0d_k");
     }
 
     @Test
     public void shouldDisplayImageInDialogWhenClicked() throws Exception {
-        clickOn("#14474347006_99aa0fd981_k");
-
-        Node imageNode = from(lookup("#image-dialog")).lookup("#14474347006_99aa0fd981_k").query();
-        verifyThat(imageNode, isVisible());
+        ImageDialogViewObject dialogView = view.selectImage("14474347006_99aa0fd981_k");
+        dialogView.checkImageIsDisplayed("14474347006_99aa0fd981_k");
     }
 }
