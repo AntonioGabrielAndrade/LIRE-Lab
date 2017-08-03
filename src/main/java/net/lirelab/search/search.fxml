@@ -42,7 +42,7 @@
                         </padding>
                         <Label text="Image:"/>
 
-                        <TextField fx:id="currentQueryField" HBox.hgrow="ALWAYS"/>
+                        <TextField fx:id="queryField" HBox.hgrow="ALWAYS"/>
                     </HBox>
 
                     <VBox spacing="3">
