@@ -38,7 +38,7 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.concurrent.TimeoutException;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_ROOT;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertTrue;
 

@@ -28,7 +28,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_ROOT;
 import static org.junit.Assert.assertTrue;
 
 public class DirectoryStructureTest {

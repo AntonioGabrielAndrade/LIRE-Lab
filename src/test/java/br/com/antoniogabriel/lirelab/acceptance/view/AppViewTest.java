@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_ROOT;
 
 public class AppViewTest extends FXMLTest<AppFXML> {
 

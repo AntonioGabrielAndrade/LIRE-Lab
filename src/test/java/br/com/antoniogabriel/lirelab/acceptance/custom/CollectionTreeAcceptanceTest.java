@@ -29,7 +29,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.collection;
 import static java.util.Arrays.asList;
 

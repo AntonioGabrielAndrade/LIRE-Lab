@@ -32,7 +32,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.nio.file.Paths;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;

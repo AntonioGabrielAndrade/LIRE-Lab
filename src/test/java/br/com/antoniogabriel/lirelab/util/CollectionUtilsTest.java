@@ -29,8 +29,8 @@ import org.junit.Test;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_IMAGES;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestPaths.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_ROOT;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
