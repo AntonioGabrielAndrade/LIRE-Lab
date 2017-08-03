@@ -15,7 +15,7 @@ Follow this short tutorial to start using LIRE-Lab immediately.
 
 When running LIRE-Lab for the first time, you will see a Welcome view like the following:
 
-![Welcome Screen](images/welcome-page.png)
+![Welcome Screen](images/welcome.png)
 
 ### Create a collection
 
