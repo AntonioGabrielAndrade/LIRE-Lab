@@ -65,6 +65,14 @@ public class Collection {
         return features;
     }
 
+    public Feature getFeature(int index) {
+        return features.get(index);
+    }
+
+    public int totalFeatures() {
+        return features.size();
+    }
+
     public void setImagesDirectory(String imagesDirectory) {
         this.imagesDirectory = imagesDirectory;
     }

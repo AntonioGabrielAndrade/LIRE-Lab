@@ -101,6 +101,9 @@ public class SearchController implements Initializable {
     private void setupSecondOutput(Collection collection, Feature feature) {
         SearchOutput searchOutput = createRemovableSearchOutput();
         setupSearchMechanism(collection, feature, searchOutput);
+        if(queryGrid.getImage() != null) {
+            runQuery(collection, searchOutput, queryGrid.getImage());
+        }
     }
 
     private SearchOutput createSplittableSearchOutput(Collection collection, Feature feature) {
@@ -111,7 +114,7 @@ public class SearchController implements Initializable {
         splitButton.setTooltip(new Tooltip("split output"));
 
         splitButton.setOnAction(event -> {
-            setupSecondOutput(collection, feature);
+            setupSecondOutput(collection, collection.totalFeatures() > 1 ? collection.getFeature(1) : feature);
             output.disableTitleGraphics();
         });
         output.addTitleGraphics(splitButton);
