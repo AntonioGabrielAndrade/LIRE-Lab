@@ -37,12 +37,14 @@ import java.util.List;
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.*;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.isHeadless;
+import static org.junit.Assert.fail;
 
 public class HomeViewTest extends FXMLTest<HomeFXML> {
 
     private static final String COLLECTION_NAME_1 = "Collection1";
     private static final String COLLECTION_NAME_2 = "Collection2";
-    private static final String COLLECTION_NAME_3 = "Collection3";
+
+    private static final String NEW_COLLECTION_NAME = "New_Collection";
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
@@ -70,7 +72,6 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
     public static void deleteCollections() throws Exception {
         COLLECTION_HELPER.deleteCollection(COLLECTION_NAME_1);
         COLLECTION_HELPER.deleteCollection(COLLECTION_NAME_2);
-        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME_3);
     }
 
     @Override
@@ -112,31 +113,41 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
 
     @Test
     public void shouldUpdateCollectionsListWhenNewCollectionIsCreated() throws Exception {
-        CreateCollectionRunner runner = service.getCreateCollectionRunner(
-                                                        new CreateCollectionInfo(
-                                                                COLLECTION_NAME_3,
-                                                                TEST_IMAGES,
-                                                                FEATURES,
-                                                                true,
-                                                                100,
-                                                                false,
-                                                                1));
+        try {
+            CreateCollectionRunner runner = service.getCreateCollectionRunner(
+                                                            new CreateCollectionInfo(
+                                                                    NEW_COLLECTION_NAME,
+                                                                    TEST_IMAGES,
+                                                                    FEATURES,
+                                                                    true,
+                                                                    100,
+                                                                    false,
+                                                                    1));
 
-        new Thread(runner).start();
+            new Thread(runner).start();
 
-        homeView.waitUntilCollectionIsListed(COLLECTION_NAME_3);
+            homeView.waitUntilCollectionIsListed(NEW_COLLECTION_NAME);
+        } catch (Exception e) {
+            fail();
+        } finally {
+            COLLECTION_HELPER.deleteCollection(NEW_COLLECTION_NAME);
+        }
     }
 
     @Test
     public void shouldUpdateCollectionsListWhenCollectionIsDeleted() throws Exception {
-        homeView.waitUntilCollectionsAreListed(collection1, collection2);
+        try {
+            homeView.waitUntilCollectionsAreListed(collection1, collection2);
 
-        COLLECTION_HELPER.deleteCollection(collection1);
+            COLLECTION_HELPER.deleteCollection(collection1);
 
-        homeView.waitUntilCollectionIsNotListed(collection1);
-        homeView.waitUntilCollectionsAreListed(collection2);
-
-        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
+            homeView.waitUntilCollectionIsNotListed(collection1);
+            homeView.waitUntilCollectionIsListed(collection2);
+        } catch (Exception e) {
+            fail();
+        } finally {
+            COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
+        }
     }
 
     @Test
@@ -144,14 +155,18 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
         // Nasty hack to execute test only if not in headless mode.
         // Apparently Monocle cant show ContextMenu in headless mode.
         if(!isHeadless()) {
-            homeView.waitUntilCollectionsAreListed(collection1, collection2);
+            try {
+                homeView.waitUntilCollectionsAreListed(collection1, collection2);
 
-            homeView.deleteByContextMenu(collection1).ok();
+                homeView.deleteByContextMenu(collection1).ok();
 
-            homeView.waitUntilCollectionIsNotListed(collection1);
-            homeView.waitUntilCollectionsAreListed(collection2);
-
-            COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
+                homeView.waitUntilCollectionIsNotListed(collection1);
+                homeView.waitUntilCollectionIsListed(collection2);
+            } catch (Exception e) {
+                fail();
+            } finally {
+                COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
+            }
         }
     }
 
