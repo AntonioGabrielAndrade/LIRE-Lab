@@ -66,7 +66,7 @@
                 <Separator orientation="VERTICAL"/>
 
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Height: "/>
+                    <Label text="Size: "/>
                     <Slider fx:id="imageHeightSlider"
                             min="80"
                             max="300"
