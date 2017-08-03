@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import org.junit.Before;
 import org.junit.Test;
 
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE2;
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -34,7 +35,7 @@ public class ImageViewFactoryTest {
     private static final JFXPanel INIT_JAVAFX = new JFXPanel();
 
     private static final String EXISTENT_FILE_PATH = "thumb/16903390174_1d670a5849_h.thumbnail.jpg";
-    private static final String EXISTENT_FILE_NAME_WITH_NO_EXTENSIONS = "16903390174_1d670a5849_h";
+    private static final String EXISTENT_FILE_NAME_WITH_NO_EXTENSIONS = IMAGE2;
 
     private ImageViewFactory factory;
 

@@ -29,7 +29,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.*;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.collection;
 import static java.util.Arrays.asList;
 
@@ -68,15 +68,15 @@ public class CollectionTreeAcceptanceTest extends ApplicationTest {
     public void shouldListImagesInCollection() throws Exception {
         view.expandCollection(COLLECTION_1);
 
-        view.waitUntilImageIsListed("14474347006_99aa0fd981_k" + ".jpg");
-        view.waitUntilImageIsListed("16903390174_1d670a5849_h" + ".jpg");
-        view.waitUntilImageIsListed("17099294578_0ba4068bad_k" + ".jpg");
-        view.waitUntilImageIsListed("17338370170_1e620bfb18_h" + ".jpg");
-        view.waitUntilImageIsListed("17525978165_86dc26e8cb_h" + ".jpg");
-        view.waitUntilImageIsListed("19774866363_757555901c_k" + ".jpg");
-        view.waitUntilImageIsListed("25601366680_b57441bb52_k" + ".jpg");
-        view.waitUntilImageIsListed("25601374660_78e6a9bba8_k" + ".jpg");
-        view.waitUntilImageIsListed("26487616294_b22b87133e_k" + ".jpg");
-        view.waitUntilImageIsListed("26489383923_98d419eb0d_k" + ".jpg");
+        view.waitUntilImageIsListed(IMAGE1 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE2 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE3 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE4 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE5 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE6 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE7 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE8 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE9 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE10 + ".jpg");
     }
 }

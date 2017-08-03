@@ -29,8 +29,7 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE1_PATH;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE2_PATH;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.*;
 
 public class SingleImageGridAcceptanceTest extends ApplicationTest {
 
@@ -59,16 +58,16 @@ public class SingleImageGridAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldShowImage() throws Exception {
-        view.checkImageIsVisible("14474347006_99aa0fd981_k");
+        view.checkImageIsVisible(IMAGE1);
     }
 
     @Test
     public void shouldShowOnlyOneImage() throws Exception {
         interact(() -> singleImageGrid.setImage(image2));
-        view.waitUntilImageIsVisible("16903390174_1d670a5849_h");
+        view.waitUntilImageIsVisible(IMAGE2);
 
         interact(() -> singleImageGrid.setImage(image1));
-        view.waitUntilImageIsVisible("14474347006_99aa0fd981_k");
+        view.waitUntilImageIsVisible(IMAGE1);
     }
 
 }

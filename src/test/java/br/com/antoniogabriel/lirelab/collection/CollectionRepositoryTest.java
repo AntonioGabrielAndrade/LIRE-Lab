@@ -117,16 +117,16 @@ public class CollectionRepositoryTest {
 
         assertThat(images.size(), is(10));
 
-        images.contains(new Image(IMAGE1_PATH, thumbnailsDir + "14474347006_99aa0fd981_k" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE2_PATH, thumbnailsDir + "16903390174_1d670a5849_h" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE3_PATH, thumbnailsDir + "17099294578_0ba4068bad_k" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE4_PATH, thumbnailsDir + "17338370170_1e620bfb18_h" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE5_PATH, thumbnailsDir + "17525978165_86dc26e8cb_h" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE6_PATH, thumbnailsDir + "19774866363_757555901c_k" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE7_PATH, thumbnailsDir + "25601366680_b57441bb52_k" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE8_PATH, thumbnailsDir + "25601374660_78e6a9bba8_k" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE9_PATH, thumbnailsDir + "26487616294_b22b87133e_k" + ".thumbnail.jpg"));
-        images.contains(new Image(IMAGE10_PATH, thumbnailsDir + "26489383923_98d419eb0d_k" + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE1_PATH, thumbnailsDir + IMAGE1 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE2_PATH, thumbnailsDir + IMAGE2 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE3_PATH, thumbnailsDir + IMAGE3 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE4_PATH, thumbnailsDir + IMAGE4 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE5_PATH, thumbnailsDir + IMAGE5 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE6_PATH, thumbnailsDir + IMAGE6 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE7_PATH, thumbnailsDir + IMAGE7 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE8_PATH, thumbnailsDir + IMAGE8 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE9_PATH, thumbnailsDir + IMAGE9 + ".thumbnail.jpg"));
+        images.contains(new Image(IMAGE10_PATH, thumbnailsDir + IMAGE10 + ".thumbnail.jpg"));
     }
 
     @Test

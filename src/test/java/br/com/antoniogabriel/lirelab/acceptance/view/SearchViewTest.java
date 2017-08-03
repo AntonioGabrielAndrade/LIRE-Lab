@@ -32,9 +32,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE1_PATH;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_ROOT;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.*;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
 
 public class SearchViewTest extends FXMLTest<SearchFXML> {
@@ -87,19 +85,19 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
         interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
-        view.selectQuery("14474347006_99aa0fd981_k");
-        view.waitUntilShowQuery("14474347006_99aa0fd981_k");
+        view.selectQuery(IMAGE1);
+        view.waitUntilShowQuery(IMAGE1);
 
-        view.waitUntilImagesAreOrderedLike("14474347006_99aa0fd981_k",
-                                            "17338370170_1e620bfb18_h",
-                                            "26489383923_98d419eb0d_k",
-                                            "25601374660_78e6a9bba8_k",
-                                            "17525978165_86dc26e8cb_h",
-                                            "26487616294_b22b87133e_k",
-                                            "16903390174_1d670a5849_h",
-                                            "17099294578_0ba4068bad_k",
-                                            "25601366680_b57441bb52_k",
-                                            "19774866363_757555901c_k");
+        view.waitUntilImagesAreOrderedLike(IMAGE1,
+                                            IMAGE4,
+                                            IMAGE10,
+                                            IMAGE8,
+                                            IMAGE5,
+                                            IMAGE9,
+                                            IMAGE2,
+                                            IMAGE3,
+                                            IMAGE7,
+                                            IMAGE6);
     }
 
     @Test
@@ -111,18 +109,18 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
         view.setQueryPath(IMAGE1_PATH);
         view.run();
 
-        view.waitUntilShowQuery("14474347006_99aa0fd981_k");
+        view.waitUntilShowQuery(IMAGE1);
 
-        view.waitUntilImagesAreOrderedLike("14474347006_99aa0fd981_k",
-                                            "17338370170_1e620bfb18_h",
-                                            "26489383923_98d419eb0d_k",
-                                            "25601374660_78e6a9bba8_k",
-                                            "17525978165_86dc26e8cb_h",
-                                            "26487616294_b22b87133e_k",
-                                            "16903390174_1d670a5849_h",
-                                            "17099294578_0ba4068bad_k",
-                                            "25601366680_b57441bb52_k",
-                                            "19774866363_757555901c_k");
+        view.waitUntilImagesAreOrderedLike(IMAGE1,
+                                            IMAGE4,
+                                            IMAGE10,
+                                            IMAGE8,
+                                            IMAGE5,
+                                            IMAGE9,
+                                            IMAGE2,
+                                            IMAGE3,
+                                            IMAGE7,
+                                            IMAGE6);
     }
 
     @Test
