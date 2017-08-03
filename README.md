@@ -6,7 +6,7 @@
 LIRE-Lab is a desktop image retrieval tool developed on top of the [LIRE](http://www.lire-project.net/) Java library.
 LIRE-Lab provides an easy way to index collections of images and run queries using the LIRE features.
 
-For a quick tutorial on how to use LIRE-Lab, go to the project website: [https://antoniogabrielandrade.github.io/LIRE-Lab/](https://antoniogabrielandrade.github.io/LIRE-Lab/)
+For a quick tutorial on how to use LIRE-Lab, go to the project website: [http://lirelab.net/](http://lirelab.net/)
 
 **Notice:** LIRE-Lab version 1.0.0 is still in active development. Hence significant changes are
 still expected to happen frequently.
