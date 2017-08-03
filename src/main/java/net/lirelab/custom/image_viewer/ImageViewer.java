@@ -19,6 +19,7 @@
 
 package net.lirelab.custom.image_viewer;
 
+import javafx.scene.control.ProgressIndicator;
 import net.lirelab.app.ImageViewFactory;
 import net.lirelab.collection.Image;
 import javafx.fxml.FXML;
@@ -29,6 +30,8 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
+import static net.lirelab.util.FxUtils.runOnFxThreadAndWait;
+
 public class ImageViewer extends BorderPane {
 
     public static final String IMAGE_VIEWER_FXML = "image-viewer.fxml";
@@ -36,14 +39,31 @@ public class ImageViewer extends BorderPane {
     @FXML private BorderPane root;
     @FXML private Slider imageHeightSlider;
 
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
+
     private ImageViewFactory imageViewFactory = new ImageViewFactory();
 
     public ImageViewer(Image image) {
         loadFXML();
+
+        progressIndicator.setMaxHeight(50.0);
+
         ImageView imageView = imageViewFactory.create(image.getImagePath(), true);
+        imageView.getImage().progressProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.doubleValue() == 1.0) {
+                runOnFxThreadAndWait(() -> setImage(imageView));
+            }
+        });
 
         imageView.fitHeightProperty().bind(imageHeightSlider.valueProperty());
-        root.setCenter(imageView);
+
+        root.setCenter(progressIndicator);
+    }
+
+    private void setImage(ImageView imageView) {
+        if(imageView.getImage().getProgress() == 1.0) {
+            root.setCenter(imageView);
+        }
     }
 
     private void loadFXML() {
