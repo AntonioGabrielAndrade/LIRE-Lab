@@ -83,8 +83,8 @@ public class SearchController implements Initializable {
     public void startSearchSession(Collection collection, Feature feature) {
         clear();
         mapImageNamesToImages(collection);
-        bindCurrentQueryFieldToQueryGrid();
-        bindQueryGridToQueryExecution(collection);
+        bindQueryFieldToQueryImage();
+        bindQueryImageToQueryExecution(collection);
         setupQueryAutoCompletion(collection);
 
         setupFirstOutput(collection, feature);
@@ -191,7 +191,7 @@ public class SearchController implements Initializable {
         });
     }
 
-    private void bindQueryGridToQueryExecution(Collection collection) {
+    private void bindQueryImageToQueryExecution(Collection collection) {
         queryGrid.setOnChange(newImage -> {
             for (SearchOutput output : outputs) {
                 runQuery(collection, output, newImage);
@@ -209,7 +209,7 @@ public class SearchController implements Initializable {
         }
     }
 
-    private void bindCurrentQueryFieldToQueryGrid() {
+    private void bindQueryFieldToQueryImage() {
         currentQueryField.textProperty().addListener((observable, oldImageName, newImageName) -> {
             Image image;
             if((image = nameToImage.get(newImageName)) != null) {
