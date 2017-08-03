@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE1_PATH;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.core.Is.is;
@@ -62,14 +63,14 @@ public class FileUtilsTest {
         List<String> paths = utils.getAllImagesPaths(TEST_IMAGES, false);
 
         assertThat(paths.size(), is(10));
-        assertTrue(paths.contains(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg"));
+        assertTrue(paths.contains(IMAGE1_PATH));
     }
 
     @Test
     public void shouldAssertThatAFileIsAnImage() throws Exception {
         Files.createFile(Paths.get(FILE));
 
-        assertTrue(utils.isImage(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg"));
+        assertTrue(utils.isImage(IMAGE1_PATH));
         assertFalse(utils.isImage(absolutePath(FILE)));
     }
 

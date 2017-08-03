@@ -35,8 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class ImageGridAcceptanceTest extends ApplicationTest {
 
@@ -44,6 +42,8 @@ public class ImageGridAcceptanceTest extends ApplicationTest {
 
     private ImageGrid imageGrid = new ImageGrid();
     private List<String> paths = new ArrayList<>();
+
+    private ImageGridViewObject view = new ImageGridViewObject();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -64,16 +64,16 @@ public class ImageGridAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldShowImages() throws Exception {
-        verifyThat("#14474347006_99aa0fd981_k", isVisible());
-        verifyThat("#16903390174_1d670a5849_h", isVisible());
-        verifyThat("#17099294578_0ba4068bad_k", isVisible());
-        verifyThat("#17338370170_1e620bfb18_h", isVisible());
-        verifyThat("#17525978165_86dc26e8cb_h", isVisible());
-        verifyThat("#19774866363_757555901c_k", isVisible());
-        verifyThat("#25601366680_b57441bb52_k", isVisible());
-        verifyThat("#25601374660_78e6a9bba8_k", isVisible());
-        verifyThat("#26487616294_b22b87133e_k", isVisible());
-        verifyThat("#26489383923_98d419eb0d_k", isVisible());
+        view.checkImagesAreVisible( "14474347006_99aa0fd981_k",
+                                    "16903390174_1d670a5849_h",
+                                    "17099294578_0ba4068bad_k",
+                                    "17338370170_1e620bfb18_h",
+                                    "17525978165_86dc26e8cb_h",
+                                    "19774866363_757555901c_k",
+                                    "25601366680_b57441bb52_k",
+                                    "25601374660_78e6a9bba8_k",
+                                    "26487616294_b22b87133e_k",
+                                    "26489383923_98d419eb0d_k");
     }
 
     protected ArrayList<String> getPaths(String testImages) throws IOException {

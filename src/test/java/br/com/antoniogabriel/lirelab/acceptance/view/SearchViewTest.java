@@ -32,6 +32,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static br.com.antoniogabriel.lirelab.lire.Feature.CEDD;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE1_PATH;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_ROOT;
 import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.*;
@@ -107,7 +108,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
         view.waitUntilShowCollection(collection);
 
-        view.setQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+        view.setQueryPath(IMAGE1_PATH);
         view.run();
 
         view.waitUntilShowQuery("14474347006_99aa0fd981_k");
@@ -126,7 +127,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @Test
     public void shouldEnableRunButtonWhenQueryPathIsAValidImage() throws Exception {
-        view.setQueryPath(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+        view.setQueryPath(IMAGE1_PATH);
         view.checkRunIsEnabled();
     }
 

@@ -26,7 +26,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE1;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE1_PATH;
 
 public class ImageDialogAcceptanceTest extends ApplicationTest {
 
@@ -39,7 +40,7 @@ public class ImageDialogAcceptanceTest extends ApplicationTest {
     @Before
     public void setUp() throws Exception {
         interact(() -> {
-            dialog = new ImageDialog(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg");
+            dialog = new ImageDialog(IMAGE1_PATH);
             dialog.show();
         });
     }
@@ -53,7 +54,7 @@ public class ImageDialogAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldShowImage() throws Exception {
-        view.checkImageIsDisplayed("14474347006_99aa0fd981_k");
+        view.checkImageIsDisplayed(IMAGE1);
     }
 
     @Test

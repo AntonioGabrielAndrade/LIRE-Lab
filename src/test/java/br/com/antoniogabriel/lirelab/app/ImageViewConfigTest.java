@@ -32,7 +32,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.nio.file.Paths;
 
-import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.TEST_IMAGES;
+import static br.com.antoniogabriel.lirelab.test_utilities.TestConstants.IMAGE1_PATH;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -67,7 +67,7 @@ public class ImageViewConfigTest {
 
     @Test
     public void shouldLimitImageViewHeightWhenImageHeightIsBiggerThanLimit() throws Exception {
-        String imageURL = Paths.get(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg").toUri().toURL().toString();
+        String imageURL = Paths.get(IMAGE1_PATH).toUri().toURL().toString();
         ImageView imageView = new ImageView(imageURL);
 
         double imageHeight = imageView.getImage().getHeight();
@@ -82,7 +82,7 @@ public class ImageViewConfigTest {
 
     @Test
     public void shouldPreserveImageViewHeightWhenImageHeightIsSmallerThanLimit() throws Exception {
-        String imageURL = Paths.get(TEST_IMAGES + "14474347006_99aa0fd981_k.jpg").toUri().toURL().toString();
+        String imageURL = Paths.get(IMAGE1_PATH).toUri().toURL().toString();
         ImageView imageView = new ImageView(imageURL);
 
         double imageHeight = imageView.getImage().getHeight();

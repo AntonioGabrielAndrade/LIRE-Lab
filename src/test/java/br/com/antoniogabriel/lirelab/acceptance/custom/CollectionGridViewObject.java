@@ -21,15 +21,12 @@ package br.com.antoniogabriel.lirelab.acceptance.custom;
 
 import org.testfx.api.FxRobot;
 
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.util.NodeQueryUtils.isVisible;
-
 public class CollectionGridViewObject extends FxRobot {
 
+    private ImageGridViewObject gridView = new ImageGridViewObject();
+
     public void checkImagesAreVisible(String... images) {
-        for (String image : images) {
-            verifyThat("#" + image, isVisible());
-        }
+        gridView.checkImagesAreVisible(images);
     }
 
     public ImageDialogViewObject selectImage(String image) {
