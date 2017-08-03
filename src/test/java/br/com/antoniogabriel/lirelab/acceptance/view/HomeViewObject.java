@@ -29,6 +29,8 @@ import static br.com.antoniogabriel.lirelab.test_utilities.AsyncUtils.waitUntilI
 
 public class HomeViewObject extends FxRobot {
 
+    public static final String CENTER_PANE = "#center-pane";
+
     private CollectionTreeViewObject treeViewObject = new CollectionTreeViewObject();
 
 
@@ -48,6 +50,10 @@ public class HomeViewObject extends FxRobot {
         treeViewObject.expandCollection(collection);
     }
 
+    public void waitUntilImagesAreListed(String... imagesFileNames) throws TimeoutException {
+        treeViewObject.waitUntilImagesAreListed(imagesFileNames);
+    }
+
     public void waitUntilImageIsListed(String imageFileName) throws TimeoutException {
         treeViewObject.waitUntilImageIsListed(imageFileName);
     }
@@ -60,8 +66,14 @@ public class HomeViewObject extends FxRobot {
         treeViewObject.selectCollection(collection);
     }
 
+    public void waitUntilImagesAreVisible(String... images) throws TimeoutException {
+        for (String image : images) {
+            waitUntilImageIsVisible(image);
+        }
+    }
+
     public void waitUntilImageIsVisible(String imageName) throws TimeoutException {
-        waitUntilIsVisible("#" + imageName, "#center-pane");
+        waitUntilIsVisible("#" + imageName, CENTER_PANE);
     }
 
     public void selectImage(String imageName) {

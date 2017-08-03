@@ -99,16 +99,16 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
         homeView.waitUntilCollectionIsListed(collection1);
         homeView.expandCollection(collection1);
 
-        homeView.waitUntilImageIsListed(IMAGE1 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE2 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE3 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE4 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE5 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE6 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE7 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE8 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE9 + JPG);
-        homeView.waitUntilImageIsListed(IMAGE10 + JPG);
+        homeView.waitUntilImagesAreListed(IMAGE1 + JPG,
+                                                        IMAGE2 + JPG,
+                                                        IMAGE3 + JPG,
+                                                        IMAGE4 + JPG,
+                                                        IMAGE5 + JPG,
+                                                        IMAGE6 + JPG,
+                                                        IMAGE7 + JPG,
+                                                        IMAGE8 + JPG,
+                                                        IMAGE9 + JPG,
+                                                        IMAGE10 + JPG);
     }
 
     @Test
@@ -161,16 +161,16 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
         homeView.waitUntilCollectionIsListed(collection1);
         homeView.selectCollection(collection1);
 
-        homeView.waitUntilImageIsVisible(IMAGE1);
-        homeView.waitUntilImageIsVisible(IMAGE2);
-        homeView.waitUntilImageIsVisible(IMAGE3);
-        homeView.waitUntilImageIsVisible(IMAGE4);
-        homeView.waitUntilImageIsVisible(IMAGE5);
-        homeView.waitUntilImageIsVisible(IMAGE6);
-        homeView.waitUntilImageIsVisible(IMAGE7);
-        homeView.waitUntilImageIsVisible(IMAGE8);
-        homeView.waitUntilImageIsVisible(IMAGE9);
-        homeView.waitUntilImageIsVisible(IMAGE10);
+        homeView.waitUntilImagesAreVisible(IMAGE1,
+                                            IMAGE2,
+                                            IMAGE3,
+                                            IMAGE4,
+                                            IMAGE5,
+                                            IMAGE6,
+                                            IMAGE7,
+                                            IMAGE8,
+                                            IMAGE9,
+                                            IMAGE10);
     }
 
     @Test
