@@ -40,9 +40,9 @@ import static br.com.antoniogabriel.lirelab.test_utilities.TestUtils.isHeadless;
 
 public class HomeViewTest extends FXMLTest<HomeFXML> {
 
-    private static final String COLLECTION1_NAME = "Collection1";
-    private static final String COLLECTION2_NAME = "Collection2";
-    private static final String COLLECTION3_NAME = "Collection3";
+    private static final String COLLECTION_NAME_1 = "Collection1";
+    private static final String COLLECTION_NAME_2 = "Collection2";
+    private static final String COLLECTION_NAME_3 = "Collection3";
 
     private static final PathResolver RESOLVER = new PathResolver(TEST_ROOT);
     private static final CollectionTestHelper COLLECTION_HELPER = new CollectionTestHelper(RESOLVER);
@@ -59,20 +59,19 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        COLLECTION_HELPER.createRealCollection(COLLECTION1_NAME, TEST_IMAGES, CEDD);
-        COLLECTION_HELPER.createRealCollection(COLLECTION2_NAME, TEST_IMAGES, CEDD);
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_2, TEST_IMAGES, CEDD);
 
-        collection1 = COLLECTION_HELPER.readCollection(COLLECTION1_NAME);
-        collection2 = COLLECTION_HELPER.readCollection(COLLECTION2_NAME);
+        collection1 = COLLECTION_HELPER.readCollection(COLLECTION_NAME_1);
+        collection2 = COLLECTION_HELPER.readCollection(COLLECTION_NAME_2);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
-        COLLECTION_HELPER.deleteCollection(COLLECTION1_NAME);
-        COLLECTION_HELPER.deleteCollection(COLLECTION2_NAME);
-        COLLECTION_HELPER.deleteCollection(COLLECTION3_NAME);
+        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME_1);
+        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME_2);
+        COLLECTION_HELPER.deleteCollection(COLLECTION_NAME_3);
     }
-
 
     @Override
     protected AbstractModule getBindings() {
@@ -115,7 +114,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
     public void shouldUpdateCollectionsListWhenNewCollectionIsCreated() throws Exception {
         CreateCollectionRunner runner = service.getCreateCollectionRunner(
                                                         new CreateCollectionInfo(
-                                                                COLLECTION3_NAME,
+                                                                COLLECTION_NAME_3,
                                                                 TEST_IMAGES,
                                                                 FEATURES,
                                                                 true,
@@ -125,7 +124,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
 
         new Thread(runner).start();
 
-        homeView.waitUntilCollectionIsListed(COLLECTION3_NAME);
+        homeView.waitUntilCollectionIsListed(COLLECTION_NAME_3);
     }
 
     @Test
@@ -137,7 +136,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
         homeView.waitUntilCollectionIsNotListed(collection1);
         homeView.waitUntilCollectionsAreListed(collection2);
 
-        COLLECTION_HELPER.createRealCollection(COLLECTION1_NAME, TEST_IMAGES, CEDD);
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
     }
 
     @Test
@@ -152,7 +151,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
             homeView.waitUntilCollectionIsNotListed(collection1);
             homeView.waitUntilCollectionsAreListed(collection2);
 
-            COLLECTION_HELPER.createRealCollection(COLLECTION1_NAME, TEST_IMAGES, CEDD);
+            COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
         }
     }
 
