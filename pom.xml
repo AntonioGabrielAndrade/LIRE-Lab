@@ -62,7 +62,7 @@
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
 
-        <app.main.class>br.com.antoniogabriel.lirelab.app.App</app.main.class>
+        <app.main.class>net.lirelab.app.App</app.main.class>
     </properties>
 
     <repositories>

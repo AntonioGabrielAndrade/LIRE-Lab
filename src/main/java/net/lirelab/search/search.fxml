@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import net.lirelab.custom.single_image_grid.SingleImageGrid?>
+<?import net.lirelab.custom.TangoIconWrapper?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+  ~ This file is part of the LIRE-Lab project, a desktop image retrieval tool
+  ~ made on top of the LIRE image retrieval Java library.
+  ~ Copyright (C) 2017  Antonio Gabriel Pereira de Andrade
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="net.lirelab.search.SearchController">
+
+    <top>
+        <TitledPane text="Query" collapsible="false" minHeight="200">
+            <HBox spacing="20">
+                <SingleImageGrid fx:id="queryGrid" id="query" HBox.hgrow="ALWAYS"/>
+
+                <VBox spacing="20">
+
+                    <HBox spacing="4" alignment="BASELINE_CENTER" prefWidth="500">
+                        <padding>
+                            <Insets top="10" bottom="10" left="10" right="10"/>
+                        </padding>
+                        <Label text="Image:"/>
+
+                        <TextField fx:id="currentQueryField" HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <VBox spacing="3">
+                        <Label text="Choose from disk:"/>
+                        <HBox spacing="4" alignment="BASELINE_CENTER" prefWidth="500">
+
+                            <Button id="run-loaded-image" fx:id="runLoadedImage" onAction="#setLoadedQuery"
+                                    disable="true">
+                                <tooltip>
+                                    <Tooltip text="Run Query"/>
+                                </tooltip>
+                                <graphic>
+                                    <TangoIconWrapper description="actions:media-playback-start"/>
+                                </graphic>
+                            </Button>
+
+                            <TextField id="query-image-field" fx:id="queryPathField" HBox.hgrow="ALWAYS"/>
+
+                            <Button text="Browse" onAction="#chooseQueryImage"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </HBox>
+
+        </TitledPane>
+    </top>
+
+    <center>
+        <HBox fx:id="centerBox"/>
+    </center>
+
+</BorderPane>
