@@ -19,21 +19,21 @@
 
 package net.lirelab.acceptance.view;
 
+import com.google.inject.AbstractModule;
+import javafx.stage.Stage;
 import net.lirelab.acceptance.CollectionTestHelper;
 import net.lirelab.collection.Collection;
 import net.lirelab.collection.PathResolver;
-import net.lirelab.search.SearchFXML;
 import net.lirelab.search.SearchController;
+import net.lirelab.search.SearchFXML;
 import net.lirelab.test_utilities.FXMLTest;
-import com.google.inject.AbstractModule;
-import javafx.stage.Stage;
-import net.lirelab.lire.Feature;
-import net.lirelab.test_utilities.TestUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static net.lirelab.lire.Feature.CEDD;
 import static net.lirelab.test_utilities.TestConstants.*;
+import static net.lirelab.test_utilities.TestUtils.deleteWorkDirectory;
 
 public class SearchViewTest extends FXMLTest<SearchFXML> {
 
@@ -59,14 +59,14 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @BeforeClass
     public static void createCollections() throws Exception {
-        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, Feature.CEDD);
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD);
         collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
     @AfterClass
     public static void deleteCollections() throws Exception {
         COLLECTION_HELPER.deleteCollection(COLLECTION_NAME);
-        TestUtils.deleteWorkDirectory(RESOLVER);
+        deleteWorkDirectory(RESOLVER);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @Test
     public void shouldRunQueryBySelectingQueryFromCollection() throws Exception {
-        interact(() -> controller.startSearchSession(collection, Feature.CEDD));
+        interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
         view.selectQuery(IMAGE1);
@@ -102,7 +102,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @Test
     public void shouldRunQueryByLoadingQueryFromDisk() throws Exception {
-        interact(() -> controller.startSearchSession(collection, Feature.CEDD));
+        interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
 
