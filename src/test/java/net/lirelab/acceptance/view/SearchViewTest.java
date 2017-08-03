@@ -81,7 +81,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldRunQueryBySelectingQueryFromCollection() throws Exception {
+    public void shouldRunQueryBySelectingImageFromCollection() throws Exception {
         interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
@@ -101,7 +101,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldRunQueryByLoadingQueryFromDisk() throws Exception {
+    public void shouldRunQueryByLoadingImageFromDisk() throws Exception {
         interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
@@ -124,13 +124,13 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldEnableRunButtonWhenQueryPathIsAValidImage() throws Exception {
+    public void shouldEnableRunButtonWhenQueryPathIsAnImage() throws Exception {
         view.setQueryPath(IMAGE1_PATH);
         view.checkRunIsEnabled();
     }
 
     @Test
-    public void shouldDisableRunButtonWhenQueryPathIsNotAValidImage() throws Exception {
+    public void shouldDisableRunButtonWhenQueryPathIsNotAnImage() throws Exception {
         view.setQueryPath("invalid/image/path");
         view.checkRunIsDisabled();
     }
