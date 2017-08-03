@@ -19,10 +19,10 @@
 
 package net.lirelab.acceptance.view;
 
+import javafx.scene.control.TextField;
 import net.lirelab.acceptance.custom.CollectionGridViewObject;
 import net.lirelab.collection.Collection;
 import net.lirelab.collection.Image;
-import javafx.scene.control.TextField;
 import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
@@ -46,8 +46,8 @@ public class SearchViewObject extends FxRobot {
         }
     }
 
-    public void selectQuery(String image) {
-        clickOn("#" + image).interrupt();
+    public void selectQuery(String image) throws TimeoutException {
+        clickOnContainedElement("#" + image, OUTPUT).interrupt();
     }
 
     public void waitUntilShowQuery(String image) throws TimeoutException {
@@ -68,11 +68,11 @@ public class SearchViewObject extends FxRobot {
     }
 
     public void checkRunIsEnabled() throws TimeoutException {
-        waitUntil(() -> !lookup(RUN_LOADED_IMAGE).query().isDisabled());
+        waitUntilIsEnabled(RUN_LOADED_IMAGE);
     }
 
     public void checkRunIsDisabled() throws TimeoutException {
-        waitUntil(() -> lookup(RUN_LOADED_IMAGE).query().isDisabled());
+        waitUntilIsDisabled(RUN_LOADED_IMAGE);
     }
 
     public void run() throws TimeoutException {

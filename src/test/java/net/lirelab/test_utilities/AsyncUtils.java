@@ -32,6 +32,7 @@ import static org.testfx.util.WaitForAsyncUtils.waitFor;
 public class AsyncUtils {
 
     private static final TimeOut DEFAULT_TIMEOUT = TimeOut.of(5, SECONDS);
+    private static final FxRobot ROBOT = new FxRobot();
 
     public static void waitUntil(ObservableBooleanValue condition) throws TimeoutException {
         waitUntil(condition, DEFAULT_TIMEOUT);
@@ -65,19 +66,53 @@ public class AsyncUtils {
         waitUntilVisibilityIs(query, queryFrom, false);
     }
 
+    public static void waitUntilIsDisabled(String query) throws TimeoutException {
+        waitUntilDisableValueIs(query, true);
+    }
+
+    public static void waitUntilIsDisabled(String query, String queryFrom) throws TimeoutException {
+        waitUntilDisableValueIs(query, queryFrom, true);
+    }
+
+    public static void waitUntilIsEnabled(String query) throws TimeoutException {
+        waitUntilDisableValueIs(query, false);
+    }
+
+    public static void waitUntilIsEnabled(String query, String queryFrom) throws TimeoutException {
+        waitUntilDisableValueIs(query, queryFrom, false);
+    }
+
+    public static FxRobot clickOnContainedElement(String query, String queryFrom) throws TimeoutException {
+        Node node = ROBOT.from(ROBOT.lookup(queryFrom)).lookup(query).query();
+        ROBOT.clickOn(node);
+        return ROBOT;
+    }
+
     private static void waitUntilVisibilityIs(String query, String queryFrom, boolean visibility) throws TimeoutException {
         waitUntil(() -> {
-            FxRobot robot = new FxRobot();
-            Node node = robot.from(robot.lookup(queryFrom)).lookup(query).query();
+            Node node = ROBOT.from(ROBOT.lookup(queryFrom)).lookup(query).query();
             return (node == null) ? (!visibility) : (node.isVisible() == visibility);
         });
     }
 
     private static void waitUntilVisibilityIs(String query, boolean visibility) throws TimeoutException {
         waitUntil(() -> {
-            FxRobot robot = new FxRobot();
-            Node node = robot.lookup(query).query();
+            Node node = ROBOT.lookup(query).query();
             return (node == null) ? (!visibility) : (node.isVisible() == visibility);
+        });
+    }
+
+    private static void waitUntilDisableValueIs(String query, String queryFrom, boolean disableValue) throws TimeoutException {
+        waitUntil(() -> {
+            Node node = ROBOT.from(ROBOT.lookup(queryFrom)).lookup(query).query();
+            return (node == null) ? (!disableValue) : (node.isDisable() == disableValue);
+        });
+    }
+
+    private static void waitUntilDisableValueIs(String query, boolean disableValue) throws TimeoutException {
+        waitUntil(() -> {
+            Node node = ROBOT.lookup(query).query();
+            return (node == null) ? (!disableValue) : (node.isDisable() == disableValue);
         });
     }
 
@@ -93,15 +128,11 @@ public class AsyncUtils {
                                                 String queryElementType,
                                                 String elementId,
                                                 int index) throws TimeoutException {
-        waitUntil(() -> {
-            FxRobot robot = new FxRobot();
-
-            return robot
-                    .from(robot.lookup(queryFrom))
-                    .lookup(queryElementType)
-                    .nth(index).query()
-                    .getId()
-                    .equals(elementId);
-        });
+        waitUntil(() -> ROBOT
+                        .from(ROBOT.lookup(queryFrom))
+                        .lookup(queryElementType)
+                        .nth(index).query()
+                        .getId()
+                        .equals(elementId));
     }
 }
