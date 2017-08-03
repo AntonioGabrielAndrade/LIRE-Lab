@@ -60,7 +60,7 @@ public class ProgressDialogAcceptanceTest extends ApplicationTest {
 
     @Test
     public void shouldUpdateProgress() throws Exception {
-        view.checkProgressMark(percent(20),
+        view.checkProgressMarks(percent(20),
                             percent(40),
                             percent(60),
                             percent(80),

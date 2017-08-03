@@ -45,7 +45,7 @@ public class ProgressDialogViewObject extends FxRobot {
         verifyThat("#ok-button", isVisible());
     }
 
-    public ProgressDialogViewObject checkProgressMark(Integer... percentages) throws TimeoutException {
+    public ProgressDialogViewObject checkProgressMarks(Integer... percentages) throws TimeoutException {
         for (Integer percentage : percentages) {
             waitUntil(progressEqualsTo(percentage));
         }

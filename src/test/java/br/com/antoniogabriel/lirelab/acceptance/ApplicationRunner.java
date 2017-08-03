@@ -56,9 +56,9 @@ public class ApplicationRunner {
 
         progressView
                 //indexing images
-                .checkProgressMark(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+                .checkProgressMarks(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
                 //creating thumbnails
-                .checkProgressMark(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+                .checkProgressMarks(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
                 .checkOkIsEnabledWhenFinish()
                 .ok();
 
