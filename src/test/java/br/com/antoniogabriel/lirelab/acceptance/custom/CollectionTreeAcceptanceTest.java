@@ -68,15 +68,15 @@ public class CollectionTreeAcceptanceTest extends ApplicationTest {
     public void shouldListImagesInCollection() throws Exception {
         view.expandCollection(COLLECTION_1);
 
-        view.waitUntilImageIsListed(IMAGE1 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE2 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE3 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE4 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE5 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE6 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE7 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE8 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE9 + ".jpg");
-        view.waitUntilImageIsListed(IMAGE10 + ".jpg");
+        view.waitUntilImageIsListed(IMAGE1 + JPG);
+        view.waitUntilImageIsListed(IMAGE2 + JPG);
+        view.waitUntilImageIsListed(IMAGE3 + JPG);
+        view.waitUntilImageIsListed(IMAGE4 + JPG);
+        view.waitUntilImageIsListed(IMAGE5 + JPG);
+        view.waitUntilImageIsListed(IMAGE6 + JPG);
+        view.waitUntilImageIsListed(IMAGE7 + JPG);
+        view.waitUntilImageIsListed(IMAGE8 + JPG);
+        view.waitUntilImageIsListed(IMAGE9 + JPG);
+        view.waitUntilImageIsListed(IMAGE10 + JPG);
     }
 }

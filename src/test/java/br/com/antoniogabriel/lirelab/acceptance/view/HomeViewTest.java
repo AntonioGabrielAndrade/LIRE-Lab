@@ -99,16 +99,16 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
         homeView.waitUntilCollectionIsListed(collection1);
         homeView.expandCollection(collection1);
 
-        homeView.waitUntilImageIsListed(IMAGE1 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE2 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE3 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE4 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE5 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE6 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE7 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE8 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE9 + ".jpg");
-        homeView.waitUntilImageIsListed(IMAGE10 + ".jpg");
+        homeView.waitUntilImageIsListed(IMAGE1 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE2 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE3 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE4 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE5 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE6 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE7 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE8 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE9 + JPG);
+        homeView.waitUntilImageIsListed(IMAGE10 + JPG);
     }
 
     @Test
@@ -177,7 +177,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
     public void shouldShowImageWhenImageIsSelected() throws Exception {
         homeView.waitUntilCollectionIsListed(collection1);
         homeView.expandCollection(collection1);
-        homeView.selectImage(IMAGE1 + ".jpg");
+        homeView.selectImage(IMAGE1 + JPG);
         homeView.waitUntilImageIsVisible(IMAGE1);
     }
 }
