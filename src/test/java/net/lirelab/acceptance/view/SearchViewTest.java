@@ -22,6 +22,7 @@ package net.lirelab.acceptance.view;
 import com.google.inject.AbstractModule;
 import javafx.stage.Stage;
 import net.lirelab.acceptance.CollectionTestHelper;
+import net.lirelab.acceptance.custom.StatusBarViewObject;
 import net.lirelab.collection.Collection;
 import net.lirelab.collection.PathResolver;
 import net.lirelab.search.SearchController;
@@ -32,6 +33,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static net.lirelab.lire.Feature.CEDD;
+import static net.lirelab.lire.Feature.TAMURA;
 import static net.lirelab.test_utilities.TestConstants.*;
 import static net.lirelab.test_utilities.TestUtils.deleteWorkDirectory;
 
@@ -59,7 +61,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @BeforeClass
     public static void createCollection() throws Exception {
-        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD);
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD, TAMURA);
         collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
@@ -121,6 +123,91 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
                                             IMAGE3,
                                             IMAGE7,
                                             IMAGE6);
+    }
+
+    @Test
+    public void shouldSplitAndUnsplitOutput() throws Exception {
+        interact(() -> controller.startSearchSession(collection, CEDD));
+
+        view.waitUntilShowCollection(collection);
+
+        view.splitOutput();
+
+        view.checkOutputIsSplitted();
+
+        view.unsplitOutput();
+
+        view.checkOutputIsNotSplitted();
+    }
+
+    @Test
+    public void shouldSplitOutputAndComputeQuery() throws Exception {
+        interact(() -> controller.startSearchSession(collection, CEDD));
+
+        view.waitUntilShowCollection(collection);
+
+        view.splitOutput();
+
+        view.selectQuery(IMAGE1);
+        view.waitUntilShowQuery(IMAGE1);
+
+        view.waitUntilImagesInFirstOutputAreOrderedLike(IMAGE1,
+                                                        IMAGE4,
+                                                        IMAGE10,
+                                                        IMAGE8,
+                                                        IMAGE5,
+                                                        IMAGE9,
+                                                        IMAGE2,
+                                                        IMAGE3,
+                                                        IMAGE7,
+                                                        IMAGE6);
+
+        view.waitUntilImagesInSecondOutputAreOrderedLike(IMAGE1,
+                                                        IMAGE10,
+                                                        IMAGE4,
+                                                        IMAGE2,
+                                                        IMAGE5,
+                                                        IMAGE9,
+                                                        IMAGE3,
+                                                        IMAGE7,
+                                                        IMAGE6,
+                                                        IMAGE8);
+
+    }
+
+    @Test
+    public void shouldChangeFeatureAndComputeQuery() throws Exception {
+        StatusBarViewObject statusBarView = new StatusBarViewObject();
+
+        interact(() -> controller.startSearchSession(collection, CEDD));
+
+        view.waitUntilShowCollection(collection);
+        view.selectQuery(IMAGE1);
+        view.waitUntilShowQuery(IMAGE1);
+
+        view.waitUntilImagesAreOrderedLike(IMAGE1,
+                                            IMAGE4,
+                                            IMAGE10,
+                                            IMAGE8,
+                                            IMAGE5,
+                                            IMAGE9,
+                                            IMAGE2,
+                                            IMAGE3,
+                                            IMAGE7,
+                                            IMAGE6);
+
+        statusBarView.selectFeature(TAMURA);
+
+        view.waitUntilImagesAreOrderedLike(IMAGE1,
+                                            IMAGE10,
+                                            IMAGE4,
+                                            IMAGE2,
+                                            IMAGE5,
+                                            IMAGE9,
+                                            IMAGE3,
+                                            IMAGE7,
+                                            IMAGE6,
+                                            IMAGE8);
     }
 
     @Test

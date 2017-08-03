@@ -34,7 +34,7 @@
                 <graphic>
                     <HBox spacing="5" fx:id="titleGraphics"/>
                 </graphic>
-                <PaginatedCollectionGrid fx:id="outputGrid" id="output"/>
+                <PaginatedCollectionGrid fx:id="outputGrid"/>
             </TitledPane>
         </center>
         <bottom>

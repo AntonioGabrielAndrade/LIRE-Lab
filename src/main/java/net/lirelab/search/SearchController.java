@@ -108,10 +108,12 @@ public class SearchController implements Initializable {
 
     private SearchOutput createSplittableSearchOutput(Collection collection, Feature feature) {
         SearchOutput output = new SearchOutput();
+        output.setId("output");
 
         Button splitButton = new Button();
         splitButton.setGraphic(new TangoIconWrapper("actions:list-add"));
         splitButton.setTooltip(new Tooltip("split output"));
+        splitButton.setId("split-output-button");
 
         splitButton.setOnAction(event -> {
             setupSecondOutput(collection, collection.totalFeatures() > 1 ? collection.getFeature(1) : feature);
@@ -124,10 +126,12 @@ public class SearchController implements Initializable {
 
     private SearchOutput createRemovableSearchOutput() {
         SearchOutput output = new SearchOutput();
+        output.setId("second-output");
 
         Button removeButton = new Button();
         removeButton.setGraphic(new TangoIconWrapper("actions:list-remove"));
         removeButton.setTooltip(new Tooltip("unsplit output"));
+        removeButton.setId("unsplit-output-button");
 
         removeButton.setOnAction(event -> {
             Node removedOutput = centerBox.getChildren().remove(centerBox.getChildren().size()-1);

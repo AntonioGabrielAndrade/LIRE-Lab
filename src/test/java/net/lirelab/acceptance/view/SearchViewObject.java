@@ -32,6 +32,8 @@ import static net.lirelab.test_utilities.AsyncUtils.*;
 public class SearchViewObject extends FxRobot {
 
     private static final String OUTPUT = "#output";
+    private static final String SECOND_OUTPUT = "#second-output";
+
     private static final String QUERY = "#query";
     private static final String RUN_LOADED_IMAGE = "#run-loaded-image";
     private static final String QUERY_IMAGE = "#query-image-field";
@@ -58,6 +60,14 @@ public class SearchViewObject extends FxRobot {
         waitUntilElementsAreOrderedLike(OUTPUT, ".image-view", images);
     }
 
+    public void waitUntilImagesInFirstOutputAreOrderedLike(String... images) throws TimeoutException {
+        waitUntilElementsAreOrderedLike(OUTPUT, ".image-view", images);
+    }
+
+    public void waitUntilImagesInSecondOutputAreOrderedLike(String... images) throws TimeoutException {
+        waitUntilElementsAreOrderedLike(SECOND_OUTPUT, ".image-view", images);
+    }
+
     public void writeQueryPath(String path) {
         clickOn(QUERY_IMAGE).write("").interrupt().write(path);
     }
@@ -78,5 +88,21 @@ public class SearchViewObject extends FxRobot {
     public void run() throws TimeoutException {
         checkRunIsEnabled();
         clickOn(RUN_LOADED_IMAGE).interrupt();
+    }
+
+    public void splitOutput() {
+        clickOn("#split-output-button").interrupt();
+    }
+
+    public void checkOutputIsSplitted() throws TimeoutException {
+        waitUntilIsVisible(SECOND_OUTPUT);
+    }
+
+    public void unsplitOutput() {
+        clickOn("#unsplit-output-button").interrupt();
+    }
+
+    public void checkOutputIsNotSplitted() throws TimeoutException {
+        waitUntilIsNotVisible(SECOND_OUTPUT);
     }
 }
