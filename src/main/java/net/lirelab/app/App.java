@@ -19,23 +19,20 @@
 
 package net.lirelab.app;
 
-import net.lirelab.util.DependencyInjection;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import net.lirelab.util.FxUtils;
+import net.lirelab.util.DependencyInjection;
 
 import javax.inject.Inject;
+
+import static net.lirelab.util.FxUtils.runOnFxThreadAndWait;
 
 public class App extends Application {
 
     private static Image lirelab_16;
-    private static Image lirelab_24;
     private static Image lirelab_32;
     private static Image lirelab_48;
-    private static Image lirelab_64;
-    private static Image lirelab_72;
-    private static Image lirelab_96;
     private static Image lirelab_128;
 
     @Inject private AppFXML appFXML;
@@ -49,53 +46,36 @@ public class App extends Application {
     public void init() {
         initAppIcons();
         DependencyInjection.init(this);
-        showSplashScreen();
+        setupAndShowSplashScreen();
     }
 
     @Override
     public void start(Stage stage) {
         setIconsTo(stage);
-        showApplication(stage);
+        stage.setMaximized(true);
+        appFXML.loadIn(stage);
     }
 
     private void initAppIcons() {
-        FxUtils.runOnFxThreadAndWait(() -> {
+        runOnFxThreadAndWait(() -> {
             lirelab_16 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_16.png"));
-            lirelab_24 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_24.png"));
             lirelab_32 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_32.png"));
             lirelab_48 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_48.png"));
-            lirelab_64 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_64.png"));
-            lirelab_72 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_72.png"));
-            lirelab_96 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_96.png"));
             lirelab_128 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_128.png"));
         });
     }
 
-    private void showSplashScreen() {
-        FxUtils.runOnFxThreadAndWait(() -> {
+    private void setupAndShowSplashScreen() {
+        runOnFxThreadAndWait(() -> {
             Stage splashStage = new Stage();
             setIconsTo(splashStage);
             splash.loadIn(splashStage);
         });
     }
 
-    private void showApplication(Stage stage) {
-        FxUtils.runOnFxThreadAndWait(() -> {
-            stage.setMaximized(true);
-            appFXML.loadIn(stage);
-        });
-    }
-
     private void setIconsTo(Stage stage) {
-        FxUtils.runOnFxThreadAndWait(() -> {
-            stage.getIcons().addAll(lirelab_16,
-                                        lirelab_24,
-                                        lirelab_32,
-                                        lirelab_48,
-                                        lirelab_64,
-                                        lirelab_72,
-                                        lirelab_96,
-                                        lirelab_128);
+        runOnFxThreadAndWait(() -> {
+            stage.getIcons().addAll(lirelab_16, lirelab_32, lirelab_48, lirelab_128);
         });
     }
 }
