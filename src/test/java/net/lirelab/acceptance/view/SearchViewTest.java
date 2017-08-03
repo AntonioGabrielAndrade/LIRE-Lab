@@ -58,13 +58,13 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @BeforeClass
-    public static void createCollections() throws Exception {
+    public static void createCollection() throws Exception {
         COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD);
         collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
     @AfterClass
-    public static void deleteCollections() throws Exception {
+    public static void deleteCollection() throws Exception {
         COLLECTION_HELPER.deleteCollection(COLLECTION_NAME);
         deleteWorkDirectory(RESOLVER);
     }
@@ -131,7 +131,7 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
 
     @Test
     public void shouldDisableRunButtonWhenQueryPathIsNotAValidImage() throws Exception {
-        view.setQueryPath(TEST_IMAGES + "invalid-image-name");
+        view.setQueryPath("invalid/image/path");
         view.checkRunIsDisabled();
     }
 }
