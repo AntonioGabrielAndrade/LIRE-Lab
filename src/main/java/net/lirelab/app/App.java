@@ -44,7 +44,7 @@ public class App extends Application {
 
     @Override
     public void init() {
-        initAppIcons();
+        createStageIcons();
         DependencyInjection.init(this);
         setupAndShowSplashScreen();
     }
@@ -56,7 +56,7 @@ public class App extends Application {
         appFXML.loadIn(stage);
     }
 
-    private void initAppIcons() {
+    private void createStageIcons() {
         runOnFxThreadAndWait(() -> {
             lirelab_16 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_16.png"));
             lirelab_32 = new Image(App.class.getClassLoader().getResourceAsStream("app_icons/lirelab_32.png"));
