@@ -56,8 +56,13 @@ public class TestUtils {
     }
 
     public static Collection collection(String name, String imagesPath, Feature... features) {
+        return collection(name, "", imagesPath, features);
+    }
+
+    public static Collection collection(String name, String description, String imagesPath, Feature... features) {
         try {
             Collection collection = new Collection(name);
+            collection.setDescription(description);
             collection.setImagesDirectory(imagesPath);
             collection.setFeatures(asList(features));
 

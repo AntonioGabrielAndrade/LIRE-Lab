@@ -19,8 +19,6 @@
 
 package net.lirelab.collection;
 
-import net.lirelab.lire.Feature;
-import net.lirelab.test_utilities.TestUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +28,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static java.nio.file.Files.*;
+import static net.lirelab.lire.Feature.CEDD;
+import static net.lirelab.lire.Feature.TAMURA;
 import static net.lirelab.test_utilities.TestConstants.TEST_ROOT;
+import static net.lirelab.test_utilities.TestUtils.collection;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -42,16 +44,18 @@ public class CollectionXMLDAOTest {
     private static final Path XML_PATH = Paths.get(TEST_ROOT, XML_FILENAME);
 
     private static final String A_NAME = "Test Collection";
+    private static final String A_DESCRIPTION = "Test Description";
     private static final String A_DIRECTORY = "/some/example/path";
 
     private static final String XML_CONTENT =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<collection>\n" +
             "    <name>" + A_NAME + "</name>\n" +
+            "    <description>" + A_DESCRIPTION + "</description>\n" +
             "    <imagesDirectory>" + A_DIRECTORY + "</imagesDirectory>\n" +
             "    <features>\n" +
-            "        <feature>" + Feature.CEDD.name() + "</feature>\n" +
-            "        <feature>" + Feature.TAMURA.name() + "</feature>\n" +
+            "        <feature>" + CEDD.name() + "</feature>\n" +
+            "        <feature>" + TAMURA.name() + "</feature>\n" +
             "    </features>\n" +
             "</collection>\n";
 
@@ -61,12 +65,12 @@ public class CollectionXMLDAOTest {
     @Before
     public void setUp() throws Exception {
         xmlDAO = new CollectionXMLDAO(TEST_ROOT);
-        collection = TestUtils.collection(A_NAME, A_DIRECTORY, Feature.CEDD, Feature.TAMURA);
+        collection = collection(A_NAME, A_DESCRIPTION, A_DIRECTORY, CEDD, TAMURA);
     }
 
     @After
     public void tearDown() throws Exception {
-        Files.deleteIfExists(XML_PATH);
+        deleteIfExists(XML_PATH);
     }
 
     @Test
@@ -79,7 +83,7 @@ public class CollectionXMLDAOTest {
 
     @Test
     public void shouldReadCollectionXMLFile() throws Exception {
-        Files.write(XML_PATH, XML_CONTENT.getBytes());
+        write(XML_PATH, XML_CONTENT.getBytes());
 
         Collection retrievedCollection = xmlDAO.readCollection();
 
@@ -87,6 +91,6 @@ public class CollectionXMLDAOTest {
     }
 
     private String fileContent(Path path) throws IOException {
-        return new String(Files.readAllBytes(path));
+        return new String(readAllBytes(path));
     }
 }

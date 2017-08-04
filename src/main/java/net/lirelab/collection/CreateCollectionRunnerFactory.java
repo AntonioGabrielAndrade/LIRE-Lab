@@ -70,9 +70,10 @@ public class CreateCollectionRunnerFactory {
 
         CollectionXMLDAO xmlDAO = new CollectionXMLDAO(new File(collectionPath));
         XMLCreator xmlCreator = new XMLCreator(createInfo.getCollectionName(),
-                                                            createInfo.getImagesDirectory(),
-                                                            createInfo.getFeatures(),
-                                                            xmlDAO);
+                                                createInfo.getCollectionDescription(),
+                                                createInfo.getImagesDirectory(),
+                                                createInfo.getFeatures(),
+                                                xmlDAO);
 
         return new CreateCollectionRunner(indexCreator, thumbnailsCreator, xmlCreator);
     }

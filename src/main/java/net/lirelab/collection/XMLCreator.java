@@ -27,17 +27,20 @@ import java.util.List;
 public class XMLCreator {
 
     private final String collectionName;
+    private final String collectionDescription;
     private final String imagesDir;
     private final List<Feature> features;
     private CollectionXMLDAO xmlDAO;
     private XMLCreatorCallback callback = new DumbXMLCreatorCallback();
 
     public XMLCreator(String collectionName,
+                      String collectionDescription,
                       String imagesDir,
                       List<Feature> features,
                       CollectionXMLDAO xmlDAO) {
 
         this.collectionName = collectionName;
+        this.collectionDescription = collectionDescription;
         this.imagesDir = imagesDir;
         this.features = features;
         this.xmlDAO = xmlDAO;
@@ -48,6 +51,7 @@ public class XMLCreator {
 
         Collection collection = new Collection();
         collection.setName(collectionName);
+        collection.setDescription(collectionDescription);
         collection.setFeatures(features);
         collection.setImagesDirectory(imagesDir);
 

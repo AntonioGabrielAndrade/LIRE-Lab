@@ -61,6 +61,7 @@ public class CreateCollectionController implements Initializable {
 
     @FXML private DialogHeader dialogHeader;
     @FXML private TextField nameField;
+    @FXML private TextField descriptionField;
     @FXML private TextField imagesDirectoryField;
     @FXML private CheckBox scanSubdirectoriesCheckbox;
     @FXML private Spinner<Integer> thumbnailHeight;
@@ -117,6 +118,7 @@ public class CreateCollectionController implements Initializable {
     @FXML
     private void createCollection(ActionEvent event) {
         CreateCollectionInfo createInfo = new CreateCollectionInfo(collectionName(),
+                                                                    collectionDescription(),
                                                                     imagesDirectory(),
                                                                     collectionFeatures(),
                                                                     scanSubdirectories(),
@@ -226,5 +228,9 @@ public class CreateCollectionController implements Initializable {
 
     private String collectionName() {
         return nameField.getText();
+    }
+
+    private String collectionDescription() {
+        return descriptionField.getText();
     }
 }

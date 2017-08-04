@@ -19,12 +19,6 @@
 
 package net.lirelab.custom.collection_detail;
 
-import net.lirelab.app.Command;
-import net.lirelab.app.CommandTriggerFactory;
-import net.lirelab.app.LireLabException;
-import net.lirelab.collection.Collection;
-import net.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
-import net.lirelab.lire.Feature;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,13 +26,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import net.lirelab.app.Command;
+import net.lirelab.app.CommandTriggerFactory;
 import net.lirelab.app.HomeController;
+import net.lirelab.app.LireLabException;
+import net.lirelab.collection.Collection;
+import net.lirelab.custom.paginated_collection_grid.PaginatedCollectionGrid;
+import net.lirelab.lire.Feature;
 
 import java.io.IOException;
 import java.util.List;
-
-import static javafx.collections.FXCollections.observableArrayList;
 
 public class CollectionDetail extends BorderPane {
 
@@ -47,8 +45,9 @@ public class CollectionDetail extends BorderPane {
     @FXML private BorderPane center;
     @FXML private TextField nameField;
     @FXML private TextField totalField;
+    @FXML private TextField descriptionField;
     @FXML private ListView<Feature> featuresField;
-    @FXML private HBox topLine;
+    @FXML private StackPane topLine;
 
     private CommandTriggerFactory<Collection> commandTriggerFactory = new CommandTriggerFactory<>();
 
@@ -92,6 +91,7 @@ public class CollectionDetail extends BorderPane {
     private void showInfoOnTop(Collection collection) {
         nameField.setText(collection.getName());
         totalField.setText(collection.totalImages() + "");
+        descriptionField.setText(collection.getDescription());
 
         featuresField.setItems(FXCollections.observableArrayList(collection.getFeatures()));
 
