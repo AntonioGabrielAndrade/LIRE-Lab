@@ -68,6 +68,12 @@ public class StatusBarViewObject extends FxRobot {
         assertThat(comboBox.getItems(), equalTo(features));
     }
 
+    public void selectFeature(Feature feature) {
+        ComboBox<Feature> comboBox = lookup("#features-combo-box").query();
+
+        interact(() -> comboBox.setValue(feature));
+    }
+
     public void waitUntilStatusMessageIsVisible(String message) throws TimeoutException {
         AsyncUtils.waitUntilIsVisible(message);
     }

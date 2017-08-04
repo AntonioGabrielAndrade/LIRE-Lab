@@ -26,12 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement
-@XmlType(propOrder = {"name", "imagesDirectory", "features"})
+@XmlType(propOrder = {"name", "description", "imagesDirectory", "features"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Collection {
 
     @XmlElement
     private String name = "";
+
+    @XmlElement
+    private String description = "";
 
     @XmlElement
     private String imagesDirectory = "";
@@ -57,12 +60,28 @@ public class Collection {
         return name;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public void setFeatures(List<Feature> features) {
         this.features = features;
     }
 
     public List<Feature> getFeatures() {
         return features;
+    }
+
+    public Feature getFeature(int index) {
+        return features.get(index);
+    }
+
+    public int totalFeatures() {
+        return features.size();
     }
 
     public void setImagesDirectory(String imagesDirectory) {

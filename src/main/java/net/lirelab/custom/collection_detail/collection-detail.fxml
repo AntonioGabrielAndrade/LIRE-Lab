@@ -30,29 +30,69 @@
     <center>
         <SplitPane orientation="VERTICAL" dividerPositions="0.0">
             <items>
-                <VBox spacing="10" fx:id="info">
+                <GridPane hgap="10"
+                          vgap="10">
+
                     <padding>
                         <Insets top="20" bottom="20" left="20" right="20"/>
                     </padding>
 
-                    <HBox spacing="20" fx:id="topLine">
-                        <HBox spacing="3" alignment="CENTER_LEFT">
-                            <Label text="Name:"/>
-                            <TextField fx:id="nameField" editable="false"/>
-                        </HBox>
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
 
-                        <HBox spacing="3" alignment="CENTER_LEFT">
-                            <Label text="Total images:"/>
-                            <TextField fx:id="totalField" editable="false"/>
-                        </HBox>
+                    <Label text="Name:"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="0"/>
+
+                    <TextField id="collection-name"
+                               fx:id="nameField"
+                               editable="false"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="1"/>
+
+                    <HBox spacing="5"
+                          alignment="CENTER_RIGHT"
+                          GridPane.rowIndex="0"
+                          GridPane.columnIndex="2">
+
+                        <Label text="Total Images:"/>
+
+                        <TextField id="total-images"
+                                   fx:id="totalField"
+                                   editable="false"/>
                     </HBox>
 
-                    <VBox spacing="3" alignment="CENTER_LEFT">
-                        <Label text="Available Features: "/>
-                        <ListView fx:id="featuresField" minHeight="80" />
-                    </VBox>
 
-                </VBox>
+                    <StackPane id="command-container"
+                               fx:id="topLine"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="4"/>
+
+                    <Label text="Description:"
+                           GridPane.rowIndex="1"
+                           GridPane.columnIndex="0"/>
+
+                    <TextField id="description" fx:id="descriptionField"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="1"
+                               GridPane.columnSpan="4"
+                               editable="false"/>
+
+                    <Label text="Features: "
+                           GridPane.rowIndex="2"
+                           GridPane.columnIndex="0"/>
+
+                    <ListView fx:id="featuresField"
+                              minHeight="50"
+                              GridPane.rowIndex="2"
+                              GridPane.columnIndex="1"
+                              GridPane.columnSpan="4"
+                              editable="false"/>
+
+                </GridPane>
+
                 <BorderPane fx:id="center"/>
             </items>
         </SplitPane>

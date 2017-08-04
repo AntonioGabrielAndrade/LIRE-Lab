@@ -32,7 +32,7 @@ The "Create Collection" dialog will show. You have to inform a collection name,
 the directory that contains the images, and select at least one Feature to index 
 the collection. Click the "Create" button to start the collection creation routine:
 
-![Create Collection Dialog](images/create-collection-dialog.png)
+![Create Collection Dialog](images/new-collection-dialog.png)
 
 The creation process happens in two steps: first a LIRE/Lucene index is created, 
 and then the image's thumbnails are generated. A dialog will show, informing the 
@@ -105,5 +105,17 @@ After that, every query you run will be computed for the two panes, allowing you
 to visually compare the results of two features:
 
 ![Two Features](images/two-results-small.png)
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104070723-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 

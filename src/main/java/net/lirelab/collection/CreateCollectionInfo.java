@@ -25,6 +25,7 @@ import java.util.List;
 
 public class CreateCollectionInfo {
     private final String collectionName;
+    private final String collectionDescription;
     private final String imagesDirectory;
     private final List<Feature> features;
     private final boolean scanSubdirectories;
@@ -33,6 +34,7 @@ public class CreateCollectionInfo {
     private final int numberOfThreads;
 
     public CreateCollectionInfo(String collectionName,
+                                String collectionDescription,
                                 String imagesDirectory,
                                 List<Feature> features,
                                 boolean scanSubdirectories,
@@ -41,6 +43,7 @@ public class CreateCollectionInfo {
                                 int numberOfThreads) {
 
         this.collectionName = collectionName;
+        this.collectionDescription = collectionDescription;
         this.imagesDirectory = imagesDirectory;
         this.features = features;
         this.scanSubdirectories = scanSubdirectories;
@@ -51,6 +54,10 @@ public class CreateCollectionInfo {
 
     public String getCollectionName() {
         return collectionName;
+    }
+
+    public String getCollectionDescription() {
+        return collectionDescription;
     }
 
     public String getImagesDirectory() {

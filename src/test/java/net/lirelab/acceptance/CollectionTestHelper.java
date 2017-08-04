@@ -103,6 +103,7 @@ public class CollectionTestHelper {
         CreateCollectionRunner runner =
                 new CreateCollectionRunnerFactory(resolver, new net.lirelab.util.FileUtils())
                         .getCreateRunner(new CreateCollectionInfo(name,
+                                                                "",
                                                                 imagesPath,
                                                                 collectionFeatures,
                                                                 true,

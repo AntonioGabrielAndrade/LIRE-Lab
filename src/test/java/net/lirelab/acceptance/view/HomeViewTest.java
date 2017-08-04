@@ -117,6 +117,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
             CreateCollectionRunner runner = service.getCreateCollectionRunner(
                                                             new CreateCollectionInfo(
                                                                     NEW_COLLECTION_NAME,
+                                                                    "",
                                                                     TEST_IMAGES,
                                                                     FEATURES,
                                                                     true,
@@ -128,7 +129,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
 
             homeView.waitUntilCollectionIsListed(NEW_COLLECTION_NAME);
         } catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         } finally {
             COLLECTION_HELPER.deleteCollection(NEW_COLLECTION_NAME);
         }
@@ -144,7 +145,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
             homeView.waitUntilCollectionIsNotListed(collection1);
             homeView.waitUntilCollectionIsListed(collection2);
         } catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         } finally {
             COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
         }
@@ -163,7 +164,7 @@ public class HomeViewTest extends FXMLTest<HomeFXML> {
                 homeView.waitUntilCollectionIsNotListed(collection1);
                 homeView.waitUntilCollectionIsListed(collection2);
             } catch (Exception e) {
-                fail();
+                fail(e.getMessage());
             } finally {
                 COLLECTION_HELPER.createRealCollection(COLLECTION_NAME_1, TEST_IMAGES, CEDD);
             }

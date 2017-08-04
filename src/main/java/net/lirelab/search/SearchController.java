@@ -19,15 +19,6 @@
 
 package net.lirelab.search;
 
-import net.lirelab.collection.Collection;
-import net.lirelab.collection.CollectionService;
-import net.lirelab.collection.DialogProvider;
-import net.lirelab.collection.Image;
-import net.lirelab.custom.TangoIconWrapper;
-import net.lirelab.custom.collection_grid.ImageClickHandler;
-import net.lirelab.custom.single_image_grid.SingleImageGrid;
-import net.lirelab.lire.Feature;
-import net.lirelab.util.FileUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,8 +28,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.stage.Window;
+import net.lirelab.collection.Collection;
+import net.lirelab.collection.CollectionService;
+import net.lirelab.collection.DialogProvider;
+import net.lirelab.collection.Image;
+import net.lirelab.custom.TangoIconWrapper;
+import net.lirelab.custom.collection_grid.ImageClickHandler;
+import net.lirelab.custom.single_image_grid.SingleImageGrid;
+import net.lirelab.lire.Feature;
+import net.lirelab.util.FileUtils;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -48,13 +47,15 @@ import java.io.File;
 import java.net.URL;
 import java.util.*;
 
+import static javafx.scene.layout.Priority.ALWAYS;
+
 @Singleton
 public class SearchController implements Initializable {
 
     @FXML private HBox centerBox;
     @FXML private SingleImageGrid queryGrid;
     @FXML private TextField queryPathField;
-    @FXML private TextField currentQueryField;
+    @FXML private TextField queryField;
     @FXML private Button runLoadedImage;
 
     private List<SearchOutput> outputs = new ArrayList<>();
@@ -83,42 +84,55 @@ public class SearchController implements Initializable {
     public void startSearchSession(Collection collection, Feature feature) {
         clear();
         mapImageNamesToImages(collection);
-        bindCurrentQueryFieldToQueryGrid();
-        bindQueryGridToQueryExecution(collection);
+
+        bindQueryFieldToQueryImage();
+        bindQueryImageToQueryExecution(collection);
+
         setupQueryAutoCompletion(collection);
 
         setupFirstOutput(collection, feature);
     }
 
     private void setupFirstOutput(Collection collection, Feature feature) {
-        SearchOutput searchOutput = createAddableSearchOutput(collection, feature);
+        SearchOutput searchOutput = createSplittableSearchOutput(collection, feature);
         setupSearchMechanism(collection, feature, searchOutput);
     }
 
     private void setupSecondOutput(Collection collection, Feature feature) {
         SearchOutput searchOutput = createRemovableSearchOutput();
         setupSearchMechanism(collection, feature, searchOutput);
+        if(queryGrid.getImage() != null) {
+            runQuery(collection, searchOutput, queryGrid.getImage());
+        }
     }
 
-    private SearchOutput createAddableSearchOutput(Collection collection, Feature feature) {
+    private SearchOutput createSplittableSearchOutput(Collection collection, Feature feature) {
         SearchOutput output = new SearchOutput();
-        Button addButton = new Button();
-        addButton.setGraphic(new TangoIconWrapper("actions:list-add"));
-        addButton.setTooltip(new Tooltip("split output"));
-        addButton.setOnAction(event -> {
-            setupSecondOutput(collection, feature);
+        output.setId("output");
+
+        Button splitButton = new Button();
+        splitButton.setGraphic(new TangoIconWrapper("actions:list-add"));
+        splitButton.setTooltip(new Tooltip("split output"));
+        splitButton.setId("split-output-button");
+
+        splitButton.setOnAction(event -> {
+            setupSecondOutput(collection, collection.totalFeatures() > 1 ? collection.getFeature(1) : feature);
             output.disableTitleGraphics();
         });
-        output.addTitleGraphics(addButton);
+        output.addTitleGraphics(splitButton);
 
         return output;
     }
 
     private SearchOutput createRemovableSearchOutput() {
         SearchOutput output = new SearchOutput();
+        output.setId("second-output");
+
         Button removeButton = new Button();
         removeButton.setGraphic(new TangoIconWrapper("actions:list-remove"));
         removeButton.setTooltip(new Tooltip("unsplit output"));
+        removeButton.setId("unsplit-output-button");
+
         removeButton.setOnAction(event -> {
             Node removedOutput = centerBox.getChildren().remove(centerBox.getChildren().size()-1);
             outputs.remove(removedOutput);
@@ -131,11 +145,11 @@ public class SearchController implements Initializable {
     }
 
     private void setupSearchMechanism(Collection collection, Feature feature, SearchOutput searchOutput) {
-        showCollectionInOutputGrid(collection, searchOutput);
+        showCollectionInOutput(collection, searchOutput);
         setStatusBar(collection, feature, searchOutput);
 
         outputs.add(searchOutput);
-        HBox.setHgrow(searchOutput, Priority.ALWAYS);
+        HBox.setHgrow(searchOutput, ALWAYS);
         centerBox.getChildren().add(searchOutput);
     }
 
@@ -177,7 +191,7 @@ public class SearchController implements Initializable {
 
     public void setLoadedQuery() {
         Image image = new Image(queryPathField.getText(), "");
-        currentQueryField.setText(image.getImageName());
+        queryField.setText(image.getImageName());
         queryGrid.setImage(image);
     }
 
@@ -191,7 +205,7 @@ public class SearchController implements Initializable {
         });
     }
 
-    private void bindQueryGridToQueryExecution(Collection collection) {
+    private void bindQueryImageToQueryExecution(Collection collection) {
         queryGrid.setOnChange(newImage -> {
             for (SearchOutput output : outputs) {
                 runQuery(collection, output, newImage);
@@ -199,7 +213,7 @@ public class SearchController implements Initializable {
         });
     }
 
-    private void showCollectionInOutputGrid(Collection collection, SearchOutput searchOutput) {
+    private void showCollectionInOutput(Collection collection, SearchOutput searchOutput) {
         searchOutput.setCollection(collection, new UpdateCurrentQuery());
     }
 
@@ -209,8 +223,8 @@ public class SearchController implements Initializable {
         }
     }
 
-    private void bindCurrentQueryFieldToQueryGrid() {
-        currentQueryField.textProperty().addListener((observable, oldImageName, newImageName) -> {
+    private void bindQueryFieldToQueryImage() {
+        queryField.textProperty().addListener((observable, oldImageName, newImageName) -> {
             Image image;
             if((image = nameToImage.get(newImageName)) != null) {
                 queryGrid.setImage(image);
@@ -219,12 +233,12 @@ public class SearchController implements Initializable {
     }
 
     private AutoCompletionBinding<Image> setupQueryAutoCompletion(Collection collection) {
-        return TextFields.bindAutoCompletion(currentQueryField, collection.getImages());
+        return TextFields.bindAutoCompletion(queryField, collection.getImages());
     }
 
     private void clear() {
         queryGrid.clear();
-        currentQueryField.clear();
+        queryField.clear();
         queryPathField.clear();
         nameToImage.clear();
         centerBox.getChildren().clear();
@@ -245,7 +259,7 @@ public class SearchController implements Initializable {
     private class UpdateCurrentQuery implements ImageClickHandler {
         @Override
         public void handle(Image image, MouseEvent event) {
-            currentQueryField.setText(image.getImageName());
+            queryField.setText(image.getImageName());
         }
     }
 }

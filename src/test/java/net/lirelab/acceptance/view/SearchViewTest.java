@@ -19,21 +19,23 @@
 
 package net.lirelab.acceptance.view;
 
-import net.lirelab.acceptance.CollectionTestHelper;
-import net.lirelab.collection.Collection;
-import net.lirelab.collection.PathResolver;
-import net.lirelab.search.SearchFXML;
-import net.lirelab.search.SearchController;
-import net.lirelab.test_utilities.FXMLTest;
 import com.google.inject.AbstractModule;
 import javafx.stage.Stage;
-import net.lirelab.lire.Feature;
-import net.lirelab.test_utilities.TestUtils;
+import net.lirelab.acceptance.CollectionTestHelper;
+import net.lirelab.acceptance.custom.StatusBarViewObject;
+import net.lirelab.collection.Collection;
+import net.lirelab.collection.PathResolver;
+import net.lirelab.search.SearchController;
+import net.lirelab.search.SearchFXML;
+import net.lirelab.test_utilities.FXMLTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static net.lirelab.lire.Feature.CEDD;
+import static net.lirelab.lire.Feature.TAMURA;
 import static net.lirelab.test_utilities.TestConstants.*;
+import static net.lirelab.test_utilities.TestUtils.deleteWorkDirectory;
 
 public class SearchViewTest extends FXMLTest<SearchFXML> {
 
@@ -58,15 +60,15 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @BeforeClass
-    public static void createCollections() throws Exception {
-        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, Feature.CEDD);
+    public static void createCollection() throws Exception {
+        COLLECTION_HELPER.createRealCollection(COLLECTION_NAME, TEST_IMAGES, CEDD, TAMURA);
         collection = COLLECTION_HELPER.readCollection(COLLECTION_NAME);
     }
 
     @AfterClass
-    public static void deleteCollections() throws Exception {
+    public static void deleteCollection() throws Exception {
         COLLECTION_HELPER.deleteCollection(COLLECTION_NAME);
-        TestUtils.deleteWorkDirectory(RESOLVER);
+        deleteWorkDirectory(RESOLVER);
     }
 
     @Override
@@ -81,8 +83,8 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldRunQueryBySelectingQueryFromCollection() throws Exception {
-        interact(() -> controller.startSearchSession(collection, Feature.CEDD));
+    public void shouldRunQueryBySelectingImageFromCollection() throws Exception {
+        interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
         view.selectQuery(IMAGE1);
@@ -101,8 +103,8 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldRunQueryByLoadingQueryFromDisk() throws Exception {
-        interact(() -> controller.startSearchSession(collection, Feature.CEDD));
+    public void shouldRunQueryByLoadingImageFromDisk() throws Exception {
+        interact(() -> controller.startSearchSession(collection, CEDD));
 
         view.waitUntilShowCollection(collection);
 
@@ -124,14 +126,99 @@ public class SearchViewTest extends FXMLTest<SearchFXML> {
     }
 
     @Test
-    public void shouldEnableRunButtonWhenQueryPathIsAValidImage() throws Exception {
+    public void shouldSplitAndUnsplitOutput() throws Exception {
+        interact(() -> controller.startSearchSession(collection, CEDD));
+
+        view.waitUntilShowCollection(collection);
+
+        view.splitOutput();
+
+        view.checkOutputIsSplitted();
+
+        view.unsplitOutput();
+
+        view.checkOutputIsNotSplitted();
+    }
+
+    @Test
+    public void shouldSplitOutputAndComputeQuery() throws Exception {
+        interact(() -> controller.startSearchSession(collection, CEDD));
+
+        view.waitUntilShowCollection(collection);
+
+        view.splitOutput();
+
+        view.selectQuery(IMAGE1);
+        view.waitUntilShowQuery(IMAGE1);
+
+        view.waitUntilImagesInFirstOutputAreOrderedLike(IMAGE1,
+                                                        IMAGE4,
+                                                        IMAGE10,
+                                                        IMAGE8,
+                                                        IMAGE5,
+                                                        IMAGE9,
+                                                        IMAGE2,
+                                                        IMAGE3,
+                                                        IMAGE7,
+                                                        IMAGE6);
+
+        view.waitUntilImagesInSecondOutputAreOrderedLike(IMAGE1,
+                                                        IMAGE10,
+                                                        IMAGE4,
+                                                        IMAGE2,
+                                                        IMAGE5,
+                                                        IMAGE9,
+                                                        IMAGE3,
+                                                        IMAGE7,
+                                                        IMAGE6,
+                                                        IMAGE8);
+
+    }
+
+    @Test
+    public void shouldChangeFeatureAndComputeQuery() throws Exception {
+        StatusBarViewObject statusBarView = new StatusBarViewObject();
+
+        interact(() -> controller.startSearchSession(collection, CEDD));
+
+        view.waitUntilShowCollection(collection);
+        view.selectQuery(IMAGE1);
+        view.waitUntilShowQuery(IMAGE1);
+
+        view.waitUntilImagesAreOrderedLike(IMAGE1,
+                                            IMAGE4,
+                                            IMAGE10,
+                                            IMAGE8,
+                                            IMAGE5,
+                                            IMAGE9,
+                                            IMAGE2,
+                                            IMAGE3,
+                                            IMAGE7,
+                                            IMAGE6);
+
+        statusBarView.selectFeature(TAMURA);
+
+        view.waitUntilImagesAreOrderedLike(IMAGE1,
+                                            IMAGE10,
+                                            IMAGE4,
+                                            IMAGE2,
+                                            IMAGE5,
+                                            IMAGE9,
+                                            IMAGE3,
+                                            IMAGE7,
+                                            IMAGE6,
+                                            IMAGE8);
+    }
+
+    @Test
+    public void shouldEnableRunButtonWhenQueryPathIsAnImage() throws Exception {
         view.setQueryPath(IMAGE1_PATH);
         view.checkRunIsEnabled();
     }
 
     @Test
-    public void shouldDisableRunButtonWhenQueryPathIsNotAValidImage() throws Exception {
-        view.setQueryPath(TEST_IMAGES + "invalid-image-name");
+    public void shouldDisableRunButtonWhenQueryPathIsNotAnImage() throws Exception {
+        view.setQueryPath("invalid/image/path");
         view.checkRunIsDisabled();
     }
 }

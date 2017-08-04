@@ -19,10 +19,10 @@
 
 package net.lirelab.acceptance.view;
 
+import javafx.scene.control.TextField;
 import net.lirelab.acceptance.custom.CollectionGridViewObject;
 import net.lirelab.collection.Collection;
 import net.lirelab.collection.Image;
-import javafx.scene.control.TextField;
 import org.testfx.api.FxRobot;
 
 import java.util.concurrent.TimeoutException;
@@ -31,47 +31,78 @@ import static net.lirelab.test_utilities.AsyncUtils.*;
 
 public class SearchViewObject extends FxRobot {
 
+    private static final String OUTPUT = "#output";
+    private static final String SECOND_OUTPUT = "#second-output";
+
+    private static final String QUERY = "#query";
+    private static final String RUN_LOADED_IMAGE = "#run-loaded-image";
+    private static final String QUERY_IMAGE = "#query-image-field";
+
     public void checkImagesAreVisible(String... images) {
         new CollectionGridViewObject().checkImagesAreVisible(images);
     }
 
     public void waitUntilShowCollection(Collection collection) throws TimeoutException {
         for (Image image : collection.getImages()) {
-            waitUntilIsVisible("#" + image.getImageName());
+            waitUntilIsVisible("#" + image.getImageName(), OUTPUT);
         }
     }
 
-    public void selectQuery(String image) {
-        clickOn("#" + image).interrupt();
+    public void selectQuery(String image) throws TimeoutException {
+        clickOnContainedElement("#" + image, OUTPUT).interrupt();
     }
 
     public void waitUntilShowQuery(String image) throws TimeoutException {
-        waitUntilIsVisible("#" + image, "#query");
+        waitUntilIsVisible("#" + image, QUERY);
     }
 
     public void waitUntilImagesAreOrderedLike(String... images) throws TimeoutException {
-        waitUntilElementsAreOrderedLike("#output", ".image-view", images);
+        waitUntilElementsAreOrderedLike(OUTPUT, ".image-view", images);
+    }
+
+    public void waitUntilImagesInFirstOutputAreOrderedLike(String... images) throws TimeoutException {
+        waitUntilElementsAreOrderedLike(OUTPUT, ".image-view", images);
+    }
+
+    public void waitUntilImagesInSecondOutputAreOrderedLike(String... images) throws TimeoutException {
+        waitUntilElementsAreOrderedLike(SECOND_OUTPUT, ".image-view", images);
     }
 
     public void writeQueryPath(String path) {
-        clickOn("#query-image-field").write("").interrupt().write(path);
+        clickOn(QUERY_IMAGE).write("").interrupt().write(path);
     }
 
     public void setQueryPath(String path) {
-        TextField field = lookup("#query-image-field").query();
+        TextField field = lookup(QUERY_IMAGE).query();
         field.setText(path);
     }
 
     public void checkRunIsEnabled() throws TimeoutException {
-        waitUntil(() -> !lookup("#run-loaded-image").query().isDisabled());
+        waitUntilIsEnabled(RUN_LOADED_IMAGE);
     }
 
     public void checkRunIsDisabled() throws TimeoutException {
-        waitUntil(() -> lookup("#run-loaded-image").query().isDisabled());
+        waitUntilIsDisabled(RUN_LOADED_IMAGE);
     }
 
     public void run() throws TimeoutException {
         checkRunIsEnabled();
-        clickOn("#run-loaded-image").interrupt();
+        clickOn(RUN_LOADED_IMAGE).interrupt();
+    }
+
+    public void splitOutput() {
+        clickOn("#split-output-button").interrupt();
+    }
+
+    public void checkOutputIsSplitted() throws TimeoutException {
+        waitUntilIsVisible(SECOND_OUTPUT);
+    }
+
+    public void unsplitOutput() {
+        clickOn("#unsplit-output-button").interrupt();
+    }
+
+    public void checkOutputIsNotSplitted() throws TimeoutException {
+        waitUntilIsNotVisible(SECOND_OUTPUT);
     }
 }

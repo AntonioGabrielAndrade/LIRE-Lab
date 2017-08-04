@@ -46,7 +46,7 @@ public class XMLCreatorTest {
 
     @Before
     public void setUp() throws Exception {
-        creator = new XMLCreator(COLLECTION_NAME, IMAGES_DIR, FEATURES, xmlDAO);
+        creator = new XMLCreator(COLLECTION_NAME, "", IMAGES_DIR, FEATURES, xmlDAO);
         creator.setCallback(callback);
 
         collection = new CollectionBuilder()

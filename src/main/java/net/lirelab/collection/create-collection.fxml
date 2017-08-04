@@ -54,13 +54,35 @@
                 <Insets top="20" bottom="30" left="20" right="20"/>
             </padding>
 
-            <HBox spacing="5"
-                  alignment="BASELINE_CENTER"
-                  GridPane.rowIndex="0"
-                  GridPane.columnIndex="0">
-                <Label text="Collection name:"/>
-                <TextField id="collection-name" fx:id="nameField" HBox.hgrow="ALWAYS"/>
-            </HBox>
+            <GridPane GridPane.rowIndex="0"
+                      GridPane.columnIndex="0"
+                      hgap="10"
+                      vgap="10">
+
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Name:"
+                       GridPane.rowIndex="0"
+                       GridPane.columnIndex="0"/>
+
+                <TextField id="collection-name"
+                           fx:id="nameField"
+                           GridPane.rowIndex="0"
+                           GridPane.columnIndex="1"/>
+
+                <Label text="Description:"
+                       GridPane.rowIndex="1"
+                       GridPane.columnIndex="0"/>
+
+                <TextField id="description" fx:id="descriptionField"
+                           GridPane.rowIndex="1"
+                           GridPane.columnIndex="1"/>
+
+            </GridPane>
+
 
             <TitledPane text="Images"
                         collapsible="false"
