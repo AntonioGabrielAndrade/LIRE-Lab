@@ -32,7 +32,7 @@ The "Create Collection" dialog will show. You have to inform a collection name,
 the directory that contains the images, and select at least one Feature to index 
 the collection. Click the "Create" button to start the collection creation routine:
 
-![Create Collection Dialog](images/create-collection-dialog.png)
+![Create Collection Dialog](images/new-collection-dialog.png)
 
 The creation process happens in two steps: first a LIRE/Lucene index is created, 
 and then the image's thumbnails are generated. A dialog will show, informing the 
