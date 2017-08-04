@@ -25,7 +25,7 @@
 
     <groupId>net.lirelab</groupId>
     <artifactId>lirelab</artifactId>
-    <version>0.9.4</version>
+    <version>0.9.5</version>
 
     <name>LIRE-Lab</name>
     <description>Desktop Image Retrieval tool based on the LIRE Java library</description>
